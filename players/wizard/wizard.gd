@@ -22,9 +22,12 @@ var new_facing: String = facing
 var movement_enabled = true
 var potion_ready = true
 
+var x_halfway = 320
+var y_halfway = 240
+	
+
 func _ready():
 	speed = run_speed
-
 
 func get_input():
 	velocity = Vector2()
@@ -113,10 +116,32 @@ func place_potion():
 		potion_position = Vector2(global_position.x, global_position.y + 30)
 
 	p.global_position = potion_position
-	get_node('../../Bombs').add_child(p)
+	get_parent().add_child(p)
+	but_make_it_symmetrical(p.global_position)
 	if potion_cooldown_toogle:
 		potion_ready = false
 		$PotionCooldown.start()
+	
+#var x_halfway = 320
+#var y_halfway = 240
+func but_make_it_symmetrical(og_p_position):
+	# Generate potion instances
+	var symmetrical_potions = []
+	for i in range(3):
+		var symmetrical_potion = potion.instance()
+		symmetrical_potions.append(symmetrical_potion)
+
+	var y_opposite = Vector2(og_p_position.x, get_viewport().size.y - og_p_position.y)
+	symmetrical_potions[0].global_position = y_opposite
+	var x_opposite = Vector2(get_viewport().size.x - og_p_position.x, og_p_position.y)
+	symmetrical_potions[1].global_position = x_opposite
+	var direct_opposite = Vector2(get_viewport().size.x - og_p_position.x, get_viewport().size.y - og_p_position.y)
+	symmetrical_potions[2].global_position = direct_opposite
+	
+	# Lay them pots
+	for p in symmetrical_potions:
+		get_parent().add_child(p)
+
 
 func _on_PotionCooldown_timeout():
 	potion_ready = true

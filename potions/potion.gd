@@ -23,12 +23,13 @@ func _on_Egg_body_shape_entered(body_rid, body, body_shape_index, local_shape_in
 
 
 func _on_Area2D_body_entered(body):
-	if not body == self:
+	if body.name == 'Wizard':
 		nearby_players.append(body)
 
 
 func _on_Area2D_body_exited(body):
-	nearby_players.erase(body)
+	if body.name == 'Wizard':
+		nearby_players.erase(body)
 
 func _on_AnimatedSprite_animation_finished():
 	$AnimatedSprite.visible = false

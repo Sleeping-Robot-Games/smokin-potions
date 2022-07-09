@@ -5,7 +5,7 @@
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.0
-height = 18.0
+height = 10.0
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 5.0
@@ -252,7 +252,7 @@ hframes = 6
 vframes = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 3 )
+position = Vector2( -1, 7 )
 shape = SubResource( 1 )
 
 [node name="PickupArea" type="Area2D" parent="."]
