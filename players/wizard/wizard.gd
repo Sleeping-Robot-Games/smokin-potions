@@ -71,12 +71,7 @@ func get_input():
 
 
 func sprite_animation():
-	# If X and Y both changed, Y currently takes precedence
-	if x_changed:
-		new_facing = x_facing
-	elif y_changed:
-		new_facing = y_facing
-		
+	new_facing = y_facing + x_facing
 	var new_animation = animation
 
 	if velocity == Vector2(0,0):
