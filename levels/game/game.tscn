@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://players/wizard/wizard.tscn" type="PackedScene" id=1]
 [ext_resource path="res://levels/objects/breakable.tscn" type="PackedScene" id=2]
+[ext_resource path="res://levels/objects/durable.tscn" type="PackedScene" id=3]
 [ext_resource path="res://levels/game/game.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -22,22 +23,76 @@ script = ExtResource( 5 )
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Wizard" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 315, 227 )
+position = Vector2( 152, 95 )
 
 [node name="Breakable" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 203, 288 )
+position = Vector2( 89, 384 )
 
 [node name="Breakable2" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 235, 297 )
+position = Vector2( 189, 387 )
 
 [node name="Breakable3" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 269, 286 )
+position = Vector2( 169, 326 )
 
 [node name="Breakable4" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 289, 119 )
+position = Vector2( 114, 76 )
 
 [node name="Breakable5" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 197, 187 )
+position = Vector2( 113, 132 )
+
+[node name="Breakable6" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 276, 273 )
+
+[node name="Breakable7" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 234, 216 )
+
+[node name="Breakable8" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 531, 398 )
+
+[node name="Breakable16" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 525, 310 )
+
+[node name="Breakable17" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 460, 396 )
+
+[node name="Breakable9" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 202, 265 )
+
+[node name="Breakable10" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 507, 86 )
+
+[node name="Breakable11" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 414, 66 )
+
+[node name="Breakable18" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 435, 117 )
+
+[node name="Breakable12" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 467, 216 )
+
+[node name="Breakable13" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 401, 215 )
+
+[node name="Breakable14" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 364, 271 )
+
+[node name="Breakable15" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 351, 333 )
+
+[node name="Durable" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 314, 75 )
+
+[node name="Durable2" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 317, 371 )
+
+[node name="Durable3" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 316, 213 )
+
+[node name="Durable4" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 121, 211 )
+
+[node name="Durable5" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 524, 218 )
 
 [node name="Boundaries" type="StaticBody2D" parent="."]
 position = Vector2( -40, 0 )
