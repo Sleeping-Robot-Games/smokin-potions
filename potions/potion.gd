@@ -1,4 +1,4 @@
-extends Node2D
+extends RigidBody2D
 
 export (int) var heat_needed = 100
 
@@ -39,6 +39,11 @@ func _on_Explode_animation_finished():
 
 func _on_AnimatedSprite_frame_changed():
 	if $AnimatedSprite.frame == 13:
+		# prevents the egg from moving while the explode animation plays
+		mode = MODE_STATIC 
+		# lets players move through the explosion
+		$CollisionShape2D.disabled = true
+		# splody all players in area
 		for player in nearby_players:
 			print(player)
 			print('go splody')

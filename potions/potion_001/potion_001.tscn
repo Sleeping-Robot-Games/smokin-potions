@@ -131,10 +131,10 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Egg" type="RigidBody2D"]
+[node name="Potion_001" type="RigidBody2D"]
 mode = 2
-linear_damp = 100.0
-angular_damp = 100.0
+gravity_scale = 0.0
+linear_damp = 2.0
 script = ExtResource( 1 )
 heat_needed = 10
 

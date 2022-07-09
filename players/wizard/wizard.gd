@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 export (int) var run_speed: int = 150
 export (int) var sneak_speed: int = 75
+export (bool) var potion_cooldown_toogle: bool = false
 const potion = preload('res://potions/potion_001/potion_001.tscn')
 
 onready var anim_player: AnimationPlayer = $AnimationPlayer
@@ -9,10 +10,8 @@ onready var game_scene: Node = null
 #onready var player_start_node: Position2D = get_node("/root/Game/PlayerStart")
 
 var type = "player"
-var is_invulnerable = false
 var speed: int = run_speed
 var velocity: Vector2 = Vector2()
-var last_checkpoint_pos: Vector2 = Vector2()
 var x_facing: String = "Right"
 var x_changed: bool = false
 var y_facing: String = "Up"
@@ -21,9 +20,7 @@ var facing: String = "Right"
 var animation: String = "Idle"
 var new_facing: String = facing
 var movement_enabled = true
-var current_coin = null
-var current_enemy = null
-
+var potion_ready = true
 
 func _ready():
 	speed = run_speed
@@ -102,11 +99,27 @@ func _physics_process(delta):
 
 
 func place_potion():
+	if not potion_ready:
+		return
 	var p = potion.instance()
-	p.global_position = global_position
-	print(get_parent().get_children())
-	get_node('../../Bombs').add_child(p)
+	var potion_position = global_position
+	if facing == 'Right':
+		potion_position = Vector2(global_position.x + 20, global_position.y)
+	if facing == 'Left':
+		potion_position = Vector2(global_position.x - 20, global_position.y)
+	if facing == 'Back':
+		potion_position = Vector2(global_position.x, global_position.y - 30)
+	if facing == 'Front':
+		potion_position = Vector2(global_position.x, global_position.y + 30)
 
+	p.global_position = potion_position
+	get_node('../../Bombs').add_child(p)
+	if potion_cooldown_toogle:
+		potion_ready = false
+		$PotionCooldown.start()
+
+func _on_PotionCooldown_timeout():
+	potion_ready = true
 
 func play_sfx(name):
 	pass
@@ -141,4 +154,6 @@ func _on_PickupArea_body_entered(body):
 
 func _on_PickupArea_body_exited(body):
 	pass
+
+
 

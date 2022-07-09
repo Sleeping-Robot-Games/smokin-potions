@@ -507,8 +507,11 @@ anims/SneakIdleRight = SubResource( 17 )
 anims/SneakLeft = SubResource( 18 )
 anims/SneakRight = SubResource( 19 )
 
+[node name="PotionCooldown" type="Timer" parent="."]
+
 [connection signal="area_shape_entered" from="PickupArea" to="." method="_on_PickupArea_area_shape_entered"]
 [connection signal="area_shape_exited" from="PickupArea" to="." method="_on_PickupArea_area_shape_exited"]
 [connection signal="body_entered" from="PickupArea" to="." method="_on_PickupArea_body_entered"]
 [connection signal="body_exited" from="PickupArea" to="." method="_on_PickupArea_body_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="timeout" from="PotionCooldown" to="." method="_on_PotionCooldown_timeout"]
