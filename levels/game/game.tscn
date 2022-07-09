@@ -20,9 +20,6 @@ margin_bottom = 1000.0
 texture = ExtResource( 3 )
 expand = true
 stretch_mode = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Boundaries" type="StaticBody2D" parent="Map"]
 position = Vector2( -40, 0 )
@@ -78,8 +75,5 @@ max_value = 240.0
 texture_over = ExtResource( 6 )
 texture_progress = ExtResource( 7 )
 fill_mode = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_DifficultyTimer_timeout"]
