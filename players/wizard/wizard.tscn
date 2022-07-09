@@ -4,19 +4,17 @@
 [ext_resource path="res://players/wizard/Body/Skin.png" type="Texture" id=2]
 [ext_resource path="res://players/wizard/wizard.gd" type="Script" id=3]
 [ext_resource path="res://assets/materials/palette_swapper.tres" type="Material" id=4]
-[ext_resource path="res://players/wizard/Palette/Palette_000.png" type="Texture" id=5]
+[ext_resource path="res://players/wizard/Palette/Skin/skin_001.png" type="Texture" id=5]
 [ext_resource path="res://assets/shaders/PaletteSwapper.gdshader" type="Shader" id=6]
 [ext_resource path="res://players/wizard/Body/Outline.png" type="Texture" id=7]
 [ext_resource path="res://players/wizard/Hair/Hair_001.png" type="Texture" id=8]
 [ext_resource path="res://players/wizard/Body/Robe.png" type="Texture" id=9]
-
-[sub_resource type="StreamTexture" id=1]
-load_path = "res://.import/Palette_002.png-cf06255459c0ac80e2e73b9f2ad01719.stex"
+[ext_resource path="res://players/wizard/Palette/Skin/skin_000.png" type="Texture" id=10]
 
 [sub_resource type="ShaderMaterial" id=19]
 shader = ExtResource( 6 )
-shader_param/palette_swap = SubResource( 1 )
-shader_param/greyscale_palette = ExtResource( 5 )
+shader_param/palette_swap = ExtResource( 5 )
+shader_param/greyscale_palette = ExtResource( 10 )
 
 [sub_resource type="CapsuleShape2D" id=20]
 radius = 4.0
@@ -731,12 +729,14 @@ hframes = 6
 vframes = 8
 
 [node name="Robe" type="Sprite" parent="."]
+material = ExtResource( 4 )
 texture = ExtResource( 9 )
 hframes = 6
 vframes = 8
 frame = 12
 
 [node name="Hair" type="Sprite" parent="."]
+material = ExtResource( 4 )
 texture = ExtResource( 8 )
 hframes = 6
 vframes = 8
