@@ -122,8 +122,7 @@ func place_potion():
 		potion_ready = false
 		$PotionCooldown.start()
 	
-#var x_halfway = 320
-#var y_halfway = 240
+	
 func but_make_it_symmetrical(og_p_position):
 	# Generate potion instances
 	var symmetrical_potions = []
@@ -131,11 +130,11 @@ func but_make_it_symmetrical(og_p_position):
 		var symmetrical_potion = potion.instance()
 		symmetrical_potions.append(symmetrical_potion)
 
-	var y_opposite = Vector2(og_p_position.x, get_viewport().size.y - og_p_position.y)
+	var y_opposite = Vector2(og_p_position.x, get_viewport_rect().size.y - og_p_position.y)
 	symmetrical_potions[0].global_position = y_opposite
-	var x_opposite = Vector2(get_viewport().size.x - og_p_position.x, og_p_position.y)
+	var x_opposite = Vector2(get_viewport_rect().size.x - og_p_position.x, og_p_position.y)
 	symmetrical_potions[1].global_position = x_opposite
-	var direct_opposite = Vector2(get_viewport().size.x - og_p_position.x, get_viewport().size.y - og_p_position.y)
+	var direct_opposite = Vector2(get_viewport_rect().size.x - og_p_position.x, get_viewport_rect().size.y - og_p_position.y)
 	symmetrical_potions[2].global_position = direct_opposite
 	
 	# Lay them pots

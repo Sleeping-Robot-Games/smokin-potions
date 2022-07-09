@@ -43,10 +43,3 @@ shape = SubResource( 4 )
 position = Vector2( 359.961, 483 )
 rotation = 1.5708
 shape = SubResource( 1 )
-
-[node name="Label" type="Label" parent="."]
-margin_left = 230.0
-margin_top = 146.0
-margin_right = 406.0
-margin_bottom = 160.0
-text = "Press Space to place potion"
