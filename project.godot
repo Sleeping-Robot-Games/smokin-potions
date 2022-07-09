@@ -14,6 +14,10 @@ config/name="Smokin' Potions"
 run/main_scene="res://levels/game/game.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+g="*res://global.gd"
+
 [display]
 
 window/size/width=640

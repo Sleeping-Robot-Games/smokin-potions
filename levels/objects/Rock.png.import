@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Palette_001.png-6e8e54a36b78d57790f96f45596f6e52.stex"
+path="res://.import/Rock.png-05ce24da5c03bfd77adc57b579ee3d3a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://players/wizard/Palette/Palette_001.png"
-dest_files=[ "res://.import/Palette_001.png-6e8e54a36b78d57790f96f45596f6e52.stex" ]
+source_file="res://levels/objects/Rock.png"
+dest_files=[ "res://.import/Rock.png-05ce24da5c03bfd77adc57b579ee3d3a.stex" ]
 
 [params]
 

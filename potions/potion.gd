@@ -3,6 +3,7 @@ extends RigidBody2D
 export (int) var heat_needed = 100
 
 var nearby_players = []
+var nearby_breakables = []
 
 
 func _ready():
@@ -49,5 +50,19 @@ func _on_AnimatedSprite_frame_changed():
 		for player in nearby_players:
 			print(player)
 			print('go splody')
-		$Area2D/Explode.visible = true
-		$Area2D/Explode.play()
+		# destroy all breakables
+		for breakable in nearby_breakables:
+			breakable.break()
+			
+		$ExplosionArea/Explode.visible = true
+		$ExplosionArea/Explode.play()
+
+
+func _on_ExplosionArea_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	if area and 'Breakable' in area.get_parent().name:
+		nearby_breakables.append(area.get_parent())
+
+
+func _on_ExplosionArea_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
+	if area and 'Breakable' in area.get_parent().name:
+		nearby_breakables.erase(area.get_parent())

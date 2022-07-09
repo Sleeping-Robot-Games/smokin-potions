@@ -92,12 +92,9 @@ func sprite_animation():
 		animation = new_animation
 		anim_player.play(animation + facing)
 
-
 func _physics_process(delta):
 	get_input()
-	var collision = move_and_collide(velocity * delta)
-	if collision:
-		pass
+	move_and_slide(velocity)
 
 
 func place_potion():

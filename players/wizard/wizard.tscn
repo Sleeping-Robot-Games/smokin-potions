@@ -1,10 +1,21 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://players/wizard/Hat/Hat_001.png" type="Texture" id=1]
 [ext_resource path="res://players/wizard/Body/Wizard_001.png" type="Texture" id=2]
 [ext_resource path="res://players/wizard/wizard.gd" type="Script" id=3]
+[ext_resource path="res://assets/materials/palette_swapper.tres" type="Material" id=4]
+[ext_resource path="res://players/wizard/Palette/Palette_000.png" type="Texture" id=5]
+[ext_resource path="res://assets/shaders/PaletteSwapper.gdshader" type="Shader" id=6]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/Palette_002.png-cf06255459c0ac80e2e73b9f2ad01719.stex"
+
+[sub_resource type="ShaderMaterial" id=19]
+shader = ExtResource( 6 )
+shader_param/palette_swap = SubResource( 1 )
+shader_param/greyscale_palette = ExtResource( 5 )
+
+[sub_resource type="CapsuleShape2D" id=20]
 radius = 4.0
 height = 10.0
 
@@ -387,21 +398,25 @@ collision_mask = 243
 script = ExtResource( 3 )
 
 [node name="Body" type="Sprite" parent="."]
+material = SubResource( 19 )
 texture = ExtResource( 2 )
 hframes = 6
 vframes = 8
 
 [node name="Hat" type="Sprite" parent="."]
+material = ExtResource( 4 )
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 8
 frame = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( -1, 7 )
-shape = SubResource( 1 )
+shape = SubResource( 20 )
 
 [node name="PickupArea" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
 position = Vector2( 0, 3 )
