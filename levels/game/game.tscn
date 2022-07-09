@@ -23,7 +23,7 @@ script = ExtResource( 5 )
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Wizard" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 152, 95 )
+position = Vector2( 210, 134 )
 
 [node name="Breakable" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 89, 384 )
@@ -35,10 +35,10 @@ position = Vector2( 189, 387 )
 position = Vector2( 169, 326 )
 
 [node name="Breakable4" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 114, 76 )
+position = Vector2( 137, 76 )
 
 [node name="Breakable5" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 113, 132 )
+position = Vector2( 136, 132 )
 
 [node name="Breakable6" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 276, 273 )
@@ -89,7 +89,7 @@ position = Vector2( 317, 371 )
 position = Vector2( 316, 213 )
 
 [node name="Durable4" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 121, 211 )
+position = Vector2( 96, 215 )
 
 [node name="Durable5" parent="YSort" instance=ExtResource( 3 )]
 position = Vector2( 524, 218 )

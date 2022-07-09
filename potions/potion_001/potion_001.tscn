@@ -1,8 +1,9 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://potions/potion.gd" type="Script" id=1]
 [ext_resource path="res://potions/potion_001/Explosion.png" type="Texture" id=2]
 [ext_resource path="res://potions/potion_001/potion_001.png" type="Texture" id=3]
+[ext_resource path="res://potions/portal.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape2D" id=18]
 radius = 8.0
@@ -131,6 +132,62 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="AtlasTexture" id=41]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 72, 72 )
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 4 )
+region = Rect2( 72, 0, 72, 72 )
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = ExtResource( 4 )
+region = Rect2( 144, 0, 72, 72 )
+
+[sub_resource type="AtlasTexture" id=44]
+atlas = ExtResource( 4 )
+region = Rect2( 216, 0, 72, 72 )
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 4 )
+region = Rect2( 288, 0, 72, 72 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 4 )
+region = Rect2( 360, 0, 72, 72 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 4 )
+region = Rect2( 432, 0, 72, 72 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 4 )
+region = Rect2( 504, 0, 72, 72 )
+
+[sub_resource type="SpriteFrames" id=49]
+animations = [ {
+"frames": [ SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=40]
+resource_name = "fade"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Portal:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
 [node name="Potion_001" type="RigidBody2D"]
 mode = 2
 gravity_scale = 0.0
@@ -162,6 +219,18 @@ position = Vector2( 0, 7 )
 frames = SubResource( 30 )
 speed_scale = 3.0
 
+[node name="Portal" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 0, 6 )
+scale = Vector2( 0.6, 0.6 )
+frames = SubResource( 49 )
+frame = 6
+speed_scale = 5.0
+playing = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/fade = SubResource( 40 )
+
 [connection signal="body_shape_entered" from="." to="." method="_on_Egg_body_shape_entered"]
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite" to="." method="_on_AnimatedSprite_frame_changed"]
@@ -171,3 +240,4 @@ speed_scale = 3.0
 [connection signal="body_entered" from="ExplosionArea" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="ExplosionArea" to="." method="_on_Area2D_body_exited"]
 [connection signal="animation_finished" from="ExplosionArea/Explode" to="." method="_on_Explode_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -5,19 +5,29 @@ export (int) var heat_needed = 100
 var nearby_players = []
 var nearby_breakables = []
 
+var use_portal = false
+
 
 func _ready():
-	pass
-	#$AnimatedSprite.modulate = Color(1, 0.5, 0.5, 1)
+	if use_portal:
+		$Portal.visible = true
+		$AnimationPlayer.play('fade')
+
+func but_symmetrical():
+	use_portal = true
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == 'fade':
+		$Portal.visible = false
 
 
-func hatch():
+func explode():
 	$AnimatedSprite.play()
 	# EXPLODE
 
 
 func _on_ExplodeTimer_timeout():
-		hatch()
+	explode()
 
 
 func _on_Egg_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
@@ -66,3 +76,8 @@ func _on_ExplosionArea_area_shape_entered(area_rid, area, area_shape_index, loca
 func _on_ExplosionArea_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
 	if area and 'Breakable' in area.get_parent().name:
 		nearby_breakables.erase(area.get_parent())
+
+
+
+
+

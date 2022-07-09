@@ -125,6 +125,7 @@ func but_make_it_symmetrical(og_p_position):
 	var symmetrical_potions = []
 	for i in range(3):
 		var symmetrical_potion = potion.instance()
+		symmetrical_potion.but_symmetrical()
 		symmetrical_potions.append(symmetrical_potion)
 
 	var y_opposite = Vector2(og_p_position.x, get_viewport_rect().size.y - og_p_position.y)
