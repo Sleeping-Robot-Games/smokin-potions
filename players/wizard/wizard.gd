@@ -1,7 +1,6 @@
 extends KinematicBody2D
 
 export (int) var run_speed: int = 150
-export (int) var sneak_speed: int = 75
 export (bool) var potion_cooldown_toogle: bool = false
 const potion = preload('res://potions/potion_001/potion_001.tscn')
 
@@ -118,6 +117,7 @@ func place_potion():
 	p.global_position = potion_position
 	get_parent().add_child(p)
 	but_make_it_symmetrical(p.global_position)
+	
 	if potion_cooldown_toogle:
 		potion_ready = false
 		$PotionCooldown.start()

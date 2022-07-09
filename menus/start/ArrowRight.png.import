@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ground_tile.png-1be12dc9b3a7dd7a6bacfcb13fdff296.stex"
+path="res://.import/ArrowRight.png-ba63b38bdb40a100b5e0de21fad1a58c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/game/ground_tile.png"
-dest_files=[ "res://.import/ground_tile.png-1be12dc9b3a7dd7a6bacfcb13fdff296.stex" ]
+source_file="res://menus/start/ArrowRight.png"
+dest_files=[ "res://.import/ArrowRight.png-ba63b38bdb40a100b5e0de21fad1a58c.stex" ]
 
 [params]
 

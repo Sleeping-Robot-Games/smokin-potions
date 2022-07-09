@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/difficulty_bar_under.png-5d66c67bb261d828b6ab00ad5cbf0e1b.stex"
+path="res://.import/RandomIcon.png-5ddd65d387b88338e9b88e85b794dfec.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/game/difficulty_bar_under.png"
-dest_files=[ "res://.import/difficulty_bar_under.png-5d66c67bb261d828b6ab00ad5cbf0e1b.stex" ]
+source_file="res://menus/selection/RandomIcon.png"
+dest_files=[ "res://.import/RandomIcon.png-5ddd65d387b88338e9b88e85b794dfec.stex" ]
 
 [params]
 

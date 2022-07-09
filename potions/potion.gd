@@ -6,7 +6,8 @@ var nearby_players = []
 
 
 func _ready():
-	$AnimatedSprite.modulate = Color(1, 0.5, 0.5, 1)
+	pass
+	#$AnimatedSprite.modulate = Color(1, 0.5, 0.5, 1)
 
 
 func hatch():
