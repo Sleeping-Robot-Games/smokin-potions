@@ -15,9 +15,11 @@ var x_facing: String = "Right"
 var x_changed: bool = false
 var y_facing: String = "Up"
 var y_changed: bool = false
-var facing: String = "Right"
+var facing: String = "UpRight"
+var cardinal_facing: String = "Right"
 var animation: String = "Idle"
 var new_facing: String = facing
+var new_cardinal_facing: String = cardinal_facing
 var movement_enabled = true
 var potion_ready = true
 
@@ -72,6 +74,11 @@ func get_input():
 
 func sprite_animation():
 	new_facing = y_facing + x_facing
+	if x_changed:
+		new_cardinal_facing = x_facing
+	elif y_changed:
+		new_cardinal_facing = y_facing
+	
 	var new_animation = animation
 
 	if velocity == Vector2(0,0):
@@ -86,6 +93,9 @@ func sprite_animation():
 		facing = new_facing
 		animation = new_animation
 		anim_player.play(animation + facing)
+	
+	if new_cardinal_facing != cardinal_facing:
+		cardinal_facing = new_cardinal_facing
 
 func _physics_process(delta):
 	get_input()
@@ -97,13 +107,13 @@ func place_potion():
 		return
 	var p = potion.instance()
 	var potion_position = global_position
-	if facing == 'Right':
+	if cardinal_facing == 'Right':
 		potion_position = Vector2(global_position.x + 20, global_position.y)
-	if facing == 'Left':
+	if cardinal_facing == 'Left':
 		potion_position = Vector2(global_position.x - 20, global_position.y)
-	if facing == 'Back':
+	if cardinal_facing == 'Back':
 		potion_position = Vector2(global_position.x, global_position.y - 30)
-	if facing == 'Front':
+	if cardinal_facing == 'Front':
 		potion_position = Vector2(global_position.x, global_position.y + 30)
 
 	p.global_position = potion_position
