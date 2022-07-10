@@ -83,7 +83,6 @@ func _on_AnimatedSprite_frame_changed():
 		elif type == "Fire":
 			var fireball_instance = fireball.instance()
 			add_child(fireball_instance)
-			print(fx_rotation)
 			fireball_instance.rotation_degrees = fx_rotation
 			fireball_instance.trigger_next = trigger_next
 

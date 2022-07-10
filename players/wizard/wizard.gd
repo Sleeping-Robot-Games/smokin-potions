@@ -111,7 +111,7 @@ func place_potion():
 		p.type = elements[0]
 	elif elements.size() == 2:
 		p.type = elements[0] + elements[1]
-	elements = []
+	# elements = []
 	
 	var potion_position = global_position
 	if cardinal_facing == 'Right':
@@ -147,8 +147,7 @@ func but_make_it_symmetrical(og):
 	
 	# process clockwise
 	var starting_quadrant = "Upper" if og.global_position.y <= get_viewport_rect().size.y / 2 else "Lower"
-	starting_quadrant += "Left" if og.global_position.y <= get_viewport_rect().size.x / 2 else "Right"
-	print(og.global_position)
+	starting_quadrant += "Left" if og.global_position.x <= get_viewport_rect().size.x / 2 else "Right"
 	if starting_quadrant == "UpperLeft" or starting_quadrant == "LowerRight":
 		symmetrical_potions[0].global_position = x_opposite
 		symmetrical_potions[1].global_position = diagonally_opposite
