@@ -942,7 +942,6 @@ frame = 18
 
 [node name="Hat" type="Sprite" parent="."]
 material = SubResource( 28 )
-position = Vector2( 1, -1 )
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 8
