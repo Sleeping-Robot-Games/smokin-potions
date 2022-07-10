@@ -44,20 +44,12 @@ func files_in_dir(path: String, keyword: String = "") -> Array:
 	dir.list_dir_end()
 	return files
 
-func set_sprite_color(folder, sprite: Sprite, number: String) -> void:
-	var palette_path = "res://players/wizard/creator/palette/{folder}/{folder}_{number}.png".format({
-		"folder": folder,
-		"number": number
-	})
-	var gray_palette_path = "res://players/wizard/creator/palette/{folder}/{folder}_000.png".format({
-		"folder": folder
-	})
-	sprite.material.set_shader_param("palette_swap", load(palette_path))
-	sprite.material.set_shader_param("greyscale_palette", load(gray_palette_path))
-	make_shaders_unique(sprite)
+
 
 func make_shaders_unique(sprite: Sprite):
 	var mat = sprite.get_material().duplicate()
 	sprite.set_material(mat)
 	
+func remove_values_from_array(array, values_to_remove):
+	pass
 	

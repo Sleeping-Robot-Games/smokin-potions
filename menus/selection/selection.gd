@@ -3,8 +3,10 @@ extends Node2D
 var used_colors = []
 
 func _ready():
-	pass 
-
+	var boxes = $Boxes.get_children()
+	for box in boxes:
+		box.create_random_character()
+		
 func add_color(color):
 	used_colors.append(color)
 	
