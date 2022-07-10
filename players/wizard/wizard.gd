@@ -21,7 +21,7 @@ var new_facing: String = facing
 var new_cardinal_facing: String = cardinal_facing
 var movement_enabled = true
 var potion_ready = true
-var elements = ['fire', 'fire']
+var elements = []
 	
 
 func _ready():
@@ -121,7 +121,8 @@ func place_potion():
 	p.but_make_it_symmetrical(elements)
 	
 	# Clear elements after potion use
-	#elements = []
+	elements = []
+	g.emit_signal('elements_changed', elements)
 	
 	if potion_cooldown_toogle:
 		potion_ready = false
@@ -151,7 +152,13 @@ func pick_up_coin():
 
 
 func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	pass
+	if 'Crystal' in area.get_parent().name:
+		var crystal = area.get_parent()
+		if elements.size() == 2:
+			elements.remove(1)
+		elements.push_front(crystal.element)
+		g.emit_signal('elements_changed', elements)
+		crystal.cleanup()
 
 
 func _on_PickupArea_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):

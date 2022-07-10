@@ -143,3 +143,14 @@ position = Vector2( -0.00772798, 0.0123458 )
 scale = Vector2( 0.992272, 1.00206 )
 points = PoolVector2Array( 322.5, -5, 321.492, 479 )
 width = 1.0
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Element1" type="TextureRect" parent="HUD"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Element2" type="TextureRect" parent="HUD"]
+margin_left = 56.0
+margin_right = 96.0
+margin_bottom = 40.0
