@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dagger.png-3c1c109884166137fe5932813b0a7df7.stex"
+path="res://.import/potion_basic.png-4bf929a44df2d586be3ce2c46a727a4e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://projectiles/dagger/dagger.png"
-dest_files=[ "res://.import/dagger.png-3c1c109884166137fe5932813b0a7df7.stex" ]
+source_file="res://potions/basic/potion_basic.png"
+dest_files=[ "res://.import/potion_basic.png-4bf929a44df2d586be3ce2c46a727a4e.stex" ]
 
 [params]
 

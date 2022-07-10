@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 export (int) var run_speed: int = 150
 export (bool) var potion_cooldown_toogle: bool = false
-const potion = preload('res://potions/potion_001/potion_001.tscn')
+const potion = preload('res://potions/basic/potion_basic.tscn')
 
 onready var anim_player: AnimationPlayer = $AnimationPlayer
 onready var game_scene: Node = null

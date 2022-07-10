@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fireball.png-c5cce9a56cbdc3d4d02f38c3885e5a19.stex"
+path="res://.import/Explosion.png-93ede414408941a53cc629c50bf5f3cf.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://projectiles/fireball/fireball.png"
-dest_files=[ "res://.import/fireball.png-c5cce9a56cbdc3d4d02f38c3885e5a19.stex" ]
+source_file="res://potions/basic/Explosion.png"
+dest_files=[ "res://.import/Explosion.png-93ede414408941a53cc629c50bf5f3cf.stex" ]
 
 [params]
 

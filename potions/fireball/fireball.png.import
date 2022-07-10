@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/potion_001.png-af1b7063054fbee94e471e0ed01af547.stex"
+path="res://.import/fireball.png-db759b5da71699453e61791eefcb72d0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://potions/potion_001/potion_001.png"
-dest_files=[ "res://.import/potion_001.png-af1b7063054fbee94e471e0ed01af547.stex" ]
+source_file="res://potions/fireball/fireball.png"
+dest_files=[ "res://.import/fireball.png-db759b5da71699453e61791eefcb72d0.stex" ]
 
 [params]
 
