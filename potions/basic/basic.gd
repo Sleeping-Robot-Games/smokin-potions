@@ -7,24 +7,19 @@ var nearby_breakables = []
 func _ready():
 	activate()
 
-
 func activate():
 	$ExplodeTimer.start()
-
 
 func explode():
 	$AnimatedSprite.play()
 	# EXPLODE
 
-
 func _on_ExplodeTimer_timeout():
 	explode()
-
 
 func _on_Area2D_body_entered(body):
 	if body.name == 'Wizard':
 		nearby_players.append(body)
-
 
 func _on_Area2D_body_exited(body):
 	if body.name == 'Wizard':
@@ -48,8 +43,6 @@ func _on_ExplosionArea_area_shape_entered(area_rid, area, area_shape_index, loca
 	if area and 'Breakable' in area.get_parent().name:
 		nearby_breakables.append(area.get_parent())
 
-
 func _on_ExplosionArea_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
 	if area and 'Breakable' in area.get_parent().name:
 		nearby_breakables.erase(area.get_parent())
-

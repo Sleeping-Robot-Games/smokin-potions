@@ -13,8 +13,7 @@ func but_make_it_symmetrical(elements):
 	var symmetrical_potions = []
 	for i in range(3):
 		var symmetrical_potion = g.get_potion_scene(elements).instance()
-		symmetrical_potion.add_to_group(str(get_instance_id()))
-		
+		# symmetrical_potion.add_to_group(str(get_instance_id()))
 		symmetrical_potion.but_symmetrical(self)
 		symmetrical_potions.append(symmetrical_potion)
 	

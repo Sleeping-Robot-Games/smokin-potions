@@ -117,7 +117,7 @@ func place_potion():
 
 	p.global_position = potion_position
 	get_parent().add_child(p)
-	p.add_to_group(str(p.get_instance_id()))
+	# p.add_to_group(str(p.get_instance_id()))
 	p.but_make_it_symmetrical(elements)
 	
 	# Clear elements after potion use
