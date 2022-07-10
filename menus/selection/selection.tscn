@@ -175,5 +175,6 @@ margin_bottom = 235.0
 theme = ExtResource( 4 )
 text = "P1"
 
+[connection signal="button_up" from="Box1/Random" to="Box1" method="_on_Random_button_up"]
 [connection signal="button_up" from="Box1/Color/Left" to="Box1" method="_on_Color_Left_button_up"]
 [connection signal="button_up" from="Box1/Color/Right" to="Box1" method="_on_Color_Right_button_up"]

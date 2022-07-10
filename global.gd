@@ -42,11 +42,11 @@ func files_in_dir(path: String, keyword: String = "") -> Array:
 	return files
 
 func set_sprite_color(folder, sprite: Sprite, number: String) -> void:
-	var palette_path = "res://Assets/Palettes/{folder}/{folder}color_{number}.png".format({
+	var palette_path = "res://players/wizard/creator/palette/{folder}/{folder}_{number}.png".format({
 		"folder": folder,
 		"number": number
 	})
-	var gray_palette_path = "res://Assets/Palettes/{folder}/{folder}color_000.png".format({
+	var gray_palette_path = "res://players/wizard/creator/palette/{folder}/{folder}_000.png".format({
 		"folder": folder
 	})
 	sprite.material.set_shader_param("palette_swap", load(palette_path))

@@ -3,7 +3,6 @@ extends Control
 export (bool) var player: int = false
 
 onready var wizard_sprite = {
-	'Body': $Wizard/Body,
 	'Hat': $Wizard/Hat,
 	'Skin': $Wizard/Skin,
 	'Robe': $Wizard/Robe,
@@ -15,18 +14,15 @@ onready var wizard_sprite_palette = {
 	'Color': [
 		wizard_sprite['Hat'],
 		wizard_sprite['Robe'],
-		wizard_sprite['Outline']
 	],
 	'Haircolor': [wizard_sprite['Hair']],
-	'Skin': [
-		wizard_sprite['Skin'],
-		wizard_sprite['Body'],
-	]
+	'Skin': [wizard_sprite['Skin']],
+	'Outline': [wizard_sprite['Outline']]
 }
 
 
-var sprite_folder_path = "res://players/wizard/"
-var palette_folder_path = "res://players/wizard/Palette/"
+var sprite_folder_path = "res://players/wizard/creator/sprites/"
+var palette_folder_path = "res://players/wizard/creator/palette/"
 
 
 func _ready():
@@ -62,16 +58,21 @@ func set_random_color(palette_type: String) -> void:
 		g.set_sprite_color(palette_type, sprite, color_num)
 		
 func set_random_texture(sprite_name: String) -> void:
-	var random_sprite = random_asset(sprite_folder_path + sprite_name, 'Body')
+	var random_sprite = random_asset(sprite_folder_path + sprite_name)
 	if random_sprite == "": # No assets in the folder yet continue to next folder
 		return
-	if "000" in random_sprite: # Prevent some empty sprite sheets
-		if sprite_name == "HairA" and "Hair" in random_sprite: # If main hair is bald, leave rest of hair
-			return
-		if "Top" in sprite_name or "Bottom" in sprite_name: # If no top or no bottom was returned, dont set the texture
-			return
 	set_sprite_texture(sprite_name, random_sprite)
-
+	
+func create_random_character() -> void:
+	var sprite_folders = g.files_in_dir(sprite_folder_path)
+	var palette_folders = g.files_in_dir(palette_folder_path)
+	for folder in sprite_folders:
+		if folder == "Body" or folder == "Palette":
+			continue
+		set_random_texture(folder)
+	for folder in palette_folders:
+		set_random_color(folder)
+		
 func _on_Color_Left_button_up():
 	pass
 	#wizard_body.material.set_shader_param("palette_swap", load("res://players/wizard/Body"+data[part.name].palette_name))
@@ -79,3 +80,7 @@ func _on_Color_Left_button_up():
 
 func _on_Color_Right_button_up():
 	pass # Replace with function body.
+
+
+func _on_Random_button_up():
+	create_random_character()

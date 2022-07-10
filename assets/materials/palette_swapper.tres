@@ -1,8 +1,8 @@
 [gd_resource type="ShaderMaterial" load_steps=4 format=2]
 
 [ext_resource path="res://assets/shaders/PaletteSwapper.gdshader" type="Shader" id=1]
-[ext_resource path="res://players/wizard/Palette/Color/Color_001.png" type="Texture" id=2]
-[ext_resource path="res://players/wizard/Palette/Haircolor/Haircolor_000.png" type="Texture" id=3]
+[ext_resource path="res://players/wizard/creator/palette/Color/Color_001.png" type="Texture" id=2]
+[ext_resource path="res://players/wizard/creator/palette/Haircolor/Haircolor_000.png" type="Texture" id=3]
 
 [resource]
 shader = ExtResource( 1 )
