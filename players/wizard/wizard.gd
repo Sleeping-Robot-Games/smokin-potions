@@ -2,7 +2,6 @@ extends KinematicBody2D
 
 export (int) var run_speed: int = 150
 export (bool) var potion_cooldown_toogle: bool = false
-const potion = preload('res://potions/basic/potion_basic.tscn')
 
 onready var anim_player: AnimationPlayer = $AnimationPlayer
 onready var game_scene: Node = null
@@ -22,10 +21,7 @@ var new_facing: String = facing
 var new_cardinal_facing: String = cardinal_facing
 var movement_enabled = true
 var potion_ready = true
-var elements = ['Fire']
-
-var x_halfway = 320
-var y_halfway = 240
+var elements = ['fire']
 	
 
 func _ready():
@@ -106,13 +102,9 @@ func _physics_process(delta):
 func place_potion():
 	if not potion_ready:
 		return
-	var p = potion.instance()
-	if elements.size() == 1:
-		p.type = elements[0]
-	elif elements.size() == 2:
-		p.type = elements[0] + elements[1]
-	# elements = []
+	var p = g.get_potion_scene(elements).instance()
 	
+	# Places the potion in front of player
 	var potion_position = global_position
 	if cardinal_facing == 'Right':
 		potion_position = Vector2(global_position.x + 20, global_position.y)
@@ -125,72 +117,15 @@ func place_potion():
 
 	p.global_position = potion_position
 	get_parent().add_child(p)
-	but_make_it_symmetrical(p)
+	p.add_to_group(str(p.get_instance_id()))
+	p.but_make_it_symmetrical(elements)
+	
+	# Clear elements after potion use
+#	elements = []
 	
 	if potion_cooldown_toogle:
 		potion_ready = false
 		$PotionCooldown.start()
-	
-	
-func but_make_it_symmetrical(og):
-	# Generate potion instances
-	var symmetrical_potions = []
-	for i in range(3):
-		var symmetrical_potion = potion.instance()
-		symmetrical_potion.but_symmetrical()
-		symmetrical_potion.type = og.type
-		symmetrical_potions.append(symmetrical_potion)
-
-	var y_opposite = Vector2(og.global_position.x, get_viewport_rect().size.y - og.global_position.y)
-	var x_opposite = Vector2(get_viewport_rect().size.x - og.global_position.x, og.global_position.y)
-	var diagonally_opposite = Vector2(get_viewport_rect().size.x - og.global_position.x, get_viewport_rect().size.y - og.global_position.y)
-	
-	# process clockwise
-	var starting_quadrant = "Upper" if og.global_position.y <= get_viewport_rect().size.y / 2 else "Lower"
-	starting_quadrant += "Left" if og.global_position.x <= get_viewport_rect().size.x / 2 else "Right"
-	if starting_quadrant == "UpperLeft" or starting_quadrant == "LowerRight":
-		symmetrical_potions[0].global_position = x_opposite
-		symmetrical_potions[1].global_position = diagonally_opposite
-		symmetrical_potions[2].global_position = y_opposite
-	elif starting_quadrant == "UpperRight" or starting_quadrant == "LowerLeft":
-		symmetrical_potions[0].global_position = y_opposite
-		symmetrical_potions[1].global_position = diagonally_opposite
-		symmetrical_potions[2].global_position = x_opposite
-	
-	if og.type == 'Fire':
-		# setup chain effect
-		og.trigger_next = symmetrical_potions[0]
-		symmetrical_potions[0].trigger_next = symmetrical_potions[1]
-		symmetrical_potions[1].trigger_next = symmetrical_potions[2]
-		# assign fireball directions
-		var right_degrees = 0
-		var down_degrees = 90
-		var left_degrees = 180
-		var up_degrees = 270
-		if starting_quadrant == "UpperLeft":
-			og.fx_rotation = right_degrees
-			symmetrical_potions[0].fx_rotation = down_degrees
-			symmetrical_potions[1].fx_rotation = left_degrees
-			symmetrical_potions[2].fx_rotation = up_degrees
-		elif starting_quadrant == "UpperRight":
-			og.fx_rotation = down_degrees
-			symmetrical_potions[0].fx_rotation = left_degrees
-			symmetrical_potions[1].fx_rotation = up_degrees
-			symmetrical_potions[2].fx_rotation = right_degrees
-		elif starting_quadrant == "LowerRight":
-			og.fx_rotation = left_degrees
-			symmetrical_potions[0].fx_rotation = up_degrees
-			symmetrical_potions[1].fx_rotation = right_degrees
-			symmetrical_potions[2].fx_rotation = down_degrees
-		elif starting_quadrant == "LowerLeft":
-			og.fx_rotation = up_degrees
-			symmetrical_potions[0].fx_rotation = right_degrees
-			symmetrical_potions[1].fx_rotation = down_degrees
-			symmetrical_potions[2].fx_rotation = left_degrees
-	
-	# Lay them pots
-	for p in symmetrical_potions:
-		get_parent().add_child(p)
 
 
 func _on_PotionCooldown_timeout():

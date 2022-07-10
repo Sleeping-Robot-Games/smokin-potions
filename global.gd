@@ -1,5 +1,21 @@
 extends Node
 
+onready var potion_basic = preload('res://potions/basic/basic.tscn')
+onready var potion_fire = preload("res://potions/fire/fire.tscn")
+
+onready var potion_dict = {
+	'basic': potion_basic,
+	'fire': potion_fire
+}
+
+func get_potion_scene(elements):
+	if elements.size() == 0:
+		return potion_basic
+	if elements.size() == 1:
+		return potion_dict[elements[0]]
+	if elements.size() == 2:
+		return potion_dict[elements[0]+elements[1]] or potion_dict[elements[1]+elements[0]]
+
 
 func files_in_dir(path: String, keyword: String = "") -> Array:
 	var files = []

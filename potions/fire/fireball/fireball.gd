@@ -1,9 +1,6 @@
 extends Node2D
 
 export (int) var speed = 750
-var target = Vector2()
-var velocity = Vector2()
-var trigger_next = null
 
 
 func _physics_process(delta):
@@ -17,6 +14,4 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 
 func cleanup():
-	if trigger_next:
-		trigger_next.activate()
 	queue_free()
