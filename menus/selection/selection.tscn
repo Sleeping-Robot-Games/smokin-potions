@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://menus/selection/RandomIcon.png" type="Texture" id=1]
 [ext_resource path="res://players/wizard/wizard.tscn" type="PackedScene" id=2]
@@ -6,8 +6,10 @@
 [ext_resource path="res://assets/font-theme.tres" type="Theme" id=4]
 [ext_resource path="res://menus/selection/LeftArrow10.png" type="Texture" id=5]
 [ext_resource path="res://menus/selection/RightArrow10.png" type="Texture" id=6]
+[ext_resource path="res://menus/selection/selection.gd" type="Script" id=7]
 
 [node name="Select" type="Node2D"]
+script = ExtResource( 7 )
 
 [node name="VerticalDivider" type="ColorRect" parent="."]
 margin_left = 318.0
@@ -56,6 +58,8 @@ margin_left = -36.0
 margin_top = -5.0
 margin_right = -14.0
 margin_bottom = 31.0
+focus_mode = 0
+enabled_focus_mode = 0
 icon = ExtResource( 5 )
 flat = true
 
@@ -64,6 +68,8 @@ margin_left = 83.0
 margin_top = -5.0
 margin_right = 105.0
 margin_bottom = 31.0
+focus_mode = 0
+enabled_focus_mode = 0
 icon = ExtResource( 6 )
 flat = true
 
@@ -81,6 +87,8 @@ margin_left = -18.0
 margin_top = -5.0
 margin_right = 4.0
 margin_bottom = 31.0
+focus_mode = 0
+enabled_focus_mode = 0
 icon = ExtResource( 5 )
 flat = true
 
@@ -89,6 +97,8 @@ margin_left = 71.0
 margin_top = -5.0
 margin_right = 93.0
 margin_bottom = 31.0
+focus_mode = 0
+enabled_focus_mode = 0
 icon = ExtResource( 6 )
 flat = true
 
@@ -106,6 +116,8 @@ margin_left = -20.0
 margin_top = -4.0
 margin_right = 2.0
 margin_bottom = 32.0
+focus_mode = 0
+enabled_focus_mode = 0
 icon = ExtResource( 5 )
 flat = true
 
@@ -114,6 +126,8 @@ margin_left = 72.0
 margin_top = -4.0
 margin_right = 94.0
 margin_bottom = 32.0
+focus_mode = 0
+enabled_focus_mode = 0
 icon = ExtResource( 6 )
 flat = true
 
@@ -130,6 +144,8 @@ align = 1
 margin_left = -22.0
 margin_top = -4.0
 margin_bottom = 32.0
+focus_mode = 0
+enabled_focus_mode = 0
 icon = ExtResource( 5 )
 flat = true
 
@@ -138,6 +154,8 @@ margin_left = 71.0
 margin_top = -4.0
 margin_right = 93.0
 margin_bottom = 32.0
+focus_mode = 0
+enabled_focus_mode = 0
 icon = ExtResource( 6 )
 flat = true
 
@@ -156,6 +174,8 @@ margin_left = -27.0
 margin_top = 15.0
 margin_right = -5.0
 margin_bottom = 51.0
+focus_mode = 0
+enabled_focus_mode = 0
 icon = ExtResource( 5 )
 flat = true
 
@@ -164,6 +184,8 @@ margin_left = 79.0
 margin_top = 15.0
 margin_right = 101.0
 margin_bottom = 51.0
+focus_mode = 0
+enabled_focus_mode = 0
 icon = ExtResource( 6 )
 flat = true
 
@@ -176,5 +198,3 @@ theme = ExtResource( 4 )
 text = "P1"
 
 [connection signal="button_up" from="Box1/Random" to="Box1" method="_on_Random_button_up"]
-[connection signal="button_up" from="Box1/Color/Left" to="Box1" method="_on_Color_Left_button_up"]
-[connection signal="button_up" from="Box1/Color/Right" to="Box1" method="_on_Color_Right_button_up"]
