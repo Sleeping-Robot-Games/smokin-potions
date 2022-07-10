@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Wizard_004.png-2038900494a52a87c6d57e7036e66d68.stex"
+path="res://.import/Body_004.png-9ee78940c440abb779603d87173e2ab0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://players/wizard/Body/Wizard_004.png"
-dest_files=[ "res://.import/Wizard_004.png-2038900494a52a87c6d57e7036e66d68.stex" ]
+source_file="res://players/wizard/Body/Body_004.png"
+dest_files=[ "res://.import/Body_004.png-9ee78940c440abb779603d87173e2ab0.stex" ]
 
 [params]
 

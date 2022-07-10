@@ -22,9 +22,6 @@ var new_facing: String = facing
 var new_cardinal_facing: String = cardinal_facing
 var movement_enabled = true
 var potion_ready = true
-
-var x_halfway = 320
-var y_halfway = 240
 	
 
 func _ready():
@@ -181,6 +178,5 @@ func _on_PickupArea_body_entered(body):
 
 func _on_PickupArea_body_exited(body):
 	pass
-
 
 

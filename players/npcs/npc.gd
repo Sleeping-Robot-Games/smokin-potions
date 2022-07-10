@@ -21,8 +21,6 @@ var new_facing: String = facing
 var movement_enabled = true
 var potion_ready = true
 
-var x_halfway = 320
-var y_halfway = 240
 	
 
 func _ready():

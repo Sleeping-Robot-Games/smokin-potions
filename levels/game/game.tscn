@@ -131,12 +131,14 @@ __meta__ = {
 }
 
 [node name="HorzLine" type="Line2D" parent="."]
+self_modulate = Color( 1, 1, 1, 0.486275 )
 position = Vector2( -0.00772798, 0 )
 scale = Vector2( 0.992272, 1 )
 points = PoolVector2Array( 0, 235, 645, 236 )
 width = 1.0
 
 [node name="VertLine" type="Line2D" parent="."]
+self_modulate = Color( 1, 1, 1, 0.486275 )
 position = Vector2( -0.00772798, 0.0123458 )
 scale = Vector2( 0.992272, 1.00206 )
 points = PoolVector2Array( 322.5, -5, 321.492, 479 )

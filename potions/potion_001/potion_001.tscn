@@ -188,14 +188,17 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[node name="Potion_001" type="RigidBody2D"]
+[node name="Potion" type="RigidBody2D"]
 mode = 2
 gravity_scale = 0.0
+contacts_reported = 5
+contact_monitor = true
 linear_damp = 2.0
 script = ExtResource( 1 )
 heat_needed = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, 7 )
 shape = SubResource( 18 )
 
@@ -224,14 +227,12 @@ visible = false
 position = Vector2( 0, 6 )
 scale = Vector2( 0.6, 0.6 )
 frames = SubResource( 49 )
-frame = 6
 speed_scale = 5.0
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/fade = SubResource( 40 )
 
-[connection signal="body_shape_entered" from="." to="." method="_on_Egg_body_shape_entered"]
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite" to="." method="_on_AnimatedSprite_frame_changed"]
 [connection signal="timeout" from="ExplodeTimer" to="." method="_on_ExplodeTimer_timeout"]

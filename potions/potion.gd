@@ -30,10 +30,6 @@ func _on_ExplodeTimer_timeout():
 	explode()
 
 
-func _on_Egg_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	pass
-
-
 func _on_Area2D_body_entered(body):
 	if body.name == 'Wizard':
 		nearby_players.append(body)
@@ -76,8 +72,4 @@ func _on_ExplosionArea_area_shape_entered(area_rid, area, area_shape_index, loca
 func _on_ExplosionArea_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
 	if area and 'Breakable' in area.get_parent().name:
 		nearby_breakables.erase(area.get_parent())
-
-
-
-
 
