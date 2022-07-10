@@ -121,7 +121,7 @@ func place_potion():
 	p.but_make_it_symmetrical(elements)
 	
 	# Clear elements after potion use
-#	elements = []
+	#elements = []
 	
 	if potion_cooldown_toogle:
 		potion_ready = false
