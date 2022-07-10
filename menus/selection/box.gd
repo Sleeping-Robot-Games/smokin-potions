@@ -49,6 +49,8 @@ func _ready():
 		$Hair.visible = false
 		$Skin.visible = false
 		$HairColor.visible = false
+		$ReadyCheck.visible = false
+		$ReadyCheck.disabled = true
 		$Name.text = "Bot"
 		
 		

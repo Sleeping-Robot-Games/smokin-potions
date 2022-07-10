@@ -347,7 +347,7 @@ margin_bottom = 230.0
 theme = ExtResource( 4 )
 text = "P1"
 
-[node name="CheckBox" type="CheckBox" parent="Boxes/Box2"]
+[node name="ReadyCheck" type="CheckBox" parent="Boxes/Box2"]
 anchor_right = 0.075
 anchor_bottom = 0.1
 margin_left = 166.0
