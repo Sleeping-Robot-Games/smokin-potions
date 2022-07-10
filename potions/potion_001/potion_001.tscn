@@ -208,7 +208,7 @@ frames = SubResource( 17 )
 speed_scale = 2.0
 
 [node name="ExplodeTimer" type="Timer" parent="."]
-autostart = true
+one_shot = true
 
 [node name="ExplosionArea" type="Area2D" parent="."]
 
@@ -227,6 +227,7 @@ visible = false
 position = Vector2( 0, 6 )
 scale = Vector2( 0.6, 0.6 )
 frames = SubResource( 49 )
+frame = 2
 speed_scale = 5.0
 playing = true
 
