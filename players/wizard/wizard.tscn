@@ -26,11 +26,6 @@ shader = ExtResource( 6 )
 shader_param/palette_swap = ExtResource( 4 )
 shader_param/greyscale_palette = ExtResource( 5 )
 
-[sub_resource type="ShaderMaterial" id=23]
-shader = ExtResource( 6 )
-shader_param/palette_swap = ExtResource( 14 )
-shader_param/greyscale_palette = ExtResource( 12 )
-
 [sub_resource type="Shader" id=25]
 code = "shader_type canvas_item;
 render_mode unshaded;
@@ -55,6 +50,11 @@ void fragment()
 shader = SubResource( 25 )
 shader_param/palette_swap = ExtResource( 16 )
 shader_param/greyscale_palette = ExtResource( 15 )
+
+[sub_resource type="ShaderMaterial" id=23]
+shader = ExtResource( 6 )
+shader_param/palette_swap = ExtResource( 14 )
+shader_param/greyscale_palette = ExtResource( 12 )
 
 [sub_resource type="ShaderMaterial" id=28]
 shader = ExtResource( 6 )
@@ -329,9 +329,9 @@ tracks/4/keys = {
 "values": [ 3, 4, 5 ]
 }
 
-[sub_resource type="Animation" id=37]
+[sub_resource type="Animation" id=40]
 resource_name = "KickBackLeft"
-length = 0.6
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Hat:frame")
 tracks/0/interp = 1
@@ -339,10 +339,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 9, 10, 11 ]
+"values": [ 50, 51 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Skin:frame")
@@ -351,10 +351,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 9, 10, 11 ]
+"values": [ 50, 51 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Robe:frame")
@@ -363,10 +363,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 9, 10, 11 ]
+"values": [ 50, 51 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Hair:frame")
@@ -375,10 +375,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 9, 10, 11 ]
+"values": [ 50, 51 ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Outline:frame")
@@ -387,15 +387,15 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 9, 10, 11 ]
+"values": [ 50, 51 ]
 }
 
-[sub_resource type="Animation" id=38]
+[sub_resource type="Animation" id=41]
 resource_name = "KickBackRight"
-length = 0.6
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Hat:frame")
 tracks/0/interp = 1
@@ -403,10 +403,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 9, 10, 11 ]
+"values": [ 48, 49 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Skin:frame")
@@ -415,10 +415,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 9, 10, 11 ]
+"values": [ 48, 49 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Robe:frame")
@@ -427,10 +427,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 9, 10, 11 ]
+"values": [ 48, 49 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Hair:frame")
@@ -439,10 +439,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 9, 10, 11 ]
+"values": [ 48, 49 ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Outline:frame")
@@ -451,15 +451,15 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 9, 10, 11 ]
+"values": [ 48, 49 ]
 }
 
 [sub_resource type="Animation" id=39]
 resource_name = "KickFrontLeft"
-length = 0.6
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Hat:frame")
 tracks/0/interp = 1
@@ -467,10 +467,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2 ]
+"values": [ 44, 45 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Skin:frame")
@@ -479,10 +479,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2 ]
+"values": [ 44, 45 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Robe:frame")
@@ -491,10 +491,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2 ]
+"values": [ 44, 45 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Hair:frame")
@@ -503,10 +503,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2 ]
+"values": [ 44, 45 ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Outline:frame")
@@ -515,15 +515,15 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2 ]
+"values": [ 44, 45 ]
 }
 
-[sub_resource type="Animation" id=40]
+[sub_resource type="Animation" id=42]
 resource_name = "KickFrontRight"
-length = 0.6
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Hat:frame")
 tracks/0/interp = 1
@@ -531,10 +531,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 3, 4, 5 ]
+"values": [ 46, 47 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Skin:frame")
@@ -543,10 +543,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 3, 4, 5 ]
+"values": [ 46, 47 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Robe:frame")
@@ -555,10 +555,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 3, 4, 5 ]
+"values": [ 46, 47 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Hair:frame")
@@ -567,10 +567,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 3, 4, 5 ]
+"values": [ 46, 47 ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Outline:frame")
@@ -579,10 +579,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 3, 4, 5 ]
+"values": [ 46, 47 ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -1174,35 +1174,35 @@ run_speed = 120
 material = SubResource( 26 )
 texture = ExtResource( 2 )
 hframes = 6
-vframes = 8
+vframes = 9
 frame = 18
 
 [node name="Robe" type="Sprite" parent="."]
 material = SubResource( 27 )
 texture = ExtResource( 9 )
 hframes = 6
-vframes = 8
-frame = 18
-
-[node name="Hair" type="Sprite" parent="."]
-material = SubResource( 23 )
-texture = ExtResource( 8 )
-hframes = 6
-vframes = 8
+vframes = 9
 frame = 18
 
 [node name="Outline" type="Sprite" parent="."]
 material = SubResource( 29 )
 texture = ExtResource( 7 )
 hframes = 6
-vframes = 8
+vframes = 9
+frame = 18
+
+[node name="Hair" type="Sprite" parent="."]
+material = SubResource( 23 )
+texture = ExtResource( 8 )
+hframes = 6
+vframes = 9
 frame = 18
 
 [node name="Hat" type="Sprite" parent="."]
 material = SubResource( 28 )
 texture = ExtResource( 1 )
 hframes = 6
-vframes = 8
+vframes = 9
 frame = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -1224,10 +1224,10 @@ anims/IdleBackLeft = SubResource( 10 )
 anims/IdleBackRight = SubResource( 31 )
 anims/IdleFrontLeft = SubResource( 32 )
 anims/IdleFrontRight = SubResource( 11 )
-anims/KickBackLeft = SubResource( 37 )
-anims/KickBackRight = SubResource( 38 )
+anims/KickBackLeft = SubResource( 40 )
+anims/KickBackRight = SubResource( 41 )
 anims/KickFrontLeft = SubResource( 39 )
-anims/KickFrontRight = SubResource( 40 )
+anims/KickFrontRight = SubResource( 42 )
 anims/RESET = SubResource( 7 )
 anims/RunBackLeft = SubResource( 33 )
 anims/RunBackRight = SubResource( 13 )
