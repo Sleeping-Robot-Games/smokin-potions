@@ -32,8 +32,10 @@ func but_symmetrical(_original_potion):
 	use_portal = true
 	original_potion = _original_potion
 
+
 func activate():
 	$ExplodeTimer.start()
+
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == 'fade':
@@ -47,9 +49,14 @@ func explode():
 
 func _on_ExplodeTimer_timeout():
 	explode()
-	
+
+
 func trigger_effect():
 	pass # Used in children
+
+
+func kick(impulse):
+	apply_central_impulse(impulse)
 
 
 func _on_AnimatedSprite_animation_finished():

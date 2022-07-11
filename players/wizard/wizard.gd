@@ -12,15 +12,19 @@ var speed: int = run_speed
 var velocity: Vector2 = Vector2()
 var x_facing: String = "Right"
 var x_changed: bool = false
-var y_facing: String = "Up"
+var y_facing: String = "Back"
 var y_changed: bool = false
-var facing: String = "UpRight"
+var facing: String = "BackRight"
 var cardinal_facing: String = "Right"
 var animation: String = "Idle"
 var new_facing: String = facing
 var new_cardinal_facing: String = cardinal_facing
 var movement_enabled = true
 var potion_ready = true
+var kicking_impulse = Vector2.ZERO
+var kicking_potion = null
+const KICK_FORCE = 200
+const DIAG_KICK_FORCE = 100
 var elements = ['arcane', 'arcane']
 	
 
@@ -63,6 +67,47 @@ func get_input():
 		y_facing = "Front"
 		y_changed = true
 	
+	$PotionRayLeft.force_raycast_update()
+	$PotionRayRight.force_raycast_update()
+	$PotionRayUp.force_raycast_update()
+	$PotionRayDown.force_raycast_update()
+	$PotionRayUpperLeft.force_raycast_update()
+	$PotionRayUpperRight.force_raycast_update()
+	$PotionRayLowerLeft.force_raycast_update()
+	$PotionRayLowerRight.force_raycast_update()
+	if $PotionRayLeft.is_colliding() and Input.is_action_pressed("left"):
+		var collider = $PotionRayLeft.get_collider()
+		kicking_impulse = Vector2(KICK_FORCE * -1, 0)
+		kicking_potion = collider
+	elif $PotionRayRight.is_colliding() and Input.is_action_pressed("right"):
+		var collider = $PotionRayRight.get_collider()
+		kicking_impulse = Vector2(KICK_FORCE, 0)
+		kicking_potion = collider
+	elif $PotionRayUp.is_colliding() and Input.is_action_pressed("up"):
+		var collider = $PotionRayUp.get_collider()
+		kicking_impulse = Vector2(0, KICK_FORCE * -1)
+		kicking_potion = collider
+	elif $PotionRayDown.is_colliding() and Input.is_action_pressed("down"):
+		var collider = $PotionRayDown.get_collider()
+		kicking_impulse = Vector2(0, KICK_FORCE)
+		kicking_potion = collider
+	elif $PotionRayUpperLeft.is_colliding() and (Input.is_action_pressed("up") or Input.is_action_pressed("left")):
+		var collider = $PotionRayUpperLeft.get_collider()
+		kicking_impulse = Vector2(DIAG_KICK_FORCE * -1, DIAG_KICK_FORCE * -1)
+		kicking_potion = collider
+	elif $PotionRayUpperRight.is_colliding() and (Input.is_action_pressed("up") or Input.is_action_pressed("right")):
+		var collider = $PotionRayUpperRight.get_collider()
+		kicking_impulse = Vector2(DIAG_KICK_FORCE, DIAG_KICK_FORCE * -1)
+		kicking_potion = collider
+	elif $PotionRayLowerLeft.is_colliding() and (Input.is_action_pressed("down") or Input.is_action_pressed("left")):
+		var collider = $PotionRayLowerLeft.get_collider()
+		kicking_impulse = Vector2(DIAG_KICK_FORCE * -1, DIAG_KICK_FORCE)
+		kicking_potion = collider
+	elif $PotionRayLowerRight.is_colliding() and (Input.is_action_pressed("down") or Input.is_action_pressed("right")):
+		var collider = $PotionRayLowerRight.get_collider()
+		kicking_impulse = Vector2(DIAG_KICK_FORCE, DIAG_KICK_FORCE)
+		kicking_potion = collider
+	
 	sprite_animation()
 	
 	if Input.is_action_just_released('place'):
@@ -78,7 +123,10 @@ func sprite_animation():
 	
 	var new_animation = animation
 
-	if velocity == Vector2(0,0):
+	if kicking_impulse != Vector2.ZERO:
+		velocity = Vector2.ZERO
+		new_animation = "Kick"
+	elif velocity == Vector2(0,0):
 		new_animation = "Idle"
 	elif velocity != Vector2(0,0):
 		new_animation = "Run"
@@ -94,7 +142,10 @@ func sprite_animation():
 	if new_cardinal_facing != cardinal_facing:
 		cardinal_facing = new_cardinal_facing
 
+
 func _physics_process(delta):
+	if "Kick" in anim_player.current_animation:
+		return
 	get_input()
 	move_and_slide(velocity)
 
@@ -121,7 +172,7 @@ func place_potion():
 	p.but_make_it_symmetrical(elements)
 	
 	# Clear elements after potion use
-	#elements = []
+	elements = []
 	g.emit_signal('elements_changed', elements)
 	
 	if potion_cooldown_toogle:
@@ -131,6 +182,7 @@ func place_potion():
 
 func _on_PotionCooldown_timeout():
 	potion_ready = true
+
 
 func play_sfx(name):
 	pass
@@ -173,3 +225,9 @@ func _on_PickupArea_body_exited(body):
 	pass
 
 
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if "Kick" in anim_name:
+		if kicking_potion and weakref(kicking_potion).get_ref():
+			kicking_potion.kick(kicking_impulse)
+		kicking_potion = null
+		kicking_impulse = Vector2.ZERO
