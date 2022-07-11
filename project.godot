@@ -64,6 +64,8 @@ place={
 2d_physics/layer_3="projectile"
 2d_physics/layer_4="laser"
 2d_physics/layer_5="potion"
+2d_physics/layer_6="breakable"
+2d_physics/layer_7="durable"
 
 [physics]
 

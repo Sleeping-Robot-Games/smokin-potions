@@ -76,7 +76,7 @@ rotation = 1.5708
 z_index = 1
 enabled = true
 cast_to = Vector2( 0, 0 )
-collision_mask = 8
+collision_mask = 104
 collide_with_areas = true
 script = ExtResource( 2 )
 

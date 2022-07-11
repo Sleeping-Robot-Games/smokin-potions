@@ -138,7 +138,7 @@ tracks/0/keys = {
 
 [node name="FirePotion" type="RigidBody2D"]
 collision_layer = 16
-collision_mask = 0
+collision_mask = 112
 mode = 2
 gravity_scale = 0.0
 contacts_reported = 5
@@ -165,7 +165,7 @@ visible = false
 position = Vector2( 0, 6 )
 scale = Vector2( 0.6, 0.6 )
 frames = SubResource( 49 )
-frame = 2
+frame = 6
 speed_scale = 5.0
 playing = true
 
