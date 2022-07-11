@@ -216,7 +216,7 @@ visible = false
 position = Vector2( 0, 6 )
 scale = Vector2( 0.6, 0.6 )
 frames = SubResource( 49 )
-frame = 6
+frame = 5
 speed_scale = 5.0
 playing = true
 
@@ -225,9 +225,5 @@ anims/fade = SubResource( 40 )
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="timeout" from="ExplodeTimer" to="." method="_on_ExplodeTimer_timeout"]
-[connection signal="area_shape_entered" from="ExplosionArea" to="." method="_on_ExplosionArea_area_shape_entered"]
-[connection signal="area_shape_exited" from="ExplosionArea" to="." method="_on_ExplosionArea_area_shape_exited"]
-[connection signal="body_entered" from="ExplosionArea" to="." method="_on_Area2D_body_entered"]
-[connection signal="body_exited" from="ExplosionArea" to="." method="_on_Area2D_body_exited"]
 [connection signal="animation_finished" from="ExplosionArea/Explode" to="." method="_on_Explode_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
