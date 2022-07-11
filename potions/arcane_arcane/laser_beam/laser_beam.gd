@@ -1,7 +1,7 @@
 extends RayCast2D
 
 export var cast_speed := 7000.0
-export var max_length := 200
+export var max_length := 100
 export var growth_time := 0.1
 
 onready var casting_particles := $CastingParticles
@@ -13,17 +13,26 @@ onready var line_width: float = fill.width
 
 var is_casting := false setget set_is_casting
 
-var target_coords = Vector2.ZERO
 var nearby_players = []
 var nearby_breakables = []
 
+# Used for laser circular movement
+var d := 0.0
+var radius := 50.0
+var speed := 1.0
+onready var center = Vector2(position.x, position.y - radius)
+
+func _process(delta: float) -> void:
+	d += delta
+	position = Vector2(sin(d * speed) * radius,cos(d * speed) * radius) + center
+	
+	
 
 func _ready() -> void:
 	set_physics_process(false)
 	fill.points[1] = Vector2.ZERO
 	self.is_casting = true
 	$StopTimer.start()
-
 
 func _physics_process(delta: float) -> void:
 	cast_to = (cast_to + Vector2.RIGHT * cast_speed * delta).clamped(max_length)
@@ -54,7 +63,7 @@ func cast_beam() -> void:
 	force_raycast_update()
 	if is_colliding():
 		var collider = get_collider()
-		if nearby_players.has(collider) and collider.global_position.distance_to(target_coords) < 20:
+		if nearby_players.has(collider) and collider.global_position.distance_to(global_position) > max_length - 20:
 			cast_point = to_local(get_collision_point())
 			collision_particles.process_material.direction = Vector3(
 				get_collision_normal().x, get_collision_normal().y, 0

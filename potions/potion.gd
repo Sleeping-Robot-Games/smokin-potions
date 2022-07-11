@@ -66,3 +66,9 @@ func _on_AnimatedSprite_animation_finished():
 	# lets players move through the explosion
 	$CollisionShape2D.disabled = true
 	trigger_effect()
+
+
+func get_quadrant(potion = self):
+	var quadrant = "Upper" if potion.global_position.y <= get_viewport_rect().size.y / 2 else "Lower"
+	quadrant += "Left" if potion.global_position.x <= get_viewport_rect().size.x / 2 else "Right"
+	return quadrant

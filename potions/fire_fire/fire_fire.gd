@@ -23,9 +23,3 @@ func trigger_effect():
 	get_parent().add_child(fireball_instance)
 	fireball_instance.rotation_degrees = fx_dict[orginal_quadrant]
 	queue_free()
-
-
-func get_quadrant(potion = self):
-	var quadrant = "Upper" if potion.global_position.y <= get_viewport_rect().size.y / 2 else "Lower"
-	quadrant += "Left" if potion.global_position.x <= get_viewport_rect().size.x / 2 else "Right"
-	return quadrant

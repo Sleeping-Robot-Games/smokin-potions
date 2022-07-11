@@ -35,8 +35,3 @@ func set_explode_timer():
 		$ExplodeTimer.wait_time = (len(clockwise) - starting_quadrant_index) + (quadrant_index + 1)
 	else:
 		$ExplodeTimer.wait_time = (quadrant_index - starting_quadrant_index) + 1
-	
-func get_quadrant(potion = self):
-	var quadrant = "Upper" if potion.global_position.y <= get_viewport_rect().size.y / 2 else "Lower"
-	quadrant += "Left" if potion.global_position.x <= get_viewport_rect().size.x / 2 else "Right"
-	return quadrant
