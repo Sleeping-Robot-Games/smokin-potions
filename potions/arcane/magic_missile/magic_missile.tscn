@@ -48,8 +48,6 @@ shape = SubResource( 3 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 
-[node name="WaveTimer" type="Timer" parent="."]
-
 [connection signal="area_shape_entered" from="." to="." method="_on_MagicMissile_area_shape_entered"]
 [connection signal="body_entered" from="." to="." method="_on_MagicMissile_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

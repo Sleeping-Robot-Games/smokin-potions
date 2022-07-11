@@ -62,7 +62,7 @@ shader_param/palette_swap = ExtResource( 4 )
 shader_param/greyscale_palette = ExtResource( 5 )
 
 [sub_resource type="CapsuleShape2D" id=20]
-radius = 4.0
+radius = 6.0
 height = 10.0
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -909,7 +909,8 @@ tracks/4/keys = {
 }
 
 [node name="Wizard" type="KinematicBody2D"]
-collision_mask = 243
+collision_layer = 9
+collision_mask = 3
 script = ExtResource( 3 )
 run_speed = 120
 
@@ -949,7 +950,6 @@ vframes = 8
 frame = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( -1, 7 )
 shape = SubResource( 20 )
 

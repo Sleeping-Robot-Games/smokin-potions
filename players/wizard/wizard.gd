@@ -21,7 +21,7 @@ var new_facing: String = facing
 var new_cardinal_facing: String = cardinal_facing
 var movement_enabled = true
 var potion_ready = true
-var elements = ['arcane']
+var elements = ['arcane', 'arcane']
 	
 
 func _ready():

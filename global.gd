@@ -6,12 +6,14 @@ onready var potion_basic = preload('res://potions/basic/basic.tscn')
 onready var potion_fire = preload("res://potions/fire/fire.tscn")
 onready var potion_fire_fire = preload("res://potions/fire_fire/fire_fire.tscn")
 onready var potion_arcane = preload("res://potions/arcane/arcane.tscn")
+onready var potion_arcane_arcane = preload("res://potions/arcane_arcane/arcane_arcane.tscn")
 
 onready var potion_dict = {
 	'basic': potion_basic,
 	'fire': potion_fire,
 	'fire_fire': potion_fire_fire,
 	'arcane': potion_arcane,
+	'arcane_arcane': potion_arcane_arcane
 }
 
 
