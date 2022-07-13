@@ -6,6 +6,7 @@ var kick_impulse = Vector2.ZERO
 var last_position = Vector2.ZERO
 var is_moving = false
 var holder: KinematicBody2D
+var parent_player = null
 
 func _ready():
 	connect('body_entered', self, '_on_body_entered')
@@ -13,6 +14,13 @@ func _ready():
 	if use_portal:
 		$Portal.visible = true
 		$AnimationPlayer.play('fade')
+	else:
+		# when player first places potion, disable collision
+		add_collision_exception_with(parent_player)
+		for c in parent_player.get_children():
+			if c is RayCast2D:
+				c.add_exception(self)
+
 
 func but_make_it_symmetrical(elements):
 	# Generate potion instances
@@ -71,7 +79,6 @@ func get_held(player):
 	
 
 func _on_body_entered(body):
-	print(body.name)
 	if "Potion" in body.name and is_moving and kick_impulse != Vector2.ZERO:
 		body.kick(kick_impulse)
 		kick_impulse = Vector2.ZERO
@@ -100,3 +107,12 @@ func get_quadrant(potion = self):
 	var quadrant = "Upper" if potion.global_position.y <= get_viewport_rect().size.y / 2 else "Lower"
 	quadrant += "Left" if potion.global_position.x <= get_viewport_rect().size.x / 2 else "Right"
 	return quadrant
+
+
+func _on_PotionPickupArea_body_exited(body):
+	# when player leaves potion area, re-enable collision
+	if body == parent_player:
+		remove_collision_exception_with(parent_player)
+		for c in parent_player.get_children():
+			if c is RayCast2D:
+				c.remove_exception(self)

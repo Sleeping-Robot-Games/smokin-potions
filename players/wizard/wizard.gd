@@ -186,21 +186,9 @@ func place_potion():
 	if not potion_ready:
 		return
 	var p = g.get_potion_scene(elements).instance()
-	
-	# Places the potion in front of player
-	var potion_position = global_position
-	if cardinal_facing == 'Right':
-		potion_position = Vector2(global_position.x + 20, global_position.y)
-	if cardinal_facing == 'Left':
-		potion_position = Vector2(global_position.x - 20, global_position.y)
-	if cardinal_facing == 'Back':
-		potion_position = Vector2(global_position.x, global_position.y - 30)
-	if cardinal_facing == 'Front':
-		potion_position = Vector2(global_position.x, global_position.y + 30)
-
-	p.global_position = potion_position
+	p.global_position = global_position
+	p.parent_player = self
 	get_parent().add_child(p)
-	# p.add_to_group(str(p.get_instance_id()))
 	p.but_make_it_symmetrical(elements)
 	
 	# Clear elements after potion use
