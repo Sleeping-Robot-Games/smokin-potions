@@ -259,6 +259,7 @@ position = Vector2( 524, 218 )
 
 [node name="Boundaries" type="StaticBody2D" parent="."]
 position = Vector2( -40, 0 )
+collision_layer = 17
 __meta__ = {
 "_edit_lock_": true
 }
