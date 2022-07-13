@@ -16,10 +16,20 @@ func _ready():
 		$AnimationPlayer.play('fade')
 	else:
 		# when player first places potion, disable collision
+		$SpawningPlayerArea.connect('body_exited', self, '_on_body_exited')
 		add_collision_exception_with(parent_player)
 		for c in parent_player.get_children():
 			if c is RayCast2D:
 				c.add_exception(self)
+
+
+func _on_body_exited(body):
+	# when player leaves potion area, re-enable collision
+	if body == parent_player:
+		remove_collision_exception_with(parent_player)
+		for c in parent_player.get_children():
+			if c is RayCast2D:
+				c.remove_exception(self)
 
 
 func but_make_it_symmetrical(elements):
@@ -107,12 +117,3 @@ func get_quadrant(potion = self):
 	var quadrant = "Upper" if potion.global_position.y <= get_viewport_rect().size.y / 2 else "Lower"
 	quadrant += "Left" if potion.global_position.x <= get_viewport_rect().size.x / 2 else "Right"
 	return quadrant
-
-
-func _on_PotionPickupArea_body_exited(body):
-	# when player leaves potion area, re-enable collision
-	if body == parent_player:
-		remove_collision_exception_with(parent_player)
-		for c in parent_player.get_children():
-			if c is RayCast2D:
-				c.remove_exception(self)
