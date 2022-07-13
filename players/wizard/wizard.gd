@@ -7,6 +7,9 @@ onready var anim_player: AnimationPlayer = $AnimationPlayer
 onready var game_scene: Node = null
 #onready var player_start_node: Position2D = get_node("/root/Game/PlayerStart")
 
+const KICK_FORCE = 400
+const DIAG_KICK_FORCE = 200
+
 var type = "player"
 var disabled = false
 var speed: int = run_speed
@@ -25,9 +28,9 @@ var potion_ready = true
 var elements = []
 var kicking_impulse = Vector2.ZERO
 var kicking_potion = null
-const KICK_FORCE = 300
-const DIAG_KICK_FORCE = 150
 var is_invulnerable = false
+var nearby_potions = []
+var holding_potion: RigidBody2D
 
 const scent_scene = preload("res://players/wizard/scent/scent.tscn")
 var scent_trail = []
@@ -36,11 +39,9 @@ func _ready():
 	speed = run_speed
 	
 
-
 func _on_ScentTimer_timeout():
 	if not disabled:
 		add_scent()
-
 
 
 func add_scent():
@@ -88,6 +89,14 @@ func get_input():
 	elif Input.is_action_pressed("down"):
 		y_facing = "Front"
 		y_changed = true
+		
+	if Input.is_action_pressed("interact"):
+		print(nearby_potions.size())
+		if nearby_potions.size() > 0:
+			holding_potion = nearby_potions[0]
+			print('holding potion')
+			anim_player.current_animation = 'ThrowFrontLeft'
+			# TODO: Put potion pos infront of character in process loop
 	
 	$PotionRayLeft.force_raycast_update()
 	$PotionRayRight.force_raycast_update()
@@ -253,3 +262,16 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 			kicking_potion.kick(kicking_impulse)
 		kicking_potion = null
 		kicking_impulse = Vector2.ZERO
+
+
+func _on_BombPickupArea_area_entered(area):
+	if area.name == 'BombPickupArea':
+		print('FOUND BOMB')
+		var potion = area.get_parent()
+		nearby_potions.append(potion)
+
+
+func _on_BombPickupArea_area_exited(area):
+	if area.name == 'BombPickupArea':
+		var potion = area.get_parent()
+		nearby_potions.erase(potion)

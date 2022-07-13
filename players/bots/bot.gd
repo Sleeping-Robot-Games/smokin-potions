@@ -200,8 +200,8 @@ func determine_target():
 	
 	node_target = nearest_target(nearest_targets)
 	
-	print("node_target")
-	print(node_target)
+	#print("node_target")
+	#print(node_target)
 
 
 func nearest_target(targets: Array):
@@ -218,3 +218,7 @@ func nearest_target(targets: Array):
 
 func ponder_orb():
 	dir = Vector2.ZERO
+	
+
+func _on_ScentTimer_timeout():
+	pass # Player only
