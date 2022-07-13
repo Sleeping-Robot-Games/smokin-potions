@@ -16,6 +16,8 @@ onready var potion_dict = {
 	'arcane_arcane': potion_arcane_arcane
 }
 
+var players_in_current_game = []
+
 
 func get_potion_scene(elements):
 	if elements.size() == 0:
@@ -47,7 +49,6 @@ func files_in_dir(path: String, keyword: String = "") -> Array:
 	return files
 
 
-
 func make_shaders_unique(sprite: Sprite):
 	var mat = sprite.get_material().duplicate()
 	sprite.set_material(mat)
@@ -55,3 +56,23 @@ func make_shaders_unique(sprite: Sprite):
 func remove_values_from_array(array, values_to_remove):
 	pass
 	
+func load_player(parent_node: Node2D, player_number: String):
+	var f = File.new()
+	f.open("user://player_state_P"+str(player_number)+".save", File.READ)
+	var json = JSON.parse(f.get_as_text())
+	f.close()
+	var data = json.result
+	for part in parent_node.get_children():
+		if part is Sprite:
+			if part.name == 'Hair' or part.name == 'Hat':
+				part.texture = load(data.sprite_state[part.name])
+			if part.name == 'Robe' or part.name == 'Hat':
+				part.material.set_shader_param("palette_swap", load("res://players/wizard/creator/palette/Color/Color_"+data.pallete_sprite_state["Color"]+".png"))
+				part.material.set_shader_param("greyscale_palette", load("res://players/wizard/creator/palette/Color/Color_000.png"))
+			elif part.name == 'Hair':
+				part.material.set_shader_param("palette_swap", load("res://players/wizard/creator/palette/"+part.name+"color/"+part.name+"color_"+data.pallete_sprite_state[part.name+'color']+".png"))
+				part.material.set_shader_param("greyscale_palette", load("res://players/wizard/creator/palette/"+part.name+"color/"+part.name+"color_000.png"))
+			else:
+				part.material.set_shader_param("palette_swap", load("res://players/wizard/creator/palette/"+part.name+"/"+part.name+"_"+data.pallete_sprite_state[part.name]+".png"))
+				part.material.set_shader_param("greyscale_palette", load("res://players/wizard/creator/palette/"+part.name+"/"+part.name+"_000.png"))
+			make_shaders_unique(part)

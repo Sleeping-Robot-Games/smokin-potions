@@ -1,6 +1,6 @@
 extends Control
 
-export (bool) var player: int = false
+export (bool) var player: bool = false
 
 onready var wizard_sprite = {
 	'Hat': $Wizard/Hat,
@@ -21,6 +21,7 @@ onready var wizard_sprite_palette = {
 }
 
 onready var selection = get_parent().get_parent()
+onready var number = self.name.substr(3,1)
 
 var pallete_sprite_state: Dictionary
 var sprite_state: Dictionary
@@ -42,6 +43,8 @@ func _ready():
 	$Hair/Left.connect('button_up', self, '_on_Sprite_Selection_button_up', [-1, "Hair"])
 	$Hair/Right.connect('button_up', self, '_on_Sprite_Selection_button_up', [1, "Hair"])
 	
+	$Name.text = "P"+ number
+	
 	# Remove UI from bots
 	if not player:
 		$Color.visible = false
@@ -49,8 +52,8 @@ func _ready():
 		$Hair.visible = false
 		$Skin.visible = false
 		$HairColor.visible = false
-		$ReadyCheck.visible = false
-		$ReadyCheck.disabled = true
+		$CheckBox.visible = false
+		$CheckBox.disabled = true
 		$Name.text = "Bot"
 		
 		
@@ -166,4 +169,10 @@ func _on_Sprite_Selection_button_up(direction: int, sprite: String):
 		new_index = len(files) -1
 	var new_sprite_path = folder_path + '/' + files[new_index]
 	set_sprite_texture(sprite, new_sprite_path)
-	
+
+
+func _on_CheckBox_toggled(ready):
+	if ready:
+		selection.player_ready(self)
+	else:
+		selection.player_not_ready(self)

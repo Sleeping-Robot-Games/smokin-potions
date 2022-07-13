@@ -202,7 +202,7 @@ position = Vector2( 189, 387 )
 position = Vector2( 169, 326 )
 
 [node name="Breakable4" parent="YSort" groups=["breakables"] instance=ExtResource( 2 )]
-position = Vector2( 137, 76 )
+position = Vector2( 161, 81 )
 
 [node name="Breakable5" parent="YSort" groups=["breakables"] instance=ExtResource( 2 )]
 position = Vector2( 136, 132 )
@@ -214,7 +214,7 @@ position = Vector2( 276, 273 )
 position = Vector2( 234, 216 )
 
 [node name="Breakable8" parent="YSort" groups=["breakables"] instance=ExtResource( 2 )]
-position = Vector2( 531, 398 )
+position = Vector2( 458, 334 )
 
 [node name="Breakable16" parent="YSort" groups=["breakables"] instance=ExtResource( 2 )]
 position = Vector2( 525, 310 )
@@ -312,3 +312,15 @@ margin_bottom = 40.0
 margin_left = 56.0
 margin_right = 96.0
 margin_bottom = 40.0
+
+[node name="Starting1" type="Position2D" parent="."]
+position = Vector2( 130, 52 )
+
+[node name="Starting2" type="Position2D" parent="."]
+position = Vector2( 516, 44 )
+
+[node name="Starting3" type="Position2D" parent="."]
+position = Vector2( 137, 433 )
+
+[node name="Starting4" type="Position2D" parent="."]
+position = Vector2( 526, 425 )

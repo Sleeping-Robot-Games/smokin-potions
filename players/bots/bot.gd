@@ -7,7 +7,7 @@ onready var anim_player: AnimationPlayer = $AnimationPlayer
 onready var game_scene: Node = null
 #onready var player_start_node: Position2D = get_node("/root/Game/PlayerStart")
 
-var type = "player"
+var type = "bot"
 var speed: int = run_speed
 var velocity: Vector2 = Vector2()
 var x_facing: String = "Right"
@@ -156,7 +156,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 func _on_ThinkTimer_timeout():
 	determine_target()
-	if node_target:
+	if node_target and node_target.type == 'player':
 		chase_target(node_target)
 
 

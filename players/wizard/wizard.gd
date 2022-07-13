@@ -38,7 +38,8 @@ func _ready():
 
 
 func _on_ScentTimer_timeout():
-	add_scent()
+	if not disabled:
+		add_scent()
 
 
 
