@@ -61,6 +61,9 @@ script = ExtResource( 4 )
 [node name="AnimatedSprite" parent="." index="1"]
 self_modulate = Color( 0.52549, 0.172549, 0.639216, 1 )
 
+[node name="Portal" parent="." index="3"]
+frame = 6
+
 [node name="ExplosionArea" type="Area2D" parent="." index="6"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionArea" index="0"]

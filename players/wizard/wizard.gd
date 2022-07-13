@@ -89,13 +89,17 @@ func get_input():
 		y_facing = "Front"
 		y_changed = true
 		
-	if Input.is_action_pressed("interact"):
-		if nearby_potions.size() > 0:
+	if Input.is_action_just_released("interact"):
+		if !holding_potion and nearby_potions.size() > 0:
 			holding_potion = nearby_potions.pop_back()
 			holding_potion.get_held(self)
 			for c in get_children():
 				if c is RayCast2D:
-					c.collide_with_bodies = false
+					c.add_exception(holding_potion)
+		elif holding_potion:
+			holding_potion.get_thrown()
+			holding_potion = null
+			
 	
 	$PotionRayLeft.force_raycast_update()
 	$PotionRayRight.force_raycast_update()

@@ -64,6 +64,8 @@ func activate():
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == 'fade':
 		$Portal.visible = false
+	if 'throw' in anim_name:
+		mode = MODE_CHARACTER
 
 
 func explode():
@@ -86,6 +88,11 @@ func kick(impulse):
 func get_held(player):
 	holder = player
 	sleeping = true
+	mode = MODE_STATIC
+	
+func get_thrown():
+	holder = null
+	$AnimationPlayer.play("throw_right")
 	
 
 func _on_body_entered(body):
