@@ -115,7 +115,7 @@ region = Rect2( 648, 0, 72, 72 )
 [sub_resource type="SpriteFrames" id=30]
 animations = [ {
 "frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
-"loop": true,
+"loop": false,
 "name": "default",
 "speed": 5.0
 } ]
@@ -216,7 +216,7 @@ visible = false
 position = Vector2( 0, 6 )
 scale = Vector2( 0.6, 0.6 )
 frames = SubResource( 49 )
-frame = 1
+frame = 4
 speed_scale = 5.0
 playing = true
 

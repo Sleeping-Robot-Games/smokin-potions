@@ -26,92 +26,13 @@ var kicking_potion = null
 const KICK_FORCE = 200
 const DIAG_KICK_FORCE = 100
 var elements = ['arcane', 'arcane']
-	
+
+
+var node_target = null
+var dir = Vector2.ZERO
 
 func _ready():
 	speed = run_speed
-
-func get_input():
-	velocity = Vector2()
-	if Input.is_action_pressed("right"):
-		velocity.x += 1
-	if Input.is_action_pressed("left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("down"):
-		velocity.y += 1
-	if Input.is_action_pressed("up"):
-		velocity.y -= 1
-	
-	if movement_enabled:
-		velocity = velocity.normalized() * speed
-
-	# store necessary information to determine which way to face player in sprite_animation()
-	# x axis
-	x_changed = false
-	if Input.is_action_pressed("right") and Input.is_action_pressed("left"):
-		x_facing = x_facing
-	elif Input.is_action_pressed("right"):
-		x_facing = "Right"
-		x_changed = true
-	elif Input.is_action_pressed("left"):
-		x_facing = "Left"
-		x_changed = true
-	# y axis
-	y_changed = false
-	if Input.is_action_pressed("up") and Input.is_action_pressed("down"):
-		y_facing = y_facing
-	elif Input.is_action_pressed("up"):
-		y_facing = "Back"
-		y_changed = true
-	elif Input.is_action_pressed("down"):
-		y_facing = "Front"
-		y_changed = true
-	
-	$PotionRayLeft.force_raycast_update()
-	$PotionRayRight.force_raycast_update()
-	$PotionRayUp.force_raycast_update()
-	$PotionRayDown.force_raycast_update()
-	$PotionRayUpperLeft.force_raycast_update()
-	$PotionRayUpperRight.force_raycast_update()
-	$PotionRayLowerLeft.force_raycast_update()
-	$PotionRayLowerRight.force_raycast_update()
-	if $PotionRayLeft.is_colliding() and Input.is_action_pressed("left"):
-		var collider = $PotionRayLeft.get_collider()
-		kicking_impulse = Vector2(KICK_FORCE * -1, 0)
-		kicking_potion = collider
-	elif $PotionRayRight.is_colliding() and Input.is_action_pressed("right"):
-		var collider = $PotionRayRight.get_collider()
-		kicking_impulse = Vector2(KICK_FORCE, 0)
-		kicking_potion = collider
-	elif $PotionRayUp.is_colliding() and Input.is_action_pressed("up"):
-		var collider = $PotionRayUp.get_collider()
-		kicking_impulse = Vector2(0, KICK_FORCE * -1)
-		kicking_potion = collider
-	elif $PotionRayDown.is_colliding() and Input.is_action_pressed("down"):
-		var collider = $PotionRayDown.get_collider()
-		kicking_impulse = Vector2(0, KICK_FORCE)
-		kicking_potion = collider
-	elif $PotionRayUpperLeft.is_colliding() and (Input.is_action_pressed("up") or Input.is_action_pressed("left")):
-		var collider = $PotionRayUpperLeft.get_collider()
-		kicking_impulse = Vector2(DIAG_KICK_FORCE * -1, DIAG_KICK_FORCE * -1)
-		kicking_potion = collider
-	elif $PotionRayUpperRight.is_colliding() and (Input.is_action_pressed("up") or Input.is_action_pressed("right")):
-		var collider = $PotionRayUpperRight.get_collider()
-		kicking_impulse = Vector2(DIAG_KICK_FORCE, DIAG_KICK_FORCE * -1)
-		kicking_potion = collider
-	elif $PotionRayLowerLeft.is_colliding() and (Input.is_action_pressed("down") or Input.is_action_pressed("left")):
-		var collider = $PotionRayLowerLeft.get_collider()
-		kicking_impulse = Vector2(DIAG_KICK_FORCE * -1, DIAG_KICK_FORCE)
-		kicking_potion = collider
-	elif $PotionRayLowerRight.is_colliding() and (Input.is_action_pressed("down") or Input.is_action_pressed("right")):
-		var collider = $PotionRayLowerRight.get_collider()
-		kicking_impulse = Vector2(DIAG_KICK_FORCE, DIAG_KICK_FORCE)
-		kicking_potion = collider
-	
-	sprite_animation()
-	
-	if Input.is_action_just_released('place'):
-		place_potion()
 
 
 func sprite_animation():
@@ -146,8 +67,8 @@ func sprite_animation():
 func _physics_process(delta):
 	if "Kick" in anim_player.current_animation:
 		return
-	get_input()
-	move_and_slide(velocity)
+	var motion = dir * speed
+	move_and_slide(motion)
 
 
 func place_potion():
@@ -231,3 +152,69 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 			kicking_potion.kick(kicking_impulse)
 		kicking_potion = null
 		kicking_impulse = Vector2.ZERO
+
+
+func _on_ThinkTimer_timeout():
+	determine_target()
+	if node_target:
+		chase_target(node_target)
+
+
+func chase_target(target):
+	var look = $NavRayCast
+	look.cast_to = (target.global_position - global_position)
+	look.force_raycast_update()
+	
+	# if we can see the target, chase it
+	if !look.is_colliding():
+		dir = look.cast_to_normalized()
+	# of chase first scent we can see
+	else:
+		for scent in target.scent_trail:
+			look.cast_to = (scent.global_position - global_position)
+			look.force_raycast_update()
+			
+			if !look.is_colliding():
+				dir = look.cast_to.normalized()
+				break
+	
+
+func determine_target():
+	var players = get_tree().get_nodes_in_group("players")
+	players.erase(self)
+	var breakables = get_tree().get_nodes_in_group("breakables")
+	var nearest_player
+	var nearest_breakable
+	
+	if players.size() > 0:
+		nearest_player = nearest_target(players)
+	
+	#if breakables.size() > 0:
+	#	nearest_ breakable = nearest_target(breakables)
+	
+	var nearest_targets = []
+	if nearest_player:
+		nearest_targets.append(nearest_player)
+	if nearest_breakable:
+		nearest_targets.append(nearest_breakable)
+	
+	node_target = nearest_target(nearest_targets)
+	
+	print("node_target")
+	print(node_target)
+
+
+func nearest_target(targets: Array):
+	if targets.size() <= 0:
+		return null
+	var nearest_target = targets[0]
+	for target in targets:
+		var cur_target_distance = global_position.distance_to(nearest_target.global_position)
+		var new_target_distance = global_position.distance_to(target.global_position)
+		if new_target_distance < cur_target_distance:
+			nearest_target = target
+	return nearest_target
+
+
+func ponder_orb():
+	dir = Vector2.ZERO

@@ -62,7 +62,7 @@ shader_param/palette_swap = ExtResource( 4 )
 shader_param/greyscale_palette = ExtResource( 5 )
 
 [sub_resource type="CapsuleShape2D" id=20]
-radius = 4.0
+radius = 6.0
 height = 10.0
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -1272,9 +1272,14 @@ collision_mask = 16
 cast_to = Vector2( 0, 20 )
 collision_mask = 16
 
+[node name="ScentTimer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
 [connection signal="area_shape_entered" from="PickupArea" to="." method="_on_PickupArea_area_shape_entered"]
 [connection signal="area_shape_exited" from="PickupArea" to="." method="_on_PickupArea_area_shape_exited"]
 [connection signal="body_entered" from="PickupArea" to="." method="_on_PickupArea_body_entered"]
 [connection signal="body_exited" from="PickupArea" to="." method="_on_PickupArea_body_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="PotionCooldown" to="." method="_on_PotionCooldown_timeout"]
+[connection signal="timeout" from="ScentTimer" to="." method="_on_ScentTimer_timeout"]

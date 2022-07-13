@@ -27,11 +27,28 @@ var kicking_impulse = Vector2.ZERO
 var kicking_potion = null
 const KICK_FORCE = 200
 const DIAG_KICK_FORCE = 100
-	
+var is_invulnerable = false
+
+const scent_scene = preload("res://players/wizard/scent/scent.tscn")
+var scent_trail = []
 
 func _ready():
 	speed = run_speed
 	
+
+
+func _on_ScentTimer_timeout():
+	add_scent()
+
+
+
+func add_scent():
+	var scent = scent_scene.instance()
+	scent.player = self
+	scent.global_position = global_position
+	get_parent().add_child(scent)
+	scent_trail.push_front(scent)
+
 
 func get_input():
 	if disabled:
