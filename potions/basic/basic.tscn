@@ -58,11 +58,8 @@ animations = [ {
 [node name="BasicPotion" instance=ExtResource( 2 )]
 script = ExtResource( 4 )
 
-[node name="CollisionShape2D" parent="." index="0"]
-visible = true
-
 [node name="Portal" parent="." index="3"]
-frame = 0
+frame = 6
 
 [node name="ExplosionArea" type="Area2D" parent="." index="5"]
 

@@ -5,6 +5,8 @@ var nearby_players = []
 var nearby_breakables = []
 
 func _ready():
+	$ExplosionArea.connect('area_shape_entered', self, '_on_ExplosionArea_area_shape_entered')
+	$ExplosionArea.connect('area_shape_exited', self, '_on_ExplosionArea_area_shape_exited')
 	activate()
 
 func activate():
