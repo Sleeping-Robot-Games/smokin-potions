@@ -62,7 +62,7 @@ shader_param/palette_swap = ExtResource( 4 )
 shader_param/greyscale_palette = ExtResource( 5 )
 
 [sub_resource type="CapsuleShape2D" id=20]
-radius = 4.0
+radius = 6.0
 height = 10.0
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -70,7 +70,7 @@ radius = 5.0
 height = 16.0
 
 [sub_resource type="CircleShape2D" id=43]
-radius = 13.0
+radius = 14.0
 
 [sub_resource type="Animation" id=10]
 resource_name = "IdleBackLeft"
@@ -1169,7 +1169,7 @@ tracks/4/keys = {
 
 [node name="Wizard" type="KinematicBody2D"]
 collision_layer = 9
-collision_mask = 3
+collision_mask = 19
 script = ExtResource( 3 )
 run_speed = 120
 
@@ -1251,35 +1251,43 @@ anims/ThrowFrontRight = SubResource( 36 )
 [node name="PotionCooldown" type="Timer" parent="."]
 
 [node name="PotionRayUpperLeft" type="RayCast2D" parent="."]
-cast_to = Vector2( -20, -20 )
+position = Vector2( 0, 6 )
+cast_to = Vector2( -10, -10 )
 collision_mask = 16
 
 [node name="PotionRayUpperRight" type="RayCast2D" parent="."]
-cast_to = Vector2( 20, -20 )
+position = Vector2( 0, 6 )
+cast_to = Vector2( 10, -10 )
 collision_mask = 16
 
 [node name="PotionRayLowerLeft" type="RayCast2D" parent="."]
-cast_to = Vector2( -20, 20 )
+position = Vector2( 0, 6 )
+cast_to = Vector2( -10, 10 )
 collision_mask = 16
 
 [node name="PotionRayLowerRight" type="RayCast2D" parent="."]
-cast_to = Vector2( 20, 20 )
+position = Vector2( 0, 6 )
+cast_to = Vector2( 10, 10 )
 collision_mask = 16
 
 [node name="PotionRayLeft" type="RayCast2D" parent="."]
-cast_to = Vector2( -20, 0 )
+position = Vector2( 0, 6 )
+cast_to = Vector2( -10, 0 )
 collision_mask = 16
 
 [node name="PotionRayRight" type="RayCast2D" parent="."]
-cast_to = Vector2( 20, 0 )
+position = Vector2( 0, 6 )
+cast_to = Vector2( 10, 0 )
 collision_mask = 16
 
 [node name="PotionRayUp" type="RayCast2D" parent="."]
-cast_to = Vector2( 0, -20 )
+position = Vector2( 0, 6 )
+cast_to = Vector2( 0, -10 )
 collision_mask = 16
 
 [node name="PotionRayDown" type="RayCast2D" parent="."]
-cast_to = Vector2( 0, 20 )
+position = Vector2( 0, 6 )
+cast_to = Vector2( 0, 10 )
 collision_mask = 16
 
 [node name="ScentTimer" type="Timer" parent="."]

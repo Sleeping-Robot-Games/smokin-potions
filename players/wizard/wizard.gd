@@ -50,11 +50,10 @@ func add_scent():
 	scent.global_position = global_position
 	get_parent().add_child(scent)
 	scent_trail.push_front(scent)
+	scent.visible = false
 
 
 func get_input():
-	if disabled:
-		return
 	velocity = Vector2()
 	if Input.is_action_pressed("right"):
 		velocity.x += 1
@@ -91,12 +90,12 @@ func get_input():
 		y_changed = true
 		
 	if Input.is_action_pressed("interact"):
-		print(nearby_potions.size())
 		if nearby_potions.size() > 0:
-			holding_potion = nearby_potions[0]
-			print('holding potion')
-			anim_player.current_animation = 'ThrowFrontLeft'
-			# TODO: Put potion pos infront of character in process loop
+			holding_potion = nearby_potions.pop_back()
+			holding_potion.get_held(self)
+			for c in get_children():
+				if c is RayCast2D:
+					c.collide_with_bodies = false
 	
 	$PotionRayLeft.force_raycast_update()
 	$PotionRayRight.force_raycast_update()
@@ -138,6 +137,8 @@ func get_input():
 		var collider = $PotionRayLowerRight.get_collider()
 		kicking_impulse = Vector2(DIAG_KICK_FORCE, DIAG_KICK_FORCE)
 		kicking_potion = collider
+	else:
+		kicking_impulse = Vector2.ZERO
 	
 	sprite_animation()
 	
@@ -153,7 +154,7 @@ func sprite_animation():
 		new_cardinal_facing = y_facing
 	
 	var new_animation = animation
-
+	
 	if kicking_impulse != Vector2.ZERO:
 		velocity = Vector2.ZERO
 		new_animation = "Kick"
@@ -175,10 +176,10 @@ func sprite_animation():
 
 
 func _physics_process(delta):
-	if "Kick" in anim_player.current_animation:
+	move_and_slide(velocity)
+	if disabled or "Kick" in anim_player.current_animation:
 		return
 	get_input()
-	move_and_slide(velocity)
 
 
 func place_potion():
@@ -265,13 +266,13 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 
 func _on_BombPickupArea_area_entered(area):
-	if area.name == 'BombPickupArea':
-		print('FOUND BOMB')
+	if area.name == 'PotionPickupArea':
+		print('FOUND POTION')
 		var potion = area.get_parent()
 		nearby_potions.append(potion)
 
 
 func _on_BombPickupArea_area_exited(area):
-	if area.name == 'BombPickupArea':
+	if area.name == 'PotionPickupArea':
 		var potion = area.get_parent()
 		nearby_potions.erase(potion)

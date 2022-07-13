@@ -199,9 +199,9 @@ scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 17 )
 speed_scale = 2.0
 
-[node name="PickupArea" type="Area2D" parent="."]
+[node name="PotionPickupArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PotionPickupArea"]
 position = Vector2( 0, 6 )
 shape = SubResource( 63 )
 
@@ -219,6 +219,7 @@ frames = SubResource( 30 )
 speed_scale = 3.0
 
 [node name="ExplodeTimer" type="Timer" parent="."]
+wait_time = 5.0
 autostart = true
 
 [node name="Portal" type="AnimatedSprite" parent="."]
@@ -226,7 +227,6 @@ visible = false
 position = Vector2( 0, 6 )
 scale = Vector2( 0.6, 0.6 )
 frames = SubResource( 49 )
-frame = 3
 speed_scale = 5.0
 playing = true
 

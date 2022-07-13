@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://players/wizard/wizard.tscn" type="PackedScene" id=1]
 [ext_resource path="res://levels/objects/breakable.tscn" type="PackedScene" id=2]
 [ext_resource path="res://levels/objects/durable.tscn" type="PackedScene" id=3]
 [ext_resource path="res://levels/tileset_001.png" type="Texture" id=4]
 [ext_resource path="res://levels/game/game.gd" type="Script" id=5]
-[ext_resource path="res://players/bots/bot.tscn" type="PackedScene" id=6]
 
 [sub_resource type="TileSet" id=5]
 0/name = "tileset_001.png 0"
@@ -188,9 +187,6 @@ tile_data = PoolIntArray( -65535, 7, 0, -65533, 8, 0, -65531, 8, 0, 0, 0, 0, 7, 
 
 [node name="Wizard" parent="YSort" groups=["human", "players"] instance=ExtResource( 1 )]
 position = Vector2( 210, 134 )
-
-[node name="Bot" parent="YSort" groups=["bots", "players"] instance=ExtResource( 6 )]
-position = Vector2( 78, 84 )
 
 [node name="Breakable" parent="YSort" groups=["breakables"] instance=ExtResource( 2 )]
 position = Vector2( 89, 384 )
