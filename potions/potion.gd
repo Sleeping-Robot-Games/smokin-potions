@@ -8,6 +8,8 @@ var is_moving = false
 var holder: KinematicBody2D
 
 func _ready():
+	connect('body_entered', self, '_on_body_entered')
+	
 	if use_portal:
 		$Portal.visible = true
 		$AnimationPlayer.play('fade')
@@ -68,8 +70,8 @@ func get_held(player):
 	sleeping = true
 	
 
-
 func _on_body_entered(body):
+	print(body.name)
 	if "Potion" in body.name and is_moving and kick_impulse != Vector2.ZERO:
 		body.kick(kick_impulse)
 		kick_impulse = Vector2.ZERO
