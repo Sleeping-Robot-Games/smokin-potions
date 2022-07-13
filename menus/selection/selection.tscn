@@ -41,7 +41,7 @@ __meta__ = {
 player = true
 
 [node name="Wizard" parent="Boxes/Box1" instance=ExtResource( 2 )]
-position = Vector2( 154, 106 )
+position = Vector2( 154, 99 )
 scale = Vector2( 4, 4 )
 
 [node name="Random" type="Button" parent="Boxes/Box1"]
@@ -204,7 +204,7 @@ margin_bottom = 240.0
 script = ExtResource( 3 )
 
 [node name="Wizard" parent="Boxes/Box2" instance=ExtResource( 2 )]
-position = Vector2( 154, 106 )
+position = Vector2( 154, 99 )
 scale = Vector2( 4, 4 )
 
 [node name="Random" type="Button" parent="Boxes/Box2"]

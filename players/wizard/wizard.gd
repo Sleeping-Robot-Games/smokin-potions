@@ -8,6 +8,7 @@ onready var game_scene: Node = null
 #onready var player_start_node: Position2D = get_node("/root/Game/PlayerStart")
 
 var type = "player"
+var disabled = false
 var speed: int = run_speed
 var velocity: Vector2 = Vector2()
 var x_facing: String = "Right"
@@ -21,17 +22,20 @@ var new_facing: String = facing
 var new_cardinal_facing: String = cardinal_facing
 var movement_enabled = true
 var potion_ready = true
+var elements = []
 var kicking_impulse = Vector2.ZERO
 var kicking_potion = null
 const KICK_FORCE = 200
 const DIAG_KICK_FORCE = 100
-var elements = ['arcane', 'arcane']
 	
 
 func _ready():
 	speed = run_speed
+	
 
 func get_input():
+	if disabled:
+		return
 	velocity = Vector2()
 	if Input.is_action_pressed("right"):
 		velocity.x += 1
