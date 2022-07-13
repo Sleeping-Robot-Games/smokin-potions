@@ -25,8 +25,8 @@ var potion_ready = true
 var elements = []
 var kicking_impulse = Vector2.ZERO
 var kicking_potion = null
-const KICK_FORCE = 200
-const DIAG_KICK_FORCE = 100
+const KICK_FORCE = 300
+const DIAG_KICK_FORCE = 150
 var is_invulnerable = false
 
 const scent_scene = preload("res://players/wizard/scent/scent.tscn")

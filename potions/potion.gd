@@ -2,6 +2,9 @@ extends RigidBody2D
 
 var use_portal = false
 var original_potion
+var kick_impulse = Vector2.ZERO
+var last_position = Vector2.ZERO
+var is_moving = false
 
 func _ready():
 	if use_portal:
@@ -56,7 +59,21 @@ func trigger_effect():
 
 
 func kick(impulse):
+	kick_impulse = impulse 
 	apply_central_impulse(impulse)
+
+
+func _on_body_entered(body):
+	if "Potion" in body.name and is_moving and kick_impulse != Vector2.ZERO:
+		body.kick(kick_impulse)
+		kick_impulse = Vector2.ZERO
+		sleeping = true
+
+
+func _physics_process(delta):
+	var cur_position = global_position
+	is_moving = cur_position != last_position
+	last_position = cur_position
 
 
 func _on_AnimatedSprite_animation_finished():

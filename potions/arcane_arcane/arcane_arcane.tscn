@@ -218,13 +218,14 @@ visible = false
 position = Vector2( 0, 6 )
 scale = Vector2( 0.6, 0.6 )
 frames = SubResource( 49 )
-frame = 3
+frame = 7
 speed_scale = 5.0
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/fade = SubResource( 40 )
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="timeout" from="ExplodeTimer" to="." method="_on_ExplodeTimer_timeout"]
 [connection signal="animation_finished" from="ExplosionArea/Explode" to="." method="_on_Explode_animation_finished"]
