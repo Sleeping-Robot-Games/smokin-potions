@@ -32,6 +32,8 @@ var is_invulnerable = false
 var nearby_potions = []
 var holding_potion: RigidBody2D
 
+const rune_scene = preload('res://pickups/runes/rune.tscn')
+
 const scent_scene = preload("res://players/wizard/scent/scent.tscn")
 var scent_trail = []
 
@@ -230,7 +232,21 @@ func pick_up_coin():
 func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 	if 'Rune' in area.get_parent().name:
 		var rune = area.get_parent()
+		# if already have 2 runes, drop the 2nd to make room
 		if elements.size() == 2:
+			var rune_instance = rune_scene.instance()
+			var rune_pos = global_position
+			if cardinal_facing == "Left":
+				rune_pos.x += 20
+			elif cardinal_facing == "Right":
+				rune_pos.x -= 20
+			elif cardinal_facing == "Back":
+				rune_pos.y += 25
+			elif cardinal_facing == "Front":
+				rune_pos.y -= 20
+			rune_instance.global_position = rune_pos
+			get_parent().add_child(rune_instance)
+			rune_instance.set_type(elements[1])
 			elements.remove(1)
 		elements.push_front(rune.element)
 		g.emit_signal('elements_changed', elements)

@@ -18,6 +18,8 @@ func _ready():
 		element = "arcane"
 	$Sprite.set_texture(load("res://pickups/runes/" + element + ".png"))
 
+func set_type(type):
+	$Sprite.set_texture(load("res://pickups/runes/" + type + ".png"))
 
 func cleanup():
 	queue_free();
