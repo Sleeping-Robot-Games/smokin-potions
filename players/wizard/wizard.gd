@@ -274,6 +274,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 func _on_BombPickupArea_area_entered(area):
 	if area.name == 'PotionPickupArea':
+		print('FOUND POTION')
 		var potion = area.get_parent()
 		nearby_potions.append(potion)
 
