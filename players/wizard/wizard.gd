@@ -25,7 +25,7 @@ var new_facing: String = facing
 var new_cardinal_facing: String = cardinal_facing
 var movement_enabled = true
 var potion_ready = true
-var elements = ['arcane_arcane']
+var elements = []
 var kicking_impulse = Vector2.ZERO
 var kicking_potion = null
 var is_invulnerable = false
@@ -43,7 +43,8 @@ func _ready():
 
 func _on_ScentTimer_timeout():
 	if not disabled:
-		add_scent()
+		pass
+		#add_scent()
 
 
 func add_scent():
@@ -101,7 +102,6 @@ func get_input():
 		elif holding_potion:
 			holding_potion.get_thrown()
 			holding_potion = null
-			
 	
 	$PotionRayLeft.force_raycast_update()
 	$PotionRayRight.force_raycast_update()
@@ -267,19 +267,19 @@ func _on_PickupArea_body_exited(body):
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if "Kick" in anim_name:
-		if kicking_potion and weakref(kicking_potion).get_ref():			kicking_potion.kick(kicking_impulse)
+		if kicking_potion and weakref(kicking_potion).get_ref():
+			kicking_potion.kick(kicking_impulse)
 		kicking_potion = null
 		kicking_impulse = Vector2.ZERO
 
 
 func _on_BombPickupArea_area_entered(area):
-	if area.name == 'PotionPickupArea':
-		print('FOUND POTION')
+	if area.name == 'PotionPickupArea' and nearby_potions.find(area.get_parent()) == -1 and !area.get_parent().potion_daddy:
 		var potion = area.get_parent()
 		nearby_potions.append(potion)
 
 
 func _on_BombPickupArea_area_exited(area):
-	if area.name == 'PotionPickupArea':
+	if area.name == 'PotionPickupArea' and nearby_potions.find(area.get_parent()) != -1:
 		var potion = area.get_parent()
 		nearby_potions.erase(potion)

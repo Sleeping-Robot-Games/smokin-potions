@@ -449,7 +449,7 @@ position = Vector2( 554, 228 )
 
 [node name="Boundaries" type="StaticBody2D" parent="."]
 position = Vector2( -40, 0 )
-collision_layer = 17
+collision_mask = 17
 __meta__ = {
 "_edit_lock_": true
 }
@@ -528,6 +528,5 @@ autostart = true
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
-autoplay = true
 
 [connection signal="timeout" from="MatchTimer" to="." method="_on_MatchTimer_timeout"]

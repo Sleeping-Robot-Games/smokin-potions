@@ -76,3 +76,7 @@ func load_player(parent_node: Node2D, player_number: String):
 				part.material.set_shader_param("palette_swap", load("res://players/wizard/creator/palette/"+part.name+"/"+part.name+"_"+data.pallete_sprite_state[part.name]+".png"))
 				part.material.set_shader_param("greyscale_palette", load("res://players/wizard/creator/palette/"+part.name+"/"+part.name+"_000.png"))
 			make_shaders_unique(part)
+
+func reparent(node, new_parent):
+	node.get_parent().remove_child(node)
+	new_parent.add_child(node)

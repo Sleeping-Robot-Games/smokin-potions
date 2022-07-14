@@ -7,6 +7,7 @@ var last_position = Vector2.ZERO
 var is_moving = false
 var holder: KinematicBody2D
 var parent_player = null
+var potion_daddy
 
 func _ready():
 	connect('body_entered', self, '_on_body_entered')
@@ -64,8 +65,16 @@ func activate():
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == 'fade':
 		$Portal.visible = false
-	if 'throw' in anim_name:
-		mode = MODE_CHARACTER
+	if 'Throw' in anim_name:
+		var true_global = global_position
+		g.reparent(self, get_parent().get_parent()) 
+		global_position = true_global
+		for c in holder.get_children():
+			if c is RayCast2D:
+				c.remove_exception(self)
+		holder = null
+		potion_daddy.queue_free()
+		potion_daddy = null
 
 
 func explode():
@@ -84,15 +93,26 @@ func trigger_effect():
 func kick(impulse):
 	kick_impulse = impulse 
 	apply_central_impulse(impulse)
-	
+
+
 func get_held(player):
 	holder = player
 	sleeping = true
-	mode = MODE_STATIC
-	
+	add_collision_exception_with(holder)
+	potion_daddy = Position2D.new()
+	potion_daddy.name = 'daddy'
+	holder.add_child(potion_daddy)
+	g.reparent(self, potion_daddy)
+
+
 func get_thrown():
-	holder = null
-	$AnimationPlayer.play("throw_right")
+	var true_pos = global_position
+	g.reparent(potion_daddy, get_node('/root/Game/YSort'))
+	potion_daddy.global_position = true_pos
+	position = Vector2.ZERO
+	#holder.x_facing "_" + holder.y_facing
+	$AnimationPlayer.play("ThrowBackRight")
+	remove_collision_exception_with(holder)
 	
 
 func _on_body_entered(body):
@@ -118,6 +138,10 @@ func _on_AnimatedSprite_animation_finished():
 	# lets players move through the explosion
 	$CollisionShape2D.disabled = true
 	trigger_effect()
+	# if the player is still holding the potion reset it's held state
+	if holder != null and holder.holding_potion != null:
+		holder.holding_potion = null
+		holder = null
 
 
 func get_quadrant(potion = self):
