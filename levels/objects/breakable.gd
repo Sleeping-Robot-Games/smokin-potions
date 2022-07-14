@@ -8,6 +8,12 @@ func _ready():
 
 
 func break():
+	$Crumbling.visible = true
+	$Crumbling.play()
+	$Sprite.visible = false
+
+
+func _on_Crumbling_animation_finished():
 	rng.randomize()
 	var has_loot = rng.randi_range(0, 1)
 	if has_loot:
