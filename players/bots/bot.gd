@@ -8,6 +8,7 @@ onready var game_scene: Node = null
 #onready var player_start_node: Position2D = get_node("/root/Game/PlayerStart")
 
 var type = "bot"
+var number = '2'
 var speed: int = run_speed
 var velocity: Vector2 = Vector2()
 var x_facing: String = "Right"

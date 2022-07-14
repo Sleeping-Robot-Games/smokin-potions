@@ -11,7 +11,7 @@ const KICK_FORCE = 400
 const DIAG_KICK_FORCE = 200
 
 var type = "player"
-var number: int = 1
+var number: String = '1'
 var disabled = false
 var speed: int = run_speed
 var velocity: Vector2 = Vector2()
@@ -105,6 +105,7 @@ func get_input():
 			holding_potion.get_thrown()
 			holding_potion = null
 			g.load_normal_assets(self, number)
+			anim_player.play("Throw"+y_facing+x_facing)
 	
 	$PotionRayLeft.force_raycast_update()
 	$PotionRayRight.force_raycast_update()
@@ -273,6 +274,8 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 			kicking_potion.kick(kicking_impulse)
 		kicking_potion = null
 		kicking_impulse = Vector2.ZERO
+	if "Throw" in anim_name:
+		anim_player.play("Idle"+y_facing+x_facing)
 
 
 func _on_BombPickupArea_area_entered(area):

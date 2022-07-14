@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://menus/start/ArrowRight.png" type="Texture" id=1]
 [ext_resource path="res://menus/player_selection/selection.tscn" type="PackedScene" id=2]
-
+[ext_resource path="res://menus/map_selection/map_selection.tscn" type="PackedScene" id=3]
+[ext_resource path="res://menus/start/start.gd" type="Script" id=4]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://assets/fonts/alagard.ttf"
@@ -53,7 +54,7 @@ animations = [ {
 [node name="Menu" type="Node"]
 
 [node name="Title" type="Node2D" parent="."]
-visible = false
+script = ExtResource( 4 )
 
 [node name="ColorRect" type="ColorRect" parent="Title"]
 margin_right = 640.0
@@ -81,7 +82,12 @@ flat = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Title/Button"]
 position = Vector2( -5, 29 )
 frames = SubResource( 5 )
-frame = 3
 playing = true
 
 [node name="Select" parent="." instance=ExtResource( 2 )]
+visible = false
+
+[node name="MapSection" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[connection signal="button_up" from="Title/Button" to="Title" method="_on_Button_button_up"]

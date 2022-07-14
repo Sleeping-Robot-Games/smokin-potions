@@ -66,6 +66,8 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == 'fade':
 		$Portal.visible = false
 	if 'Throw' in anim_name:
+		if holder.cardinal_facing == 'front':
+			z_index = 1
 		var true_global = global_position
 		g.reparent(self, get_parent().get_parent()) 
 		global_position = true_global
@@ -110,9 +112,10 @@ func get_thrown():
 	g.reparent(potion_daddy, get_node('/root/Game/YSort'))
 	potion_daddy.global_position = true_pos
 	position = Vector2.ZERO
-	#holder.x_facing "_" + holder.y_facing
-	$AnimationPlayer.play("ThrowBackRight")
 	remove_collision_exception_with(holder)
+	$AnimationPlayer.play("Throw"+holder.cardinal_facing)
+	if holder.cardinal_facing == 'Front':
+		z_index = 2
 	
 
 func _on_body_entered(body):

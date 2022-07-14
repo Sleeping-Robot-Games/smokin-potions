@@ -19,9 +19,6 @@ func remove_color(color):
 	used_colors.erase(color)
 
 func player_ready(player):
-	print(player.sprite_state)
-	print(player.pallete_sprite_state)
-	
 	ready_players.append(player)
 	store_player_state(player)
 	if players.size() == ready_players.size():
@@ -34,7 +31,8 @@ func player_ready(player):
 			})
 			if not box.player:
 				store_player_state(box)
-		get_tree().change_scene("res://levels/game/game.tscn")
+		visible = false
+		get_parent().get_node("MapSection").visible = true
 
 func player_not_ready(player):
 	ready_players.erase(player)

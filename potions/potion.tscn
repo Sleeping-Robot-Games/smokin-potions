@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://potions/basic/basic.png" type="Texture" id=1]
 [ext_resource path="res://potions/portal.png" type="Texture" id=2]
@@ -108,8 +108,56 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="Animation" id=68]
+resource_name = "ThrowBack"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -80 ) ]
+}
+
+[sub_resource type="Animation" id=69]
+resource_name = "ThrowFront"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 120 ) ]
+}
+
+[sub_resource type="Animation" id=67]
+resource_name = "ThrowLeft"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -50, -10 ), Vector2( -100, 20 ) ]
+}
+
 [sub_resource type="Animation" id=66]
-resource_name = "ThrowBackRight"
+resource_name = "ThrowRight"
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -175,12 +223,15 @@ visible = false
 position = Vector2( 0, 6 )
 scale = Vector2( 0.6, 0.6 )
 frames = SubResource( 49 )
-frame = 5
+frame = 6
 speed_scale = 5.0
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/ThrowBackRight = SubResource( 66 )
+anims/ThrowBack = SubResource( 68 )
+anims/ThrowFront = SubResource( 69 )
+anims/ThrowLeft = SubResource( 67 )
+anims/ThrowRight = SubResource( 66 )
 anims/fade = SubResource( 40 )
 
 [node name="PotionPickupArea" type="Area2D" parent="."]

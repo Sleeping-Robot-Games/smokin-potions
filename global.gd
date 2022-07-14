@@ -79,7 +79,7 @@ func load_player(parent_node: Node2D, player_number: String):
 				part.material.set_shader_param("greyscale_palette", load("res://players/wizard/creator/palette/"+part.name+"/"+part.name+"_000.png"))
 			make_shaders_unique(part)
 			
-func load_normal_assets(parent_node: Node2D, player_number: int):
+func load_normal_assets(parent_node: Node2D, player_number: String):
 	var f = File.new()
 	f.open("user://player_state_P"+str(player_number)+".save", File.READ)
 	var json = JSON.parse(f.get_as_text())
@@ -92,7 +92,7 @@ func load_normal_assets(parent_node: Node2D, player_number: int):
 			else:
 				part.texture = load('res://players/wizard/Body/'+part.name+'.png')
 				
-func load_hold_assets(parent_node: Node2D, player_number: int):
+func load_hold_assets(parent_node: Node2D, player_number: String):
 	var f = File.new()
 	f.open("user://player_state_P"+str(player_number)+".save", File.READ)
 	var json = JSON.parse(f.get_as_text())
