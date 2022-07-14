@@ -1,8 +1,13 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://players/bots/bot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://levels/wizard_sprites.tscn" type="PackedScene" id=2]
+[ext_resource path="res://pickups/runes/ice.png" type="Texture" id=3]
+[ext_resource path="res://pickups/heart.png" type="Texture" id=4]
 [ext_resource path="res://levels/game.gd" type="Script" id=5]
 [ext_resource path="res://assets/fonts/BOMBERMA.TTF" type="DynamicFontData" id=6]
+[ext_resource path="res://pickups/runes/arcane.png" type="Texture" id=7]
+[ext_resource path="res://levels/player_ui.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 10, 239.156 )
@@ -15,6 +20,9 @@ extents = Vector2( 10, 320 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 322.039 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 46.5, 20 )
 
 [sub_resource type="DynamicFont" id=6]
 font_data = ExtResource( 6 )
@@ -32,7 +40,7 @@ format = 1
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Bot" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 118, 95 )
+position = Vector2( 96, 76 )
 
 [node name="Boundaries" type="StaticBody2D" parent="."]
 position = Vector2( -40, 0 )
@@ -73,17 +81,253 @@ width = 1.0
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="Element1" type="TextureRect" parent="HUD"]
-margin_left = 269.0
-margin_top = 411.0
-margin_right = 309.0
-margin_bottom = 451.0
+[node name="P1UI" type="Control" parent="HUD"]
+margin_right = 93.0
+margin_bottom = 41.0
+script = ExtResource( 8 )
 
-[node name="Element2" type="TextureRect" parent="HUD"]
-margin_left = 309.0
-margin_top = 411.0
-margin_right = 349.0
-margin_bottom = 451.0
+[node name="ColorRect" type="ColorRect" parent="HUD/P1UI"]
+margin_right = 93.0
+margin_bottom = 41.0
+color = Color( 0, 0, 0, 0.25098 )
+
+[node name="UIArea" type="Area2D" parent="HUD/P1UI"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HUD/P1UI/UIArea"]
+position = Vector2( 46.5, 20 )
+shape = SubResource( 8 )
+
+[node name="Portrait" type="Control" parent="HUD/P1UI"]
+margin_right = 41.0
+margin_bottom = 41.0
+rect_clip_content = true
+
+[node name="WizardSprites" parent="HUD/P1UI/Portrait" instance=ExtResource( 2 )]
+position = Vector2( 22, 10 )
+scale = Vector2( 3, 3 )
+
+[node name="Health1" type="TextureRect" parent="HUD/P1UI"]
+margin_left = 39.0
+margin_top = -3.0
+margin_right = 103.0
+margin_bottom = 61.0
+rect_scale = Vector2( 0.5, 0.5 )
+rect_clip_content = true
+texture = ExtResource( 4 )
+
+[node name="Health2" type="TextureRect" parent="HUD/P1UI"]
+margin_left = 65.0
+margin_top = -3.0
+margin_right = 129.0
+margin_bottom = 61.0
+rect_scale = Vector2( 0.5, 0.5 )
+rect_clip_content = true
+texture = ExtResource( 4 )
+
+[node name="Element1" type="TextureRect" parent="HUD/P1UI"]
+margin_left = 40.0
+margin_top = 16.0
+margin_right = 104.0
+margin_bottom = 80.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 7 )
+
+[node name="Element2" type="TextureRect" parent="HUD/P1UI"]
+margin_left = 66.0
+margin_top = 16.0
+margin_right = 130.0
+margin_bottom = 80.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="P2UI" type="Control" parent="HUD"]
+margin_left = 547.0
+margin_right = 640.0
+margin_bottom = 41.0
+script = ExtResource( 8 )
+
+[node name="ColorRect" type="ColorRect" parent="HUD/P2UI"]
+margin_right = 93.0
+margin_bottom = 41.0
+color = Color( 0, 0, 0, 0.25098 )
+
+[node name="UIArea" type="Area2D" parent="HUD/P2UI"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HUD/P2UI/UIArea"]
+position = Vector2( 46.5, 20 )
+shape = SubResource( 8 )
+
+[node name="Portrait" type="Control" parent="HUD/P2UI"]
+margin_left = 52.0
+margin_right = 93.0
+margin_bottom = 41.0
+rect_clip_content = true
+
+[node name="WizardSprites" parent="HUD/P2UI/Portrait" instance=ExtResource( 2 )]
+position = Vector2( 22, 10 )
+scale = Vector2( 3, 3 )
+frame = 0
+
+[node name="Health1" type="TextureRect" parent="HUD/P2UI"]
+margin_left = -5.0
+margin_top = -3.0
+margin_right = 59.0
+margin_bottom = 61.0
+rect_scale = Vector2( 0.5, 0.5 )
+rect_clip_content = true
+texture = ExtResource( 4 )
+
+[node name="Health2" type="TextureRect" parent="HUD/P2UI"]
+margin_left = 23.0
+margin_top = -3.0
+margin_right = 87.0
+margin_bottom = 61.0
+rect_scale = Vector2( 0.5, 0.5 )
+rect_clip_content = true
+texture = ExtResource( 4 )
+
+[node name="Element1" type="TextureRect" parent="HUD/P2UI"]
+margin_left = -4.0
+margin_top = 16.0
+margin_right = 60.0
+margin_bottom = 80.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 7 )
+
+[node name="Element2" type="TextureRect" parent="HUD/P2UI"]
+margin_left = 24.0
+margin_top = 16.0
+margin_right = 88.0
+margin_bottom = 80.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="P3UI" type="Control" parent="HUD"]
+margin_top = 439.0
+margin_right = 93.0
+margin_bottom = 480.0
+script = ExtResource( 8 )
+
+[node name="ColorRect" type="ColorRect" parent="HUD/P3UI"]
+margin_right = 93.0
+margin_bottom = 41.0
+color = Color( 0, 0, 0, 0.25098 )
+
+[node name="UIArea" type="Area2D" parent="HUD/P3UI"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HUD/P3UI/UIArea"]
+position = Vector2( 46.5, 20 )
+shape = SubResource( 8 )
+
+[node name="Portrait" type="Control" parent="HUD/P3UI"]
+margin_right = 41.0
+margin_bottom = 41.0
+rect_clip_content = true
+
+[node name="WizardSprites" parent="HUD/P3UI/Portrait" instance=ExtResource( 2 )]
+position = Vector2( 22, 10 )
+scale = Vector2( 3, 3 )
+
+[node name="Health1" type="TextureRect" parent="HUD/P3UI"]
+margin_left = 39.0
+margin_top = -3.0
+margin_right = 103.0
+margin_bottom = 61.0
+rect_scale = Vector2( 0.5, 0.5 )
+rect_clip_content = true
+texture = ExtResource( 4 )
+
+[node name="Health2" type="TextureRect" parent="HUD/P3UI"]
+margin_left = 65.0
+margin_top = -3.0
+margin_right = 129.0
+margin_bottom = 61.0
+rect_scale = Vector2( 0.5, 0.5 )
+rect_clip_content = true
+texture = ExtResource( 4 )
+
+[node name="Element1" type="TextureRect" parent="HUD/P3UI"]
+margin_left = 40.0
+margin_top = 16.0
+margin_right = 104.0
+margin_bottom = 80.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 7 )
+
+[node name="Element2" type="TextureRect" parent="HUD/P3UI"]
+margin_left = 66.0
+margin_top = 16.0
+margin_right = 130.0
+margin_bottom = 80.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="P4UI" type="Control" parent="HUD"]
+margin_left = 547.0
+margin_top = 439.0
+margin_right = 640.0
+margin_bottom = 480.0
+script = ExtResource( 8 )
+
+[node name="ColorRect" type="ColorRect" parent="HUD/P4UI"]
+margin_right = 93.0
+margin_bottom = 41.0
+color = Color( 0, 0, 0, 0.25098 )
+
+[node name="UIArea" type="Area2D" parent="HUD/P4UI"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HUD/P4UI/UIArea"]
+position = Vector2( 46.5, 20 )
+shape = SubResource( 8 )
+
+[node name="Portrait" type="Control" parent="HUD/P4UI"]
+margin_left = 52.0
+margin_right = 93.0
+margin_bottom = 41.0
+rect_clip_content = true
+
+[node name="WizardSprites" parent="HUD/P4UI/Portrait" instance=ExtResource( 2 )]
+position = Vector2( 22, 10 )
+scale = Vector2( 3, 3 )
+frame = 0
+
+[node name="Health1" type="TextureRect" parent="HUD/P4UI"]
+margin_left = -5.0
+margin_top = -3.0
+margin_right = 59.0
+margin_bottom = 61.0
+rect_scale = Vector2( 0.5, 0.5 )
+rect_clip_content = true
+texture = ExtResource( 4 )
+
+[node name="Health2" type="TextureRect" parent="HUD/P4UI"]
+margin_left = 23.0
+margin_top = -3.0
+margin_right = 87.0
+margin_bottom = 61.0
+rect_scale = Vector2( 0.5, 0.5 )
+rect_clip_content = true
+texture = ExtResource( 4 )
+
+[node name="Element1" type="TextureRect" parent="HUD/P4UI"]
+margin_left = -4.0
+margin_top = 16.0
+margin_right = 60.0
+margin_bottom = 80.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 7 )
+
+[node name="Element2" type="TextureRect" parent="HUD/P4UI"]
+margin_left = 24.0
+margin_top = 16.0
+margin_right = 88.0
+margin_bottom = 80.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
 
 [node name="MatchTime" type="RichTextLabel" parent="HUD"]
 margin_left = 242.0
@@ -94,20 +338,28 @@ theme = SubResource( 7 )
 bbcode_enabled = true
 
 [node name="Starting1" type="Position2D" parent="."]
-position = Vector2( 31, 21 )
+position = Vector2( 54, 52 )
 
 [node name="Starting2" type="Position2D" parent="."]
-position = Vector2( 607, 21 )
+position = Vector2( 584, 51 )
 
 [node name="Starting3" type="Position2D" parent="."]
-position = Vector2( 34, 450 )
+position = Vector2( 60, 424 )
 
 [node name="Starting4" type="Position2D" parent="."]
-position = Vector2( 611, 449 )
+position = Vector2( 589, 427 )
 
 [node name="MatchTimer" type="Timer" parent="."]
 autostart = true
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 
+[connection signal="body_entered" from="HUD/P1UI/UIArea" to="HUD/P1UI" method="_on_UIArea_body_entered"]
+[connection signal="body_exited" from="HUD/P1UI/UIArea" to="HUD/P1UI" method="_on_UIArea_body_exited"]
+[connection signal="body_entered" from="HUD/P2UI/UIArea" to="HUD/P2UI" method="_on_UIArea_body_entered"]
+[connection signal="body_exited" from="HUD/P2UI/UIArea" to="HUD/P2UI" method="_on_UIArea_body_exited"]
+[connection signal="body_entered" from="HUD/P3UI/UIArea" to="HUD/P3UI" method="_on_UIArea_body_entered"]
+[connection signal="body_exited" from="HUD/P3UI/UIArea" to="HUD/P3UI" method="_on_UIArea_body_exited"]
+[connection signal="body_entered" from="HUD/P4UI/UIArea" to="HUD/P4UI" method="_on_UIArea_body_entered"]
+[connection signal="body_exited" from="HUD/P4UI/UIArea" to="HUD/P4UI" method="_on_UIArea_body_exited"]
 [connection signal="timeout" from="MatchTimer" to="." method="_on_MatchTimer_timeout"]

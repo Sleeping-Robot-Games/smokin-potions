@@ -20,16 +20,16 @@ func _ready():
 	g.players_in_current_game = []
 
 
-func handle_elements_changed(elements):
+func handle_elements_changed(elements, player_number):
 	if elements.size() == 2:
-		$HUD/Element1.set_texture(load("res://pickups/runes/" + elements[0] + ".png"))
-		$HUD/Element2.set_texture(load("res://pickups/runes/" + elements[1] + ".png"))
+		get_node("HUD/P"+player_number+"UI/Element1").set_texture(load("res://pickups/runes/" + elements[0] + ".png"))
+		get_node("HUD/P"+player_number+"UI/Element2").set_texture(load("res://pickups/runes/" + elements[1] + ".png"))
 	elif elements.size() == 1:
-		$HUD/Element1.set_texture(load("res://pickups/runes/" + elements[0] + ".png"))
-		$HUD/Element2.texture = null
+		get_node("HUD/P"+player_number+"UI/Element1").set_texture(load("res://pickups/runes/" + elements[0] + ".png"))
+		get_node("HUD/P"+player_number+"UI/Element2").texture = null
 	else:
-		$HUD/Element1.texture = null
-		$HUD/Element2.texture = null
+		get_node("HUD/P"+player_number+"UI/Element1").texture = null
+		get_node("HUD/P"+player_number+"UI/Element2").texture = null
 
 
 func _on_MatchTimer_timeout():
@@ -45,3 +45,5 @@ func _on_MatchTimer_timeout():
 
 func format_time():
 	return str(abs(ceil(seconds/60))).pad_zeros(2) + ":" + str("%01d" % abs(ceil(seconds % 60))).pad_zeros(2)
+
+

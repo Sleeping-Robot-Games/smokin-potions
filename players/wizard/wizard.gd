@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 export (int) var run_speed: int = 150
 export (bool) var potion_cooldown_toogle: bool = false
+export (bool) var disabled: bool = false
 
 onready var anim_player: AnimationPlayer = $AnimationPlayer
 onready var game_scene: Node = null
@@ -11,8 +12,7 @@ const KICK_FORCE = 400
 const DIAG_KICK_FORCE = 200
 
 var type = "player"
-var number: String = '1'
-var disabled = false
+var number = "1"
 var speed: int = run_speed
 var velocity: Vector2 = Vector2()
 var x_facing: String = "Right"
@@ -40,7 +40,6 @@ var scent_trail = []
 
 func _ready():
 	speed = run_speed
-	
 
 func _on_ScentTimer_timeout():
 	if not disabled:
@@ -202,7 +201,7 @@ func place_potion():
 	
 	# Clear elements after potion use
 	elements = []
-	g.emit_signal('elements_changed', elements)
+	g.emit_signal('elements_changed', elements, number)
 	
 	if potion_cooldown_toogle:
 		potion_ready = false
@@ -252,7 +251,7 @@ func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_s
 			rune_instance.set_type(elements[1])
 			elements.remove(1)
 		elements.push_front(rune.element)
-		g.emit_signal('elements_changed', elements)
+		g.emit_signal('elements_changed', elements, number)
 		rune.cleanup()
 
 

@@ -1,0 +1,100 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://assets/shaders/PaletteSwapper.gdshader" type="Shader" id=1]
+[ext_resource path="res://players/wizard/creator/palette/Color/Color_001.png" type="Texture" id=2]
+[ext_resource path="res://players/wizard/creator/sprites/Hat/Hat_001.png" type="Texture" id=3]
+[ext_resource path="res://players/wizard/Body/Skin.png" type="Texture" id=4]
+[ext_resource path="res://players/wizard/creator/palette/Color/Color_000.png" type="Texture" id=5]
+[ext_resource path="res://players/wizard/Body/Outline.png" type="Texture" id=6]
+[ext_resource path="res://players/wizard/creator/sprites/Hair/Hair_003.png" type="Texture" id=7]
+[ext_resource path="res://players/wizard/creator/palette/Haircolor/Haircolor_004.png" type="Texture" id=8]
+[ext_resource path="res://players/wizard/Body/Robe.png" type="Texture" id=9]
+[ext_resource path="res://players/wizard/creator/palette/Outline/Outline_000.png" type="Texture" id=10]
+[ext_resource path="res://players/wizard/creator/palette/Haircolor/Haircolor_000.png" type="Texture" id=11]
+[ext_resource path="res://players/wizard/creator/palette/Skin/Skin_002.png" type="Texture" id=12]
+[ext_resource path="res://players/wizard/creator/palette/Skin/Skin_000.png" type="Texture" id=13]
+[ext_resource path="res://players/wizard/creator/palette/Outline/Outline_001.png" type="Texture" id=14]
+[ext_resource path="res://levels/wizard_sprites.gd" type="Script" id=15]
+
+[sub_resource type="ShaderMaterial" id=26]
+shader = ExtResource( 1 )
+shader_param/palette_swap = ExtResource( 12 )
+shader_param/greyscale_palette = ExtResource( 13 )
+
+[sub_resource type="ShaderMaterial" id=27]
+shader = ExtResource( 1 )
+shader_param/palette_swap = ExtResource( 2 )
+shader_param/greyscale_palette = ExtResource( 5 )
+
+[sub_resource type="Shader" id=25]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform sampler2D palette_swap : hint_albedo;
+uniform sampler2D greyscale_palette : hint_albedo;
+
+void fragment()
+{
+	vec4 old_color = texture(TEXTURE, UV);
+	vec2 swap_coord = vec2 ( old_color.r, 0);
+	vec4 new_color = texture(palette_swap, swap_coord);
+	if (old_color == texture(greyscale_palette, swap_coord)){
+		new_color.a *= old_color.a;
+		COLOR = new_color;
+	} else {
+		COLOR = old_color;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=28]
+shader = SubResource( 25 )
+shader_param/palette_swap = ExtResource( 14 )
+shader_param/greyscale_palette = ExtResource( 10 )
+
+[sub_resource type="ShaderMaterial" id=29]
+shader = ExtResource( 1 )
+shader_param/palette_swap = ExtResource( 8 )
+shader_param/greyscale_palette = ExtResource( 11 )
+
+[sub_resource type="ShaderMaterial" id=30]
+shader = ExtResource( 1 )
+shader_param/palette_swap = ExtResource( 2 )
+shader_param/greyscale_palette = ExtResource( 5 )
+
+[node name="WizardSprites" type="Node2D"]
+script = ExtResource( 15 )
+
+[node name="Skin" type="Sprite" parent="."]
+material = SubResource( 26 )
+texture = ExtResource( 4 )
+hframes = 6
+vframes = 9
+frame = 3
+
+[node name="Robe" type="Sprite" parent="."]
+material = SubResource( 27 )
+texture = ExtResource( 9 )
+hframes = 6
+vframes = 9
+frame = 3
+
+[node name="Outline" type="Sprite" parent="."]
+material = SubResource( 28 )
+texture = ExtResource( 6 )
+hframes = 6
+vframes = 9
+frame = 3
+
+[node name="Hair" type="Sprite" parent="."]
+material = SubResource( 29 )
+texture = ExtResource( 7 )
+hframes = 6
+vframes = 9
+frame = 3
+
+[node name="Hat" type="Sprite" parent="."]
+material = SubResource( 30 )
+texture = ExtResource( 3 )
+hframes = 6
+vframes = 9
+frame = 3

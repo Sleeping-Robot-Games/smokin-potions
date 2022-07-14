@@ -140,7 +140,7 @@ func place_potion():
 	
 	# Clear elements after potion use
 	elements = []
-	g.emit_signal('elements_changed', elements)
+	g.emit_signal('elements_changed', elements, number)
 	
 	if potion_cooldown_toogle:
 		potion_ready = false
@@ -157,7 +157,7 @@ func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_s
 		if elements.size() == 2:
 			elements.remove(1)
 		elements.push_front(rune.element)
-		g.emit_signal('elements_changed', elements)
+		g.emit_signal('elements_changed', elements, number)
 		rune.cleanup()
 
 
@@ -189,7 +189,7 @@ func _on_ThinkTimer_timeout():
 			if da_ray.is_colliding():
 				var collider = da_ray.get_collider()
 				# TODO factor in distance & speed
-				if collider.get_node('ExplodeTimer').wait_time > 1:
+				if collider.get_node('ExplodeTimer') and collider.get_node('ExplodeTimer').wait_time > 1:
 					fresh_bombs.append(collider)
 				else:
 					scary_bombs.append(collider)

@@ -26,7 +26,7 @@ shader = ExtResource( 6 )
 shader_param/palette_swap = ExtResource( 4 )
 shader_param/greyscale_palette = ExtResource( 5 )
 
-[sub_resource type="Shader" id=25]
+[sub_resource type="Shader" id=60]
 code = "shader_type canvas_item;
 render_mode unshaded;
 
@@ -47,7 +47,7 @@ void fragment()
 }"
 
 [sub_resource type="ShaderMaterial" id=29]
-shader = SubResource( 25 )
+shader = SubResource( 60 )
 shader_param/palette_swap = ExtResource( 16 )
 shader_param/greyscale_palette = ExtResource( 15 )
 
