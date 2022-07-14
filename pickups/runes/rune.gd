@@ -16,7 +16,7 @@ func _ready():
 		element = "earth"
 	elif type == 3:
 		element = "arcane"
-	$Sprite.set_texture(load("res://loot/crystal/" + element + ".png"))
+	$Sprite.set_texture(load("res://pickups/runes/" + element + ".png"))
 
 
 func cleanup():

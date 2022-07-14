@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-const crystal = preload('res://loot/crystal/crystal.tscn')
+const rune = preload('res://pickups/runes/rune.tscn')
 var rng = RandomNumberGenerator.new()
 
 func _ready():
@@ -12,11 +12,11 @@ func break():
 	var has_loot = rng.randi_range(0, 1)
 	if has_loot:
 		rng.randomize()
-		# Crystals, Scrolls, ???
+		# Runes, Scrolls, ???
 		var loot_type = rng.randi_range(0, 0)
 		if loot_type == 0:
-			# Spawn a crystal
-			var crystal_instance = crystal.instance()
-			crystal_instance.global_position = global_position
-			get_parent().add_child(crystal_instance)
+			# Spawn a rune
+			var rune_instance = rune.instance()
+			rune_instance.global_position = global_position
+			get_parent().add_child(rune_instance)
 	queue_free()

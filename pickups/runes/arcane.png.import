@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/earth.png-00f59b9f0163825b0119edd4f4ca755d.stex"
+path="res://.import/arcane.png-c74e7b70376916bd69ddf554eb603d3f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://loot/crystal/earth.png"
-dest_files=[ "res://.import/earth.png-00f59b9f0163825b0119edd4f4ca755d.stex" ]
+source_file="res://pickups/runes/arcane.png"
+dest_files=[ "res://.import/arcane.png-c74e7b70376916bd69ddf554eb603d3f.stex" ]
 
 [params]
 

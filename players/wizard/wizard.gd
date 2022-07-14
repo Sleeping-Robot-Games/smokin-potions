@@ -228,13 +228,13 @@ func pick_up_coin():
 
 
 func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	if 'Crystal' in area.get_parent().name:
-		var crystal = area.get_parent()
+	if 'Rune' in area.get_parent().name:
+		var rune = area.get_parent()
 		if elements.size() == 2:
 			elements.remove(1)
-		elements.push_front(crystal.element)
+		elements.push_front(rune.element)
 		g.emit_signal('elements_changed', elements)
-		crystal.cleanup()
+		rune.cleanup()
 
 
 func _on_PickupArea_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
