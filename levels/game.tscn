@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
+[ext_resource path="res://players/bots/bot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://levels/game.gd" type="Script" id=5]
 [ext_resource path="res://assets/fonts/BOMBERMA.TTF" type="DynamicFontData" id=6]
 
@@ -30,12 +31,13 @@ format = 1
 
 [node name="YSort" type="YSort" parent="."]
 
+[node name="Bot" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 118, 95 )
+
 [node name="Boundaries" type="StaticBody2D" parent="."]
 position = Vector2( -40, 0 )
+collision_layer = 128
 collision_mask = 17
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Left" type="CollisionShape2D" parent="Boundaries"]
 position = Vector2( 44, 234 )
@@ -49,9 +51,6 @@ shape = SubResource( 3 )
 position = Vector2( 360, -6 )
 rotation = 1.5708
 shape = SubResource( 4 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Bottom" type="CollisionShape2D" parent="Boundaries"]
 position = Vector2( 360, 475 )

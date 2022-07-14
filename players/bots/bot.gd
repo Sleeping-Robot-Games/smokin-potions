@@ -26,11 +26,15 @@ var kicking_impulse = Vector2.ZERO
 var kicking_potion = null
 const KICK_FORCE = 200
 const DIAG_KICK_FORCE = 100
-var elements = ['arcane', 'arcane']
+var elements = []
 
-
+var rng = RandomNumberGenerator.new()
 var node_target = null
 var dir = Vector2.ZERO
+
+var mission_type = -1
+var move_dir = ""
+var move_coord = Vector2.ZERO
 
 func _ready():
 	speed = run_speed
@@ -68,8 +72,49 @@ func sprite_animation():
 func _physics_process(delta):
 	if "Kick" in anim_player.current_animation:
 		return
-	var motion = dir * speed
-	move_and_slide(motion)
+	
+	# MOVEMENT
+	velocity = Vector2.ZERO
+	if move_dir == "Left":
+		velocity.x -= 1
+	elif move_dir == "UpperLeft":
+		velocity.x -= 1
+		velocity.y -= 1
+	elif move_dir == "Up":
+		velocity.y -= 1
+	elif move_dir == "UpperRight":
+		velocity.x += 1
+		velocity.y -= 1
+	elif move_dir == "Right":
+		velocity.x += 1
+	elif move_dir == "LowerRight":
+		velocity.x += 1
+		velocity.y += 1
+	elif move_dir == "Down":
+		velocity.y += 1
+	elif move_dir == "LowerLeft":
+		velocity.x -= 1
+		velocity.y += 1
+	
+	
+	# ANIMATION
+	var new_animation = animation
+	if kicking_impulse != Vector2.ZERO:
+		velocity = Vector2.ZERO
+		new_animation = "Kick"
+	elif velocity == Vector2(0,0):
+		new_animation = "Idle"
+	elif velocity != Vector2(0,0):
+		new_animation = "Run"
+	
+	new_facing = facing if move_dir == "" else move_dir
+	if facing != new_facing or new_animation != animation:
+		facing = new_facing
+		animation = new_animation
+		anim_player.play(animation + facing)
+	
+	velocity = velocity.normalized() * speed
+	move_and_slide(velocity)
 
 
 func place_potion():
@@ -106,25 +151,6 @@ func _on_PotionCooldown_timeout():
 	potion_ready = true
 
 
-func play_sfx(name):
-	pass
-#	var sfx_player = AudioStreamPlayer2D.new()
-#	sfx_player.stream = load("res://Assets/Audio/"+name+".mp3")
-#	sfx_player.connect("finished", sfx_player, "queue_free")
-#	add_child(sfx_player)
-#	sfx_player.play()
-
-
-func pick_up_coin():
-	pass
-#	if current_coin:
-#		if current_coin.type == "Coin":
-#			play_sfx('coin')
-#			game_scene.add_coin()
-#			current_coin.queue_free()
-#			current_coin = null
-
-
 func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 	if 'Rune' in area.get_parent().name:
 		var rune = area.get_parent()
@@ -156,9 +182,42 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 
 func _on_ThinkTimer_timeout():
-	determine_target()
-	if node_target and node_target.type == 'player':
-		chase_target(node_target)
+	if mission_type == -1:
+		var fresh_bombs = [] # safer to interact
+		var scary_bombs = [] # about to blow
+		for da_ray in $DeathAvoidance.get_children():
+			if da_ray.is_colliding():
+				var collider = da_ray.get_collider()
+				# TODO factor in distance & speed
+				if collider.get_node('ExplodeTimer').wait_time > 1:
+					fresh_bombs.append(collider)
+				else:
+					scary_bombs.append(collider)
+		var cap = 7 if fresh_bombs.size() > 0 or scary_bombs.size() > 0 else 4
+		cap = 1 # TESTING
+		rng.randomize()
+		var decision = rng.randi_range(1, cap)
+		# MOVE TO A RANDOM SPOT
+		if decision == 1:
+			var valid_coords = []
+			var valid_dir = []
+			var wall_collisions = []
+			for w_ray in $Wall.get_children():
+				if w_ray.is_colliding():
+					wall_collisions.append(w_ray.name)
+			for m_ray in $Move.get_children():
+				if not m_ray.is_colliding() and not wall_collisions.has(m_ray.name):
+					valid_coords.append(m_ray.cast_to)
+					valid_dir.append(m_ray.name)
+			if valid_dir.size() > 0:
+				rng.randomize()
+				var m = rng.randi_range(0, valid_dir.size() - 1)
+				#mission_type = 1
+				move_dir = valid_dir[m]
+				move_coord = valid_coords[m]
+#	determine_target()
+#	if node_target and node_target.type == 'player':
+#		chase_target(node_target)
 
 
 func chase_target(target):

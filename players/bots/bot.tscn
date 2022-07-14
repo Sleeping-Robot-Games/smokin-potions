@@ -4,18 +4,196 @@
 [ext_resource path="res://players/bots/bot.gd" type="Script" id=2]
 
 [node name="Bot" instance=ExtResource( 1 )]
+collision_layer = 1
 script = ExtResource( 2 )
 
 [node name="ThinkTimer" type="Timer" parent="." index="6"]
+wait_time = 2.0
 autostart = true
 
+[node name="PotionRayUpperLeft" parent="." index="11"]
+visible = false
+
+[node name="PotionRayUpperRight" parent="." index="12"]
+visible = false
+
+[node name="PotionRayLowerLeft" parent="." index="13"]
+visible = false
+
+[node name="PotionRayLowerRight" parent="." index="14"]
+visible = false
+
+[node name="PotionRayLeft" parent="." index="15"]
+visible = false
+
+[node name="PotionRayRight" parent="." index="16"]
+visible = false
+
+[node name="PotionRayUp" parent="." index="17"]
+visible = false
+
+[node name="PotionRayDown" parent="." index="18"]
+visible = false
+
 [node name="NavRayCast" type="RayCast2D" parent="." index="19"]
+visible = false
 cast_to = Vector2( 0, 1000 )
 collision_mask = 120
 
 [node name="PlayerRayCast" type="RayCast2D" parent="." index="20"]
+visible = false
 cast_to = Vector2( 100, 400 )
 
 [node name="MoveRayCast" type="RayCast2D" parent="." index="21"]
+visible = false
+
+[node name="DeathAvoidance" type="Node2D" parent="." index="23"]
+
+[node name="Left" type="RayCast2D" parent="DeathAvoidance" index="0"]
+enabled = true
+cast_to = Vector2( -40, 0 )
+collision_mask = 16
+
+[node name="UpperLeft" type="RayCast2D" parent="DeathAvoidance" index="1"]
+enabled = true
+cast_to = Vector2( -30, -30 )
+
+[node name="Up" type="RayCast2D" parent="DeathAvoidance" index="2"]
+enabled = true
+cast_to = Vector2( 0, -40 )
+collision_mask = 16
+
+[node name="UpperRight" type="RayCast2D" parent="DeathAvoidance" index="3"]
+enabled = true
+cast_to = Vector2( 30, -30 )
+collision_mask = 16
+
+[node name="Right" type="RayCast2D" parent="DeathAvoidance" index="4"]
+enabled = true
+cast_to = Vector2( 40, 0 )
+collision_mask = 16
+
+[node name="LowerRight" type="RayCast2D" parent="DeathAvoidance" index="5"]
+enabled = true
+cast_to = Vector2( 30, 30 )
+collision_mask = 16
+
+[node name="Down" type="RayCast2D" parent="DeathAvoidance" index="6"]
+enabled = true
+cast_to = Vector2( 0, 40 )
+collision_mask = 16
+
+[node name="LowerLeft" type="RayCast2D" parent="DeathAvoidance" index="7"]
+enabled = true
+cast_to = Vector2( -30, 30 )
+collision_mask = 16
+
+[node name="Move" type="Node2D" parent="." index="24"]
+
+[node name="Left" type="RayCast2D" parent="Move" index="0"]
+enabled = true
+cast_to = Vector2( -80, 0 )
+collision_mask = 120
+collide_with_areas = true
+
+[node name="UpperLeft" type="RayCast2D" parent="Move" index="1"]
+enabled = true
+cast_to = Vector2( -60, -60 )
+collision_mask = 120
+collide_with_areas = true
+
+[node name="Up" type="RayCast2D" parent="Move" index="2"]
+enabled = true
+cast_to = Vector2( 0, -80 )
+collision_mask = 120
+collide_with_areas = true
+
+[node name="UpperRight" type="RayCast2D" parent="Move" index="3"]
+enabled = true
+cast_to = Vector2( 60, -60 )
+collision_mask = 120
+collide_with_areas = true
+
+[node name="Right" type="RayCast2D" parent="Move" index="4"]
+enabled = true
+cast_to = Vector2( 80, 0 )
+collision_mask = 120
+collide_with_areas = true
+
+[node name="LowerRight" type="RayCast2D" parent="Move" index="5"]
+enabled = true
+cast_to = Vector2( 60, 60 )
+collision_mask = 120
+collide_with_areas = true
+
+[node name="Down" type="RayCast2D" parent="Move" index="6"]
+enabled = true
+cast_to = Vector2( 0, 80 )
+collision_mask = 120
+collide_with_areas = true
+
+[node name="LowerLeft" type="RayCast2D" parent="Move" index="7"]
+enabled = true
+cast_to = Vector2( -60, 60 )
+collision_mask = 120
+collide_with_areas = true
+
+[node name="Wall" type="Node2D" parent="." index="25"]
+
+[node name="Left" type="RayCast2D" parent="Wall" index="0"]
+position = Vector2( -10, 0 )
+enabled = true
+cast_to = Vector2( -10, 0 )
+collision_mask = 128
+collide_with_areas = true
+
+[node name="UpperLeft" type="RayCast2D" parent="Wall" index="1"]
+position = Vector2( -5, -5 )
+enabled = true
+cast_to = Vector2( -10, -10 )
+collision_mask = 128
+collide_with_areas = true
+
+[node name="Up" type="RayCast2D" parent="Wall" index="2"]
+position = Vector2( 0, -10 )
+enabled = true
+cast_to = Vector2( 0, -10 )
+collision_mask = 128
+collide_with_areas = true
+
+[node name="UpperRight" type="RayCast2D" parent="Wall" index="3"]
+position = Vector2( 5, -5 )
+enabled = true
+cast_to = Vector2( 10, -10 )
+collision_mask = 128
+collide_with_areas = true
+
+[node name="Right" type="RayCast2D" parent="Wall" index="4"]
+position = Vector2( 10, 0 )
+enabled = true
+cast_to = Vector2( 10, 0 )
+collision_mask = 128
+collide_with_areas = true
+
+[node name="LowerRight" type="RayCast2D" parent="Wall" index="5"]
+position = Vector2( 5, 5 )
+enabled = true
+cast_to = Vector2( 10, 10 )
+collision_mask = 128
+collide_with_areas = true
+
+[node name="Down" type="RayCast2D" parent="Wall" index="6"]
+position = Vector2( 0, 10 )
+enabled = true
+cast_to = Vector2( 0, 10 )
+collision_mask = 128
+collide_with_areas = true
+
+[node name="LowerLeft" type="RayCast2D" parent="Wall" index="7"]
+position = Vector2( -5, 5 )
+enabled = true
+cast_to = Vector2( -10, 10 )
+collision_mask = 128
+collide_with_areas = true
 
 [connection signal="timeout" from="ThinkTimer" to="." method="_on_ThinkTimer_timeout"]
