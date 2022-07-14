@@ -23,5 +23,6 @@ func _on_Explode_animation_finished():
 		global_position.x,
 		global_position.y - laser_beam_instance.max_length
 	)
+	laser_beam_instance.use_portal = use_portal
 	get_parent().add_child(laser_beam_instance)
 	queue_free()

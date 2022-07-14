@@ -11,6 +11,7 @@ const KICK_FORCE = 400
 const DIAG_KICK_FORCE = 200
 
 var type = "player"
+var number: int
 var disabled = false
 var speed: int = run_speed
 var velocity: Vector2 = Vector2()
@@ -99,6 +100,7 @@ func get_input():
 			for c in get_children():
 				if c is RayCast2D:
 					c.add_exception(holding_potion)
+		
 		elif holding_potion:
 			holding_potion.get_thrown()
 			holding_potion = null
@@ -187,6 +189,11 @@ func _physics_process(delta):
 		return
 	get_input()
 
+func throw_sprite_sheets():
+	pass
+	
+func normal_sprite_sheets():
+	pass
 
 func place_potion():
 	if not potion_ready:

@@ -1,0 +1,114 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://levels/game.gd" type="Script" id=5]
+[ext_resource path="res://assets/fonts/BOMBERMA.TTF" type="DynamicFontData" id=6]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 239.156 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 239.156 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 10, 320 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10, 322.039 )
+
+[sub_resource type="DynamicFont" id=6]
+font_data = ExtResource( 6 )
+
+[sub_resource type="Theme" id=7]
+default_font = SubResource( 6 )
+
+[node name="Game" type="Node"]
+script = ExtResource( 5 )
+
+[node name="TileMap" type="TileMap" parent="."]
+cell_size = Vector2( 16, 16 )
+format = 1
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Boundaries" type="StaticBody2D" parent="."]
+position = Vector2( -40, 0 )
+collision_mask = 17
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Left" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2( 44, 234 )
+shape = SubResource( 2 )
+
+[node name="Right" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2( 676, 238 )
+shape = SubResource( 3 )
+
+[node name="Top" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2( 360, -6 )
+rotation = 1.5708
+shape = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Bottom" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2( 360, 475 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="HorzLine" type="Line2D" parent="."]
+self_modulate = Color( 1, 1, 1, 0.486275 )
+position = Vector2( -1, 5 )
+scale = Vector2( 0.992272, 1 )
+points = PoolVector2Array( 0, 235, 645, 236 )
+width = 1.0
+
+[node name="VertLine" type="Line2D" parent="."]
+self_modulate = Color( 1, 1, 1, 0.486275 )
+position = Vector2( -0.00772798, 0.0123458 )
+scale = Vector2( 0.992272, 1.00206 )
+points = PoolVector2Array( 322.5, -5, 321.492, 479 )
+width = 1.0
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Element1" type="TextureRect" parent="HUD"]
+margin_left = 269.0
+margin_top = 411.0
+margin_right = 309.0
+margin_bottom = 451.0
+
+[node name="Element2" type="TextureRect" parent="HUD"]
+margin_left = 309.0
+margin_top = 411.0
+margin_right = 349.0
+margin_bottom = 451.0
+
+[node name="MatchTime" type="RichTextLabel" parent="HUD"]
+margin_left = 242.0
+margin_top = 21.0
+margin_right = 392.0
+margin_bottom = 41.0
+theme = SubResource( 7 )
+bbcode_enabled = true
+
+[node name="Starting1" type="Position2D" parent="."]
+position = Vector2( 31, 21 )
+
+[node name="Starting2" type="Position2D" parent="."]
+position = Vector2( 607, 21 )
+
+[node name="Starting3" type="Position2D" parent="."]
+position = Vector2( 34, 450 )
+
+[node name="Starting4" type="Position2D" parent="."]
+position = Vector2( 611, 449 )
+
+[node name="MatchTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+
+[connection signal="timeout" from="MatchTimer" to="." method="_on_MatchTimer_timeout"]

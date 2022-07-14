@@ -12,6 +12,7 @@ onready var tween := $Tween
 onready var line_width: float = fill.width
 
 var is_casting := false setget set_is_casting
+var use_portal = false
 
 var nearby_players = []
 var nearby_breakables = []
@@ -33,6 +34,8 @@ func _ready() -> void:
 	fill.points[1] = Vector2.ZERO
 	self.is_casting = true
 	$StopTimer.start()
+	if not use_portal:
+		$AudioStreamPlayer.play()
 
 func _physics_process(delta: float) -> void:
 	cast_to = (cast_to + Vector2.RIGHT * cast_speed * delta).clamped(max_length)
