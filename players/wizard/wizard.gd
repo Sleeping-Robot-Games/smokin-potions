@@ -267,8 +267,7 @@ func _on_PickupArea_body_exited(body):
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if "Kick" in anim_name:
-		if kicking_potion and weakref(kicking_potion).get_ref():
-			kicking_potion.kick(kicking_impulse)
+		if kicking_potion and weakref(kicking_potion).get_ref():			kicking_potion.kick(kicking_impulse)
 		kicking_potion = null
 		kicking_impulse = Vector2.ZERO
 
