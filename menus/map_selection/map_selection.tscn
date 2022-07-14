@@ -11,6 +11,9 @@ margin_top = 182.0
 margin_right = 554.0
 margin_bottom = 288.0
 text = "WIZARD TOWER"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="RockGardenButton" type="Button" parent="."]
 margin_left = 83.0
@@ -18,6 +21,9 @@ margin_top = 189.0
 margin_right = 255.0
 margin_bottom = 292.0
 text = "ROCK GARDEN"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="button_up" from="WizardTowerButton" to="." method="_on_Map_Selected_button_up" binds= [ "wizard_tower" ]]
 [connection signal="button_up" from="RockGardenButton" to="." method="_on_Map_Selected_button_up" binds= [ "rock_garden" ]]
