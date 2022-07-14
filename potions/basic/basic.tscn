@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://potions/basic/Explosion.png" type="Texture" id=1]
 [ext_resource path="res://potions/potion.tscn" type="PackedScene" id=2]
+[ext_resource path="res://potions/basic/basic_potion_explosion.ogg" type="AudioStream" id=3]
 [ext_resource path="res://potions/basic/basic.gd" type="Script" id=4]
 
 [sub_resource type="CircleShape2D" id=31]
@@ -58,9 +59,6 @@ animations = [ {
 [node name="BasicPotion" instance=ExtResource( 2 )]
 script = ExtResource( 4 )
 
-[node name="Portal" parent="." index="3"]
-frame = 6
-
 [node name="ExplosionArea" type="Area2D" parent="." index="5"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionArea" index="0"]
@@ -72,5 +70,8 @@ visible = false
 position = Vector2( 0, 7 )
 frames = SubResource( 32 )
 speed_scale = 3.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="8"]
+stream = ExtResource( 3 )
 
 [connection signal="animation_finished" from="ExplosionArea/Explode" to="." method="_on_Explode_animation_finished"]

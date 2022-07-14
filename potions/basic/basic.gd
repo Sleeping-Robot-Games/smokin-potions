@@ -37,6 +37,7 @@ func trigger_effect():
 		
 	$ExplosionArea/Explode.visible = true
 	$ExplosionArea/Explode.play()
+	$AudioStreamPlayer.play()
 
 func _on_Explode_animation_finished():
 	queue_free()
