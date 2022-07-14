@@ -20,6 +20,7 @@ func _ready():
 
 func set_type(type):
 	$Sprite.set_texture(load("res://pickups/runes/" + type + ".png"))
+	element = type
 
 func cleanup():
 	queue_free();
