@@ -140,6 +140,7 @@ func _on_AnimatedSprite_animation_finished():
 	trigger_effect()
 	# if the player is still holding the potion reset it's held state
 	if holder != null and holder.holding_potion != null:
+		g.load_normal_assets(holder, holder.number)
 		holder.holding_potion = null
 		holder = null
 

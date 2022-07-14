@@ -79,8 +79,32 @@ func load_player(parent_node: Node2D, player_number: String):
 				part.material.set_shader_param("greyscale_palette", load("res://players/wizard/creator/palette/"+part.name+"/"+part.name+"_000.png"))
 			make_shaders_unique(part)
 			
-func load_throw_assets(parent_node: Node2D, player_number: String):
-	pass
+func load_normal_assets(parent_node: Node2D, player_number: int):
+	var f = File.new()
+	f.open("user://player_state_P"+str(player_number)+".save", File.READ)
+	var json = JSON.parse(f.get_as_text())
+	f.close()
+	var data = json.result
+	for part in parent_node.get_children():
+		if part is Sprite:
+			if part.name == 'Hair' or part.name == 'Hat':
+				part.texture = load(data.sprite_state[part.name])
+			else:
+				part.texture = load('res://players/wizard/Body/'+part.name+'.png')
+				
+func load_hold_assets(parent_node: Node2D, player_number: int):
+	var f = File.new()
+	f.open("user://player_state_P"+str(player_number)+".save", File.READ)
+	var json = JSON.parse(f.get_as_text())
+	f.close()
+	var data = json.result
+	for part in parent_node.get_children():
+		if part is Sprite:
+			if part.name == 'Hair' or part.name == 'Hat':
+				var sprite_number = data.sprite_state[part.name].substr(len(data.sprite_state[part.name])-7, 3)
+				part.texture = load('res://players/wizard/'+part.name+'throw/'+part.name+'_'+sprite_number+'.png')
+			else:
+				part.texture = load('res://players/wizard/Bodythrow/'+part.name+'.png')
 	
 func reparent(node, new_parent):
 	node.get_parent().remove_child(node)
