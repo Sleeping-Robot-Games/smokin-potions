@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/laser_beam.mp3-a7e89f2fb1a82049618eab9e4a62d633.mp3str"
+
+[deps]
+
+source_file="res://potions/arcane_arcane/laser_beam/laser_beam.mp3"
+dest_files=[ "res://.import/laser_beam.mp3-a7e89f2fb1a82049618eab9e4a62d633.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
