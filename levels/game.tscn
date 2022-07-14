@@ -169,6 +169,7 @@ rect_clip_content = true
 position = Vector2( 22, 10 )
 scale = Vector2( 3, 3 )
 frame = 0
+number = "2"
 
 [node name="Health1" type="TextureRect" parent="HUD/P2UI"]
 margin_left = -5.0
@@ -230,6 +231,7 @@ rect_clip_content = true
 [node name="WizardSprites" parent="HUD/P3UI/Portrait" instance=ExtResource( 2 )]
 position = Vector2( 22, 10 )
 scale = Vector2( 3, 3 )
+number = "3"
 
 [node name="Health1" type="TextureRect" parent="HUD/P3UI"]
 margin_left = 39.0
@@ -294,6 +296,7 @@ rect_clip_content = true
 position = Vector2( 22, 10 )
 scale = Vector2( 3, 3 )
 frame = 0
+number = "4"
 
 [node name="Health1" type="TextureRect" parent="HUD/P4UI"]
 margin_left = -5.0
@@ -338,16 +341,16 @@ theme = SubResource( 7 )
 bbcode_enabled = true
 
 [node name="Starting1" type="Position2D" parent="."]
-position = Vector2( 54, 52 )
+position = Vector2( 50, 63 )
 
 [node name="Starting2" type="Position2D" parent="."]
-position = Vector2( 584, 51 )
+position = Vector2( 595, 64 )
 
 [node name="Starting3" type="Position2D" parent="."]
-position = Vector2( 60, 424 )
+position = Vector2( 46, 413 )
 
 [node name="Starting4" type="Position2D" parent="."]
-position = Vector2( 589, 427 )
+position = Vector2( 590, 414 )
 
 [node name="MatchTimer" type="Timer" parent="."]
 autostart = true
