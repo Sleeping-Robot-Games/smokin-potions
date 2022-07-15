@@ -62,6 +62,10 @@ func _on_PotionCooldown_timeout():
 
 
 func take_dmg(dmg, potion):
+	if holding_potion:
+		holding_potion.drop_potion()
+		holding_potion = null
+		g.load_normal_assets(self, number)
 	if health > 0:
 		health -= dmg
 		g.emit_signal('health_changed', number, health)
