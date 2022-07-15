@@ -2298,49 +2298,51 @@ anims/ThrowHoldFrontRight = SubResource( 59 )
 
 [node name="PotionCooldown" type="Timer" parent="."]
 
-[node name="PotionRayUpperLeft" type="RayCast2D" parent="."]
-position = Vector2( 0, 6 )
-cast_to = Vector2( -10, -10 )
-collision_mask = 16
+[node name="ScentTimer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
 
-[node name="PotionRayUpperRight" type="RayCast2D" parent="."]
-position = Vector2( 0, 6 )
-cast_to = Vector2( 10, -10 )
-collision_mask = 16
+[node name="PotionRays" type="Node2D" parent="."]
 
-[node name="PotionRayLowerLeft" type="RayCast2D" parent="."]
-position = Vector2( 0, 6 )
-cast_to = Vector2( -10, 10 )
-collision_mask = 16
-
-[node name="PotionRayLowerRight" type="RayCast2D" parent="."]
-position = Vector2( 0, 6 )
-cast_to = Vector2( 10, 10 )
-collision_mask = 16
-
-[node name="PotionRayLeft" type="RayCast2D" parent="."]
+[node name="Left" type="RayCast2D" parent="PotionRays"]
 position = Vector2( 0, 6 )
 cast_to = Vector2( -10, 0 )
 collision_mask = 16
 
-[node name="PotionRayRight" type="RayCast2D" parent="."]
+[node name="UpperLeft" type="RayCast2D" parent="PotionRays"]
 position = Vector2( 0, 6 )
-cast_to = Vector2( 10, 0 )
+cast_to = Vector2( -10, -10 )
 collision_mask = 16
 
-[node name="PotionRayUp" type="RayCast2D" parent="."]
+[node name="Up" type="RayCast2D" parent="PotionRays"]
 position = Vector2( 0, 6 )
 cast_to = Vector2( 0, -10 )
 collision_mask = 16
 
-[node name="PotionRayDown" type="RayCast2D" parent="."]
+[node name="UpperRight" type="RayCast2D" parent="PotionRays"]
+position = Vector2( 0, 6 )
+cast_to = Vector2( 10, -10 )
+collision_mask = 16
+
+[node name="Right" type="RayCast2D" parent="PotionRays"]
+position = Vector2( 0, 6 )
+cast_to = Vector2( 10, 0 )
+collision_mask = 16
+
+[node name="LowerRight" type="RayCast2D" parent="PotionRays"]
+position = Vector2( 0, 6 )
+cast_to = Vector2( 10, 10 )
+collision_mask = 16
+
+[node name="Down" type="RayCast2D" parent="PotionRays"]
 position = Vector2( 0, 6 )
 cast_to = Vector2( 0, 10 )
 collision_mask = 16
 
-[node name="ScentTimer" type="Timer" parent="."]
-wait_time = 0.25
-autostart = true
+[node name="LowerLeft" type="RayCast2D" parent="PotionRays"]
+position = Vector2( 0, 6 )
+cast_to = Vector2( -10, 10 )
+collision_mask = 16
 
 [connection signal="area_shape_entered" from="PickupArea" to="." method="_on_PickupArea_area_shape_entered"]
 [connection signal="area_shape_exited" from="PickupArea" to="." method="_on_PickupArea_area_shape_exited"]

@@ -105,46 +105,41 @@ func get_input():
 			holding_potion = null
 			g.load_normal_assets(self, number)
 			anim_player.play("Throw"+y_facing+x_facing)
-	
-	$PotionRayLeft.force_raycast_update()
-	$PotionRayRight.force_raycast_update()
-	$PotionRayUp.force_raycast_update()
-	$PotionRayDown.force_raycast_update()
-	$PotionRayUpperLeft.force_raycast_update()
-	$PotionRayUpperRight.force_raycast_update()
-	$PotionRayLowerLeft.force_raycast_update()
-	$PotionRayLowerRight.force_raycast_update()
-	if $PotionRayLeft.is_colliding() and Input.is_action_pressed("left"):
-		var collider = $PotionRayLeft.get_collider()
+		
+		
+	for p_ray in $PotionRays.get_children():
+		p_ray.force_raycast_update()
+	if $PotionRays/Left.is_colliding() and Input.is_action_pressed("left"):
+		var collider = $PotionRays/Left.get_collider()
 		kicking_impulse = Vector2(KICK_FORCE * -1, 0)
 		kicking_potion = collider
-	elif $PotionRayRight.is_colliding() and Input.is_action_pressed("right"):
-		var collider = $PotionRayRight.get_collider()
-		kicking_impulse = Vector2(KICK_FORCE, 0)
-		kicking_potion = collider
-	elif $PotionRayUp.is_colliding() and Input.is_action_pressed("up"):
-		var collider = $PotionRayUp.get_collider()
-		kicking_impulse = Vector2(0, KICK_FORCE * -1)
-		kicking_potion = collider
-	elif $PotionRayDown.is_colliding() and Input.is_action_pressed("down"):
-		var collider = $PotionRayDown.get_collider()
-		kicking_impulse = Vector2(0, KICK_FORCE)
-		kicking_potion = collider
-	elif $PotionRayUpperLeft.is_colliding() and (Input.is_action_pressed("up") or Input.is_action_pressed("left")):
-		var collider = $PotionRayUpperLeft.get_collider()
+	elif $PotionRays/UpperLeft.is_colliding() and (Input.is_action_pressed("up") or Input.is_action_pressed("left")):
+		var collider = $PotionRays/UpperLeft.get_collider()
 		kicking_impulse = Vector2(DIAG_KICK_FORCE * -1, DIAG_KICK_FORCE * -1)
 		kicking_potion = collider
-	elif $PotionRayUpperRight.is_colliding() and (Input.is_action_pressed("up") or Input.is_action_pressed("right")):
-		var collider = $PotionRayUpperRight.get_collider()
+	elif $PotionRays/Up.is_colliding() and Input.is_action_pressed("up"):
+		var collider = $PotionRays/Up.get_collider()
+		kicking_impulse = Vector2(0, KICK_FORCE * -1)
+		kicking_potion = collider
+	elif $PotionRays/UpperRight.is_colliding() and (Input.is_action_pressed("up") or Input.is_action_pressed("right")):
+		var collider = $PotionRays/UpperRight.get_collider()
 		kicking_impulse = Vector2(DIAG_KICK_FORCE, DIAG_KICK_FORCE * -1)
 		kicking_potion = collider
-	elif $PotionRayLowerLeft.is_colliding() and (Input.is_action_pressed("down") or Input.is_action_pressed("left")):
-		var collider = $PotionRayLowerLeft.get_collider()
-		kicking_impulse = Vector2(DIAG_KICK_FORCE * -1, DIAG_KICK_FORCE)
+	elif $PotionRays/Right.is_colliding() and Input.is_action_pressed("right"):
+		var collider = $PotionRays/Right.get_collider()
+		kicking_impulse = Vector2(KICK_FORCE, 0)
 		kicking_potion = collider
-	elif $PotionRayLowerRight.is_colliding() and (Input.is_action_pressed("down") or Input.is_action_pressed("right")):
-		var collider = $PotionRayLowerRight.get_collider()
+	elif $PotionRays/LowerRight.is_colliding() and (Input.is_action_pressed("down") or Input.is_action_pressed("right")):
+		var collider = $PotionRays/LowerRight.get_collider()
 		kicking_impulse = Vector2(DIAG_KICK_FORCE, DIAG_KICK_FORCE)
+		kicking_potion = collider
+	elif $PotionRays/Down.is_colliding() and Input.is_action_pressed("down"):
+		var collider = $PotionRays/Down.get_collider()
+		kicking_impulse = Vector2(0, KICK_FORCE)
+		kicking_potion = collider
+	elif $PotionRays/LowerLeft.is_colliding() and (Input.is_action_pressed("down") or Input.is_action_pressed("left")):
+		var collider = $PotionRays/LowerLeft.get_collider()
+		kicking_impulse = Vector2(DIAG_KICK_FORCE * -1, DIAG_KICK_FORCE)
 		kicking_potion = collider
 	else:
 		kicking_impulse = Vector2.ZERO

@@ -19,18 +19,16 @@ func _ready():
 		# when player first places potion, disable collision
 		$SpawningPlayerArea.connect('body_exited', self, '_on_body_exited')
 		add_collision_exception_with(parent_player)
-		for c in parent_player.get_children():
-			if c is RayCast2D:
-				c.add_exception(self)
+		for p_ray in parent_player.get_node("PotionRays").get_children():
+			p_ray.add_exception(self)
 
 
 func _on_body_exited(body):
 	# when player leaves potion area, re-enable collision
 	if body == parent_player:
 		remove_collision_exception_with(parent_player)
-		for c in parent_player.get_children():
-			if c is RayCast2D:
-				c.remove_exception(self)
+		for p_ray in parent_player.get_node("PotionRays").get_children():
+			p_ray.remove_exception(self)
 
 
 func but_make_it_symmetrical(elements):
@@ -71,9 +69,8 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		var true_global = global_position
 		g.reparent(self, get_parent().get_parent()) 
 		global_position = true_global
-		for c in holder.get_children():
-			if c is RayCast2D:
-				c.remove_exception(self)
+		for p_ray in holder.get_node("PotionRays").get_children():
+			p_ray.remove_exception(self)
 		holder = null
 		potion_daddy.queue_free()
 		potion_daddy = null

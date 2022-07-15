@@ -32,23 +32,138 @@ var rng = RandomNumberGenerator.new()
 var node_target = null
 var dir = Vector2.ZERO
 
-var mission_type = -1
-var move_dir = ""
-var move_coord = Vector2.ZERO
+#var mission_type = -1
+var move_dir = []
+var move_coord = []
+onready var action_started = OS.get_ticks_msec()
 
 func _ready():
 	speed = run_speed
+	for d_ray in $DangerRays.get_children():
+		d_ray.add_exception(self)
+	for m_ray in $MoveRays.get_children():
+		m_ray.add_exception(self)
+	for s_ray in $SidestepRays.get_children():
+		s_ray.add_exception(self)
+	for w_ray in $WallRays.get_children():
+		w_ray.add_exception(self)
 
 
-func sprite_animation():
+func invert_dir(d):
+	if d == "Left":
+		return "Right"
+	elif d == "UpperLeft":
+		return "LowerRight"
+	elif d == "Up":
+		return "Down"
+	elif d == "UpperRight":
+		return "LowerLeft"
+	elif d == "Right":
+		return "Left"
+	elif d == "LowerRight":
+		return "UpperLeft"
+	elif d == "Down":
+		return "Up"
+	elif d == "LowerLeft":
+		return "UpperRight"
+
+
+func _physics_process(delta):
+	if "Kick" in anim_player.current_animation:
+		return
+	
+	for p_ray in $PotionRays.get_children():
+		p_ray.force_raycast_update()
+	if $PotionRays/Left.is_colliding() and Input.is_action_pressed("left"):
+		var collider = $PotionRays/Left.get_collider()
+		kicking_impulse = Vector2(KICK_FORCE * -1, 0)
+		kicking_potion = collider
+	elif $PotionRays/UpperLeft.is_colliding() and (Input.is_action_pressed("up") or Input.is_action_pressed("left")):
+		var collider = $PotionRays/UpperLeft.get_collider()
+		kicking_impulse = Vector2(DIAG_KICK_FORCE * -1, DIAG_KICK_FORCE * -1)
+		kicking_potion = collider
+	elif $PotionRays/Up.is_colliding() and Input.is_action_pressed("up"):
+		var collider = $PotionRays/Up.get_collider()
+		kicking_impulse = Vector2(0, KICK_FORCE * -1)
+		kicking_potion = collider
+	elif $PotionRays/UpperRight.is_colliding() and (Input.is_action_pressed("up") or Input.is_action_pressed("right")):
+		var collider = $PotionRays/UpperRight.get_collider()
+		kicking_impulse = Vector2(DIAG_KICK_FORCE, DIAG_KICK_FORCE * -1)
+		kicking_potion = collider
+	elif $PotionRays/Right.is_colliding() and Input.is_action_pressed("right"):
+		var collider = $PotionRays/Right.get_collider()
+		kicking_impulse = Vector2(KICK_FORCE, 0)
+		kicking_potion = collider
+	elif $PotionRays/LowerRight.is_colliding() and (Input.is_action_pressed("down") or Input.is_action_pressed("right")):
+		var collider = $PotionRays/LowerRight.get_collider()
+		kicking_impulse = Vector2(DIAG_KICK_FORCE, DIAG_KICK_FORCE)
+		kicking_potion = collider
+	elif $PotionRays/Down.is_colliding() and Input.is_action_pressed("down"):
+		var collider = $PotionRays/Down.get_collider()
+		kicking_impulse = Vector2(0, KICK_FORCE)
+		kicking_potion = collider
+	elif $PotionRays/LowerLeft.is_colliding() and (Input.is_action_pressed("down") or Input.is_action_pressed("left")):
+		var collider = $PotionRays/LowerLeft.get_collider()
+		kicking_impulse = Vector2(DIAG_KICK_FORCE * -1, DIAG_KICK_FORCE)
+		kicking_potion = collider
+	else:
+		kicking_impulse = Vector2.ZERO
+	print("kicking_impulse: " + str(kicking_impulse))
+	
+	# drop current action if bot has spent more than 2 secs on it or if within 5 pixels of destination
+	if move_coord.size() > 0 and (OS.get_ticks_msec() - action_started > 2000 or global_position.distance_to(move_coord[0]) < 5):
+			move_dir.remove(0)
+			move_coord.remove(0)
+			action_started = OS.get_ticks_msec()
+	
+	# DIRECTION
+	velocity = Vector2.ZERO
+	if move_dir.size() > 0:
+		if move_dir[0] == "Left":
+			velocity.x -= 1
+		elif move_dir[0] == "UpperLeft":
+			velocity.x -= 1
+			velocity.y -= 1
+		elif move_dir[0] == "Up":
+			velocity.y -= 1
+		elif move_dir[0] == "UpperRight":
+			velocity.x += 1
+			velocity.y -= 1
+		elif move_dir[0] == "Right":
+			velocity.x += 1
+		elif move_dir[0] == "LowerRight":
+			velocity.x += 1
+			velocity.y += 1
+		elif move_dir[0] == "Down":
+			velocity.y += 1
+		elif move_dir[0] == "LowerLeft":
+			velocity.x -= 1
+			velocity.y += 1
+	
+	x_changed = velocity.x != 0
+	x_facing = x_facing
+	if x_changed and velocity.x < 0:
+		x_facing = "Left"
+	elif x_changed and velocity.x > 0:
+		x_facing = "Right"
+	
+	y_changed = velocity.y != 0
+	y_facing = y_facing
+	if y_changed and velocity.y < 0:
+		y_facing = "Back"
+	elif y_changed and velocity.y > 0:
+		y_facing = "Front"	
+	
+	# ANIMATIONs
 	new_facing = y_facing + x_facing
 	if x_changed:
 		new_cardinal_facing = x_facing
 	elif y_changed:
 		new_cardinal_facing = y_facing
 	
+	
 	var new_animation = animation
-
+	
 	if kicking_impulse != Vector2.ZERO:
 		velocity = Vector2.ZERO
 		new_animation = "Kick"
@@ -60,59 +175,15 @@ func sprite_animation():
 	if not movement_enabled and new_animation == "Run":
 		new_animation = "Idle"
 	
+	#print("new_facing: " + new_facing + ", facing: " + facing + ", new_animation: " + new_animation + ", animation" + animation)
 	if new_facing != facing or new_animation != animation:
+		print("PLAYING ANIMATION: " + animation + facing)
 		facing = new_facing
 		animation = new_animation
 		anim_player.play(animation + facing)
 	
-	if new_cardinal_facing != cardinal_facing:
-		cardinal_facing = new_cardinal_facing
-
-
-func _physics_process(delta):
-	if "Kick" in anim_player.current_animation:
-		return
 	
 	# MOVEMENT
-	velocity = Vector2.ZERO
-	if move_dir == "Left":
-		velocity.x -= 1
-	elif move_dir == "UpperLeft":
-		velocity.x -= 1
-		velocity.y -= 1
-	elif move_dir == "Up":
-		velocity.y -= 1
-	elif move_dir == "UpperRight":
-		velocity.x += 1
-		velocity.y -= 1
-	elif move_dir == "Right":
-		velocity.x += 1
-	elif move_dir == "LowerRight":
-		velocity.x += 1
-		velocity.y += 1
-	elif move_dir == "Down":
-		velocity.y += 1
-	elif move_dir == "LowerLeft":
-		velocity.x -= 1
-		velocity.y += 1
-	
-	
-	# ANIMATION
-	var new_animation = animation
-	if kicking_impulse != Vector2.ZERO:
-		velocity = Vector2.ZERO
-		new_animation = "Kick"
-	elif velocity == Vector2(0,0):
-		new_animation = "Idle"
-	elif velocity != Vector2(0,0):
-		new_animation = "Run"
-	
-	new_facing = facing if move_dir == "" else move_dir
-	if facing != new_facing or new_animation != animation:
-		facing = new_facing
-		animation = new_animation
-		anim_player.play(animation + facing)
-	
 	velocity = velocity.normalized() * speed
 	move_and_slide(velocity)
 
@@ -121,21 +192,9 @@ func place_potion():
 	if not potion_ready:
 		return
 	var p = g.get_potion_scene(elements).instance()
-	
-	# Places the potion in front of player
-	var potion_position = global_position
-	if cardinal_facing == 'Right':
-		potion_position = Vector2(global_position.x + 20, global_position.y)
-	if cardinal_facing == 'Left':
-		potion_position = Vector2(global_position.x - 20, global_position.y)
-	if cardinal_facing == 'Back':
-		potion_position = Vector2(global_position.x, global_position.y - 30)
-	if cardinal_facing == 'Front':
-		potion_position = Vector2(global_position.x, global_position.y + 30)
-
-	p.global_position = potion_position
+	p.global_position = global_position
+	p.parent_player = self
 	get_parent().add_child(p)
-	# p.add_to_group(str(p.get_instance_id()))
 	p.but_make_it_symmetrical(elements)
 	
 	# Clear elements after potion use
@@ -179,22 +238,26 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 			kicking_potion.kick(kicking_impulse)
 		kicking_potion = null
 		kicking_impulse = Vector2.ZERO
+	if "Throw" in anim_name:
+		anim_player.play("Idle"+y_facing+x_facing)
 
 
 func _on_ThinkTimer_timeout():
-	if mission_type == -1:
+	if move_dir.size() == 0:
 		var fresh_bombs = [] # safer to interact
 		var scary_bombs = [] # about to blow
-		for da_ray in $DeathAvoidance.get_children():
-			if da_ray.is_colliding():
-				var collider = da_ray.get_collider()
+		for d_ray in $DangerRays.get_children():
+			d_ray.force_raycast_update()
+			if d_ray.is_colliding():
+				var collider = d_ray.get_collider()
+				print(collider.name)
 				# TODO factor in distance & speed
 				if collider.get_node('ExplodeTimer') and collider.get_node('ExplodeTimer').wait_time > 1:
 					fresh_bombs.append(collider)
 				else:
 					scary_bombs.append(collider)
 		var cap = 7 if fresh_bombs.size() > 0 or scary_bombs.size() > 0 else 4
-		cap = 1 # TESTING
+		cap = 2 # TESTING
 		rng.randomize()
 		var decision = rng.randi_range(1, cap)
 		# MOVE TO A RANDOM SPOT
@@ -202,22 +265,39 @@ func _on_ThinkTimer_timeout():
 			var valid_coords = []
 			var valid_dir = []
 			var wall_collisions = []
-			for w_ray in $Wall.get_children():
+			for w_ray in $WallRays.get_children():
+				w_ray.force_raycast_update()
 				if w_ray.is_colliding():
 					wall_collisions.append(w_ray.name)
-			for m_ray in $Move.get_children():
+			for m_ray in $MoveRays.get_children():
+				m_ray.force_raycast_update()
 				if not m_ray.is_colliding() and not wall_collisions.has(m_ray.name):
 					valid_coords.append(m_ray.cast_to)
 					valid_dir.append(m_ray.name)
 			if valid_dir.size() > 0:
 				rng.randomize()
 				var m = rng.randi_range(0, valid_dir.size() - 1)
-				#mission_type = 1
-				move_dir = valid_dir[m]
-				move_coord = valid_coords[m]
-#	determine_target()
-#	if node_target and node_target.type == 'player':
-#		chase_target(node_target)
+				move_dir.append(valid_dir[m])
+				move_coord.append(valid_coords[m])
+		elif decision == 2:
+			var valid_coords = []
+			var valid_dir = []
+			for s_ray in $SidestepRays.get_children():
+				s_ray.force_raycast_update()
+				if not s_ray.is_colliding():
+					valid_coords.append(s_ray.cast_to)
+					valid_dir.append(s_ray.name)
+			if valid_dir.size() > 0:
+				print("placing potion")
+				place_potion()
+				rng.randomize()
+				var m = rng.randi_range(0, valid_dir.size() - 1)
+				move_dir.append(valid_dir[m])
+				move_coord.append(valid_coords[m])
+				move_dir.append(invert_dir(valid_dir[m]))
+				move_coord.append(Vector2(valid_coords[m].x * -1, valid_coords[m].y * -1))
+	
+	
 
 
 func chase_target(target):
