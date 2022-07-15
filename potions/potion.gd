@@ -25,7 +25,8 @@ func _ready():
 
 func _on_body_exited(body):
 	# when player leaves potion area, re-enable collision
-	if body == parent_player:
+	if body == parent_player and holder == null:
+		print('ray collides')
 		remove_collision_exception_with(parent_player)
 		for p_ray in parent_player.get_node("PotionRays").get_children():
 			p_ray.remove_exception(self)
