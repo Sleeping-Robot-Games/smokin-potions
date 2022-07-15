@@ -71,6 +71,7 @@ func take_dmg(dmg, potion):
 
 	anim_player.play('Hurt'+y_facing+x_facing)
 	modulate = Color(1, .25, .25, 1)
+	$HurtTimer.start()
 	
 	if holding_potion:
 		holding_potion.drop_potion()
@@ -84,7 +85,6 @@ func take_dmg(dmg, potion):
 	if health <= 0:
 		g.emit_signal("player_death", self)
 		anim_player.play('Death'+y_facing+x_facing)
-		modulate = Color(1, 1, 1, 1)
 		dead = true
 		disabled = true
 		$DeathTimer.start()
@@ -107,6 +107,11 @@ func get_stunned():
 	$StunnedTimer.start()
 	anim_player.play('Daze'+y_facing+x_facing)
 	
+	
+func _on_HurtTimer_timeout():
+	modulate = Color(1, 1, 1, 1)
+
+
 func _on_StunnedTimer_timeout():
 	disabled = false
 	anim_player.play("Idle"+y_facing+x_facing)
@@ -138,8 +143,6 @@ func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_s
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-	if 'Hurt' in anim_name:
-		modulate = Color(1, 1, 1, 1)
 	if "Kick" in anim_name:
 		if kicking_potion and weakref(kicking_potion).get_ref():
 			kicking_potion.kick(kicking_impulse, self)

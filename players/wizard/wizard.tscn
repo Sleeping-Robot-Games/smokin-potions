@@ -3079,6 +3079,9 @@ anims/ThrowHoldBackRight = SubResource( 57 )
 anims/ThrowHoldFrontLeft = SubResource( 58 )
 anims/ThrowHoldFrontRight = SubResource( 59 )
 
+[node name="HurtTimer" type="Timer" parent="."]
+wait_time = 0.2
+
 [node name="PotionCooldown" type="Timer" parent="."]
 
 [node name="StunnedTimer" type="Timer" parent="."]
@@ -3133,6 +3136,7 @@ collision_mask = 16
 [connection signal="area_entered" from="BombPickupArea" to="." method="_on_BombPickupArea_area_entered"]
 [connection signal="area_exited" from="BombPickupArea" to="." method="_on_BombPickupArea_area_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="timeout" from="HurtTimer" to="." method="_on_HurtTimer_timeout"]
 [connection signal="timeout" from="PotionCooldown" to="." method="_on_PotionCooldown_timeout"]
 [connection signal="timeout" from="StunnedTimer" to="." method="_on_StunnedTimer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]

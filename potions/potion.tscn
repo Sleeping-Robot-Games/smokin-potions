@@ -216,7 +216,7 @@ frames = SubResource( 17 )
 speed_scale = 2.0
 
 [node name="ExplodeTimer" type="Timer" parent="."]
-wait_time = 1000.0
+wait_time = 5.0
 autostart = true
 
 [node name="Portal" type="AnimatedSprite" parent="."]
@@ -224,7 +224,7 @@ visible = false
 position = Vector2( 0, 6 )
 scale = Vector2( 0.6, 0.6 )
 frames = SubResource( 49 )
-frame = 2
+frame = 6
 speed_scale = 5.0
 playing = true
 
