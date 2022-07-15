@@ -10,7 +10,6 @@ var dead_players = []
 
 func _ready():
 	g.connect("elements_changed", self, "handle_elements_changed")
-	g.connect("health_changed", self, "handle_heath_changed")
 	g.connect("player_death", self, "handle_player_death")
 	g.connect("player_revive", self, "handle_player_revive")
 	
@@ -26,8 +25,8 @@ func _ready():
 	for player in g.players_in_current_game:
 		add_player_to_game(player)
 
-
 func add_player_to_game(player):
+	print(player)
 	# Adds player to game
 	var new_player = wizard.instance() if not player.bot else bot.instance()
 	new_player.number = player.number
@@ -63,17 +62,6 @@ func handle_elements_changed(elements, player_number):
 		get_node("HUD/P"+player_number+"UI/Element1").texture = null
 		get_node("HUD/P"+player_number+"UI/Element2").texture = null
 
-
-func handle_heath_changed(player_number, health):
-	if health == 2:
-		get_node("HUD/P"+player_number+"UI/Health1").set_texture(load("res://pickups/heart.png"))
-		get_node("HUD/P"+player_number+"UI/Health2").set_texture(load("res://pickups/heart.png"))
-	elif health == 1:
-		get_node("HUD/P"+player_number+"UI/Health1").set_texture(load("res://pickups/heart.png"))
-		get_node("HUD/P"+player_number+"UI/Health2").texture = null
-	else:
-		get_node("HUD/P"+player_number+"UI/Health1").texture = null
-		get_node("HUD/P"+player_number+"UI/Health2").texture = null
 
 func _on_MatchTimer_timeout():
 	if seconds > 0:

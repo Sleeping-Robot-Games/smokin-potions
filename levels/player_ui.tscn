@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://levels/player_ui.gd" type="Script" id=1]
 [ext_resource path="res://pickups/runes/ice.png" type="Texture" id=2]
@@ -13,13 +13,42 @@
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 46.5, 20 )
 
+[sub_resource type="Animation" id=9]
+resource_name = "heartshake1"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Health1:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 39, -3 ), Vector2( 45, -3 ), Vector2( 35, -3 ), Vector2( 39, -3 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "heartshake2"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Health2:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 65, -3 ), Vector2( 71, -3 ), Vector2( 61, -3 ), Vector2( 65, -3 ) ]
+}
+
 [node name="P1UI" type="Control"]
 margin_right = 92.0
 margin_bottom = 40.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 93.0
@@ -70,9 +99,6 @@ margin_bottom = 61.0
 rect_scale = Vector2( 0.5, 0.5 )
 rect_clip_content = true
 texture = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Health2" type="TextureRect" parent="."]
 margin_left = 65.0
@@ -133,9 +159,11 @@ margin_right = 90.0
 margin_bottom = 98.0
 rect_scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 9 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/heartshake1 = SubResource( 9 )
+anims/heartshake2 = SubResource( 10 )
 
 [connection signal="body_entered" from="UIArea" to="." method="_on_UIArea_body_entered"]
 [connection signal="body_exited" from="UIArea" to="." method="_on_UIArea_body_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

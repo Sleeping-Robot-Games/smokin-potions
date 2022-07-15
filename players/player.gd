@@ -5,7 +5,7 @@ export (bool) var potion_cooldown_toogle: bool = false
 export (bool) var disabled: bool = false
 
 onready var anim_player: AnimationPlayer = $AnimationPlayer
-onready var game_scene: Node = null
+onready var game_scene: Node = get_node('/root/Game')
 
 const KICK_FORCE = 400
 const DIAG_KICK_FORCE = 200
@@ -68,19 +68,21 @@ func _on_PotionCooldown_timeout():
 func take_dmg(dmg, potion):
 	if ghost or dead:
 		return
-
-	anim_player.play('Hurt'+y_facing+x_facing)
-	modulate = Color(1, .25, .25, 1)
-	$HurtTimer.start()
 	
 	if holding_potion:
 		holding_potion.drop_potion()
 		holding_potion = null
 		g.load_normal_assets(self, number)
 		
+	health -= dmg
+	g.emit_signal('health_changed', health, true)
+	
 	if health > 0:
-		health -= dmg
-		g.emit_signal('health_changed', number, health)
+		anim_player.play('Hurt'+y_facing+x_facing)
+		modulate = Color(1, .25, .25, 1)
+		$HurtTimer.start()
+		disabled = true
+		$FloatTextManager.float_text(str(dmg)+" HP", false)
 		
 	if health <= 0:
 		g.emit_signal("player_death", self)
@@ -89,12 +91,13 @@ func take_dmg(dmg, potion):
 		disabled = true
 		$DeathTimer.start()
 		if potion.last_wiz and potion.last_wiz.ghost and potion.last_wiz != self:
+			print('revived')
 			potion.last_wiz.revive()
 			g.emit_signal("player_revive", potion.last_wiz)
 			
 func revive():
 	health = 1
-	g.emit_signal('health_changed', number, health)
+	g.emit_signal('health_changed', health, false)
 	ghost = false
 	dead = false
 	modulate = Color(1, 1, 1, 1)
@@ -110,11 +113,19 @@ func get_stunned():
 	
 func _on_HurtTimer_timeout():
 	modulate = Color(1, 1, 1, 1)
+	disabled = false
 
 
 func _on_StunnedTimer_timeout():
 	disabled = false
 	anim_player.play("Idle"+y_facing+x_facing)
+
+
+func _on_DeathTimer_timeout():
+	anim_player.play('Idle'+y_facing+x_facing)
+	ghost = true
+	modulate = Color(1, 1, 1, .25)
+	disabled = false
 
 
 func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
@@ -163,9 +174,3 @@ func _on_BombPickupArea_area_exited(area):
 		var potion = area.get_parent()
 		nearby_potions.erase(potion)
 
-
-func _on_DeathTimer_timeout():
-	anim_player.play('Idle'+y_facing+x_facing)
-	ghost = true
-	modulate = Color(1, 1, 1, .25)
-	disabled = false

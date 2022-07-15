@@ -1,7 +1,7 @@
 extends Node
 
 signal elements_changed(elements, number)
-signal health_changed(player_number, health)
+signal health_changed(health)
 signal player_death(player)
 signal player_revive(player)
 

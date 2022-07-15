@@ -350,7 +350,8 @@ func pickup_potion():
 
 
 func throw_potion():
-	if holding_potion:
+	var wr = weakref(holding_potion)
+	if holding_potion and !wr.get_ref():
 		holding_potion.get_thrown()
 		holding_potion = null
 		g.load_normal_assets(self, number)
