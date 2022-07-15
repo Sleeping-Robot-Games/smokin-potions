@@ -17,6 +17,8 @@ func _on_Explode_animation_finished():
 	for i in range(3):
 		var magic_missile_instance = magic_missile.instance()
 		magic_missile_instance.global_position = global_position
+		magic_missile_instance
+		magic_missile_instance.last_wiz = last_wiz
 		get_parent().add_child(magic_missile_instance)
 		rng.randomize()
 		magic_missile_instance.rotation_degrees = rng.randi_range(0, 360)

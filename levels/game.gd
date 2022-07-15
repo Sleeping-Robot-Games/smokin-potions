@@ -14,7 +14,7 @@ func _ready():
 	for player in g.players_in_current_game:
 		add_player_to_game(player)
 		
-	## USED FOR DEBUGGING
+	## USED FOR DEBUGGING ##
 	if g.players_in_current_game.size() == 0:
 		add_player_to_game({'number': '1', 'bot': false})
 		add_player_to_game({'number': '2', 'bot': true})

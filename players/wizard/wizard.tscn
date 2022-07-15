@@ -2974,7 +2974,6 @@ tracks/4/keys = {
 [node name="Wizard" type="KinematicBody2D"]
 collision_mask = 19
 script = ExtResource( 3 )
-run_speed = 120
 
 [node name="Skin" type="Sprite" parent="."]
 material = SubResource( 26 )

@@ -2,6 +2,7 @@ extends Node2D
 
 export (int) var speed = 100
 
+var last_wiz
 
 func _physics_process(delta):
 	if not get_node("VisibilityNotifier2D").is_on_screen():

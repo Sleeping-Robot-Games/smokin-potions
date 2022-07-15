@@ -20,6 +20,7 @@ func _ready():
 func trigger_effect():
 	var fireball_instance = fireball.instance()
 	fireball_instance.global_position = global_position
+	fireball_instance.last_wiz = last_wiz
 	get_parent().add_child(fireball_instance)
 	fireball_instance.rotation_degrees = fx_dict[orginal_quadrant]
 	queue_free()

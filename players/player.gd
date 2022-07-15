@@ -40,7 +40,6 @@ func _ready():
 	add_to_group("players")
 	ready();
 
-
 func ready():
 	pass
 

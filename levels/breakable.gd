@@ -5,19 +5,22 @@ var rng = RandomNumberGenerator.new()
 var sprite = "001"
 
 func _ready():
+	spawn()
+
+func break():
+	$Sprite.set_texture(load("res://levels/"+g.level_selected+"/breakable/broken/" + sprite + ".png"))
+	$AnimationPlayer.play("fade_out")
+	$RespawnTimer.start()
+	
+func spawn():
 	rng.randomize()
 	var sprite_num = rng.randi_range(1, 6)
 	sprite = str(sprite_num).pad_zeros(3)
 	$Sprite.set_texture(load("res://levels/"+g.level_selected+"/breakable/unbroken/" + sprite + ".png"))
 
 
-func break():
-	$Sprite.set_texture(load("res://levels/"+g.level_selected+"/breakable/broken/" + sprite + ".png"))
-	$AnimationPlayer.play("fade")
-
-
 func _on_AnimationPlayer_animation_finished(anim_name):
-	if anim_name == "fade":
+	if anim_name == "fade_out":
 		rng.randomize()
 		var has_loot = rng.randi_range(0, 1)
 		if has_loot:
@@ -30,3 +33,8 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 				rune_instance.global_position = global_position
 				get_parent().add_child(rune_instance)
 		queue_free()
+
+
+func _on_RespawnTimer_timeout():
+	$AnimationPlayer.play("fade_in")
+	spawn()

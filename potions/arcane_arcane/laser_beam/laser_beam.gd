@@ -14,6 +14,8 @@ onready var line_width: float = fill.width
 var is_casting := false setget set_is_casting
 var use_portal = false
 
+var last_wiz
+
 var nearby_players = []
 var nearby_breakables = []
 
