@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/dying_4.ogg-938a496fb865d0ca029beef2c3a399d2.oggstr"
+
+[deps]
+
+source_file="res://sfx/dying_4.ogg"
+dest_files=[ "res://.import/dying_4.ogg-938a496fb865d0ca029beef2c3a399d2.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

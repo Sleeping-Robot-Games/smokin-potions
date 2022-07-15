@@ -1,7 +1,5 @@
 extends 'res://players/player.gd'
 
-var rng = RandomNumberGenerator.new()
-
 var action_queue = []
 onready var action_started = OS.get_ticks_msec()
 

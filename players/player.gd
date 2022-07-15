@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+var rng = RandomNumberGenerator.new()
 
 export (bool) var potion_cooldown_toogle: bool = false
 export (bool) var disabled: bool = false
@@ -80,6 +81,7 @@ func take_dmg(dmg, potion):
 	g.emit_signal('health_changed', health, true, number)
 	
 	if health > 0:
+		play_sfx('hurt')
 		anim_player.play('Hurt'+y_facing+x_facing)
 		modulate = Color(1, .25, .25, 1)
 		$HurtTimer.start()
@@ -87,6 +89,7 @@ func take_dmg(dmg, potion):
 		$FloatTextManager.float_text("-"+str(dmg)+" HP", Color(1,0,0,1))
 		
 	if health <= 0:
+		play_sfx('dying')
 		g.emit_signal("player_death", self)
 		anim_player.play('Death'+y_facing+x_facing)
 		dead = true
@@ -163,7 +166,6 @@ func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_s
 		rune.cleanup()
 
 
-
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if "Kick" in anim_name:
 		if kicking_potion and weakref(kicking_potion).get_ref():
@@ -184,4 +186,14 @@ func _on_BombPickupArea_area_exited(area):
 	if area.name == 'PotionPickupArea' and nearby_potions.find(area.get_parent()) != -1:
 		var potion = area.get_parent()
 		nearby_potions.erase(potion)
-
+		
+		
+func play_sfx(name):
+	var sfx_player = AudioStreamPlayer2D.new()
+	rng.randomize()
+	var track_num = rng.randi_range(1, 5)
+	print(track_num)
+	sfx_player.stream = load('res://sfx/'+name+'_'+str(track_num)+'.ogg')
+	sfx_player.connect("finished", sfx_player, "queue_free")
+	add_child(sfx_player)
+	sfx_player.play()
