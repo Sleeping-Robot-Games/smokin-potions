@@ -82,7 +82,7 @@ func take_dmg(dmg, potion):
 		modulate = Color(1, .25, .25, 1)
 		$HurtTimer.start()
 		disabled = true
-		$FloatTextManager.float_text(str(dmg)+" HP", false)
+		$FloatTextManager.float_text("-"+str(dmg)+" HP", Color(1,0,0,1))
 		
 	if health <= 0:
 		g.emit_signal("player_death", self)
@@ -136,17 +136,25 @@ func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_s
 			var rune_instance = rune_scene.instance()
 			var rune_pos = global_position
 			if cardinal_facing == "Left":
-				rune_pos.x += 20
+				rune_pos.x += 30
 			elif cardinal_facing == "Right":
-				rune_pos.x -= 20
+				rune_pos.x -= 30
 			elif cardinal_facing == "Back":
-				rune_pos.y += 25
+				rune_pos.y += 35
 			elif cardinal_facing == "Front":
-				rune_pos.y -= 20
+				rune_pos.y -= 30
 			rune_instance.global_position = rune_pos
 			get_parent().add_child(rune_instance)
 			rune_instance.set_type(elements[1])
 			elements.remove(1)
+			
+		var element_color_map = {
+			'earth': Color("#256830"),
+			'arcane': Color("#c32379"),
+			'ice': Color("#39aac8"),
+			'fire': Color("#c35723")
+		}
+		$FloatTextManager.float_text(rune.element, element_color_map[rune.element])
 		elements.push_front(rune.element)
 		g.emit_signal('elements_changed', elements, number)
 		rune.cleanup()

@@ -23,16 +23,16 @@ func spawn():
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "fade_out":
 		rng.randomize()
-		var has_loot = rng.randi_range(0, 1)
-		if has_loot:
-			rng.randomize()
-			# Runes, Scrolls, ???
-			var loot_type = rng.randi_range(0, 0)
-			if loot_type == 0:
-				# Spawn a rune
-				var rune_instance = rune.instance()
-				rune_instance.global_position = global_position
-				get_parent().add_child(rune_instance)
+#		var has_loot = rng.randi_range(0, 1)
+#		if has_loot:
+		#rng.randomize()
+		# Runes, Scrolls, ???
+		var loot_type = rng.randi_range(0, 0)
+		if loot_type == 0:
+			# Spawn a rune
+			var rune_instance = rune.instance()
+			rune_instance.global_position = global_position
+			get_parent().add_child(rune_instance)
 		queue_free()
 
 
