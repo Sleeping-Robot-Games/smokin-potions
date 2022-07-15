@@ -108,7 +108,7 @@ func _physics_process(delta):
 		kicking_potion = collider
 	else:
 		kicking_impulse = Vector2.ZERO
-	print("kicking_impulse: " + str(kicking_impulse))
+	#print("kicking_impulse: " + str(kicking_impulse))
 	
 	# drop current action if bot has spent more than 2 secs on it or if within 5 pixels of destination
 	if move_coord.size() > 0 and (OS.get_ticks_msec() - action_started > 2000 or global_position.distance_to(move_coord[0]) < 5):
@@ -339,9 +339,6 @@ func determine_target():
 		nearest_targets.append(nearest_breakable)
 	
 	node_target = nearest_target(nearest_targets)
-	
-	#print("node_target")
-	#print(node_target)
 
 
 func nearest_target(targets: Array):
