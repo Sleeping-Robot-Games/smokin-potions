@@ -2,7 +2,6 @@ extends 'res://players/player.gd'
 
 var rng = RandomNumberGenerator.new()
 
-#var mission_type = -1
 var action_queue = []
 onready var action_started = OS.get_ticks_msec()
 
@@ -58,8 +57,9 @@ func _physics_process(delta):
 	
 	# if current action is a function and we've waited long enough, call it
 	if action_queue.size() > 0 and action_queue[0]["type"] == "FUNCTION":
-		if OS.get_ticks_msec() - action_queue[0]["start_time"] >= action_queue[0]["delay"]:
-			action_queue[0]["fn"]
+		var delay = OS.get_ticks_msec() - action_queue[0]["start_time"]
+		if delay >= action_queue[0]["delay"]:
+			action_queue[0]["fn"].call_func()
 			remove_action()
 	
 	# DIRECTION
@@ -241,56 +241,45 @@ func scheme():
 					"start_time" : null,
 				})
 		elif decision == 3:
-			place_potion()
+			
 			action_queue.append({
 				"type": "FUNCTION",
-				"fn": pickup_potion(),
-				"delay": 500,
+				"fn": funcref(self, "place_potion"),
+				"delay": 0,
 				"timeout_ms": 1000,
 				"start_time" : null,
+				"name": "place_potion()",
 			})
 			action_queue.append({
 				"type": "FUNCTION",
-				"fn": throw_potion(),
+				"fn": funcref(self, "pickup_potion"),
 				"delay": 500,
 				"timeout_ms": 1000,
 				"start_time" : null,
+				"name": "pickup_potion()",
+			})
+			action_queue.append({
+				"type": "FUNCTION",
+				"fn": funcref(self, "throw_potion"),
+				"delay": 500,
+				"timeout_ms": 1000,
+				"start_time" : null,
+				"name": "throw_potion()",
 			})
 
 
 func pickup_potion():
-	print("PICKING UP POTION")
 	if !holding_potion and nearby_potions.size() > 0:
 		holding_potion = nearby_potions.pop_back()
-		print("PICKED UP: " + holding_potion.name)
 		holding_potion.get_held(self)
 		for p_ray in $PotionRays.get_children():
 			p_ray.add_exception(holding_potion)
 		g.load_hold_assets(self, number)
-	else:
-		print("nothing to pickup :( -- " + str(!holding_potion) + ", " + str(nearby_potions.size()))
+
 
 func throw_potion():
-	print("THROWING POTIONS")
 	if holding_potion:
-		print("THROWING: " + holding_potion.name + ", Throw"+y_facing+x_facing)
 		holding_potion.get_thrown()
 		holding_potion = null
 		g.load_normal_assets(self, number)
 		anim_player.play("Throw"+y_facing+x_facing)
-	else:
-		print("nothing to throw :(")
-
-
-#func place_potion():
-#	print("PLACING POTION")
-	# nearby_potions.append(p)
-
-func _on_BombPickupArea_area_entered(area):
-	if area.name == 'PotionPickupArea' and nearby_potions.find(area.get_parent()) == -1 and !area.get_parent().potion_daddy:
-		print("NEARBY_POTION ENTERED")
-
-
-func _on_BombPickupArea_area_exited(area):
-	if area.name == 'PotionPickupArea' and nearby_potions.find(area.get_parent()) != -1:
-		print("NEARBY_POTION EXITED")
