@@ -1,7 +1,7 @@
 extends 'res://players/player.gd'
 
 
-func _ready():
+func ready():
 	number = "1"
 
 

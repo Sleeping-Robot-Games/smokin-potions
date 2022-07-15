@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export (int) var run_speed: int = 150
+
 export (bool) var potion_cooldown_toogle: bool = false
 export (bool) var disabled: bool = false
 
@@ -12,7 +12,7 @@ const DIAG_KICK_FORCE = 200
 
 var number = "1"
 var health = 2
-var speed: int = run_speed
+var speed: int = 150
 var velocity: Vector2 = Vector2()
 var x_facing: String = "Right"
 var x_changed: bool = false
@@ -37,8 +37,12 @@ var dead = false
 const rune_scene = preload('res://pickups/runes/rune.tscn')
 
 func _ready():
-	speed = run_speed
+	add_to_group("players")
+	ready();
 
+
+func ready():
+	pass
 
 func place_potion():
 	if not potion_ready or ghost:

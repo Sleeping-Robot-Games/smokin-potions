@@ -5,7 +5,9 @@ var rng = RandomNumberGenerator.new()
 var action_queue = []
 onready var action_started = OS.get_ticks_msec()
 
-func _ready():	
+
+func ready():
+	number = '2'
 	for d_ray in $DangerRays.get_children():
 		d_ray.add_exception(self)
 	for m_ray in $MoveRays.get_children():
@@ -14,6 +16,7 @@ func _ready():
 		s_ray.add_exception(self)
 	for w_ray in $WallRays.get_children():
 		w_ray.add_exception(self)
+
 
 
 func invert_dir(d):
@@ -239,7 +242,6 @@ func scheme():
 					"start_time" : null,
 				})
 		elif decision == 3:
-			
 			action_queue.append({
 				"type": "FUNCTION",
 				"fn": funcref(self, "place_potion"),
@@ -256,6 +258,22 @@ func scheme():
 				"start_time" : null,
 				"name": "pickup_potion()",
 			})
+			var targets = []
+			for p in get_tree().get_nodes_in_group("players"):
+				if not p.ghost:
+					targets.append(p)
+			rng.randomize()
+			var t = rng.randi_range(0, targets.size() - 1)
+			var target = targets[t] if t >= 0 else null
+			if target:
+				var dir = dir_to_target(target)
+				action_queue.append({
+					"type": "MOVE",
+					"dir": dir,
+					"coord": target.global_position,
+					"timeout_ms": 500,
+					"start_time" : null,
+				})
 			action_queue.append({
 				"type": "FUNCTION",
 				"fn": funcref(self, "throw_potion"),
@@ -264,6 +282,29 @@ func scheme():
 				"start_time" : null,
 				"name": "throw_potion()",
 			})
+
+
+func dir_to_target(target):
+	var dir = global_position.direction_to(target.global_position)
+	var precision = 0.25
+	var y = ""
+	var x = ""
+	if dir.x <= precision * -1:
+		x = "Left"
+	elif dir.x >= precision:
+		x = "Right"
+	
+	if dir.y <= precision * -1 and x == "":
+		y = "Up"
+	elif dir.y <= precision * -1 and x != "":
+		y = "Upper"
+	elif dir.y >= precision and x == "":
+		y = "Down"
+	elif dir.y >= precision and y != "":
+		y = "Lower"
+	
+	#print("dir: " + str(dir) + ", " + x + y)
+	return y + x
 
 
 func pickup_potion():

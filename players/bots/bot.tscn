@@ -9,19 +9,10 @@ script = ExtResource( 2 )
 [node name="ThinkTimer" type="Timer" parent="." index="6"]
 autostart = true
 
-[node name="NavRayCast" type="RayCast2D" parent="." index="13"]
-visible = false
-cast_to = Vector2( 0, 1000 )
-collision_mask = 120
-
-[node name="PlayerRayCast" type="RayCast2D" parent="." index="14"]
-visible = false
+[node name="PlayerRay" type="RayCast2D" parent="." index="13"]
 cast_to = Vector2( 100, 400 )
 
-[node name="MoveRayCast" type="RayCast2D" parent="." index="15"]
-visible = false
-
-[node name="DangerRays" type="Node2D" parent="." index="16"]
+[node name="DangerRays" type="Node2D" parent="." index="14"]
 position = Vector2( 0, 7 )
 
 [node name="Left" type="RayCast2D" parent="DangerRays" index="0"]
@@ -63,7 +54,7 @@ enabled = true
 cast_to = Vector2( -30, 30 )
 collision_mask = 16
 
-[node name="MoveRays" type="Node2D" parent="." index="17"]
+[node name="MoveRays" type="Node2D" parent="." index="15"]
 position = Vector2( 0, 7 )
 
 [node name="Left" type="RayCast2D" parent="MoveRays" index="0"]
@@ -114,7 +105,7 @@ cast_to = Vector2( -60, 60 )
 collision_mask = 120
 collide_with_areas = true
 
-[node name="SidestepRays" type="Node2D" parent="." index="18"]
+[node name="SidestepRays" type="Node2D" parent="." index="16"]
 position = Vector2( 0, 7 )
 
 [node name="Left" type="RayCast2D" parent="SidestepRays" index="0"]
@@ -173,7 +164,7 @@ cast_to = Vector2( -10, 10 )
 collision_mask = 248
 collide_with_areas = true
 
-[node name="WallRays" type="Node2D" parent="." index="19"]
+[node name="WallRays" type="Node2D" parent="." index="17"]
 position = Vector2( 0, 7 )
 
 [node name="Left" type="RayCast2D" parent="WallRays" index="0"]
