@@ -32,6 +32,7 @@ var is_invulnerable = false
 var nearby_potions = []
 var holding_potion: RigidBody2D
 var ghost = false
+var dead = false
 
 const rune_scene = preload('res://pickups/runes/rune.tscn')
 
@@ -62,6 +63,12 @@ func _on_PotionCooldown_timeout():
 
 
 func take_dmg(dmg, potion):
+	if ghost:
+		return
+		
+	anim_player.play('Hurt'+y_facing+x_facing)
+	modulate = Color(1, .25, .25, 1)
+	
 	if holding_potion:
 		holding_potion.drop_potion()
 		holding_potion = null
@@ -70,8 +77,10 @@ func take_dmg(dmg, potion):
 		health -= dmg
 		g.emit_signal('health_changed', number, health)
 	if health <= 0:
-		ghost = true
-		modulate = Color(1, 1, 1, .25)
+		anim_player.play('Death'+y_facing+x_facing)
+		modulate = Color(1, 1, 1, 1)
+		dead = true
+		$DeathTimer.start()
 		if potion.last_wiz and potion.last_wiz.ghost and potion.last_wiz != self:
 			potion.last_wiz.revive()
 			
@@ -79,14 +88,17 @@ func revive():
 	health = 1
 	g.emit_signal('health_changed', number, health)
 	ghost = false
+	dead = false
 	modulate = Color(1, 1, 1, 1)
 
 func get_stunned():
 	disabled = true
 	$StunnedTimer.start()
+	anim_player.play('Daze'+y_facing+x_facing)
 	
 func _on_StunnedTimer_timeout():
 	disabled = false
+	anim_player.play("Idle"+y_facing+x_facing)
 
 
 func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
@@ -120,8 +132,10 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 			kicking_potion.kick(kicking_impulse, self)
 		kicking_potion = null
 		kicking_impulse = Vector2.ZERO
-	if "Throw" in anim_name:
+	if "Throw" in anim_name or 'Hurt' in anim_name:
 		anim_player.play("Idle"+y_facing+x_facing)
+	if 'Hurt' in anim_name and not ghost and not dead:
+		modulate = Color(1, 1, 1, 1)
 
 
 func _on_BombPickupArea_area_entered(area):
@@ -134,3 +148,10 @@ func _on_BombPickupArea_area_exited(area):
 	if area.name == 'PotionPickupArea' and nearby_potions.find(area.get_parent()) != -1:
 		var potion = area.get_parent()
 		nearby_potions.erase(potion)
+
+
+func _on_DeathTimer_timeout():
+	anim_player.play('Idle'+y_facing+x_facing)
+	ghost = true
+	modulate = Color(1, 1, 1, .25)
+	disabled = false

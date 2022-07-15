@@ -16,9 +16,6 @@ extents = Vector2( 46.5, 20 )
 margin_right = 92.0
 margin_bottom = 40.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 93.0
@@ -38,7 +35,7 @@ margin_bottom = 41.0
 rect_clip_content = true
 
 [node name="WizardSprites" parent="Portrait" instance=ExtResource( 4 )]
-position = Vector2( 22, 10 )
+position = Vector2( 24, 30 )
 scale = Vector2( 3, 3 )
 
 [node name="PUiEmptyHeart" type="Sprite" parent="."]

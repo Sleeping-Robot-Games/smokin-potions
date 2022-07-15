@@ -3084,7 +3084,11 @@ anims/ThrowHoldFrontRight = SubResource( 59 )
 [node name="StunnedTimer" type="Timer" parent="."]
 wait_time = 2.0
 
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 4.0
+
 [node name="PotionRays" type="Node2D" parent="."]
+visible = false
 
 [node name="Left" type="RayCast2D" parent="PotionRays"]
 position = Vector2( 0, 6 )
@@ -3132,3 +3136,4 @@ collision_mask = 16
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="PotionCooldown" to="." method="_on_PotionCooldown_timeout"]
 [connection signal="timeout" from="StunnedTimer" to="." method="_on_StunnedTimer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
