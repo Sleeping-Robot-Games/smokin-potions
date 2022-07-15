@@ -23,7 +23,6 @@ func _on_ExplodeTimer_timeout():
 
 
 func trigger_effect():
-	print(nearby_players)
 	for player in nearby_players:
 		player.take_dmg(1)
 	# destroy all breakables

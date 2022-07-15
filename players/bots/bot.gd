@@ -30,14 +30,14 @@ const KICK_FORCE = 200
 const DIAG_KICK_FORCE = 100
 var elements = []
 var nearby_potions = []
+var holding_potion: RigidBody2D
 
 var rng = RandomNumberGenerator.new()
 var node_target = null
 var dir = Vector2.ZERO
 
 #var mission_type = -1
-var move_dir = []
-var move_coord = []
+var action_queue = []
 onready var action_started = OS.get_ticks_msec()
 
 func _ready():
@@ -71,37 +71,51 @@ func invert_dir(d):
 		return "UpperRight"
 
 
+func remove_action():
+	action_queue.remove(0)
+	if action_queue.size() > 0:
+		action_queue[0]["start_time"] = OS.get_ticks_msec()
+
+
 func _physics_process(delta):
 	if disabled or "Kick" in anim_player.current_animation:
 		return
 	
-	# drop current action if bot has spent more than 2 secs on it or if within 5 pixels of destination
-	if move_coord.size() > 0 and (OS.get_ticks_msec() - action_started > 2000 or global_position.distance_to(move_coord[0]) < 5):
-			move_dir.remove(0)
-			move_coord.remove(0)
-			action_started = OS.get_ticks_msec()
+	# if current action hasn't been started, do so now
+	if action_queue.size() > 0 and not action_queue[0]["start_time"]:
+		action_queue[0]["start_time"] = OS.get_ticks_msec()
+	
+	# drop current action if it's expired or if type is movement and we're within 5 px of target
+	if action_queue.size() > 0 and (OS.get_ticks_msec() - action_queue[0]["start_time"] > action_queue[0]["timeout_ms"]  or (action_queue[0]["type"] == "MOVE" and global_position.distance_to(action_queue[0]["coord"]) < 5)):
+		remove_action()
+	
+	# if current action is a function and we've waited long enough, call it
+	if action_queue.size() > 0 and action_queue[0]["type"] == "FUNCTION":
+		if OS.get_ticks_msec() - action_queue[0]["start_time"] >= action_queue[0]["delay"]:
+			action_queue[0]["fn"]
+			remove_action()
 	
 	# DIRECTION
 	velocity = Vector2.ZERO
-	if move_dir.size() > 0:
-		if move_dir[0] == "Left":
+	if action_queue.size() > 0 and action_queue[0]["type"] == "MOVE":
+		if action_queue[0]["dir"] == "Left":
 			velocity.x -= 1
-		elif move_dir[0] == "UpperLeft":
+		elif action_queue[0]["dir"] == "UpperLeft":
 			velocity.x -= 1
 			velocity.y -= 1
-		elif move_dir[0] == "Up":
+		elif action_queue[0]["dir"] == "Up":
 			velocity.y -= 1
-		elif move_dir[0] == "UpperRight":
+		elif action_queue[0]["dir"] == "UpperRight":
 			velocity.x += 1
 			velocity.y -= 1
-		elif move_dir[0] == "Right":
+		elif action_queue[0]["dir"] == "Right":
 			velocity.x += 1
-		elif move_dir[0] == "LowerRight":
+		elif action_queue[0]["dir"] == "LowerRight":
 			velocity.x += 1
 			velocity.y += 1
-		elif move_dir[0] == "Down":
+		elif action_queue[0]["dir"] == "Down":
 			velocity.y += 1
-		elif move_dir[0] == "LowerLeft":
+		elif action_queue[0]["dir"] == "LowerLeft":
 			velocity.x -= 1
 			velocity.y += 1
 	
@@ -163,9 +177,7 @@ func _physics_process(delta):
 	else:
 		kicking_impulse = Vector2.ZERO
 	
-	
-	
-	# ANIMATIONs
+	# ANIMATION
 	var new_animation = animation
 	
 	if kicking_impulse != Vector2.ZERO:
@@ -193,8 +205,9 @@ func _physics_process(delta):
 func _on_ThinkTimer_timeout():
 	scheme()
 
+
 func scheme():
-	if move_dir.size() == 0:
+	if action_queue.size() == 0:
 		var fresh_bombs = [] # safer to interact
 		var scary_bombs = [] # about to blow
 		for d_ray in $DangerRays.get_children():
@@ -207,7 +220,7 @@ func scheme():
 				else:
 					scary_bombs.append(collider)
 		var cap = 7 if fresh_bombs.size() > 0 or scary_bombs.size() > 0 else 4
-		cap = 2 # TESTING
+		cap = 3 # TESTING
 		rng.randomize()
 		var decision = rng.randi_range(1, cap)
 		# MOVE TO A RANDOM SPOT
@@ -227,8 +240,13 @@ func scheme():
 			if valid_dir.size() > 0:
 				rng.randomize()
 				var m = rng.randi_range(0, valid_dir.size() - 1)
-				move_dir.append(valid_dir[m])
-				move_coord.append(valid_coords[m])
+				action_queue.append({
+					"type": "MOVE",
+					"dir": valid_dir[m],
+					"coord": valid_coords[m],
+					"timeout_ms": 2000,
+					"start_time" : null,
+				})
 		elif decision == 2:
 			var valid_coords = []
 			var valid_dir = []
@@ -241,20 +259,74 @@ func scheme():
 				place_potion()
 				rng.randomize()
 				var m = rng.randi_range(0, valid_dir.size() - 1)
-				move_dir.append(valid_dir[m])
-				move_coord.append(valid_coords[m])
-				move_dir.append(invert_dir(valid_dir[m]))
-				move_coord.append(Vector2(valid_coords[m].x * -1, valid_coords[m].y * -1))
+				action_queue.append({
+					"type": "MOVE",
+					"dir": valid_dir[m],
+					"coord": valid_coords[m],
+					"timeout_ms": 1000,
+					"start_time" : null,
+				})
+				action_queue.append({
+					"type": "MOVE",
+					"dir": invert_dir(valid_dir[m]),
+					"coord": Vector2(valid_coords[m].x * -1, valid_coords[m].y * -1),
+					"timeout_ms": 1000,
+					"start_time" : null,
+				})
+		elif decision == 3:
+			place_potion()
+			action_queue.append({
+				"type": "FUNCTION",
+				"fn": pickup_potion(),
+				"delay": 500,
+				"timeout_ms": 1000,
+				"start_time" : null,
+			})
+			action_queue.append({
+				"type": "FUNCTION",
+				"fn": throw_potion(),
+				"delay": 500,
+				"timeout_ms": 1000,
+				"start_time" : null,
+			})
+
+
+func pickup_potion():
+	print("PICKING UP POTION")
+	if !holding_potion and nearby_potions.size() > 0:
+		holding_potion = nearby_potions.pop_back()
+		print("PICKED UP: " + holding_potion.name)
+		holding_potion.get_held(self)
+		for p_ray in $PotionRays.get_children():
+			p_ray.add_exception(holding_potion)
+		g.load_hold_assets(self, number)
+	else:
+		print("nothing to pickup :( -- " + str(!holding_potion) + ", " + str(nearby_potions.size()))
+
+func throw_potion():
+	print("THROWING POTIONS")
+	if holding_potion:
+		print("THROWING: " + holding_potion.name + ", Throw"+y_facing+x_facing)
+		holding_potion.get_thrown()
+		holding_potion = null
+		g.load_normal_assets(self, number)
+		anim_player.play("Throw"+y_facing+x_facing)
+	else:
+		print("nothing to throw :(")
 
 
 func place_potion():
+	print("PLACING POTION")
 	if not potion_ready:
+		print("aborted placing potion (not ready)")
 		return
 	var p = g.get_potion_scene(elements).instance()
 	p.global_position = global_position
 	p.parent_player = self
 	get_parent().add_child(p)
 	p.but_make_it_symmetrical(elements)
+	nearby_potions.append(p)
+	
 	
 	# Clear elements after potion use
 	elements = []
@@ -301,10 +373,10 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 			kicking_potion.kick(kicking_impulse)
 		kicking_potion = null
 		kicking_impulse = Vector2.ZERO
-		if move_dir.size() > 0:
-			move_dir.remove(0)
-			move_coord.remove(0)
-			scheme()
+#		if move_dir.size() > 0:
+#			move_dir.remove(0)
+#			move_coord.remove(0)
+#			scheme()
 	if "Throw" in anim_name:
 		anim_player.play("Idle"+y_facing+x_facing)
 
@@ -326,7 +398,7 @@ func chase_target(target):
 			if !look.is_colliding():
 				dir = look.cast_to.normalized()
 				break
-	
+
 
 func determine_target():
 	var players = get_tree().get_nodes_in_group("players")
@@ -378,11 +450,13 @@ func _on_ScentTimer_timeout():
 
 func _on_BombPickupArea_area_entered(area):
 	if area.name == 'PotionPickupArea' and nearby_potions.find(area.get_parent()) == -1 and !area.get_parent().potion_daddy:
+		print("NEARBY_POTION ENTERED")
 		var potion = area.get_parent()
 		nearby_potions.append(potion)
 
 
 func _on_BombPickupArea_area_exited(area):
 	if area.name == 'PotionPickupArea' and nearby_potions.find(area.get_parent()) != -1:
+		print("NEARBY_POTION EXITED")
 		var potion = area.get_parent()
 		nearby_potions.erase(potion)

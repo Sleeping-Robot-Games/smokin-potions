@@ -97,9 +97,8 @@ func get_input():
 		if !holding_potion and nearby_potions.size() > 0:
 			holding_potion = nearby_potions.pop_back()
 			holding_potion.get_held(self)
-			for c in get_children():
-				if c is RayCast2D:
-					c.add_exception(holding_potion)
+			for p_ray in $PotionRays.get_children():
+				p_ray.add_exception(holding_potion)
 			g.load_hold_assets(self, number)
 		elif holding_potion:
 			holding_potion.get_thrown()
