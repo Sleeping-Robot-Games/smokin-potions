@@ -180,116 +180,127 @@ func _on_ThinkTimer_timeout():
 
 
 func scheme():
-	if action_queue.size() == 0:
-		var fresh_bombs = [] # safer to interact
-		var scary_bombs = [] # about to blow
-		for d_ray in $DangerRays.get_children():
-			d_ray.force_raycast_update()
-			if d_ray.is_colliding():
-				var collider = d_ray.get_collider()
-				# TODO factor in distance & speed
-				if collider.get_node('ExplodeTimer') and collider.get_node('ExplodeTimer').wait_time > 1:
-					fresh_bombs.append(collider)
-				else:
-					scary_bombs.append(collider)
-		var cap = 7 if fresh_bombs.size() > 0 or scary_bombs.size() > 0 else 4
-		cap = 3 # TESTING
-		rng.randomize()
-		var decision = rng.randi_range(1, cap)
-		# MOVE TO A RANDOM SPOT
-		if decision == 1:
-			var valid_coords = []
-			var valid_dir = []
-			var wall_collisions = []
-			for w_ray in $WallRays.get_children():
-				w_ray.force_raycast_update()
-				if w_ray.is_colliding():
-					wall_collisions.append(w_ray.name)
-			for m_ray in $MoveRays.get_children():
-				m_ray.force_raycast_update()
-				if not m_ray.is_colliding() and not wall_collisions.has(m_ray.name):
-					valid_coords.append(m_ray.to_global(m_ray.cast_to))
-					valid_dir.append(m_ray.name)
-			if valid_dir.size() > 0:
-				rng.randomize()
-				var m = rng.randi_range(0, valid_dir.size() - 1)
-				action_queue.append({
-					"type": "MOVE",
-					"dir": valid_dir[m],
-					"coord": valid_coords[m],
-					"timeout_ms": 2000,
-					"start_time" : null,
-				})
-		elif decision == 2:
-			var valid_coords = []
-			var valid_dir = []
-			for s_ray in $SidestepRays.get_children():
-				s_ray.force_raycast_update()
-				if not s_ray.is_colliding():
-					valid_coords.append(s_ray.to_global(s_ray.cast_to))
-					valid_dir.append(s_ray.name)
-			if valid_dir.size() > 0:
-				place_potion()
-				rng.randomize()
-				var m = rng.randi_range(0, valid_dir.size() - 1)
-				action_queue.append({
-					"type": "MOVE",
-					"dir": valid_dir[m],
-					"coord": valid_coords[m],
-					"timeout_ms": 1000,
-					"start_time" : null,
-				})
-				action_queue.append({
-					"type": "MOVE",
-					"dir": invert_dir(valid_dir[m]),
-					"coord": Vector2(valid_coords[m].x * -1, valid_coords[m].y * -1),
-					"timeout_ms": 1000,
-					"start_time" : null,
-				})
-		elif decision == 3:
-			action_queue.append({
-				"type": "FUNCTION",
-				"fn": funcref(self, "place_potion"),
-				"delay": 0,
-				"timeout_ms": 1000,
-				"start_time" : null,
-				"name": "place_potion()",
-			})
-			action_queue.append({
-				"type": "FUNCTION",
-				"fn": funcref(self, "pickup_potion"),
-				"delay": 500,
-				"timeout_ms": 1000,
-				"start_time" : null,
-				"name": "pickup_potion()",
-			})
-			var targets = []
-			for p in get_tree().get_nodes_in_group("players"):
-				if not p.ghost:
-					targets.append(p)
+	# only add more actions to the queue after we run out
+	if action_queue.size() > 0:
+		return
+	var fresh_bombs = [] # safer to interact
+	var scary_bombs = [] # about to blow
+	for d_ray in $DangerRays.get_children():
+		d_ray.force_raycast_update()
+		if d_ray.is_colliding():
+			var collider = d_ray.get_collider()
+			# TODO factor in distance & speed
+			if collider.get_node('ExplodeTimer') and collider.get_node('ExplodeTimer').wait_time > 1:
+				fresh_bombs.append(collider)
+			else:
+				scary_bombs.append(collider)
+	var cap = 7 if fresh_bombs.size() > 0 or scary_bombs.size() > 0 else 4
+	cap = 4 # TESTING
+	rng.randomize()
+	var decision = rng.randi_range(1, cap)
+	# MOVE TO A RANDOM SPOT
+	if decision == 1:
+		queue_action_random_move()
+	# DROP AND KICK POTION (RANDOM DIRECTION)
+	elif decision == 2:
+		var valid_coords = []
+		var valid_dir = []
+		for s_ray in $SidestepRays.get_children():
+			s_ray.force_raycast_update()
+			if not s_ray.is_colliding():
+				valid_coords.append(s_ray.to_global(s_ray.cast_to))
+				valid_dir.append(s_ray.name)
+		if valid_dir.size() > 0:
+			place_potion()
 			rng.randomize()
-			if targets.size() > 0:
-				var t = rng.randi_range(0, targets.size() - 1)
-				var target = null
-				if t >= 0:
-					target = targets[t]
-				if target:
-					var dir = dir_to_target(target)
-					action_queue.append({
-						"type": "MOVE",
-						"dir": dir,
-						"coord": target.global_position,
-						"timeout_ms": 1000,
-						"start_time" : null,
-					})
+			var m = rng.randi_range(0, valid_dir.size() - 1)
 			action_queue.append({
-				"type": "FUNCTION",
-				"fn": funcref(self, "throw_potion"),
-				"delay": 500,
+				"type": "MOVE",
+				"dir": valid_dir[m],
+				"coord": valid_coords[m],
 				"timeout_ms": 1000,
 				"start_time" : null,
-				"name": "throw_potion()",
 			})
+			action_queue.append({
+				"type": "MOVE",
+				"dir": invert_dir(valid_dir[m]),
+				"coord": Vector2(valid_coords[m].x * -1, valid_coords[m].y * -1),
+				"timeout_ms": 1000,
+				"start_time" : null,
+			})
+	# DROP AND THROW POTION (VERY ROUGHLY TOWARDS RANDOM PLAYER)
+	elif decision == 3:
+		action_queue.append({
+			"type": "FUNCTION",
+			"fn": funcref(self, "place_potion"),
+			"delay": 0,
+			"timeout_ms": 1000,
+			"start_time" : null,
+			"name": "place_potion()",
+		})
+		action_queue.append({
+			"type": "FUNCTION",
+			"fn": funcref(self, "pickup_potion"),
+			"delay": 500,
+			"timeout_ms": 1000,
+			"start_time" : null,
+			"name": "pickup_potion()",
+		})
+		var targets = []
+		for p in get_tree().get_nodes_in_group("players"):
+			if not p.ghost:
+				targets.append(p)
+		rng.randomize()
+		if targets.size() > 0:
+			var t = rng.randi_range(0, targets.size() - 1)
+			var target = null
+			if t >= 0:
+				target = targets[t]
+			if target:
+				var dir = dir_to_target(target)
+				action_queue.append({
+					"type": "MOVE",
+					"dir": dir,
+					"coord": target.global_position,
+					"timeout_ms": 1000,
+					"start_time" : null,
+				})
+		action_queue.append({
+			"type": "FUNCTION",
+			"fn": funcref(self, "throw_potion"),
+			"delay": 500,
+			"timeout_ms": 1000,
+			"start_time" : null,
+			"name": "throw_potion()",
+		})
+	# DROP A BOMB AND WALK AWAY
+	elif decision == 4:
+		place_potion()
+		queue_action_random_move()
+
+func queue_action_random_move():
+	var valid_coords = []
+	var valid_dir = []
+	var wall_collisions = []
+	for w_ray in $WallRays.get_children():
+		w_ray.force_raycast_update()
+		if w_ray.is_colliding():
+			wall_collisions.append(w_ray.name)
+	for m_ray in $MoveRays.get_children():
+		m_ray.force_raycast_update()
+		if not m_ray.is_colliding() and not wall_collisions.has(m_ray.name):
+			valid_coords.append(m_ray.to_global(m_ray.cast_to))
+			valid_dir.append(m_ray.name)
+	if valid_dir.size() > 0:
+		rng.randomize()
+		var m = rng.randi_range(0, valid_dir.size() - 1)
+		action_queue.append({
+			"type": "MOVE",
+			"dir": valid_dir[m],
+			"coord": valid_coords[m],
+			"timeout_ms": 2000,
+			"start_time" : null,
+		})
 
 
 func dir_to_target(target):
