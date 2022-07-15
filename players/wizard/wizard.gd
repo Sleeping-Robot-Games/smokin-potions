@@ -212,6 +212,13 @@ func take_dmg(dmg):
 	health -= dmg
 	g.emit_signal('health_changed', number, health)
 
+func get_stunned():
+	disabled = true
+	$StunnedTimer.start()
+	
+func _on_StunnedTimer_timeout():
+	disabled = false
+	
 func play_sfx(name):
 	pass
 #	var sfx_player = AudioStreamPlayer2D.new()
@@ -287,3 +294,6 @@ func _on_BombPickupArea_area_exited(area):
 	if area.name == 'PotionPickupArea' and nearby_potions.find(area.get_parent()) != -1:
 		var potion = area.get_parent()
 		nearby_potions.erase(potion)
+
+
+

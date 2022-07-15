@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 export (int) var run_speed: int = 150
 export (bool) var potion_cooldown_toogle: bool = false
+export (bool) var disabled: bool = false
 
 onready var anim_player: AnimationPlayer = $AnimationPlayer
 onready var game_scene: Node = null
@@ -71,7 +72,7 @@ func invert_dir(d):
 
 
 func _physics_process(delta):
-	if "Kick" in anim_player.current_animation:
+	if disabled or "Kick" in anim_player.current_animation:
 		return
 	
 	# drop current action if bot has spent more than 2 secs on it or if within 5 pixels of destination
@@ -364,6 +365,12 @@ func nearest_target(targets: Array):
 func ponder_orb():
 	dir = Vector2.ZERO
 	
+func get_stunned():
+	disabled = true
+	$StunnedTimer.start()
+	
+func _on_StunnedTimer_timeout():
+	disabled = false
 
 func _on_ScentTimer_timeout():
 	pass # Player only

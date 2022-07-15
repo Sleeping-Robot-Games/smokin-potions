@@ -71,7 +71,8 @@ func cast_beam() -> void:
 			collision_particles.process_material.direction = Vector3(
 				get_collision_normal().x, get_collision_normal().y, 0
 			)
-			print("laser the wizard")
+			collider.take_dmg(1)
+				
 		elif nearby_breakables.has(collider):
 			tween.interpolate_callback(self, 1, "break", collider)
 			tween.start()
@@ -104,12 +105,12 @@ func disappear() -> void:
 
 
 func _on_Area2D_body_entered(body):
-	if body.name == 'Wizard':
+	if 'Wizard' in body.name or 'Bot' in body.name:
 		nearby_players.append(body)
 
 
 func _on_Area2D_body_exited(body):
-	if body.name == 'Wizard':
+	if 'Wizard' in body.name or 'Bot' in body.name:
 		nearby_players.erase(body)
 
 

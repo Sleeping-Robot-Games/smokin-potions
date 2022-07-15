@@ -26,7 +26,6 @@ func _ready():
 func _on_body_exited(body):
 	# when player leaves potion area, re-enable collision
 	if body == parent_player and holder == null:
-		print('ray collides')
 		remove_collision_exception_with(parent_player)
 		for p_ray in parent_player.get_node("PotionRays").get_children():
 			p_ray.remove_exception(self)
@@ -121,6 +120,10 @@ func _on_body_entered(body):
 		body.kick(kick_impulse)
 		kick_impulse = Vector2.ZERO
 		sleeping = true
+	if ("Wizard" in body.name or "Bot" in body.name) and is_moving and kick_impulse != Vector2.ZERO:
+		body.get_stunned()
+		kick_impulse = Vector2.ZERO
+		sleeping = true
 
 
 func _physics_process(delta):
@@ -150,3 +153,4 @@ func get_quadrant(potion = self):
 	var quadrant = "Upper" if potion.global_position.y <= get_viewport_rect().size.y / 2 else "Lower"
 	quadrant += "Left" if potion.global_position.x <= get_viewport_rect().size.x / 2 else "Right"
 	return quadrant
+
