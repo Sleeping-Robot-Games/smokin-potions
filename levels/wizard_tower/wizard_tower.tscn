@@ -1,8 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://levels/game.tscn" type="PackedScene" id=1]
 [ext_resource path="res://levels/wizard_tower/tileset_001.png" type="Texture" id=2]
 [ext_resource path="res://levels/wizard_tower/tileset_002.png" type="Texture" id=3]
+[ext_resource path="res://levels/breakable.tscn" type="PackedScene" id=4]
+[ext_resource path="res://levels/durable.tscn" type="PackedScene" id=5]
+[ext_resource path="res://levels/wizard_tower/durable/003.png" type="Texture" id=6]
+[ext_resource path="res://levels/wizard_tower/durable/004.png" type="Texture" id=7]
+[ext_resource path="res://levels/wizard_tower/durable/001.png" type="Texture" id=8]
+[ext_resource path="res://levels/wizard_tower/durable/002.png" type="Texture" id=9]
 
 [sub_resource type="TileSet" id=1]
 0/name = "tileset_001.png 0"
@@ -481,6 +487,46 @@ tile_set = SubResource( 2 )
 cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( 196611, 0, 0, 196612, 1, 0, 196613, 1, 0, 196614, 1, 0, 196615, 1, 0, 196616, 1, 0, 196617, 1, 0, 196618, 1, 0, 196619, 1, 0, 196620, 1, 0, 196621, 1, 0, 196622, 1, 0, 196623, 1, 0, 196624, 2, 0, 262147, 3, 0, 262148, 4, 0, 262149, 4, 0, 262150, 4, 0, 262151, 4, 0, 262152, 4, 0, 262153, 4, 0, 262154, 4, 0, 262155, 4, 0, 262156, 4, 0, 262157, 4, 0, 262158, 4, 0, 262159, 4, 0, 262160, 5, 0, 327683, 3, 0, 327684, 4, 0, 327685, 4, 0, 327686, 4, 0, 327687, 4, 0, 327688, 4, 0, 327689, 4, 0, 327690, 4, 0, 327691, 4, 0, 327692, 4, 0, 327693, 4, 0, 327694, 4, 0, 327695, 4, 0, 327696, 5, 0, 393219, 3, 0, 393220, 4, 0, 393221, 4, 0, 393222, 4, 0, 393223, 4, 0, 393224, 4, 0, 393225, 4, 0, 393226, 4, 0, 393227, 4, 0, 393228, 4, 0, 393229, 4, 0, 393230, 4, 0, 393231, 4, 0, 393232, 5, 0, 458755, 3, 0, 458756, 4, 0, 458757, 4, 0, 458758, 4, 0, 458759, 4, 0, 458760, 4, 0, 458761, 4, 0, 458762, 4, 0, 458763, 4, 0, 458764, 4, 0, 458765, 4, 0, 458766, 4, 0, 458767, 4, 0, 458768, 5, 0, 524291, 3, 0, 524292, 4, 0, 524293, 4, 0, 524294, 4, 0, 524295, 4, 0, 524296, 4, 0, 524297, 4, 0, 524298, 4, 0, 524299, 4, 0, 524300, 4, 0, 524301, 4, 0, 524302, 4, 0, 524303, 4, 0, 524304, 5, 0, 589827, 3, 0, 589828, 4, 0, 589829, 4, 0, 589830, 4, 0, 589831, 4, 0, 589832, 4, 0, 589833, 4, 0, 589834, 4, 0, 589835, 4, 0, 589836, 4, 0, 589837, 4, 0, 589838, 4, 0, 589839, 4, 0, 589840, 5, 0, 655363, 3, 0, 655364, 4, 0, 655365, 4, 0, 655366, 4, 0, 655367, 4, 0, 655368, 4, 0, 655369, 4, 0, 655370, 4, 0, 655371, 4, 0, 655372, 4, 0, 655373, 4, 0, 655374, 4, 0, 655375, 4, 0, 655376, 5, 0, 720899, 6, 0, 720900, 7, 0, 720901, 7, 0, 720902, 7, 0, 720903, 7, 0, 720904, 7, 0, 720905, 7, 0, 720906, 7, 0, 720907, 7, 0, 720908, 7, 0, 720909, 7, 0, 720910, 7, 0, 720911, 7, 0, 720912, 8, 0 )
+
+[node name="Durable" parent="YSort" index="0" instance=ExtResource( 5 )]
+position = Vector2( 110, 353 )
+texture = ExtResource( 6 )
+
+[node name="Durable2" parent="YSort" index="1" instance=ExtResource( 5 )]
+position = Vector2( 535, 356 )
+texture = ExtResource( 9 )
+
+[node name="Durable3" parent="YSort" index="2" instance=ExtResource( 5 )]
+position = Vector2( 532, 81 )
+texture = ExtResource( 8 )
+
+[node name="Breakable" parent="YSort" index="3" instance=ExtResource( 4 )]
+position = Vector2( 299, 359 )
+
+[node name="Breakable6" parent="YSort" index="4" instance=ExtResource( 4 )]
+position = Vector2( 300, 266 )
+
+[node name="Breakable7" parent="YSort" index="5" instance=ExtResource( 4 )]
+position = Vector2( 301, 296 )
+
+[node name="Breakable8" parent="YSort" index="6" instance=ExtResource( 4 )]
+position = Vector2( 299, 329 )
+
+[node name="Breakable2" parent="YSort" index="7" instance=ExtResource( 4 )]
+position = Vector2( 345, 148 )
+
+[node name="Breakable3" parent="YSort" index="8" instance=ExtResource( 4 )]
+position = Vector2( 345, 183 )
+
+[node name="Breakable4" parent="YSort" index="9" instance=ExtResource( 4 )]
+position = Vector2( 347, 214 )
+
+[node name="Breakable5" parent="YSort" index="10" instance=ExtResource( 4 )]
+position = Vector2( 344, 110 )
+
+[node name="Durable4" parent="YSort" index="11" instance=ExtResource( 5 )]
+position = Vector2( 106, 83 )
+texture = ExtResource( 7 )
 
 [node name="Right" parent="Boundaries" index="1"]
 visible = false

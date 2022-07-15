@@ -13,8 +13,9 @@ func break():
 	$RespawnTimer.start()
 	
 func spawn():
+	var avail_sprites = g.files_in_dir('res://levels/'+g.level_selected+'/breakable/unbroken/')
 	rng.randomize()
-	var sprite_num = rng.randi_range(1, 6)
+	var sprite_num = rng.randi_range(1, avail_sprites.size())
 	sprite = str(sprite_num).pad_zeros(3)
 	$Sprite.set_texture(load("res://levels/"+g.level_selected+"/breakable/unbroken/" + sprite + ".png"))
 
