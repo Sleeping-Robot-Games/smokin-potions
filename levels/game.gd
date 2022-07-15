@@ -18,8 +18,8 @@ func _ready():
 	if g.players_in_current_game.size() == 0:
 		add_player_to_game({'number': '1', 'bot': false})
 		add_player_to_game({'number': '2', 'bot': true})
-		add_player_to_game({'number': '3', 'bot': true})
-		add_player_to_game({'number': '4', 'bot': true})
+		#add_player_to_game({'number': '3', 'bot': true})
+		#add_player_to_game({'number': '4', 'bot': true})
 	# Reset current game array?
 	g.players_in_current_game = []
 	

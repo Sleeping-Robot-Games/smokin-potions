@@ -102,10 +102,15 @@ func _physics_process(delta):
 		y_facing = "Front"	
 	
 	new_facing = y_facing + x_facing
-	if x_changed:
+	new_cardinal_facing = cardinal_facing
+	if x_changed and new_cardinal_facing != x_facing:
 		new_cardinal_facing = x_facing
-	elif y_changed:
+	elif y_changed and new_cardinal_facing != y_facing:
 		new_cardinal_facing = y_facing
+	
+	if new_cardinal_facing != cardinal_facing:
+		cardinal_facing = new_cardinal_facing
+	
 	
 	# KICKING
 	for p_ray in $PotionRays.get_children():
@@ -263,17 +268,20 @@ func scheme():
 				if not p.ghost:
 					targets.append(p)
 			rng.randomize()
-			var t = rng.randi_range(0, targets.size() - 1)
-			var target = targets[t] if t >= 0 else null
-			if target:
-				var dir = dir_to_target(target)
-				action_queue.append({
-					"type": "MOVE",
-					"dir": dir,
-					"coord": target.global_position,
-					"timeout_ms": 500,
-					"start_time" : null,
-				})
+			if targets.size() > 0:
+				var t = rng.randi_range(0, targets.size() - 1)
+				var target = null
+				if t >= 0:
+					target = targets[t]
+				if target:
+					var dir = dir_to_target(target)
+					action_queue.append({
+						"type": "MOVE",
+						"dir": dir,
+						"coord": target.global_position,
+						"timeout_ms": 1000,
+						"start_time" : null,
+					})
 			action_queue.append({
 				"type": "FUNCTION",
 				"fn": funcref(self, "throw_potion"),
@@ -303,7 +311,6 @@ func dir_to_target(target):
 	elif dir.y >= precision and y != "":
 		y = "Lower"
 	
-	#print("dir: " + str(dir) + ", " + x + y)
 	return y + x
 
 
