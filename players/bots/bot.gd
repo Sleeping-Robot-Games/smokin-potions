@@ -44,7 +44,7 @@ func remove_action():
 
 
 func _physics_process(delta):
-	if disabled or super_disabled or "Kick" in anim_player.current_animation:
+	if disabled or super_disabled or dead_disabled or "Kick" in anim_player.current_animation:
 		return
 	
 	# if current action hasn't been started, do so now
@@ -175,6 +175,9 @@ func _physics_process(delta):
 
 
 func _on_ThinkTimer_timeout():
+	if disabled or super_disabled or dead_disabled:
+		return
+		
 	scheme()
 
 

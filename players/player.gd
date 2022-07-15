@@ -4,6 +4,7 @@ extends KinematicBody2D
 export (bool) var potion_cooldown_toogle: bool = false
 export (bool) var disabled: bool = false
 export (bool) var super_disabled: bool = false
+export (bool) var dead_disabled: bool = false
 
 onready var anim_player: AnimationPlayer = $AnimationPlayer
 onready var game_scene: Node = get_node('/root/Game')
@@ -67,15 +68,13 @@ func _on_PotionCooldown_timeout():
 
 
 func take_dmg(dmg, potion):
-	if ghost or dead:
+	if ghost or dead or super_disabled:
 		return
 	
-	if holding_potion:
-		var wr = weakref(holding_potion)
-		if !wr.get_ref():
-			holding_potion.drop_potion()
-			holding_potion = null
-			g.load_normal_assets(self, number)
+	if holding_potion and weakref(holding_potion).get_ref():
+		holding_potion.drop_potion()
+		holding_potion = null
+		g.load_normal_assets(self, number)
 		
 	health -= dmg
 	g.emit_signal('health_changed', health, true, number)
@@ -91,7 +90,7 @@ func take_dmg(dmg, potion):
 		g.emit_signal("player_death", self)
 		anim_player.play('Death'+y_facing+x_facing)
 		dead = true
-		disabled = true
+		dead_disabled = true
 		$DeathTimer.start()
 		if potion.last_wiz and potion.last_wiz.ghost and potion.last_wiz != self:
 			print('revived')
@@ -100,6 +99,7 @@ func take_dmg(dmg, potion):
 			
 func revive(hp = 1):
 	health = hp
+	g.emit_signal("player_revive", self)
 	g.emit_signal('health_changed', health, false, number)
 	ghost = false
 	dead = false
@@ -127,8 +127,8 @@ func _on_StunnedTimer_timeout():
 func _on_DeathTimer_timeout():
 	anim_player.play('Idle'+y_facing+x_facing)
 	ghost = true
+	dead_disabled = false
 	modulate = Color(1, 1, 1, .25)
-	disabled = false
 
 
 func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):

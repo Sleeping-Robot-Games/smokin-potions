@@ -10,7 +10,7 @@ script = ExtResource( 1 )
 self_modulate = Color( 1, 0.376471, 0, 1 )
 
 [node name="Portal" parent="." index="3"]
-frame = 6
+frame = 4
 
 [node name="PotionPickupArea" parent="." index="5"]
 visible = false

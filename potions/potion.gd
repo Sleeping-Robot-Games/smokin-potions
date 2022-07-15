@@ -13,6 +13,7 @@ var potion_daddy
 func _ready():
 	connect('body_entered', self, '_on_body_entered')
 	
+	
 	if use_portal:
 		$Portal.visible = true
 		$AnimationPlayer.play('fade')

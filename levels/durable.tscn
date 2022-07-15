@@ -4,7 +4,7 @@
 radius = 8.0
 height = 16.0
 
-[node name="Durable" type="Sprite"]
+[node name="Durable" type="Sprite" groups=["durables"]]
 scale = Vector2( 2, 2 )
 
 [node name="RigidBody2D" type="StaticBody2D" parent="."]

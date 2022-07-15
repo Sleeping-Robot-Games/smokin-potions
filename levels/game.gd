@@ -54,23 +54,27 @@ func next_round():
 		player.revive(2)
 		player.super_disabled = false
 		handle_elements_changed([], player.number)
-
-
+	for potion in get_tree().get_nodes_in_group('potions'):
+		potion.queue_free()
+		
 
 func handle_player_death(player):
 	dead_players.append(player)
 	if dead_players.size() == current_players.size() - 1:
-		for p in dead_players:
-			p.super_disabled = true
 		var winner
 		for p in current_players:
+			p.super_disabled = true
 			if dead_players.find(p) == -1:
 				winner = p
 				last_winner = p
 		
 		win_state[winner.number] += 1
-		get_node("HUD/P"+winner.number+"UI/AnimationPlayer").play('star'+str(win_state[winner.number]))
+		var winner_ui = get_node("HUD/P"+winner.number+"UI")
+		winner_ui.play_star_animation(winner.number, str(win_state[winner.number]))
+		
 		$NextRound.start()
+		for potion in get_tree().get_nodes_in_group('potions'):
+			potion.queue_free()
 
 func handle_player_revive(player):
 	dead_players.erase(player)
