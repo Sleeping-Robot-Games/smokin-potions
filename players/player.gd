@@ -70,9 +70,11 @@ func take_dmg(dmg, potion):
 		return
 	
 	if holding_potion:
-		holding_potion.drop_potion()
-		holding_potion = null
-		g.load_normal_assets(self, number)
+		var wr = weakref(holding_potion)
+		if !wr.get_ref():
+			holding_potion.drop_potion()
+			holding_potion = null
+			g.load_normal_assets(self, number)
 		
 	health -= dmg
 	g.emit_signal('health_changed', health, true)

@@ -26,7 +26,6 @@ func _ready():
 		add_player_to_game(player)
 
 func add_player_to_game(player):
-	print(player)
 	# Adds player to game
 	var new_player = wizard.instance() if not player.bot else bot.instance()
 	new_player.number = player.number
