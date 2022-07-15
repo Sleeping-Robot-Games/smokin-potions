@@ -71,7 +71,7 @@ func cast_beam() -> void:
 			collision_particles.process_material.direction = Vector3(
 				get_collision_normal().x, get_collision_normal().y, 0
 			)
-			collider.take_dmg(1)
+			collider.take_dmg(1, self)
 				
 		elif nearby_breakables.has(collider):
 			tween.interpolate_callback(self, 1, "break", collider)

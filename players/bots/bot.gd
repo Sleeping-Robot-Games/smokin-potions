@@ -282,13 +282,9 @@ func throw_potion():
 		print("nothing to throw :(")
 
 
-func place_potion():
-	print("PLACING POTION")
+#func place_potion():
+#	print("PLACING POTION")
 	# nearby_potions.append(p)
-
-
-
-
 
 func _on_BombPickupArea_area_entered(area):
 	if area.name == 'PotionPickupArea' and nearby_potions.find(area.get_parent()) == -1 and !area.get_parent().potion_daddy:

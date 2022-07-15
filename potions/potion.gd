@@ -2,6 +2,7 @@ extends RigidBody2D
 
 var use_portal = false
 var original_potion
+var last_wiz: KinematicBody2D
 var kick_impulse = Vector2.ZERO
 var last_position = Vector2.ZERO
 var is_moving = false
@@ -89,12 +90,14 @@ func trigger_effect():
 	pass # Used in children
 
 
-func kick(impulse):
+func kick(impulse, kicker):
 	kick_impulse = impulse 
 	apply_central_impulse(impulse)
+	last_wiz = kicker
 
 
 func get_held(player):
+	last_wiz = player
 	holder = player
 	sleeping = true
 	add_collision_exception_with(holder)
@@ -117,7 +120,7 @@ func get_thrown():
 
 func _on_body_entered(body):
 	if "Potion" in body.name and is_moving and kick_impulse != Vector2.ZERO:
-		body.kick(kick_impulse)
+		body.kick(kick_impulse, body.last_wiz)
 		kick_impulse = Vector2.ZERO
 		sleeping = true
 	if ("Wizard" in body.name or "Bot" in body.name) and is_moving and kick_impulse != Vector2.ZERO:

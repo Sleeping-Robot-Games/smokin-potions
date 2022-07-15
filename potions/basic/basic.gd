@@ -24,7 +24,7 @@ func _on_ExplodeTimer_timeout():
 
 func trigger_effect():
 	for player in nearby_players:
-		player.take_dmg(1)
+		player.take_dmg(1, self)
 	# destroy all breakables
 	for breakable in nearby_breakables:
 		breakable.break()

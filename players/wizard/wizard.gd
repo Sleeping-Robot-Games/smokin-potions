@@ -94,7 +94,7 @@ func get_input():
 	
 	sprite_animation()
 	
-	if Input.is_action_just_released('place') and not ghost:
+	if Input.is_action_just_released('place'):
 		place_potion()
 
 

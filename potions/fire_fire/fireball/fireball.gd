@@ -16,7 +16,7 @@ func cleanup():
 
 func _on_Fireball_body_entered(body):
 	if 'Wizard' in body.name or 'Bot' in body.name:
-		body.take_dmg(1)
+		body.take_dmg(1, self)
 
 func _on_Fireball_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 	if area and 'Breakable' in area.get_parent().name:

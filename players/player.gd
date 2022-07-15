@@ -40,7 +40,7 @@ func _ready():
 
 
 func place_potion():
-	if not potion_ready:
+	if not potion_ready or ghost:
 		return
 	var p = g.get_potion_scene(elements).instance()
 	p.global_position = global_position
@@ -61,14 +61,21 @@ func _on_PotionCooldown_timeout():
 	potion_ready = true
 
 
-func take_dmg(dmg):
+func take_dmg(dmg, potion):
 	if health > 0:
 		health -= dmg
 		g.emit_signal('health_changed', number, health)
 	if health <= 0:
-		print(name + " is ghost now")
 		ghost = true
 		modulate = Color(1, 1, 1, .25)
+		if potion.last_wiz and potion.last_wiz.ghost and potion.last_wiz != self:
+			potion.last_wiz.revive()
+			
+func revive():
+	health = 1
+	g.emit_signal('health_changed', number, health)
+	ghost = false
+	modulate = Color(1, 1, 1, 1)
 
 func get_stunned():
 	disabled = true
@@ -79,7 +86,7 @@ func _on_StunnedTimer_timeout():
 
 
 func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	if 'Rune' in area.get_parent().name:
+	if 'Rune' in area.get_parent().name and not ghost:
 		var rune = area.get_parent()
 		# if already have 2 runes, drop the 2nd to make room
 		if elements.size() == 2:
@@ -106,7 +113,7 @@ func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_s
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if "Kick" in anim_name:
 		if kicking_potion and weakref(kicking_potion).get_ref():
-			kicking_potion.kick(kicking_impulse)
+			kicking_potion.kick(kicking_impulse, self)
 		kicking_potion = null
 		kicking_impulse = Vector2.ZERO
 	if "Throw" in anim_name:
