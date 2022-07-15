@@ -191,11 +191,10 @@ func scheme():
 			var collider = d_ray.get_collider()
 			# TODO factor in distance & speed
 			if collider.get_node('ExplodeTimer') and collider.get_node('ExplodeTimer').wait_time > 1:
-				fresh_bombs.append(collider)
+				fresh_bombs.append({"collider": collider, "dir": d_ray.name})
 			else:
-				scary_bombs.append(collider)
+				scary_bombs.append({"collider": collider, "dir": d_ray.name})
 	var cap = 7 if fresh_bombs.size() > 0 or scary_bombs.size() > 0 else 4
-	cap = 4 # TESTING
 	rng.randomize()
 	var decision = rng.randi_range(1, cap)
 	# MOVE TO A RANDOM SPOT
@@ -277,8 +276,24 @@ func scheme():
 	elif decision == 4:
 		place_potion()
 		queue_action_random_move()
+	elif decision == 5:
+		if scary_bombs.size() > 0:
+			var scary_dir = []
+			for scary_bomb in scary_bombs:
+				scary_dir.append(scary_bomb["dir"])
+			queue_action_random_move(scary_dir)
+		elif fresh_bombs.size() > 0:
+			var fresh_dir = []
+			for fresh_bomb in fresh_bombs:
+				fresh_dir.append(fresh_bomb["dir"])
+			queue_action_random_move(fresh_dir)
+	elif decision == 6:
+		pass
+	elif decision == 7:
+		pass
 
-func queue_action_random_move():
+
+func queue_action_random_move(avoid_extra_dirs = []):
 	var valid_coords = []
 	var valid_dir = []
 	var wall_collisions = []
@@ -288,7 +303,7 @@ func queue_action_random_move():
 			wall_collisions.append(w_ray.name)
 	for m_ray in $MoveRays.get_children():
 		m_ray.force_raycast_update()
-		if not m_ray.is_colliding() and not wall_collisions.has(m_ray.name):
+		if not m_ray.is_colliding() and not wall_collisions.has(m_ray.name) and not avoid_extra_dirs.has(m_ray.name):
 			valid_coords.append(m_ray.to_global(m_ray.cast_to))
 			valid_dir.append(m_ray.name)
 	if valid_dir.size() > 0:
