@@ -2,23 +2,39 @@ extends Node
 
 onready var wizard = preload('res://players/wizard/wizard.tscn')
 onready var bot = preload("res://players/bots/bot.tscn")
+onready var ui = preload('res://levels/player_ui.tscn')
 
 onready var match_time = get_node("HUD/MatchTime")
 var seconds = 120
 
 func _ready():
 	g.connect("elements_changed", self, "handle_elements_changed")
+	
 	for player in g.players_in_current_game:
-		var new_player = wizard.instance() if not player.bot else bot.instance()
-		new_player.number = player.number
-		g.load_player(new_player, player.number)
-		var starting_pos = get_node("Starting" + str(player.number)).global_position
-		new_player.global_position = starting_pos
-		$YSort.add_child(new_player)
+		add_player_to_game(player)
 		
+	## USED FOR DEBUGGING
+	if g.players_in_current_game.size() == 0:
+		add_player_to_game({'number': '1', 'bot': false})
+		add_player_to_game({'number': '2', 'bot': true})
 	# Reset current game array?
 	g.players_in_current_game = []
+	
 
+func add_player_to_game(player):
+	# Adds player to game
+	var new_player = wizard.instance() if not player.bot else bot.instance()
+	new_player.number = player.number
+	g.load_player(new_player, player.number)
+	var starting_pos = get_node("Starting" + str(player.number)).global_position
+	new_player.global_position = starting_pos
+	$YSort.add_child(new_player)
+	
+	# Creates the player's UI
+	var p_ui = ui.instance()
+	p_ui.name = "P"+player.number+"UI"
+	$HUD.add_child(p_ui)
+	
 
 func handle_elements_changed(elements, player_number):
 	if elements.size() == 2:
