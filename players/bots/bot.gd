@@ -221,7 +221,7 @@ func scheme():
 			for m_ray in $MoveRays.get_children():
 				m_ray.force_raycast_update()
 				if not m_ray.is_colliding() and not wall_collisions.has(m_ray.name):
-					valid_coords.append(m_ray.cast_to)
+					valid_coords.append(m_ray.to_global(m_ray.cast_to))
 					valid_dir.append(m_ray.name)
 			if valid_dir.size() > 0:
 				rng.randomize()
@@ -234,7 +234,7 @@ func scheme():
 			for s_ray in $SidestepRays.get_children():
 				s_ray.force_raycast_update()
 				if not s_ray.is_colliding():
-					valid_coords.append(s_ray.cast_to)
+					valid_coords.append(s_ray.to_global(s_ray.cast_to))
 					valid_dir.append(s_ray.name)
 			if valid_dir.size() > 0:
 				place_potion()
