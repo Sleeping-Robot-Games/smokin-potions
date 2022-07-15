@@ -6,23 +6,26 @@ onready var ui = preload('res://levels/player_ui.tscn')
 
 onready var match_time = get_node("HUD/MatchTime")
 var seconds = 120
+var dead_players = []
 
 func _ready():
 	g.connect("elements_changed", self, "handle_elements_changed")
 	g.connect("health_changed", self, "handle_heath_changed")
+	g.connect("player_death", self, "handle_player_death")
+	g.connect("player_revive", self, "handle_player_revive")
 	
-	for player in g.players_in_current_game:
-		add_player_to_game(player)
-		
 	## USED FOR DEBUGGING ##
 	if g.players_in_current_game.size() == 0:
-		add_player_to_game({'number': '1', 'bot': false})
-		add_player_to_game({'number': '2', 'bot': true})
-		#add_player_to_game({'number': '3', 'bot': true})
-		#add_player_to_game({'number': '4', 'bot': true})
-	# Reset current game array?
-	g.players_in_current_game = []
-	
+		g.players_in_current_game = [
+			{'number': '1', 'bot': false},
+#			{'number': '2', 'bot': true},
+#			{'number': '3', 'bot': true},
+#			{'number': '4', 'bot': true},
+		]
+		
+	for player in g.players_in_current_game:
+		add_player_to_game(player)
+
 
 func add_player_to_game(player):
 	# Adds player to game
@@ -39,6 +42,16 @@ func add_player_to_game(player):
 	$HUD.add_child(p_ui)
 	
 
+func handle_player_death(player):
+	dead_players.append(player)
+	if dead_players.size() == g.players_in_current_game.size() - 1:
+		$HUD/GameOver.visible = true
+		for p in dead_players:
+			p.disabled = true
+
+func handle_player_revive(player):
+	dead_players.erase(player)
+
 func handle_elements_changed(elements, player_number):
 	if elements.size() == 2:
 		get_node("HUD/P"+player_number+"UI/Element1").set_texture(load("res://pickups/runes/" + elements[0] + ".png"))
@@ -49,6 +62,7 @@ func handle_elements_changed(elements, player_number):
 	else:
 		get_node("HUD/P"+player_number+"UI/Element1").texture = null
 		get_node("HUD/P"+player_number+"UI/Element2").texture = null
+
 
 func handle_heath_changed(player_number, health):
 	if health == 2:

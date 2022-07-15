@@ -2972,6 +2972,8 @@ tracks/4/keys = {
 }
 
 [node name="Wizard" type="KinematicBody2D"]
+scale = Vector2( 1.5, 1.5 )
+z_index = 1
 collision_mask = 19
 script = ExtResource( 3 )
 

@@ -47,7 +47,7 @@ func place_potion():
 	if not potion_ready or ghost:
 		return
 	var p = g.get_potion_scene(elements).instance()
-	p.global_position = global_position
+	p.global_position = Vector2(global_position.x, global_position.y + 10)
 	p.parent_player = self
 	get_parent().add_child(p)
 	p.but_make_it_symmetrical(elements)
@@ -68,9 +68,9 @@ func _on_PotionCooldown_timeout():
 func take_dmg(dmg, potion):
 	if ghost or dead:
 		return
-		
+
 	anim_player.play('Hurt'+y_facing+x_facing)
-	# modulate = Color(1, .25, .25, 1)
+	modulate = Color(1, .25, .25, 1)
 	
 	if holding_potion:
 		holding_potion.drop_potion()
@@ -82,13 +82,15 @@ func take_dmg(dmg, potion):
 		g.emit_signal('health_changed', number, health)
 		
 	if health <= 0:
+		g.emit_signal("player_death", self)
 		anim_player.play('Death'+y_facing+x_facing)
-		# modulate = Color(1, 1, 1, 1)
+		modulate = Color(1, 1, 1, 1)
 		dead = true
 		disabled = true
 		$DeathTimer.start()
 		if potion.last_wiz and potion.last_wiz.ghost and potion.last_wiz != self:
 			potion.last_wiz.revive()
+			g.emit_signal("player_revive", potion.last_wiz)
 			
 func revive():
 	health = 1
@@ -98,6 +100,9 @@ func revive():
 	modulate = Color(1, 1, 1, 1)
 
 func get_stunned():
+	if dead:
+		return
+
 	disabled = true
 	$StunnedTimer.start()
 	anim_player.play('Daze'+y_facing+x_facing)
@@ -133,8 +138,8 @@ func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_s
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-	#if 'Hurt' in anim_name and not ghost and not dead:
-		#modulate = Color(1, 1, 1, 1)
+	if 'Hurt' in anim_name:
+		modulate = Color(1, 1, 1, 1)
 	if "Kick" in anim_name:
 		if kicking_potion and weakref(kicking_potion).get_ref():
 			kicking_potion.kick(kicking_impulse, self)

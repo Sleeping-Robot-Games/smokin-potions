@@ -2,6 +2,8 @@ extends Node
 
 signal elements_changed(elements, number)
 signal health_changed(player_number, health)
+signal player_death(player)
+signal player_revive(player)
 
 onready var potion_basic = preload('res://potions/basic/basic.tscn')
 onready var potion_fire = preload("res://potions/fire/fire.tscn")

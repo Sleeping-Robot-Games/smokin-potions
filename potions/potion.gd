@@ -65,8 +65,8 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == 'fade':
 		$Portal.visible = false
 	if 'Throw' in anim_name:
-		if holder.cardinal_facing == 'front':
-			z_index = 1
+		if holder.cardinal_facing == 'Back':
+			z_index = 0
 		var true_global = global_position
 		g.reparent(self, get_parent().get_parent()) 
 		global_position = true_global
@@ -126,9 +126,9 @@ func get_thrown():
 	potion_daddy.global_position = true_pos
 	position = Vector2.ZERO
 	remove_collision_exception_with(holder)
+	if holder.cardinal_facing == 'Back':
+		z_index = 0
 	$AnimationPlayer.play("Throw"+holder.cardinal_facing)
-	if holder.cardinal_facing == 'Front':
-		z_index = 2
 	
 
 func _on_body_entered(body):
@@ -143,8 +143,12 @@ func _on_body_entered(body):
 
 
 func _physics_process(delta):
-	if holder:
-		global_position = Vector2(holder.global_position.x, holder.global_position.y - 20)
+	if holder and not 'Throw' in $AnimationPlayer.current_animation:
+		global_position = Vector2(holder.global_position.x, holder.global_position.y - 10)
+		if holder.y_facing == 'Back':
+			z_index = -1
+		else: 
+			z_index = 2
 	else:
 		var cur_position = global_position
 		is_moving = cur_position != last_position

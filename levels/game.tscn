@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
+[ext_resource path="res://assets/font-theme.tres" type="Theme" id=1]
 [ext_resource path="res://levels/game.gd" type="Script" id=5]
 [ext_resource path="res://assets/fonts/BOMBERMA.TTF" type="DynamicFontData" id=6]
 
@@ -76,6 +77,15 @@ margin_right = 392.0
 margin_bottom = 41.0
 theme = SubResource( 7 )
 bbcode_enabled = true
+
+[node name="GameOver" type="RichTextLabel" parent="HUD"]
+visible = false
+margin_left = 235.0
+margin_top = 167.0
+margin_right = 418.0
+margin_bottom = 202.0
+theme = ExtResource( 1 )
+text = "GAME OVER"
 
 [node name="Starting1" type="Position2D" parent="."]
 position = Vector2( 50, 63 )
