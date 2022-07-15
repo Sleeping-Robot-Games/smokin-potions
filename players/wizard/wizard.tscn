@@ -3231,7 +3231,7 @@ collision_mask = 16
 
 [node name="UpperLeft" type="RayCast2D" parent="PotionRays"]
 position = Vector2( 0, 6 )
-cast_to = Vector2( -10, -10 )
+cast_to = Vector2( -8, -8 )
 collision_mask = 16
 
 [node name="Up" type="RayCast2D" parent="PotionRays"]
@@ -3241,7 +3241,7 @@ collision_mask = 16
 
 [node name="UpperRight" type="RayCast2D" parent="PotionRays"]
 position = Vector2( 0, 6 )
-cast_to = Vector2( 10, -10 )
+cast_to = Vector2( 8, -8 )
 collision_mask = 16
 
 [node name="Right" type="RayCast2D" parent="PotionRays"]
@@ -3251,7 +3251,7 @@ collision_mask = 16
 
 [node name="LowerRight" type="RayCast2D" parent="PotionRays"]
 position = Vector2( 0, 6 )
-cast_to = Vector2( 10, 10 )
+cast_to = Vector2( 8, 8 )
 collision_mask = 16
 
 [node name="Down" type="RayCast2D" parent="PotionRays"]
@@ -3261,7 +3261,7 @@ collision_mask = 16
 
 [node name="LowerLeft" type="RayCast2D" parent="PotionRays"]
 position = Vector2( 0, 6 )
-cast_to = Vector2( -10, 10 )
+cast_to = Vector2( -8, 8 )
 collision_mask = 16
 
 [connection signal="area_shape_entered" from="PickupArea" to="." method="_on_PickupArea_area_shape_entered"]
