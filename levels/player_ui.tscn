@@ -13,14 +13,9 @@
 extents = Vector2( 46.5, 20 )
 
 [node name="P1UI" type="Control"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 93.0
-margin_bottom = 41.0
+margin_right = 92.0
+margin_bottom = 40.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 93.0

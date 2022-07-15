@@ -8,13 +8,13 @@ func _ready():
 	$Element1.texture = null
 	$Element2.texture = null
 	if player_number == '1':
-		rect_position = Vector2(0, 0)
+		rect_position = Vector2(1, 1)
 	elif player_number == '2':
-		rect_position = Vector2(547, 0)
+		rect_position = Vector2(544, 1)
 	elif player_number == '3':
-		rect_position = Vector2(0, 439)
+		rect_position = Vector2(1, 435)
 	else:
-		rect_position = Vector2(547, 439)
+		rect_position = Vector2(544, 435)
 	
 
 func make_ui_transparent():
