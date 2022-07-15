@@ -1,9 +1,11 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://menus/start/ArrowRight.png" type="Texture" id=1]
 [ext_resource path="res://menus/player_selection/selection.tscn" type="PackedScene" id=2]
 [ext_resource path="res://menus/map_selection/map_selection.tscn" type="PackedScene" id=3]
 [ext_resource path="res://menus/start/start.gd" type="Script" id=4]
+[ext_resource path="res://Splashscreen.png" type="Texture" id=5]
+[ext_resource path="res://potions/basic/basic.png" type="Texture" id=6]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://assets/fonts/alagard.ttf"
@@ -51,6 +53,38 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="Animation" id=12]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "jiggle"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
 [node name="Menu" type="Node"]
 
 [node name="Title" type="Node2D" parent="."]
@@ -59,15 +93,31 @@ script = ExtResource( 4 )
 [node name="ColorRect" type="ColorRect" parent="Title"]
 margin_right = 640.0
 margin_bottom = 480.0
-color = Color( 0, 0, 0, 1 )
+color = Color( 0.0313726, 0.027451, 0.027451, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="Title"]
+margin_left = 19.0
+margin_top = 23.0
+margin_right = 620.0
+margin_bottom = 458.0
+color = Color( 0.270588, 0.309804, 0.709804, 0.109804 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Title"]
-margin_left = 24.0
+margin_left = 29.0
 margin_top = 50.0
-margin_right = 631.0
+margin_right = 636.0
 margin_bottom = 145.0
 custom_fonts/normal_font = SubResource( 2 )
 text = "Smokin' Potions"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Button" type="Button" parent="Title"]
 margin_left = 62.0
@@ -82,13 +132,31 @@ flat = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Title/Button"]
 position = Vector2( -5, 29 )
 frames = SubResource( 5 )
-frame = 3
 playing = true
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 425, 232 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 6 )
+hframes = 4
+vframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+method_call_mode = 1
+anims/RESET = SubResource( 12 )
+anims/jiggle = SubResource( 13 )
 
 [node name="Select" parent="." instance=ExtResource( 2 )]
 visible = false
 
 [node name="MapSection" parent="." instance=ExtResource( 3 )]
 visible = false
+
+[node name="Splashscreen" type="Node2D" parent="."]
+visible = false
+
+[node name="Sprite" type="Sprite" parent="Splashscreen"]
+position = Vector2( 321, 241 )
+texture = ExtResource( 5 )
 
 [connection signal="button_up" from="Title/Button" to="Title" method="_on_Button_button_up"]
