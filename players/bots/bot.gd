@@ -349,10 +349,8 @@ func pickup_potion():
 
 
 func throw_potion():
-	if holding_potion:
-		var wr = weakref(holding_potion)
-		if !wr.get_ref():
-			holding_potion.get_thrown()
-			holding_potion = null
-			g.load_normal_assets(self, number)
-			anim_player.play("Throw"+y_facing+x_facing)
+	if holding_potion and weakref(holding_potion).get_ref():
+		holding_potion.get_thrown()
+		holding_potion = null
+		g.load_normal_assets(self, number)
+		anim_player.play("Throw"+y_facing+x_facing)
