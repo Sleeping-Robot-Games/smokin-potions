@@ -6,7 +6,6 @@ export (bool) var disabled: bool = false
 
 onready var anim_player: AnimationPlayer = $AnimationPlayer
 onready var game_scene: Node = null
-#onready var player_start_node: Position2D = get_node("/root/Game/PlayerStart")
 
 const KICK_FORCE = 400
 const DIAG_KICK_FORCE = 200
@@ -33,6 +32,7 @@ var kicking_potion = null
 var is_invulnerable = false
 var nearby_potions = []
 var holding_potion: RigidBody2D
+var ghost = false
 
 const rune_scene = preload('res://pickups/runes/rune.tscn')
 
@@ -146,7 +146,7 @@ func get_input():
 	
 	sprite_animation()
 	
-	if Input.is_action_just_released('place'):
+	if Input.is_action_just_released('place') and not ghost:
 		place_potion()
 
 
@@ -182,6 +182,7 @@ func sprite_animation():
 func _physics_process(delta):
 	move_and_slide(velocity)
 	if disabled or "Kick" in anim_player.current_animation:
+		velocity = Vector2.ZERO
 		return
 	get_input()
 
@@ -208,8 +209,14 @@ func _on_PotionCooldown_timeout():
 
 
 func take_dmg(dmg):
-	health -= dmg
-	g.emit_signal('health_changed', number, health)
+	print(health)
+	if health > 0:
+		health -= dmg
+		g.emit_signal('health_changed', number, health)
+	if health <= 0:
+		print(name + " is ghost now")
+		ghost = true
+		modulate = Color(1, 1, 1, .25)
 
 func get_stunned():
 	disabled = true

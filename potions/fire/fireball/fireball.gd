@@ -15,9 +15,8 @@ func cleanup():
 	queue_free()
 
 func _on_Fireball_body_entered(body):
-	if 'Wizard' in body.name:
-		print('kill the wizard')
-		print(body)
+	if 'Wizard' in body.name or 'Bot' in body.name:
+		body.take_dmg(1)
 
 func _on_Fireball_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 	if area and 'Breakable' in area.get_parent().name:

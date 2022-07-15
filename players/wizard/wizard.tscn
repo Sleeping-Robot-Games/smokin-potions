@@ -2200,7 +2200,6 @@ tracks/4/keys = {
 }
 
 [node name="Wizard" type="KinematicBody2D"]
-modulate = Color( 1, 1, 1, 0.25098 )
 collision_mask = 19
 script = ExtResource( 3 )
 run_speed = 120

@@ -31,6 +31,7 @@ const DIAG_KICK_FORCE = 100
 var elements = []
 var nearby_potions = []
 var holding_potion: RigidBody2D
+var ghost = false
 
 var rng = RandomNumberGenerator.new()
 var node_target = null
@@ -353,7 +354,11 @@ func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_s
 
 func take_dmg(dmg):
 	health -= dmg
-	g.emit_signal('health_changed', number, health)
+	if health == 0:
+		ghost = true
+		self_modulate = Color(1, 1, 1, .25)
+	if health >= 1:
+		g.emit_signal('health_changed', number, health)
 
 func _on_PickupArea_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
 	pass
