@@ -9,6 +9,7 @@ onready var game_scene: Node = null
 
 var type = "bot"
 var number = '2'
+var health = 2
 var speed: int = run_speed
 var velocity: Vector2 = Vector2()
 var x_facing: String = "Right"
@@ -27,6 +28,7 @@ var kicking_potion = null
 const KICK_FORCE = 200
 const DIAG_KICK_FORCE = 100
 var elements = []
+var nearby_potions = []
 
 var rng = RandomNumberGenerator.new()
 var node_target = null
@@ -276,6 +278,10 @@ func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_s
 		rune.cleanup()
 
 
+func take_dmg(dmg):
+	health -= dmg
+	g.emit_signal('health_changed', number, health)
+
 func _on_PickupArea_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
 	pass
 
@@ -361,3 +367,15 @@ func ponder_orb():
 
 func _on_ScentTimer_timeout():
 	pass # Player only
+
+
+func _on_BombPickupArea_area_entered(area):
+	if area.name == 'PotionPickupArea' and nearby_potions.find(area.get_parent()) == -1 and !area.get_parent().potion_daddy:
+		var potion = area.get_parent()
+		nearby_potions.append(potion)
+
+
+func _on_BombPickupArea_area_exited(area):
+	if area.name == 'PotionPickupArea' and nearby_potions.find(area.get_parent()) != -1:
+		var potion = area.get_parent()
+		nearby_potions.erase(potion)

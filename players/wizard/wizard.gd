@@ -13,6 +13,7 @@ const DIAG_KICK_FORCE = 200
 
 var type = "player"
 var number = "1"
+var health = 2
 var speed: int = run_speed
 var velocity: Vector2 = Vector2()
 var x_facing: String = "Right"
@@ -206,6 +207,10 @@ func place_potion():
 func _on_PotionCooldown_timeout():
 	potion_ready = true
 
+
+func take_dmg(dmg):
+	health -= dmg
+	g.emit_signal('health_changed', number, health)
 
 func play_sfx(name):
 	pass

@@ -19,11 +19,8 @@ script = ExtResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 93.0
-margin_bottom = 41.0
+margin_bottom = 42.0
 color = Color( 0, 0, 0, 0.25098 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="UIArea" type="Area2D" parent="."]
 visible = false
