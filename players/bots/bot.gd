@@ -5,9 +5,7 @@ var rng = RandomNumberGenerator.new()
 var action_queue = []
 onready var action_started = OS.get_ticks_msec()
 
-func _ready():
-	number = '2'
-	
+func _ready():	
 	for d_ray in $DangerRays.get_children():
 		d_ray.add_exception(self)
 	for m_ray in $MoveRays.get_children():

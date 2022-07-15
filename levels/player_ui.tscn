@@ -35,7 +35,7 @@ margin_bottom = 41.0
 rect_clip_content = true
 
 [node name="WizardSprites" parent="Portrait" instance=ExtResource( 4 )]
-position = Vector2( 24, 30 )
+position = Vector2( 24, 12 )
 scale = Vector2( 3, 3 )
 
 [node name="PUiEmptyHeart" type="Sprite" parent="."]

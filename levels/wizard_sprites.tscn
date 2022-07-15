@@ -68,33 +68,33 @@ script = ExtResource( 15 )
 material = SubResource( 26 )
 texture = ExtResource( 4 )
 hframes = 6
-vframes = 9
+vframes = 12
 frame = 3
 
 [node name="Robe" type="Sprite" parent="."]
 material = SubResource( 27 )
 texture = ExtResource( 9 )
 hframes = 6
-vframes = 9
+vframes = 12
 frame = 3
 
 [node name="Outline" type="Sprite" parent="."]
 material = SubResource( 28 )
 texture = ExtResource( 6 )
 hframes = 6
-vframes = 9
+vframes = 12
 frame = 3
 
 [node name="Hair" type="Sprite" parent="."]
 material = SubResource( 29 )
 texture = ExtResource( 7 )
 hframes = 6
-vframes = 9
+vframes = 12
 frame = 3
 
 [node name="Hat" type="Sprite" parent="."]
 material = SubResource( 30 )
 texture = ExtResource( 3 )
 hframes = 6
-vframes = 9
+vframes = 12
 frame = 3

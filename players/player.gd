@@ -63,23 +63,26 @@ func _on_PotionCooldown_timeout():
 
 
 func take_dmg(dmg, potion):
-	if ghost:
+	if ghost or dead:
 		return
 		
 	anim_player.play('Hurt'+y_facing+x_facing)
-	modulate = Color(1, .25, .25, 1)
+	# modulate = Color(1, .25, .25, 1)
 	
 	if holding_potion:
 		holding_potion.drop_potion()
 		holding_potion = null
 		g.load_normal_assets(self, number)
+		
 	if health > 0:
 		health -= dmg
 		g.emit_signal('health_changed', number, health)
+		
 	if health <= 0:
 		anim_player.play('Death'+y_facing+x_facing)
-		modulate = Color(1, 1, 1, 1)
+		# modulate = Color(1, 1, 1, 1)
 		dead = true
+		disabled = true
 		$DeathTimer.start()
 		if potion.last_wiz and potion.last_wiz.ghost and potion.last_wiz != self:
 			potion.last_wiz.revive()
@@ -127,6 +130,8 @@ func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_s
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):
+	#if 'Hurt' in anim_name and not ghost and not dead:
+		#modulate = Color(1, 1, 1, 1)
 	if "Kick" in anim_name:
 		if kicking_potion and weakref(kicking_potion).get_ref():
 			kicking_potion.kick(kicking_impulse, self)
@@ -134,8 +139,6 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		kicking_impulse = Vector2.ZERO
 	if "Throw" in anim_name or 'Hurt' in anim_name:
 		anim_player.play("Idle"+y_facing+x_facing)
-	if 'Hurt' in anim_name and not ghost and not dead:
-		modulate = Color(1, 1, 1, 1)
 
 
 func _on_BombPickupArea_area_entered(area):

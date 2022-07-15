@@ -3088,7 +3088,6 @@ wait_time = 2.0
 wait_time = 4.0
 
 [node name="PotionRays" type="Node2D" parent="."]
-visible = false
 
 [node name="Left" type="RayCast2D" parent="PotionRays"]
 position = Vector2( 0, 6 )
