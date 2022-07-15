@@ -126,8 +126,7 @@ func get_thrown():
 	potion_daddy.global_position = true_pos
 	position = Vector2.ZERO
 	remove_collision_exception_with(holder)
-	if holder.cardinal_facing == 'Back':
-		z_index = 0
+	z_index = 0
 	$AnimationPlayer.play("Throw"+holder.cardinal_facing)
 	
 

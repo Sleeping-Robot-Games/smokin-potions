@@ -31,9 +31,6 @@ margin_bottom = 323.0
 texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 4 )
 texture_hover = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="RockGardenButton"]
 margin_left = 77.0

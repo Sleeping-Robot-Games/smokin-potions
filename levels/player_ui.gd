@@ -5,6 +5,31 @@ var player_number
 var health
 
 func _ready():
+#	var star_anim: Animation = $AnimationPlayer.get_animation('star1') 
+#	star_anim.track_set_key_value(1, 0, Vector2(320, 240)) # set beginning
+#	star_anim.track_set_key_value(1, 1, Vector2(182, 111)) # set mid
+#	star_anim.track_set_key_value(1, 2, Vector2(182, 111)) # set mid
+#	$AnimationPlayer.play("star1")
+	
+#	var star_anim2: Animation = $AnimationPlayer.get_animation('star1') 
+#	star_anim2.track_set_key_value(1, 0, Vector2(-224, 240)) # set beginning
+#	star_anim2.track_set_key_value(1, 1, Vector2(-352, 111)) # set mid
+#	star_anim2.track_set_key_value(1, 2, Vector2(-352, 111)) # set mid
+#	$AnimationPlayer.play("star1")
+
+#	var star_anim3: Animation = $AnimationPlayer.get_animation('star1') 
+#	star_anim3.track_set_key_value(1, 0, Vector2(320, -180)) # set beginning
+#	star_anim3.track_set_key_value(1, 1, Vector2(191, -339)) # set mid
+#	star_anim3.track_set_key_value(1, 2, Vector2(191, -339)) # set mid
+#	$AnimationPlayer.play("star1")
+##
+#	var star_anim4: Animation = $AnimationPlayer.get_animation('star1') 
+#	star_anim4.track_set_key_value(1, 0, Vector2(-224, -180)) # set beginning
+#	star_anim4.track_set_key_value(1, 1, Vector2(-352, -352)) # set mid
+#	star_anim4.track_set_key_value(1, 2, Vector2(-352, -352)) # set mid
+#	$AnimationPlayer.play("star1")
+	
+	
 	g.connect("health_changed", self, "handle_heath_changed")
 	
 	player_number = name.substr(1,1)
@@ -15,9 +40,9 @@ func _ready():
 	elif player_number == '2':
 		rect_position = Vector2(544, 1)
 	elif player_number == '3':
-		rect_position = Vector2(1, 435)
+		rect_position = Vector2(1, 432)
 	else:
-		rect_position = Vector2(544, 435)
+		rect_position = Vector2(544, 432)
 
 
 func make_ui_transparent():
@@ -26,15 +51,16 @@ func make_ui_transparent():
 func make_ui_normal():
 	modulate = Color(1, 1, 1, 1)
 	
-func handle_heath_changed(_health, damage):
-	health = _health
-	if damage:
-		if health == 1:
-			$AnimationPlayer.play("heartshake2")
-		elif health == 0:
-			$AnimationPlayer.play("heartshake1")
-	else:
-		change_health_ui()
+func handle_heath_changed(_health, damage, number):
+	if player_number == number:
+		health = _health
+		if damage:
+			if health == 1:
+				$AnimationPlayer.play("heartshake2")
+			elif health == 0:
+				$AnimationPlayer.play("heartshake1")
+		else:
+			change_health_ui()
 	
 func change_health_ui():
 	if health == 2:

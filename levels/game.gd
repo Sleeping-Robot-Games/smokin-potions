@@ -3,10 +3,15 @@ extends Node
 onready var wizard = preload('res://players/wizard/wizard.tscn')
 onready var bot = preload("res://players/bots/bot.tscn")
 onready var ui = preload('res://levels/player_ui.tscn')
+onready var breakable = preload('res://levels/breakable.tscn')
 
 onready var match_time = get_node("HUD/MatchTime")
 var seconds = 120
+var current_players = []
 var dead_players = []
+var win_state = {}
+var last_winner
+var breakable_positions = []
 
 func _ready():
 	g.connect("elements_changed", self, "handle_elements_changed")
@@ -28,6 +33,8 @@ func _ready():
 func add_player_to_game(player):
 	# Adds player to game
 	var new_player = wizard.instance() if not player.bot else bot.instance()
+	current_players.append(new_player)
+	win_state[player.number] = 0
 	new_player.number = player.number
 	g.load_player(new_player, player.number)
 	var starting_pos = get_node("Starting" + str(player.number)).global_position
@@ -39,13 +46,31 @@ func add_player_to_game(player):
 	p_ui.name = "P"+player.number+"UI"
 	$HUD.add_child(p_ui)
 	
+	
+func next_round():
+	for player in current_players:
+		var starting_pos = get_node("Starting" + str(player.number)).global_position
+		player.global_position = starting_pos
+		player.revive(2)
+		player.super_disabled = false
+		handle_elements_changed([], player.number)
+
+
 
 func handle_player_death(player):
 	dead_players.append(player)
-	if dead_players.size() == g.players_in_current_game.size() - 1:
-		$HUD/GameOver.visible = true
+	if dead_players.size() == current_players.size() - 1:
 		for p in dead_players:
-			p.disabled = true
+			p.super_disabled = true
+		var winner
+		for p in current_players:
+			if dead_players.find(p) == -1:
+				winner = p
+				last_winner = p
+		
+		win_state[winner.number] += 1
+		get_node("HUD/P"+winner.number+"UI/AnimationPlayer").play('star'+str(win_state[winner.number]))
+		$NextRound.start()
 
 func handle_player_revive(player):
 	dead_players.erase(player)
@@ -77,3 +102,9 @@ func format_time():
 	return str(abs(ceil(seconds/60))).pad_zeros(2) + ":" + str("%01d" % abs(ceil(seconds % 60))).pad_zeros(2)
 
 
+func _on_NextRound_timeout():
+	if win_state[last_winner.number] == 3:
+		$HUD/GameOver.text = "Player "+last_winner.number+" won!"
+		$HUD/GameOver.visible = true
+	else:
+		next_round()

@@ -18,24 +18,28 @@ func spawn():
 	var sprite_num = rng.randi_range(1, avail_sprites.size())
 	sprite = str(sprite_num).pad_zeros(3)
 	$Sprite.set_texture(load("res://levels/"+g.level_selected+"/breakable/unbroken/" + sprite + ".png"))
+	visible = true
+	$CollisionShape2D.disabled = false
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "fade_out":
 		rng.randomize()
-#		var has_loot = rng.randi_range(0, 1)
-#		if has_loot:
-		#rng.randomize()
-		# Runes, Scrolls, ???
-		var loot_type = rng.randi_range(0, 0)
-		if loot_type == 0:
-			# Spawn a rune
-			var rune_instance = rune.instance()
-			rune_instance.global_position = global_position
-			get_parent().add_child(rune_instance)
-		queue_free()
+		var has_loot = rng.randi_range(0, 1)
+		if has_loot:
+			rng.randomize()
+			# Runes, Scrolls, ???
+			var loot_type = rng.randi_range(0, 0)
+			if loot_type == 0:
+				# Spawn a rune
+				var rune_instance = rune.instance()
+				rune_instance.global_position = global_position
+				get_parent().add_child(rune_instance)
+		visible = false
+		$CollisionShape2D.disabled = true
 
 
 func _on_RespawnTimer_timeout():
 	$AnimationPlayer.play("fade_in")
-	spawn()
+	if visible == false:
+		spawn()

@@ -86,6 +86,7 @@ anims/fade_out = SubResource( 40 )
 
 [node name="RespawnTimer" type="Timer" parent="."]
 wait_time = 10.0
+one_shot = true
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_RespawnTimer_timeout"]

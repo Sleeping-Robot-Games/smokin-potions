@@ -2,7 +2,7 @@ extends 'res://players/player.gd'
 
 
 func ready():
-	number = "1"
+	pass
 
 
 func get_input():
@@ -129,7 +129,7 @@ func sprite_animation():
 
 func _physics_process(delta):
 	move_and_slide(velocity)
-	if disabled or "Kick" in anim_player.current_animation:
+	if disabled or super_disabled or "Kick" in anim_player.current_animation:
 		velocity = Vector2.ZERO
 		return
 	get_input()

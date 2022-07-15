@@ -102,6 +102,11 @@ position = Vector2( 590, 414 )
 [node name="MatchTimer" type="Timer" parent="."]
 autostart = true
 
+[node name="NextRound" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
 [node name="Music" type="AudioStreamPlayer" parent="."]
 
 [connection signal="timeout" from="MatchTimer" to="." method="_on_MatchTimer_timeout"]
+[connection signal="timeout" from="NextRound" to="." method="_on_NextRound_timeout"]

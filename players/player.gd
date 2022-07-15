@@ -3,6 +3,7 @@ extends KinematicBody2D
 
 export (bool) var potion_cooldown_toogle: bool = false
 export (bool) var disabled: bool = false
+export (bool) var super_disabled: bool = false
 
 onready var anim_player: AnimationPlayer = $AnimationPlayer
 onready var game_scene: Node = get_node('/root/Game')
@@ -77,7 +78,7 @@ func take_dmg(dmg, potion):
 			g.load_normal_assets(self, number)
 		
 	health -= dmg
-	g.emit_signal('health_changed', health, true)
+	g.emit_signal('health_changed', health, true, number)
 	
 	if health > 0:
 		anim_player.play('Hurt'+y_facing+x_facing)
@@ -97,9 +98,9 @@ func take_dmg(dmg, potion):
 			potion.last_wiz.revive()
 			g.emit_signal("player_revive", potion.last_wiz)
 			
-func revive():
-	health = 1
-	g.emit_signal('health_changed', health, false)
+func revive(hp = 1):
+	health = hp
+	g.emit_signal('health_changed', health, false, number)
 	ghost = false
 	dead = false
 	modulate = Color(1, 1, 1, 1)
