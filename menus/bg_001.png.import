@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Outline.png-4775e7f31821ace0f77f6faee9295766.stex"
+path="res://.import/bg_001.png-c8c7ec553fbc293c1b45c41725e34a73.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://players/wizard/Bodythrow/Outline.png"
-dest_files=[ "res://.import/Outline.png-4775e7f31821ace0f77f6faee9295766.stex" ]
+source_file="res://menus/bg_001.png"
+dest_files=[ "res://.import/bg_001.png-c8c7ec553fbc293c1b45c41725e34a73.stex" ]
 
 [params]
 
