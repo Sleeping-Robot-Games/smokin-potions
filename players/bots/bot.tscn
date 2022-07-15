@@ -4,7 +4,6 @@
 [ext_resource path="res://players/bots/bot.gd" type="Script" id=2]
 
 [node name="Bot" instance=ExtResource( 1 )]
-collision_layer = 1
 script = ExtResource( 2 )
 
 [node name="ThinkTimer" type="Timer" parent="." index="6"]
