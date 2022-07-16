@@ -62,7 +62,7 @@ script = ExtResource( 3 )
 self_modulate = Color( 0.207843, 0.282353, 0.901961, 1 )
 
 [node name="Portal" parent="." index="3"]
-frame = 7
+frame = 1
 
 [node name="ExplosionArea" type="Area2D" parent="." index="6"]
 

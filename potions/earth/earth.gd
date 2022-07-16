@@ -1,6 +1,6 @@
 extends 'res://potions/potion.gd'
 
-const spikes = preload('res://potions/ice_earth/spikes/spikes.tscn')
+const spikes = preload('res://potions/earth/spikes/spikes.tscn')
 
 func _ready():
 	activate()

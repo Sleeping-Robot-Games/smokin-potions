@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/spike.png-8b7bddb176c4d8d9d4a77cc175b8f84b.stex"
+path="res://.import/Explosion.png-96abeffbe70130dcee01909e548dfae3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://potions/ice_earth/spikes/spike.png"
-dest_files=[ "res://.import/spike.png-8b7bddb176c4d8d9d4a77cc175b8f84b.stex" ]
+source_file="res://potions/earth/Explosion.png"
+dest_files=[ "res://.import/Explosion.png-96abeffbe70130dcee01909e548dfae3.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

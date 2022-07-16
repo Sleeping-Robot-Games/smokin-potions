@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/spike_origin.png-287a8439237523994de0b6462facf8dc.stex"
+path="res://.import/spike_origin.png-63f3bc01883dbd4e1d838ea8e6bd9e62.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://potions/ice_earth/spikes/spike_origin.png"
-dest_files=[ "res://.import/spike_origin.png-287a8439237523994de0b6462facf8dc.stex" ]
+source_file="res://potions/earth/spikes/spike_origin.png"
+dest_files=[ "res://.import/spike_origin.png-63f3bc01883dbd4e1d838ea8e6bd9e62.stex" ]
 
 [params]
 
