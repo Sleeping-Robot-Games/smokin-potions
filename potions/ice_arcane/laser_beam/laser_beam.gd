@@ -68,15 +68,16 @@ func cast_beam() -> void:
 	force_raycast_update()
 	if is_colliding():
 		var collider = get_collider()
-		if nearby_players.has(collider) and collider.global_position.distance_to(global_position) > max_length - 20:
-			cast_point = to_local(get_collision_point())
-			collision_particles.process_material.direction = Vector3(
-				get_collision_normal().x, get_collision_normal().y, 0
-			)
-			collider.take_dmg(1, self)
+		# TODO: apply damage while splashing laser off player/bot instead of instantly
+#		if nearby_players.has(collider) and collider.global_position.distance_to(global_position) > max_length - 20:
+#			cast_point = to_local(get_collision_point())
+#			collision_particles.process_material.direction = Vector3(
+#				get_collision_normal().x, get_collision_normal().y, 0
+#			)
+#			collider.take_dmg(1, self)
 				
-		elif nearby_breakables.has(collider):
-			tween.interpolate_callback(self, 1, "break", collider)
+		if nearby_breakables.has(collider):
+			tween.interpolate_callback(self, .5, "break", collider)
 			tween.start()
 			
 	collision_particles.emitting = true
@@ -89,8 +90,7 @@ func cast_beam() -> void:
 func break(breakable):
 	if nearby_breakables.has(breakable):
 		breakable.break()
-		print("lasered breakable")
-		
+
 
 func appear() -> void:
 	if tween.is_active():
@@ -109,6 +109,8 @@ func disappear() -> void:
 func _on_Area2D_body_entered(body):
 	if 'Wizard' in body.name or 'Bot' in body.name:
 		nearby_players.append(body)
+		body.take_dmg(1, self)
+		
 
 
 func _on_Area2D_body_exited(body):

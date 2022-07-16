@@ -1,7 +1,7 @@
 extends 'res://potions/potion.gd'
 
 var rng = RandomNumberGenerator.new()
-const laser_beam = preload('res://potions/arcane_arcane/laser_beam/laser_beam.tscn')
+const laser_beam = preload('res://potions/ice_arcane/laser_beam/laser_beam.tscn')
 
 
 func _ready():

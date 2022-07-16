@@ -10,8 +10,9 @@ onready var potion_fire = preload("res://potions/fire/fire.tscn")
 onready var potion_fire_fire = preload("res://potions/fire_fire/fire_fire.tscn")
 onready var potion_fire_ice = preload("res://potions/fire_ice/fire_ice.tscn")
 onready var potion_ice_earth = preload("res://potions/ice_earth/ice_earth.tscn")
+onready var potion_ice_arcane = preload("res://potions/ice_arcane/ice_arcane.tscn")
 onready var potion_arcane = preload("res://potions/arcane/arcane.tscn")
-onready var potion_arcane_arcane = preload("res://potions/arcane_arcane/arcane_arcane.tscn")
+
 
 
 onready var potion_dict = {
@@ -20,8 +21,8 @@ onready var potion_dict = {
 	'fire_fire': potion_fire_fire,
 	'fire_ice': potion_fire_ice,
 	'ice_earth': potion_ice_earth,
+	'ice_arcane': potion_ice_arcane,
 	'arcane': potion_arcane,
-	'arcane_arcane': potion_arcane_arcane,
 }
 
 var players_in_current_game = []

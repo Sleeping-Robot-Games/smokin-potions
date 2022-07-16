@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/glowing_circle.png-1671090927daa2df352b95b2499296f8.stex"
+path="res://.import/ice_arcane.png-b538eb4c82d2cebd9c67861814f1d1f8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://potions/arcane_arcane/laser_beam/glowing_circle.png"
-dest_files=[ "res://.import/glowing_circle.png-1671090927daa2df352b95b2499296f8.stex" ]
+source_file="res://potions/ice_arcane/ice_arcane.png"
+dest_files=[ "res://.import/ice_arcane.png-b538eb4c82d2cebd9c67861814f1d1f8.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

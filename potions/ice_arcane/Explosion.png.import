@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Explosion.png-0820a6b3fabe8d55dc9f86058ead39d0.stex"
+path="res://.import/Explosion.png-30539aff9188904093c284c7dbf05bd8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://potions/arcane_arcane/Explosion.png"
-dest_files=[ "res://.import/Explosion.png-0820a6b3fabe8d55dc9f86058ead39d0.stex" ]
+source_file="res://potions/ice_arcane/Explosion.png"
+dest_files=[ "res://.import/Explosion.png-30539aff9188904093c284c7dbf05bd8.stex" ]
 
 [params]
 
