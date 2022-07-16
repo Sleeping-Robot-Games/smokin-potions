@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://pickups/scroll.gd" type="Script" id=1]
 [ext_resource path="res://pickups/scroll.png" type="Texture" id=2]
@@ -117,6 +117,22 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 2 )
 }
 
+[sub_resource type="Animation" id=4]
+resource_name = "float"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -15 ), Vector2( 0, 0 ) ]
+}
+
 [node name="Scroll" type="Node2D"]
 scale = Vector2( 0.25, 0.25 )
 script = ExtResource( 1 )
@@ -139,5 +155,6 @@ autostart = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 2 )
 anims/despawn = SubResource( 3 )
+anims/float = SubResource( 4 )
 
 [connection signal="timeout" from="DespawnTimer" to="." method="_on_DespawnTimer_timeout"]

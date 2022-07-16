@@ -190,7 +190,7 @@ func scheme():
 		if d_ray.is_colliding():
 			var collider = d_ray.get_collider()
 			# TODO factor in distance & speed
-			if collider.get_node('ExplodeTimer') and collider.get_node('ExplodeTimer').wait_time > 1:
+			if collider.get_node_or_null('ExplodeTimer') and collider.get_node_or_null('ExplodeTimer').wait_time > 1:
 				fresh_bombs.append({"collider": collider, "dir": d_ray.name})
 			else:
 				scary_bombs.append({"collider": collider, "dir": d_ray.name})

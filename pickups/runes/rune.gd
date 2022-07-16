@@ -6,6 +6,8 @@ var element = 'fire'
 
 
 func _ready():
+	$AnimationPlayer.play('float')
+	
 	rng.randomize()
 	var type = rng.randi_range(0, 3)
 	if type == 0:

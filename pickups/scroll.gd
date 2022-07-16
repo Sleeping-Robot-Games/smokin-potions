@@ -7,6 +7,8 @@ var label_text = 'Humungo!'
 
 
 func _ready():
+	$AnimationPlayer.play('float')
+	
 	rng.randomize()
 	var type = rng.randi_range(0, 1)
 	if type == 0:

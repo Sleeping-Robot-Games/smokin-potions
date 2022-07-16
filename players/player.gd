@@ -189,7 +189,7 @@ func humungo():
 
 func tinyboi():
 	speed = 300
-	scale = Vector2(.75,.75)
+	scale = Vector2(.75, .75)
 
 func reset_scroll_magic():
 	speed = 150
