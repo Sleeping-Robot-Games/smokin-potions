@@ -1,0 +1,165 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://assets/font-theme.tres" type="Theme" id=1]
+[ext_resource path="res://players/animated deco/pinkwiz3.png" type="Texture" id=2]
+[ext_resource path="res://players/animated deco/purpwiz3.png" type="Texture" id=3]
+[ext_resource path="res://players/animated deco/redwiz2.png" type="Texture" id=4]
+[ext_resource path="res://players/animated deco/ogwiz1.png" type="Texture" id=5]
+[ext_resource path="res://players/animated deco/pinkwiz1.png" type="Texture" id=6]
+[ext_resource path="res://players/animated deco/redwiz3.png" type="Texture" id=7]
+[ext_resource path="res://players/animated deco/grewiz1.png" type="Texture" id=8]
+[ext_resource path="res://players/animated deco/yellowiz1.png" type="Texture" id=9]
+[ext_resource path="res://players/animated deco/ogwiz2.png" type="Texture" id=10]
+[ext_resource path="res://players/animated deco/yellowiz2.png" type="Texture" id=11]
+[ext_resource path="res://players/animated deco/grewiz2.png" type="Texture" id=12]
+[ext_resource path="res://players/animated deco/grewiz3.png" type="Texture" id=13]
+[ext_resource path="res://players/animated deco/yellowiz3.png" type="Texture" id=14]
+[ext_resource path="res://players/animated deco/redwiz1.png" type="Texture" id=15]
+[ext_resource path="res://players/animated deco/ogwiz3.png" type="Texture" id=16]
+[ext_resource path="res://players/animated deco/pinkwiz2.png" type="Texture" id=17]
+[ext_resource path="res://players/animated deco/purpwiz1.png" type="Texture" id=18]
+[ext_resource path="res://players/animated deco/purpwiz2.png" type="Texture" id=19]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 15 ), ExtResource( 4 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 9 ), ExtResource( 11 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 8 ), ExtResource( 12 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 5 ), ExtResource( 10 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ ExtResource( 18 ), ExtResource( 3 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 17 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="Credits" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CreditsLabel" type="RichTextLabel" parent="."]
+margin_left = 206.0
+margin_top = 12.0
+margin_right = 310.0
+margin_bottom = 48.0
+rect_scale = Vector2( 2, 2 )
+theme = ExtResource( 1 )
+text = "Credits"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CreditsName" type="RichTextLabel" parent="."]
+margin_left = 82.0
+margin_top = 76.0
+margin_right = 603.0
+margin_bottom = 368.0
+theme = ExtResource( 1 )
+text = "Artist - Jenna Wing-Hu -(Memao)
+Developer - Bryan Reed -(Bronsky)
+Developer - Ross Root -(SleepingRobot)
+Music/SFX - Bryce Wilcox -(esphron)
+Music - Seth Garcia -(SethTheTrash)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MadeWith" type="RichTextLabel" parent="."]
+margin_left = 83.0
+margin_top = 243.0
+margin_right = 572.0
+margin_bottom = 303.0
+theme = ExtResource( 1 )
+text = "Smokin' Potions was made using Godot, Aseprite, and cubase 10 pro"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Thanks" type="RichTextLabel" parent="."]
+margin_left = 170.0
+margin_top = 322.0
+margin_right = 659.0
+margin_bottom = 382.0
+theme = ExtResource( 1 )
+text = "Thanks for playing!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Red" type="AnimatedSprite" parent="."]
+position = Vector2( 140, 373 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 1 )
+frame = 1
+playing = true
+
+[node name="Yellow" type="AnimatedSprite" parent="."]
+position = Vector2( 200, 373 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 2 )
+frame = 2
+playing = true
+
+[node name="Green" type="AnimatedSprite" parent="."]
+position = Vector2( 270, 373 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 3 )
+playing = true
+
+[node name="Blue" type="AnimatedSprite" parent="."]
+position = Vector2( 333, 373 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 4 )
+frame = 2
+playing = true
+
+[node name="Purple" type="AnimatedSprite" parent="."]
+position = Vector2( 393, 373 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 5 )
+frame = 2
+playing = true
+
+[node name="Pink" type="AnimatedSprite" parent="."]
+position = Vector2( 459, 373 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 6 )
+playing = true

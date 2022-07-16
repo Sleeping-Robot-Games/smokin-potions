@@ -107,19 +107,12 @@ tracks/0/keys = {
 script = ExtResource( 4 )
 
 [node name="ColorRect" type="ColorRect" parent="Title"]
-margin_right = 640.0
-margin_bottom = 480.0
-color = Color( 0.0313726, 0.027451, 0.027451, 1 )
+margin_right = 642.0
+margin_bottom = 482.0
+color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="ColorRect2" type="ColorRect" parent="Title"]
-margin_left = 2.0
-margin_top = 1.0
-margin_right = 639.0
-margin_bottom = 480.0
-color = Color( 0.270588, 0.309804, 0.709804, 0.109804 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Title"]
 margin_left = 26.0

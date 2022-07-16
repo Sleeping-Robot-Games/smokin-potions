@@ -136,6 +136,9 @@ bbcode_enabled = true
 [node name="WinnerScreen" type="Control" parent="HUD"]
 margin_top = -480.0
 margin_bottom = -480.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ColorRect" type="ColorRect" parent="HUD/WinnerScreen"]
 margin_right = 640.0
