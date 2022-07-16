@@ -118,7 +118,8 @@ one_shot = true
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
-volume_db = -20.0
+volume_db = -15.0
+autoplay = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 11 )
@@ -161,9 +162,9 @@ text = "Player 1 wins!"
 
 [node name="Star" type="TextureRect" parent="HUD/WinnerScreen"]
 margin_left = 453.0
-margin_top = 341.891
+margin_top = 335.0
 margin_right = 517.0
-margin_bottom = 405.891
+margin_bottom = 399.0
 texture = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/WinnerScreen/Star"]

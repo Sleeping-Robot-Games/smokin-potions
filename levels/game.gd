@@ -18,7 +18,7 @@ func _ready():
 	g.connect("elements_changed", self, "handle_elements_changed")
 	g.connect("player_death", self, "handle_player_death")
 	g.connect("player_revive", self, "handle_player_revive")
-	
+	print(g.players_in_current_game)
 	## USED FOR DEBUGGING ##
 	if g.players_in_current_game.size() == 0:
 		g.players_in_current_game = [
@@ -50,6 +50,8 @@ func add_player_to_game(player):
 	
 	
 func next_round():
+	seconds = 120
+	$MatchTimer.start()
 	for player in current_players:
 		var starting_pos = get_node("Starting" + str(player.number)).global_position
 		player.global_position = starting_pos
@@ -75,6 +77,7 @@ func handle_player_death(player):
 		winner_ui.play_star_animation(winner.number, str(win_state[winner.number]))
 		
 		$NextRound.start()
+		$MatchTimer.stop()
 		for potion in get_tree().get_nodes_in_group('potions'):
 			potion.queue_free()
 
@@ -122,4 +125,5 @@ func _on_NextRound_timeout():
 
 
 func _on_Button_button_up():
+	g.players_in_current_game = []
 	get_tree().change_scene("res://menus/start/start.tscn")
