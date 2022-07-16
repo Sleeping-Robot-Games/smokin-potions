@@ -1,11 +1,22 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://assets/font-theme.tres" type="Theme" id=1]
 [ext_resource path="res://sfx/battle_bgm.ogg" type="AudioStream" id=2]
+[ext_resource path="res://assets/keys/S-Key.png" type="Texture" id=3]
 [ext_resource path="res://pickups/star.png" type="Texture" id=4]
 [ext_resource path="res://levels/game.gd" type="Script" id=5]
 [ext_resource path="res://assets/fonts/BOMBERMA.TTF" type="DynamicFontData" id=6]
 [ext_resource path="res://assets/star_bounce.tres" type="Animation" id=7]
+[ext_resource path="res://assets/keys/A-Key.png" type="Texture" id=8]
+[ext_resource path="res://assets/keys/D-Key.png" type="Texture" id=9]
+[ext_resource path="res://assets/keys/W-Key.png" type="Texture" id=10]
+[ext_resource path="res://pickups/runes/fire.png" type="Texture" id=11]
+[ext_resource path="res://pickups/scroll.png" type="Texture" id=12]
+[ext_resource path="res://pickups/runes/ice.png" type="Texture" id=13]
+[ext_resource path="res://pickups/runes/arcane.png" type="Texture" id=14]
+[ext_resource path="res://assets/keys/Space-Key.png" type="Texture" id=15]
+[ext_resource path="res://assets/keys/E-Key.png" type="Texture" id=16]
+[ext_resource path="res://pickups/runes/earth.png" type="Texture" id=17]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 10, 239.156 )
@@ -49,6 +60,106 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 0, -480 ), Vector2( 0, 0 ) ]
 }
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 10 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 10 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=17]
+animations = [ {
+"frames": [ SubResource( 15 ), SubResource( 16 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 8 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=20]
+animations = [ {
+"frames": [ SubResource( 18 ), SubResource( 19 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 3 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=23]
+animations = [ {
+"frames": [ SubResource( 21 ), SubResource( 22 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 9 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=14]
+animations = [ {
+"frames": [ SubResource( 12 ), SubResource( 13 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 15 )
+region = Rect2( 0, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 15 )
+region = Rect2( 64, 0, 64, 32 )
+
+[sub_resource type="SpriteFrames" id=26]
+animations = [ {
+"frames": [ SubResource( 24 ), SubResource( 25 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 16 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 16 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=29]
+animations = [ {
+"frames": [ SubResource( 27 ), SubResource( 28 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="DynamicFont" id=30]
+size = 28
+font_data = ExtResource( 6 )
 
 [node name="Game" type="Node"]
 script = ExtResource( 5 )
@@ -113,6 +224,13 @@ position = Vector2( 586, 404 )
 [node name="NextRound" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+
+[node name="StartingTimer" type="Timer" parent="."]
+
+[node name="PressStartTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
@@ -180,6 +298,7 @@ root_node = NodePath("../WinnerScreen")
 anims/show_winner = SubResource( 8 )
 
 [node name="StartingTime" type="Label" parent="HUD"]
+visible = false
 margin_left = 231.0
 margin_top = 229.0
 margin_right = 415.0
@@ -187,9 +306,112 @@ margin_bottom = 251.0
 theme = ExtResource( 1 )
 text = "Starting in 1..."
 
-[node name="StartingTimer" type="Timer" parent="."]
+[node name="Tutorial" type="Control" parent="HUD"]
+margin_right = 642.0
+margin_bottom = 493.0
+
+[node name="ColorRect" type="ColorRect" parent="HUD/Tutorial"]
+margin_right = 640.0
+margin_bottom = 480.0
+color = Color( 0, 0, 0, 0.45098 )
+
+[node name="Label" type="Label" parent="HUD/Tutorial"]
+margin_left = 69.0
+margin_top = 24.0
+margin_right = 614.0
+margin_bottom = 396.0
+theme = ExtResource( 1 )
+text = "                       Controls
+
+Move -                       or arrow keys
+
+place potion - 
+
+kick - walk into potion
+
+grab and throw -        +
+
+collect power-ups - walk over them
+
+
+Revive - Kill another player as a ghost
+"
+
+[node name="W" type="AnimatedSprite" parent="HUD/Tutorial"]
+position = Vector2( 175, 83 )
+frames = SubResource( 17 )
+playing = true
+
+[node name="A" type="AnimatedSprite" parent="HUD/Tutorial"]
+position = Vector2( 219, 84 )
+frames = SubResource( 20 )
+playing = true
+
+[node name="S" type="AnimatedSprite" parent="HUD/Tutorial"]
+position = Vector2( 264, 83 )
+frames = SubResource( 23 )
+playing = true
+
+[node name="D" type="AnimatedSprite" parent="HUD/Tutorial"]
+position = Vector2( 308, 83 )
+frames = SubResource( 14 )
+frame = 1
+playing = true
+
+[node name="space" type="AnimatedSprite" parent="HUD/Tutorial"]
+position = Vector2( 306, 132 )
+frames = SubResource( 26 )
+playing = true
+
+[node name="e" type="AnimatedSprite" parent="HUD/Tutorial"]
+position = Vector2( 331, 231 )
+frames = SubResource( 29 )
+playing = true
+
+[node name="e2" type="AnimatedSprite" parent="HUD/Tutorial"]
+position = Vector2( 414, 231 )
+frames = SubResource( 29 )
+frame = 1
+playing = true
+
+[node name="Scroll" type="Sprite" parent="HUD/Tutorial"]
+position = Vector2( 560, 307 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
+
+[node name="Arcane" type="Sprite" parent="HUD/Tutorial"]
+position = Vector2( 364, 307 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 14 )
+
+[node name="Arcane2" type="Sprite" parent="HUD/Tutorial"]
+position = Vector2( 514, 306 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 17 )
+
+[node name="Arcane3" type="Sprite" parent="HUD/Tutorial"]
+position = Vector2( 464, 306 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 11 )
+
+[node name="Arcane4" type="Sprite" parent="HUD/Tutorial"]
+position = Vector2( 414, 307 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 13 )
+
+[node name="presskeytostart" type="Label" parent="HUD/Tutorial"]
+visible = false
+margin_left = 108.0
+margin_top = 409.0
+margin_right = 545.0
+margin_bottom = 438.0
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 1, 0.890196, 0.290196, 1 )
+custom_fonts/font = SubResource( 30 )
+text = "Press any key to start..."
 
 [connection signal="timeout" from="MatchTimer" to="." method="_on_MatchTimer_timeout"]
 [connection signal="timeout" from="NextRound" to="." method="_on_NextRound_timeout"]
-[connection signal="button_up" from="HUD/WinnerScreen/Button" to="." method="_on_Button_button_up"]
 [connection signal="timeout" from="StartingTimer" to="." method="_on_StartingTimer_timeout"]
+[connection signal="timeout" from="PressStartTimer" to="." method="_on_PressStartTimer_timeout"]
+[connection signal="button_up" from="HUD/WinnerScreen/Button" to="." method="_on_Button_button_up"]

@@ -14,6 +14,7 @@ var dead_players = []
 var win_state = {}
 var last_winner
 var breakable_positions = []
+var reading_controls = true
 
 func _ready():
 	
@@ -34,9 +35,25 @@ func _ready():
 	for player in g.players_in_current_game:
 		add_player_to_game(player)
 	
-	$StartingTimer.start()
-	$HUD/StartingTime.text = "Starting in 3..."
-
+	if not g.new_game:
+		$StartingTimer.start()
+		$HUD/StartingTime.visible = true
+		$HUD/StartingTime.text = "Starting in 3..."
+	else:
+		for ui in get_tree().get_nodes_in_group('player_ui'):
+			ui.visible = false
+		$HUD/Tutorial.visible = true
+		
+func _input(event):
+	if reading_controls and event is InputEventKey:
+		for ui in get_tree().get_nodes_in_group('player_ui'):
+			ui.visible = true
+		$HUD/Tutorial.visible = false
+		$StartingTimer.start()
+		$HUD/StartingTime.visible = true
+		$HUD/StartingTime.text = "Starting in 3..."
+		reading_controls = false
+	
 
 func add_player_to_game(player):
 	# Adds player to game
@@ -154,6 +171,11 @@ func _on_StartingTimer_timeout():
 		for player in get_tree().get_nodes_in_group('players'):
 			player.super_disabled = false
 		$HUD/StartingTime.visible = false
+		$StartingTimer.stop()
 		$MatchTimer.start()
 	else:
 		$HUD/StartingTime.text = 'Starting in '+str(starting_seconds)+'...'
+
+
+func _on_PressStartTimer_timeout():
+	$HUD/Tutorial/presskeytostart.visible = true

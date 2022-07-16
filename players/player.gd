@@ -92,7 +92,6 @@ func take_dmg(dmg, potion):
 		
 	if health <= 0:
 		g.play_random_sfx(self, 'dying')
-		g.emit_signal("player_death", self)
 		anim_player.play('Death'+y_facing+x_facing)
 		dead = true
 		dead_disabled = true
@@ -101,6 +100,7 @@ func take_dmg(dmg, potion):
 			print('revived')
 			potion.last_wiz.revive()
 			g.emit_signal("player_revive", potion.last_wiz)
+		g.emit_signal("player_death", self)
 			
 func revive(hp = 1):
 	health = hp
