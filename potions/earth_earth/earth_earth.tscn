@@ -120,6 +120,7 @@ animations = [ {
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" parent="." index="0"]
+position = Vector2( 0, 9 )
 scale = Vector2( 1.25, 1.25 )
 
 [node name="AnimatedSprite" parent="." index="1"]
@@ -129,12 +130,13 @@ frames = SubResource( 45 )
 
 [node name="Portal" parent="." index="3"]
 scale = Vector2( 0.75, 0.75 )
-frame = 2
+frame = 4
 
 [node name="PotionPickupArea" parent="." index="5"]
 scale = Vector2( 1.25, 1.25 )
 
 [node name="ExplosionArea" type="Area2D" parent="." index="6"]
+visible = false
 scale = Vector2( 1.25, 1.25 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionArea" index="0"]

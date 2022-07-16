@@ -3,7 +3,7 @@
 [ext_resource path="res://potions/potion.tscn" type="PackedScene" id=1]
 [ext_resource path="res://potions/basic/Explosion.png" type="Texture" id=2]
 [ext_resource path="res://potions/fire_arcane/fire_arcane.gd" type="Script" id=3]
-[ext_resource path="res://potions/fire/fire.png" type="Texture" id=4]
+[ext_resource path="res://potions/fire_arcane/fire_arcane.png" type="Texture" id=4]
 
 [sub_resource type="AtlasTexture" id=32]
 atlas = ExtResource( 4 )
@@ -119,12 +119,14 @@ animations = [ {
 [node name="FireArcanePotion" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 
-[node name="AnimatedSprite" parent="." index="1"]
-modulate = Color( 1.2, 1.2, 1.2, 1 )
-frames = SubResource( 45 )
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2( 0, 9 )
+scale = Vector2( 1.25, 1.25 )
 
-[node name="Portal" parent="." index="3"]
-frame = 5
+[node name="AnimatedSprite" parent="." index="1"]
+modulate = Color( 1.5, 1.5, 1.5, 1 )
+scale = Vector2( 0.625, 0.625 )
+frames = SubResource( 45 )
 
 [node name="ExplosionArea" type="Area2D" parent="." index="6"]
 
