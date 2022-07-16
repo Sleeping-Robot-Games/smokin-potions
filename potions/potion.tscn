@@ -190,7 +190,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=63]
-radius = 13.0
+radius = 19.0263
 
 [sub_resource type="CapsuleShape2D" id=65]
 radius = 8.0
@@ -257,7 +257,6 @@ anims/ThrowRight = SubResource( 66 )
 anims/fade = SubResource( 40 )
 
 [node name="PotionPickupArea" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PotionPickupArea"]
 position = Vector2( 0, 6 )
