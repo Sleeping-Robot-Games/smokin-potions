@@ -36,6 +36,7 @@ var holding_potion: RigidBody2D
 var ghost = false
 var dead = false
 var potion_drop_distance = 10
+var rune_drop_distance = 30
 
 const rune_scene = preload('res://pickups/runes/rune.tscn')
 
@@ -145,13 +146,13 @@ func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_s
 			var rune_instance = rune_scene.instance()
 			var rune_pos = global_position
 			if cardinal_facing == "Left":
-				rune_pos.x += 30
+				rune_pos.x += rune_drop_distance
 			elif cardinal_facing == "Right":
-				rune_pos.x -= 30
+				rune_pos.x -= rune_drop_distance
 			elif cardinal_facing == "Back":
-				rune_pos.y += 35
+				rune_pos.y += rune_drop_distance + 5
 			elif cardinal_facing == "Front":
-				rune_pos.y -= 30
+				rune_pos.y -= rune_drop_distance
 			rune_instance.global_position = rune_pos
 			get_parent().add_child(rune_instance)
 			rune_instance.set_type(elements[1])
@@ -183,6 +184,7 @@ func humungo():
 	speed = 50
 	scale = Vector2(3,3)
 	potion_drop_distance = 40
+	rune_drop_distance = 60
 	
 
 func tinyboi():
@@ -193,6 +195,7 @@ func reset_scroll_magic():
 	speed = 150
 	scale = Vector2(1.5, 1.5)
 	potion_drop_distance = 10
+	rune_drop_distance = 30
 
 func _on_ScrollTimer_timeout():
 	reset_scroll_magic()
