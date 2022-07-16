@@ -104,6 +104,8 @@ func revive(hp = 1):
 	health = hp
 	g.emit_signal("player_revive", self)
 	g.emit_signal('health_changed', health, false, number)
+	$GhostParticles.visible = false
+	$GhostParticles.emitting = false
 	ghost = false
 	dead = false
 	modulate = Color(1, 1, 1, 1)
@@ -131,6 +133,7 @@ func _on_DeathTimer_timeout():
 	anim_player.play('Idle'+y_facing+x_facing)
 	ghost = true
 	dead_disabled = false
+	$GhostParticles.emitting = true
 	modulate = Color(1, 1, 1, .25)
 
 

@@ -48,7 +48,7 @@ func get_input():
 			for p_ray in $PotionRays.get_children():
 				p_ray.add_exception(holding_potion)
 			g.load_hold_assets(self, number)
-		elif holding_potion:
+		elif holding_potion and weakref(holding_potion).get_ref():
 			holding_potion.get_thrown()
 			holding_potion = null
 			g.load_normal_assets(self, number)

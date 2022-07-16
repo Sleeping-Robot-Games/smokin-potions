@@ -83,10 +83,12 @@ scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
+visible = false
 show_behind_parent = true
 position = Vector2( -5, -8 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 10 )
+frame = 7
 speed_scale = 5.0
 playing = true
 
