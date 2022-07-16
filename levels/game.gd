@@ -8,6 +8,7 @@ onready var wizard_sprites = preload('res://levels/wizard_sprites.tscn')
 
 onready var match_time = get_node("HUD/MatchTime")
 var seconds = 120
+var starting_seconds = 3
 var current_players = []
 var dead_players = []
 var win_state = {}
@@ -32,6 +33,9 @@ func _ready():
 		
 	for player in g.players_in_current_game:
 		add_player_to_game(player)
+	
+	$StartingTimer.start()
+	$HUD/StartingTime.text = "Starting in 3..."
 
 
 func add_player_to_game(player):
@@ -43,6 +47,7 @@ func add_player_to_game(player):
 	g.load_player(new_player, player.number)
 	var starting_pos = get_node("Starting" + str(player.number)).global_position
 	new_player.global_position = starting_pos
+	new_player.super_disabled = true
 	$YSort.add_child(new_player)
 	
 	# Creates the player's UI
@@ -52,6 +57,10 @@ func add_player_to_game(player):
 	
 	
 func next_round():
+	starting_seconds = 3
+	$StartingTimer.start()
+	$HUD/StartingTime.visible = true
+	$HUD/StartingTime.text = "Starting in 3..."
 	seconds = 120
 	$MatchTimer.start()
 	for player in current_players:
@@ -137,3 +146,14 @@ func _on_Button_button_up():
 	g.players_in_current_game = []
 	get_tree().change_scene("res://menus/start/start.tscn")
 	g.new_game = false
+
+
+func _on_StartingTimer_timeout():
+	starting_seconds -= 1
+	if starting_seconds == 0:
+		for player in get_tree().get_nodes_in_group('players'):
+			player.super_disabled = false
+		$HUD/StartingTime.visible = false
+		$MatchTimer.start()
+	else:
+		$HUD/StartingTime.text = 'Starting in '+str(starting_seconds)+'...'

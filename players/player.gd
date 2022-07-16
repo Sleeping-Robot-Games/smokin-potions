@@ -37,7 +37,6 @@ var ghost = false
 var dead = false
 var potion_drop_distance = 10
 var rune_drop_distance = 30
-var apply_elements = false
 
 const rune_scene = preload('res://pickups/runes/rune.tscn')
 
@@ -51,9 +50,7 @@ func ready():
 func place_potion():
 	if not potion_ready or ghost:
 		return
-#	var applied_elements = []
-#	if apply_elements:
-#
+
 	var p = g.get_potion_scene(elements).instance()
 	p.global_position = Vector2(global_position.x, global_position.y + potion_drop_distance)
 	p.parent_player = self

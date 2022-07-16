@@ -1,7 +1,6 @@
 extends 'res://players/player.gd'
 
 
-
 func ready():
 	pass
 

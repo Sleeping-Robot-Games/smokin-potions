@@ -109,7 +109,6 @@ position = Vector2( 55, 402 )
 position = Vector2( 586, 404 )
 
 [node name="MatchTimer" type="Timer" parent="."]
-autostart = true
 
 [node name="NextRound" type="Timer" parent="."]
 wait_time = 5.0
@@ -180,6 +179,17 @@ position = Vector2( 535, 379 )
 root_node = NodePath("../WinnerScreen")
 anims/show_winner = SubResource( 8 )
 
+[node name="StartingTime" type="Label" parent="HUD"]
+margin_left = 231.0
+margin_top = 229.0
+margin_right = 415.0
+margin_bottom = 251.0
+theme = ExtResource( 1 )
+text = "Starting in 1..."
+
+[node name="StartingTimer" type="Timer" parent="."]
+
 [connection signal="timeout" from="MatchTimer" to="." method="_on_MatchTimer_timeout"]
 [connection signal="timeout" from="NextRound" to="." method="_on_NextRound_timeout"]
 [connection signal="button_up" from="HUD/WinnerScreen/Button" to="." method="_on_Button_button_up"]
+[connection signal="timeout" from="StartingTimer" to="." method="_on_StartingTimer_timeout"]
