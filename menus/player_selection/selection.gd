@@ -46,6 +46,6 @@ func store_player_state(player):
 		'pallete_sprite_state': player.pallete_sprite_state
 	}
 	var f = File.new()
-	print("user://player_state_P"+ str(player.number) +".save")
 	f.open("user://player_state_P"+ str(player.number) +".save", File.WRITE)
+	f.store_string(JSON.print(player_customized_state, "  ", true))
 	f.close()
