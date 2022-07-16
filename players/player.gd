@@ -8,7 +8,6 @@ export (bool) var super_disabled: bool = false
 export (bool) var dead_disabled: bool = false
 
 onready var anim_player: AnimationPlayer = $AnimationPlayer
-onready var game_scene: Node = get_node('/root/Game')
 
 const KICK_FORCE = 400
 const DIAG_KICK_FORCE = 200

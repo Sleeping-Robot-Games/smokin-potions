@@ -58,20 +58,33 @@ func get_potion_scene(elements):
 	else:
 		return potion_basic
 
+func folders_in_dir(path: String) -> Array:
+	var folders = []
+	var dir = Directory.new()
+	dir.open(path)
+	dir.list_dir_begin(true, true)
+	while true:
+		var folder = dir.get_next()
+		if folder == "":
+			break
+		if not folder.begins_with("."):
+			folders.append(folder)
+	dir.list_dir_end()
+	return folders
 
 func files_in_dir(path: String, keyword: String = "") -> Array:
 	var files = []
 	var dir = Directory.new()
 	dir.open(path)
-	dir.list_dir_begin()
+	dir.list_dir_begin(true, true)
 	while true:
 		var file = dir.get_next()
 		if file == "":
 			break
-		elif keyword != "" and file.find(keyword) == -1:
+		if keyword != "" and file.find(keyword) == -1:
 			continue
-		elif not file.begins_with(".") and not file.ends_with(".import"):
-			files.append(file)
+		if not file.begins_with(".") and file.ends_with(".import"):
+			files.append(file.replace(".import", ""))
 	dir.list_dir_end()
 	return files
 

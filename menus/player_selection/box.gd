@@ -1,5 +1,7 @@
 extends Control
 
+var rng = RandomNumberGenerator.new()
+
 export (bool) var player: bool = false
 
 onready var wizard_sprite = {
@@ -78,10 +80,10 @@ func random_asset(folder: String, keyword: String = "") -> String:
 	files = g.files_in_dir(folder)
 	if keyword == "":
 		files = g.files_in_dir(folder)
-	if len(files) == 0:
+	if files.size() == 0:
 		return ""
-	randomize()
-	var random_index = randi() % len(files)
+	rng.randomize()
+	var random_index = rng.randi_range(0, files.size() - 1)
 	return folder+"/"+files[random_index]
 	
 func set_random_color(palette_type: String) -> void:
@@ -92,8 +94,8 @@ func set_random_color(palette_type: String) -> void:
 		for color in all_colors:
 			if not '000' in color and not selection.used_colors.has(color):
 				available_colors.append(color)
-		randomize()
-		var random_index = randi() % len(available_colors)
+		rng.randomize()
+		var random_index = rng.randi_range(0, available_colors.size() - 1)
 		random_color = available_colors[random_index]
 		selection.add_color(random_color)
 		if 'Color' in pallete_sprite_state.keys():
@@ -114,8 +116,10 @@ func set_random_texture(sprite_name: String) -> void:
 	set_sprite_texture(sprite_name, random_sprite)
 	
 func create_random_character() -> void:
-	var sprite_folders = g.files_in_dir(sprite_folder_path)
-	var palette_folders = g.files_in_dir(palette_folder_path)
+	var sprite_folders = g.folders_in_dir(sprite_folder_path)
+	var palette_folders = g.folders_in_dir(palette_folder_path)
+	print(sprite_folders)
+	print(palette_folders)
 	for folder in sprite_folders:
 		set_random_texture(folder)
 	for folder in palette_folders:
@@ -126,7 +130,7 @@ func _on_Random_button_up():
 	create_random_character()
 
 func get_next_avail_color(direction):
-	var all_colors = g.files_in_dir(palette_folder_path + "Color")
+	var all_colors = g.files_in_dir(palette_folder_path + "Color/")
 	var current_color_index = all_colors.find("Color_" + pallete_sprite_state['Color'] + ".png")
 	var reordered_colors = all_colors.slice(current_color_index, all_colors.size()-1) + all_colors.slice(1, current_color_index)
 	for color in reordered_colors:
@@ -134,6 +138,8 @@ func get_next_avail_color(direction):
 			return color.substr(6, 3)
 
 func _on_Color_Selection_button_up(direction: int, palette_sprite: String):
+	print(sprite_state)
+	print(pallete_sprite_state)
 	if palette_sprite == 'Color':
 		var folder_path = palette_folder_path + palette_sprite
 		var files = g.files_in_dir(folder_path)
