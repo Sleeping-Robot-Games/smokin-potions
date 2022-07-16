@@ -227,7 +227,6 @@ linear_damp = 2.0
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, 7 )
 shape = SubResource( 18 )
 
@@ -245,7 +244,7 @@ visible = false
 position = Vector2( 0, 6 )
 scale = Vector2( 0.6, 0.6 )
 frames = SubResource( 49 )
-frame = 1
+frame = 3
 speed_scale = 5.0
 playing = true
 

@@ -60,7 +60,7 @@ animations = [ {
 script = ExtResource( 4 )
 
 [node name="Portal" parent="." index="3"]
-frame = 7
+frame = 4
 
 [node name="ExplosionArea" type="Area2D" parent="." index="5"]
 
