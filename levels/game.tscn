@@ -1,7 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/font-theme.tres" type="Theme" id=1]
 [ext_resource path="res://sfx/battle_bgm.ogg" type="AudioStream" id=2]
+[ext_resource path="res://levels/wizard_sprites.tscn" type="PackedScene" id=3]
+[ext_resource path="res://pickups/star.png" type="Texture" id=4]
 [ext_resource path="res://levels/game.gd" type="Script" id=5]
 [ext_resource path="res://assets/fonts/BOMBERMA.TTF" type="DynamicFontData" id=6]
 
@@ -22,6 +24,41 @@ font_data = ExtResource( 6 )
 
 [sub_resource type="Theme" id=7]
 default_font = SubResource( 6 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 37
+font_data = ExtResource( 6 )
+
+[sub_resource type="Animation" id=8]
+resource_name = "show_winner"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -480 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "star_bounce"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Star:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 453, 335 ), Vector2( 453, 350 ), Vector2( 453, 335 ) ]
+}
 
 [node name="Game" type="Node"]
 script = ExtResource( 5 )
@@ -69,36 +106,17 @@ scale = Vector2( 0.992272, 1.00206 )
 points = PoolVector2Array( 322.5, -5, 321.492, 479 )
 width = 1.0
 
-[node name="HUD" type="CanvasLayer" parent="."]
-
-[node name="MatchTime" type="RichTextLabel" parent="HUD"]
-margin_left = 242.0
-margin_top = 21.0
-margin_right = 392.0
-margin_bottom = 41.0
-theme = SubResource( 7 )
-bbcode_enabled = true
-
-[node name="GameOver" type="RichTextLabel" parent="HUD"]
-visible = false
-margin_left = 235.0
-margin_top = 167.0
-margin_right = 418.0
-margin_bottom = 202.0
-theme = ExtResource( 1 )
-text = "GAME OVER"
-
 [node name="Starting1" type="Position2D" parent="."]
-position = Vector2( 50, 63 )
+position = Vector2( 58, 73 )
 
 [node name="Starting2" type="Position2D" parent="."]
-position = Vector2( 595, 64 )
+position = Vector2( 587, 72 )
 
 [node name="Starting3" type="Position2D" parent="."]
-position = Vector2( 46, 413 )
+position = Vector2( 55, 402 )
 
 [node name="Starting4" type="Position2D" parent="."]
-position = Vector2( 590, 414 )
+position = Vector2( 586, 404 )
 
 [node name="MatchTimer" type="Timer" parent="."]
 autostart = true
@@ -111,5 +129,60 @@ one_shot = true
 stream = ExtResource( 2 )
 volume_db = -20.0
 
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="MatchTime" type="RichTextLabel" parent="HUD"]
+margin_left = 242.0
+margin_top = 21.0
+margin_right = 392.0
+margin_bottom = 41.0
+theme = SubResource( 7 )
+bbcode_enabled = true
+
+[node name="WinnerScreen" type="Control" parent="HUD"]
+margin_top = -480.0
+margin_bottom = -480.0
+
+[node name="ColorRect" type="ColorRect" parent="HUD/WinnerScreen"]
+margin_right = 640.0
+margin_bottom = 480.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="WizardSprites" parent="HUD/WinnerScreen" instance=ExtResource( 3 )]
+position = Vector2( 531, 399 )
+scale = Vector2( 2, 2 )
+frame = 68
+
+[node name="Label" type="Label" parent="HUD/WinnerScreen"]
+margin_left = 144.0
+margin_top = 203.0
+margin_right = 476.0
+margin_bottom = 241.0
+theme = ExtResource( 1 )
+custom_fonts/font = SubResource( 9 )
+text = "Player 1 wins!"
+
+[node name="Star" type="TextureRect" parent="HUD/WinnerScreen"]
+margin_left = 453.0
+margin_top = 346.189
+margin_right = 517.0
+margin_bottom = 410.189
+texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/WinnerScreen"]
+anims/show_winner = SubResource( 8 )
+anims/star_bounce = SubResource( 10 )
+
+[node name="Button" type="Button" parent="HUD/WinnerScreen"]
+margin_left = 236.0
+margin_top = 414.0
+margin_right = 405.0
+margin_bottom = 442.0
+theme = ExtResource( 1 )
+text = "Play Again?"
+flat = true
+
 [connection signal="timeout" from="MatchTimer" to="." method="_on_MatchTimer_timeout"]
 [connection signal="timeout" from="NextRound" to="." method="_on_NextRound_timeout"]
+[connection signal="button_up" from="HUD/WinnerScreen/Button" to="." method="_on_Button_button_up"]

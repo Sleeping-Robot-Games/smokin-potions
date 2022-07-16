@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://menus/player_selection/RandomIcon.png" type="Texture" id=1]
 [ext_resource path="res://players/wizard/wizard.tscn" type="PackedScene" id=2]
@@ -6,12 +6,8 @@
 [ext_resource path="res://assets/font-theme.tres" type="Theme" id=4]
 [ext_resource path="res://menus/player_selection/LeftArrow10.png" type="Texture" id=5]
 [ext_resource path="res://menus/player_selection/RightArrow10.png" type="Texture" id=6]
-[ext_resource path="res://assets/fonts/alagard.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://menus/player_selection/selection.gd" type="Script" id=8]
 [ext_resource path="res://menus/bg_002.png" type="Texture" id=9]
-
-[sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 7 )
 
 [node name="Select" type="Node2D"]
 script = ExtResource( 8 )
@@ -36,9 +32,6 @@ margin_top = -229.0
 margin_right = 310.0
 margin_bottom = -15.0
 color = Color( 0, 0, 0, 0.317647 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect3" type="ColorRect" parent="Bg002"]
 margin_left = -312.0
@@ -80,9 +73,6 @@ margin_bottom = 40.0
 margin_right = 320.0
 margin_bottom = 240.0
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_lock_": true
-}
 player = true
 
 [node name="Wizard" parent="Boxes/Box1" instance=ExtResource( 2 )]
@@ -107,18 +97,18 @@ theme = ExtResource( 4 )
 text = "Color"
 
 [node name="Left" type="Button" parent="Boxes/Box1/Color"]
-margin_left = -36.0
-margin_top = -5.0
-margin_right = -14.0
-margin_bottom = 31.0
+margin_left = -24.0
+margin_top = -8.0
+margin_right = -2.0
+margin_bottom = 28.0
 icon = ExtResource( 5 )
 flat = true
 
 [node name="Right" type="Button" parent="Boxes/Box1/Color"]
-margin_left = 83.0
-margin_top = -5.0
-margin_right = 105.0
-margin_bottom = 31.0
+margin_left = 82.0
+margin_top = -9.0
+margin_right = 104.0
+margin_bottom = 27.0
 icon = ExtResource( 6 )
 flat = true
 
@@ -132,18 +122,18 @@ text = "Hat"
 align = 1
 
 [node name="Left" type="Button" parent="Boxes/Box1/Hat"]
-margin_left = -18.0
-margin_top = -5.0
-margin_right = 4.0
-margin_bottom = 31.0
+margin_left = -11.0
+margin_top = -9.0
+margin_right = 11.0
+margin_bottom = 27.0
 icon = ExtResource( 5 )
 flat = true
 
 [node name="Right" type="Button" parent="Boxes/Box1/Hat"]
-margin_left = 71.0
-margin_top = -5.0
-margin_right = 93.0
-margin_bottom = 31.0
+margin_left = 67.0
+margin_top = -10.0
+margin_right = 89.0
+margin_bottom = 26.0
 icon = ExtResource( 6 )
 flat = true
 
@@ -157,18 +147,18 @@ text = "Hair"
 align = 1
 
 [node name="Left" type="Button" parent="Boxes/Box1/Hair"]
-margin_left = -20.0
-margin_top = -4.0
-margin_right = 2.0
-margin_bottom = 32.0
+margin_left = -14.0
+margin_top = -10.0
+margin_right = 8.0
+margin_bottom = 26.0
 icon = ExtResource( 5 )
 flat = true
 
 [node name="Right" type="Button" parent="Boxes/Box1/Hair"]
-margin_left = 72.0
-margin_top = -4.0
-margin_right = 94.0
-margin_bottom = 32.0
+margin_left = 69.0
+margin_top = -10.0
+margin_right = 91.0
+margin_bottom = 26.0
 icon = ExtResource( 6 )
 flat = true
 
@@ -182,17 +172,18 @@ text = "SKin"
 align = 1
 
 [node name="Left" type="Button" parent="Boxes/Box1/Skin"]
-margin_left = -22.0
-margin_top = -4.0
-margin_bottom = 32.0
+margin_left = -13.0
+margin_top = -9.0
+margin_right = 9.0
+margin_bottom = 27.0
 icon = ExtResource( 5 )
 flat = true
 
 [node name="Right" type="Button" parent="Boxes/Box1/Skin"]
-margin_left = 71.0
-margin_top = -4.0
-margin_right = 93.0
-margin_bottom = 32.0
+margin_left = 69.0
+margin_top = -10.0
+margin_right = 91.0
+margin_bottom = 26.0
 icon = ExtResource( 6 )
 flat = true
 
@@ -207,18 +198,18 @@ Color"
 align = 1
 
 [node name="Left" type="Button" parent="Boxes/Box1/HairColor"]
-margin_left = -27.0
-margin_top = 15.0
-margin_right = -5.0
-margin_bottom = 51.0
+margin_left = -23.0
+margin_top = 4.0
+margin_right = -1.0
+margin_bottom = 40.0
 icon = ExtResource( 5 )
 flat = true
 
 [node name="Right" type="Button" parent="Boxes/Box1/HairColor"]
-margin_left = 79.0
-margin_top = 15.0
-margin_right = 101.0
-margin_bottom = 51.0
+margin_left = 78.0
+margin_top = 6.0
+margin_right = 100.0
+margin_bottom = 42.0
 icon = ExtResource( 6 )
 flat = true
 
@@ -232,12 +223,12 @@ theme = ExtResource( 4 )
 [node name="CheckBox" type="CheckBox" parent="Boxes/Box1"]
 anchor_right = 0.075
 anchor_bottom = 0.1
-margin_left = 166.0
-margin_top = 202.0
-margin_right = 221.0
-margin_bottom = 204.0
+margin_left = 189.0
+margin_top = 199.0
+margin_right = 284.0
+margin_bottom = 205.0
 focus_mode = 0
-custom_fonts/font = SubResource( 1 )
+theme = ExtResource( 4 )
 enabled_focus_mode = 0
 text = "Ready?"
 
@@ -246,9 +237,7 @@ margin_left = 320.0
 margin_right = 640.0
 margin_bottom = 240.0
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_lock_": true
-}
+player = true
 
 [node name="Wizard" parent="Boxes/Box2" instance=ExtResource( 2 )]
 position = Vector2( 154, 99 )
@@ -271,18 +260,18 @@ theme = ExtResource( 4 )
 text = "Color"
 
 [node name="Left" type="Button" parent="Boxes/Box2/Color"]
-margin_left = -36.0
-margin_top = -5.0
-margin_right = -14.0
-margin_bottom = 31.0
+margin_left = -24.0
+margin_top = -8.0
+margin_right = -2.0
+margin_bottom = 28.0
 icon = ExtResource( 5 )
 flat = true
 
 [node name="Right" type="Button" parent="Boxes/Box2/Color"]
-margin_left = 83.0
-margin_top = -5.0
-margin_right = 105.0
-margin_bottom = 31.0
+margin_left = 82.0
+margin_top = -9.0
+margin_right = 104.0
+margin_bottom = 27.0
 icon = ExtResource( 6 )
 flat = true
 
@@ -296,18 +285,18 @@ text = "Hat"
 align = 1
 
 [node name="Left" type="Button" parent="Boxes/Box2/Hat"]
-margin_left = -18.0
-margin_top = -5.0
-margin_right = 4.0
-margin_bottom = 31.0
+margin_left = -11.0
+margin_top = -9.0
+margin_right = 11.0
+margin_bottom = 27.0
 icon = ExtResource( 5 )
 flat = true
 
 [node name="Right" type="Button" parent="Boxes/Box2/Hat"]
-margin_left = 71.0
-margin_top = -5.0
-margin_right = 93.0
-margin_bottom = 31.0
+margin_left = 67.0
+margin_top = -10.0
+margin_right = 89.0
+margin_bottom = 26.0
 icon = ExtResource( 6 )
 flat = true
 
@@ -321,18 +310,18 @@ text = "Hair"
 align = 1
 
 [node name="Left" type="Button" parent="Boxes/Box2/Hair"]
-margin_left = -20.0
-margin_top = -4.0
-margin_right = 2.0
-margin_bottom = 32.0
+margin_left = -14.0
+margin_top = -10.0
+margin_right = 8.0
+margin_bottom = 26.0
 icon = ExtResource( 5 )
 flat = true
 
 [node name="Right" type="Button" parent="Boxes/Box2/Hair"]
-margin_left = 72.0
-margin_top = -4.0
-margin_right = 94.0
-margin_bottom = 32.0
+margin_left = 69.0
+margin_top = -10.0
+margin_right = 91.0
+margin_bottom = 26.0
 icon = ExtResource( 6 )
 flat = true
 
@@ -346,17 +335,18 @@ text = "SKin"
 align = 1
 
 [node name="Left" type="Button" parent="Boxes/Box2/Skin"]
-margin_left = -22.0
-margin_top = -4.0
-margin_bottom = 32.0
+margin_left = -13.0
+margin_top = -9.0
+margin_right = 9.0
+margin_bottom = 27.0
 icon = ExtResource( 5 )
 flat = true
 
 [node name="Right" type="Button" parent="Boxes/Box2/Skin"]
-margin_left = 71.0
-margin_top = -4.0
-margin_right = 93.0
-margin_bottom = 32.0
+margin_left = 69.0
+margin_top = -10.0
+margin_right = 91.0
+margin_bottom = 26.0
 icon = ExtResource( 6 )
 flat = true
 
@@ -371,18 +361,18 @@ Color"
 align = 1
 
 [node name="Left" type="Button" parent="Boxes/Box2/HairColor"]
-margin_left = -27.0
-margin_top = 15.0
-margin_right = -5.0
-margin_bottom = 51.0
+margin_left = -23.0
+margin_top = 4.0
+margin_right = -1.0
+margin_bottom = 40.0
 icon = ExtResource( 5 )
 flat = true
 
 [node name="Right" type="Button" parent="Boxes/Box2/HairColor"]
-margin_left = 79.0
-margin_top = 15.0
-margin_right = 101.0
-margin_bottom = 51.0
+margin_left = 78.0
+margin_top = 6.0
+margin_right = 100.0
+margin_bottom = 42.0
 icon = ExtResource( 6 )
 flat = true
 
@@ -396,12 +386,12 @@ theme = ExtResource( 4 )
 [node name="CheckBox" type="CheckBox" parent="Boxes/Box2"]
 anchor_right = 0.075
 anchor_bottom = 0.1
-margin_left = 166.0
-margin_top = 202.0
-margin_right = 221.0
-margin_bottom = 204.0
+margin_left = 189.0
+margin_top = 199.0
+margin_right = 284.0
+margin_bottom = 205.0
 focus_mode = 0
-custom_fonts/font = SubResource( 1 )
+theme = ExtResource( 4 )
 enabled_focus_mode = 0
 text = "Ready?"
 
@@ -410,9 +400,7 @@ margin_top = 240.0
 margin_right = 320.0
 margin_bottom = 480.0
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_lock_": true
-}
+player = true
 
 [node name="Wizard" parent="Boxes/Box3" instance=ExtResource( 2 )]
 position = Vector2( 154, 99 )
@@ -435,18 +423,18 @@ theme = ExtResource( 4 )
 text = "Color"
 
 [node name="Left" type="Button" parent="Boxes/Box3/Color"]
-margin_left = -36.0
-margin_top = -5.0
-margin_right = -14.0
-margin_bottom = 31.0
+margin_left = -24.0
+margin_top = -8.0
+margin_right = -2.0
+margin_bottom = 28.0
 icon = ExtResource( 5 )
 flat = true
 
 [node name="Right" type="Button" parent="Boxes/Box3/Color"]
-margin_left = 83.0
-margin_top = -5.0
-margin_right = 105.0
-margin_bottom = 31.0
+margin_left = 82.0
+margin_top = -9.0
+margin_right = 104.0
+margin_bottom = 27.0
 icon = ExtResource( 6 )
 flat = true
 
@@ -460,18 +448,18 @@ text = "Hat"
 align = 1
 
 [node name="Left" type="Button" parent="Boxes/Box3/Hat"]
-margin_left = -18.0
-margin_top = -5.0
-margin_right = 4.0
-margin_bottom = 31.0
+margin_left = -11.0
+margin_top = -9.0
+margin_right = 11.0
+margin_bottom = 27.0
 icon = ExtResource( 5 )
 flat = true
 
 [node name="Right" type="Button" parent="Boxes/Box3/Hat"]
-margin_left = 71.0
-margin_top = -5.0
-margin_right = 93.0
-margin_bottom = 31.0
+margin_left = 67.0
+margin_top = -10.0
+margin_right = 89.0
+margin_bottom = 26.0
 icon = ExtResource( 6 )
 flat = true
 
@@ -485,18 +473,18 @@ text = "Hair"
 align = 1
 
 [node name="Left" type="Button" parent="Boxes/Box3/Hair"]
-margin_left = -20.0
-margin_top = -4.0
-margin_right = 2.0
-margin_bottom = 32.0
+margin_left = -14.0
+margin_top = -10.0
+margin_right = 8.0
+margin_bottom = 26.0
 icon = ExtResource( 5 )
 flat = true
 
 [node name="Right" type="Button" parent="Boxes/Box3/Hair"]
-margin_left = 72.0
-margin_top = -4.0
-margin_right = 94.0
-margin_bottom = 32.0
+margin_left = 69.0
+margin_top = -10.0
+margin_right = 91.0
+margin_bottom = 26.0
 icon = ExtResource( 6 )
 flat = true
 
@@ -510,17 +498,18 @@ text = "SKin"
 align = 1
 
 [node name="Left" type="Button" parent="Boxes/Box3/Skin"]
-margin_left = -22.0
-margin_top = -4.0
-margin_bottom = 32.0
+margin_left = -13.0
+margin_top = -9.0
+margin_right = 9.0
+margin_bottom = 27.0
 icon = ExtResource( 5 )
 flat = true
 
 [node name="Right" type="Button" parent="Boxes/Box3/Skin"]
-margin_left = 71.0
-margin_top = -4.0
-margin_right = 93.0
-margin_bottom = 32.0
+margin_left = 69.0
+margin_top = -10.0
+margin_right = 91.0
+margin_bottom = 26.0
 icon = ExtResource( 6 )
 flat = true
 
@@ -535,18 +524,18 @@ Color"
 align = 1
 
 [node name="Left" type="Button" parent="Boxes/Box3/HairColor"]
-margin_left = -27.0
-margin_top = 15.0
-margin_right = -5.0
-margin_bottom = 51.0
+margin_left = -23.0
+margin_top = 4.0
+margin_right = -1.0
+margin_bottom = 40.0
 icon = ExtResource( 5 )
 flat = true
 
 [node name="Right" type="Button" parent="Boxes/Box3/HairColor"]
-margin_left = 79.0
-margin_top = 15.0
-margin_right = 101.0
-margin_bottom = 51.0
+margin_left = 78.0
+margin_top = 6.0
+margin_right = 100.0
+margin_bottom = 42.0
 icon = ExtResource( 6 )
 flat = true
 
@@ -560,12 +549,12 @@ theme = ExtResource( 4 )
 [node name="CheckBox" type="CheckBox" parent="Boxes/Box3"]
 anchor_right = 0.075
 anchor_bottom = 0.1
-margin_left = 166.0
-margin_top = 202.0
-margin_right = 221.0
-margin_bottom = 204.0
+margin_left = 189.0
+margin_top = 199.0
+margin_right = 284.0
+margin_bottom = 205.0
 focus_mode = 0
-custom_fonts/font = SubResource( 1 )
+theme = ExtResource( 4 )
 enabled_focus_mode = 0
 text = "Ready?"
 
@@ -575,9 +564,7 @@ margin_top = 240.0
 margin_right = 640.0
 margin_bottom = 480.0
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_lock_": true
-}
+player = true
 
 [node name="Wizard" parent="Boxes/Box4" instance=ExtResource( 2 )]
 position = Vector2( 154, 99 )
@@ -600,18 +587,18 @@ theme = ExtResource( 4 )
 text = "Color"
 
 [node name="Left" type="Button" parent="Boxes/Box4/Color"]
-margin_left = -36.0
-margin_top = -5.0
-margin_right = -14.0
-margin_bottom = 31.0
+margin_left = -24.0
+margin_top = -8.0
+margin_right = -2.0
+margin_bottom = 28.0
 icon = ExtResource( 5 )
 flat = true
 
 [node name="Right" type="Button" parent="Boxes/Box4/Color"]
-margin_left = 83.0
-margin_top = -5.0
-margin_right = 105.0
-margin_bottom = 31.0
+margin_left = 82.0
+margin_top = -9.0
+margin_right = 104.0
+margin_bottom = 27.0
 icon = ExtResource( 6 )
 flat = true
 
@@ -625,18 +612,18 @@ text = "Hat"
 align = 1
 
 [node name="Left" type="Button" parent="Boxes/Box4/Hat"]
-margin_left = -18.0
-margin_top = -5.0
-margin_right = 4.0
-margin_bottom = 31.0
+margin_left = -11.0
+margin_top = -9.0
+margin_right = 11.0
+margin_bottom = 27.0
 icon = ExtResource( 5 )
 flat = true
 
 [node name="Right" type="Button" parent="Boxes/Box4/Hat"]
-margin_left = 71.0
-margin_top = -5.0
-margin_right = 93.0
-margin_bottom = 31.0
+margin_left = 67.0
+margin_top = -10.0
+margin_right = 89.0
+margin_bottom = 26.0
 icon = ExtResource( 6 )
 flat = true
 
@@ -650,18 +637,18 @@ text = "Hair"
 align = 1
 
 [node name="Left" type="Button" parent="Boxes/Box4/Hair"]
-margin_left = -20.0
-margin_top = -4.0
-margin_right = 2.0
-margin_bottom = 32.0
+margin_left = -14.0
+margin_top = -10.0
+margin_right = 8.0
+margin_bottom = 26.0
 icon = ExtResource( 5 )
 flat = true
 
 [node name="Right" type="Button" parent="Boxes/Box4/Hair"]
-margin_left = 72.0
-margin_top = -4.0
-margin_right = 94.0
-margin_bottom = 32.0
+margin_left = 69.0
+margin_top = -10.0
+margin_right = 91.0
+margin_bottom = 26.0
 icon = ExtResource( 6 )
 flat = true
 
@@ -675,17 +662,18 @@ text = "SKin"
 align = 1
 
 [node name="Left" type="Button" parent="Boxes/Box4/Skin"]
-margin_left = -22.0
-margin_top = -4.0
-margin_bottom = 32.0
+margin_left = -13.0
+margin_top = -9.0
+margin_right = 9.0
+margin_bottom = 27.0
 icon = ExtResource( 5 )
 flat = true
 
 [node name="Right" type="Button" parent="Boxes/Box4/Skin"]
-margin_left = 71.0
-margin_top = -4.0
-margin_right = 93.0
-margin_bottom = 32.0
+margin_left = 69.0
+margin_top = -10.0
+margin_right = 91.0
+margin_bottom = 26.0
 icon = ExtResource( 6 )
 flat = true
 
@@ -700,18 +688,18 @@ Color"
 align = 1
 
 [node name="Left" type="Button" parent="Boxes/Box4/HairColor"]
-margin_left = -27.0
-margin_top = 15.0
-margin_right = -5.0
-margin_bottom = 51.0
+margin_left = -23.0
+margin_top = 4.0
+margin_right = -1.0
+margin_bottom = 40.0
 icon = ExtResource( 5 )
 flat = true
 
 [node name="Right" type="Button" parent="Boxes/Box4/HairColor"]
-margin_left = 79.0
-margin_top = 15.0
-margin_right = 101.0
-margin_bottom = 51.0
+margin_left = 78.0
+margin_top = 6.0
+margin_right = 100.0
+margin_bottom = 42.0
 icon = ExtResource( 6 )
 flat = true
 
@@ -725,12 +713,12 @@ theme = ExtResource( 4 )
 [node name="CheckBox" type="CheckBox" parent="Boxes/Box4"]
 anchor_right = 0.075
 anchor_bottom = 0.1
-margin_left = 166.0
-margin_top = 202.0
-margin_right = 221.0
-margin_bottom = 204.0
+margin_left = 189.0
+margin_top = 199.0
+margin_right = 284.0
+margin_bottom = 205.0
 focus_mode = 0
-custom_fonts/font = SubResource( 1 )
+theme = ExtResource( 4 )
 enabled_focus_mode = 0
 text = "Ready?"
 

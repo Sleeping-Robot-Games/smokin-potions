@@ -128,6 +128,8 @@ func get_thrown():
 	position = Vector2.ZERO
 	remove_collision_exception_with(holder)
 	z_index = 0
+	if holder.cardinal_facing == 'Front':
+		z_index = 2
 	$AnimationPlayer.play("Throw"+holder.cardinal_facing)
 	
 

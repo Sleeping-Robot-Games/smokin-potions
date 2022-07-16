@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://menus/map_selection/map_selection.gd" type="Script" id=1]
 [ext_resource path="res://menus/map_selection/rockgardenlevelnormal.PNG" type="Texture" id=2]
 [ext_resource path="res://menus/bg_001.png" type="Texture" id=3]
 [ext_resource path="res://menus/map_selection/rockgardenlevelpressed.PNG" type="Texture" id=4]
 [ext_resource path="res://menus/map_selection/rockgardenlevelhover.PNG" type="Texture" id=5]
+[ext_resource path="res://assets/fonts/BOMBERMA.TTF" type="DynamicFontData" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 6 )
 
 [node name="MapSection" type="Node2D"]
 script = ExtResource( 1 )
@@ -33,10 +37,11 @@ texture_pressed = ExtResource( 4 )
 texture_hover = ExtResource( 5 )
 
 [node name="Label" type="Label" parent="RockGardenButton"]
-margin_left = 77.0
+margin_left = 58.0
 margin_top = 193.0
-margin_right = 158.0
-margin_bottom = 207.0
+margin_right = 187.0
+margin_bottom = 210.0
+custom_fonts/font = SubResource( 1 )
 text = "Rock Garden"
 
 [connection signal="button_up" from="WizardTowerButton" to="." method="_on_Map_Selected_button_up" binds= [ "wizard_tower" ]]

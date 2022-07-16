@@ -14,6 +14,7 @@ var last_winner
 var breakable_positions = []
 
 func _ready():
+	
 	g.connect("elements_changed", self, "handle_elements_changed")
 	g.connect("player_death", self, "handle_player_death")
 	g.connect("player_revive", self, "handle_player_revive")
@@ -29,6 +30,9 @@ func _ready():
 		
 	for player in g.players_in_current_game:
 		add_player_to_game(player)
+		
+	$HUD/WinnerScreen/AnimationPlayer.play("show_winner")
+	$HUD/WinnerScreen/AnimationPlayer.play("star_bounce")
 
 func add_player_to_game(player):
 	# Adds player to game
@@ -108,7 +112,11 @@ func format_time():
 
 func _on_NextRound_timeout():
 	if win_state[last_winner.number] == 3:
-		$HUD/GameOver.text = "Player "+last_winner.number+" won!"
-		$HUD/GameOver.visible = true
+		$HUD/WinnerScreen/AnimationPlayer.play("show_winner")
+		$HUD/WinnerScreen/AnimationPlayer.play("star_bounce")
 	else:
 		next_round()
+
+
+func _on_Button_button_up():
+	get_tree().change_scene("res://menus/start/start.tscn")
