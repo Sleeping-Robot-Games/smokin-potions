@@ -5,10 +5,12 @@ const spikes = preload('res://potions/earth/spikes/spikes.tscn')
 func _ready():
 	activate()
 
+
 func _on_ExplodeTimer_timeout():
 	explode()
 
-func trigger_effect():		
+
+func trigger_effect():
 	$ExplosionArea/Explode.visible = true
 	$ExplosionArea/Explode.play()
 	var spikes_instance = spikes.instance()

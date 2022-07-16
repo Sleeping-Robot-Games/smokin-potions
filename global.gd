@@ -9,6 +9,11 @@ onready var potion_basic = preload('res://potions/basic/basic.tscn')
 onready var potion_fire = preload("res://potions/fire/fire.tscn")
 onready var potion_fire_fire = preload("res://potions/fire_fire/fire_fire.tscn")
 onready var potion_fire_ice = preload("res://potions/fire_ice/fire_ice.tscn")
+#onready var potion_fire_earth = preload("res://potions/fire_earth/fire_earth.tscn")
+onready var potion_fire_arcane = preload("res://potions/fire_arcane/fire_arcane.tscn")
+#onready var potion_ice = preload("res://potions/ice/ice.tscn")
+#onready var potion_ice_ice = preload("res://potions/ice_ice/ice_ice.tscn")
+#onready var potion_ice_earth = preload("res://potions/ice_earth/ice_earth.tscn")
 onready var potion_ice_arcane = preload("res://potions/ice_arcane/ice_arcane.tscn")
 onready var potion_earth = preload("res://potions/earth/earth.tscn")
 onready var potion_earth_earth = preload("res://potions/earth_earth/earth_earth.tscn")
@@ -22,7 +27,12 @@ onready var potion_dict = {
 	'basic': potion_basic,
 	'fire': potion_fire,
 	'fire_fire': potion_fire_fire,
+	'fire_arcane': potion_fire_arcane,
 	'fire_ice': potion_fire_ice,
+	#'fire_earth': potion_fire_earth,
+	#'ice': potion_ice,
+	#'ice_ice': potion_ice_ice,
+	#'ice_earth': potion_ice_earth,
 	'ice_arcane': potion_ice_arcane,
 	'earth': potion_earth,
 	'earth_earth': potion_earth_earth,
