@@ -31,8 +31,8 @@ func _ready():
 	for player in g.players_in_current_game:
 		add_player_to_game(player)
 		
-	$HUD/WinnerScreen/AnimationPlayer.play("show_winner")
-	$HUD/WinnerScreen/AnimationPlayer.play("star_bounce")
+	$HUD/AnimationPlayer.play("show_winner")
+	$HUD/AnimationPlayer.play("star_bounce")
 
 func add_player_to_game(player):
 	# Adds player to game

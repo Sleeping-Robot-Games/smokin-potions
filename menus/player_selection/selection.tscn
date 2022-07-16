@@ -237,7 +237,6 @@ margin_left = 320.0
 margin_right = 640.0
 margin_bottom = 240.0
 script = ExtResource( 3 )
-player = true
 
 [node name="Wizard" parent="Boxes/Box2" instance=ExtResource( 2 )]
 position = Vector2( 154, 99 )
@@ -400,7 +399,6 @@ margin_top = 240.0
 margin_right = 320.0
 margin_bottom = 480.0
 script = ExtResource( 3 )
-player = true
 
 [node name="Wizard" parent="Boxes/Box3" instance=ExtResource( 2 )]
 position = Vector2( 154, 99 )
@@ -564,7 +562,6 @@ margin_top = 240.0
 margin_right = 640.0
 margin_bottom = 480.0
 script = ExtResource( 3 )
-player = true
 
 [node name="Wizard" parent="Boxes/Box4" instance=ExtResource( 2 )]
 position = Vector2( 154, 99 )

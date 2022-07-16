@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/font-theme.tres" type="Theme" id=1]
 [ext_resource path="res://sfx/battle_bgm.ogg" type="AudioStream" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://pickups/star.png" type="Texture" id=4]
 [ext_resource path="res://levels/game.gd" type="Script" id=5]
 [ext_resource path="res://assets/fonts/BOMBERMA.TTF" type="DynamicFontData" id=6]
+[ext_resource path="res://potions/ice_arcane/laser_beam/laser_beam.tscn" type="PackedScene" id=7]
+[ext_resource path="res://potions/fire/fireball/fireball.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 10, 239.156 )
@@ -18,6 +20,12 @@ extents = Vector2( 10, 320 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15, 322.039 )
+
+[sub_resource type="Environment" id=11]
+background_mode = 4
+glow_enabled = true
+glow_blend_mode = 0
+glow_hdr_threshold = 1.5
 
 [sub_resource type="DynamicFont" id=6]
 font_data = ExtResource( 6 )
@@ -129,6 +137,15 @@ one_shot = true
 stream = ExtResource( 2 )
 volume_db = -20.0
 
+[node name="LaserBeam" parent="." instance=ExtResource( 7 )]
+position = Vector2( 140, 97 )
+
+[node name="Fireball" parent="." instance=ExtResource( 8 )]
+position = Vector2( 71, 153 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 11 )
+
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 2
 
@@ -141,6 +158,7 @@ theme = SubResource( 7 )
 bbcode_enabled = true
 
 [node name="WinnerScreen" type="Control" parent="HUD"]
+visible = false
 margin_top = -480.0
 margin_bottom = -480.0
 
@@ -152,7 +170,9 @@ color = Color( 0, 0, 0, 1 )
 [node name="WizardSprites" parent="HUD/WinnerScreen" instance=ExtResource( 3 )]
 position = Vector2( 531, 399 )
 scale = Vector2( 2, 2 )
+use_export_vars = true
 frame = 68
+p_number = "1"
 
 [node name="Label" type="Label" parent="HUD/WinnerScreen"]
 margin_left = 144.0
@@ -170,10 +190,6 @@ margin_right = 517.0
 margin_bottom = 410.189
 texture = ExtResource( 4 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/WinnerScreen"]
-anims/show_winner = SubResource( 8 )
-anims/star_bounce = SubResource( 10 )
-
 [node name="Button" type="Button" parent="HUD/WinnerScreen"]
 margin_left = 236.0
 margin_top = 414.0
@@ -182,6 +198,11 @@ margin_bottom = 442.0
 theme = ExtResource( 1 )
 text = "Play Again?"
 flat = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD"]
+root_node = NodePath("../WinnerScreen")
+anims/show_winner = SubResource( 8 )
+anims/star_bounce = SubResource( 10 )
 
 [connection signal="timeout" from="MatchTimer" to="." method="_on_MatchTimer_timeout"]
 [connection signal="timeout" from="NextRound" to="." method="_on_NextRound_timeout"]
