@@ -154,15 +154,6 @@ func reparent(node, new_parent):
 	new_parent.add_child(node)
 
 
-func play_random_sfx_2D(parent, name):
-	var sfx_player = AudioStreamPlayer2D.new()
-	rng.randomize()
-	var track_num = rng.randi_range(1, 5)
-	sfx_player.stream = load('res://sfx/'+name+'_'+str(track_num)+'.ogg')
-	sfx_player.connect("finished", sfx_player, "queue_free")
-	parent.add_child(sfx_player)
-	sfx_player.play()
-	
 func play_random_sfx(parent, name):
 	var sfx_player = AudioStreamPlayer.new()
 	rng.randomize()
@@ -172,15 +163,6 @@ func play_random_sfx(parent, name):
 	parent.add_child(sfx_player)
 	sfx_player.play()
 
-
-func play_sfx_2D(parent, name):
-	var sfx_player = AudioStreamPlayer2D.new()
-	rng.randomize()
-	var track_num = rng.randi_range(1, 5)
-	sfx_player.stream = load('res://sfx/'+name+'.ogg')
-	sfx_player.connect("finished", sfx_player, "queue_free")
-	parent.add_child(sfx_player)
-	sfx_player.play()
 
 func play_sfx(parent, name):
 	var sfx_player = AudioStreamPlayer.new()

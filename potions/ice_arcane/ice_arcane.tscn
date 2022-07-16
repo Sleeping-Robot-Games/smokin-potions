@@ -129,7 +129,7 @@ scale = Vector2( 0.625, 0.625 )
 frames = SubResource( 45 )
 
 [node name="Portal" parent="." index="3"]
-frame = 3
+frame = 2
 
 [node name="ExplosionArea" type="Area2D" parent="." index="6"]
 

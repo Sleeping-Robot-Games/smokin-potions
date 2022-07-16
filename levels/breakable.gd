@@ -14,7 +14,7 @@ func break():
 	$AnimationPlayer.play("fade_out")
 	$RespawnTimer.start()
 	var type = 'box' if g.level_selected == 'wizard_tower' else 'rock'
-	g.play_random_sfx_2D(self, type+'_breaking')
+	g.play_random_sfx(self, type+'_breaking')
 	
 func spawn():
 	var avail_sprites = g.files_in_dir('res://levels/'+g.level_selected+'/breakable/unbroken/')

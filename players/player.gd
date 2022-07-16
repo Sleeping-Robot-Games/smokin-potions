@@ -37,6 +37,7 @@ var ghost = false
 var dead = false
 var potion_drop_distance = 10
 var rune_drop_distance = 30
+var apply_elements = false
 
 const rune_scene = preload('res://pickups/runes/rune.tscn')
 
@@ -50,6 +51,9 @@ func ready():
 func place_potion():
 	if not potion_ready or ghost:
 		return
+#	var applied_elements = []
+#	if apply_elements:
+#
 	var p = g.get_potion_scene(elements).instance()
 	p.global_position = Vector2(global_position.x, global_position.y + potion_drop_distance)
 	p.parent_player = self
@@ -82,7 +86,7 @@ func take_dmg(dmg, potion):
 	g.emit_signal('health_changed', health, true, number)
 	
 	if health > 0:
-		g.play_random_sfx_2D(self, 'hurt')
+		g.play_random_sfx(self, 'hurt')
 		anim_player.play('Hurt'+y_facing+x_facing)
 		modulate = Color(1, .25, .25, 1)
 		$HurtTimer.start()
@@ -90,7 +94,7 @@ func take_dmg(dmg, potion):
 		$FloatTextManager.float_text("-"+str(dmg)+" HP", Color(1,0,0,1))
 		
 	if health <= 0:
-		g.play_random_sfx_2D(self, 'dying')
+		g.play_random_sfx(self, 'dying')
 		g.emit_signal("player_death", self)
 		anim_player.play('Death'+y_facing+x_facing)
 		dead = true
@@ -114,7 +118,7 @@ func revive(hp = 1):
 func get_stunned():
 	if dead:
 		return
-	g.play_sfx_2D(self, 'character_stunned')
+	g.play_sfx(self, 'character_stunned')
 	disabled = true
 	$StunnedTimer.start()
 	anim_player.play('Daze'+y_facing+x_facing)
@@ -206,7 +210,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 			kicking_potion.kick(kicking_impulse, self)
 		kicking_potion = null
 		kicking_impulse = Vector2.ZERO
-		g.play_sfx_2D(self, 'kicking_potion')
+		g.play_sfx(self, 'kicking_potion')
 	if "Throw" in anim_name or 'Hurt' in anim_name:
 		anim_player.play("Idle"+y_facing+x_facing)
 
@@ -221,5 +225,4 @@ func _on_BombPickupArea_area_exited(area):
 	if area.name == 'PotionPickupArea' and nearby_potions.find(area.get_parent()) != -1:
 		var potion = area.get_parent()
 		nearby_potions.erase(potion)
-		
 

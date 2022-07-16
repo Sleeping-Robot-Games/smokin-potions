@@ -212,8 +212,8 @@ rect_scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
 [node name="PUi" type="Sprite" parent="."]
-position = Vector2( 47.5, 22 )
-scale = Vector2( 1.43939, 1.375 )
+position = Vector2( 48.0001, 22 )
+scale = Vector2( 1.45454, 1.375 )
 texture = ExtResource( 8 )
 flip_h = true
 

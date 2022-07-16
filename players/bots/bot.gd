@@ -13,6 +13,9 @@ func ready():
 		s_ray.add_exception(self)
 	for w_ray in $WallRays.get_children():
 		w_ray.add_exception(self)
+	
+	# Whenver a bot gets an element it's just gonna apply it automatically
+	apply_elements = true
 
 
 

@@ -77,7 +77,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		holder = null
 		potion_daddy.queue_free()
 		potion_daddy = null
-		g.play_sfx_2D(self, 'potion_landing')
+		g.play_sfx(self, 'potion_landing')
 
 
 func explode():
