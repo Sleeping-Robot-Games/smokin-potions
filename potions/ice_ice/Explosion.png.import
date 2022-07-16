@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ice.png-fd9ff9215f9108e38c01588e0ab9eb86.stex"
+path="res://.import/Explosion.png-4430c94f7d8440abb3866585d00abb77.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://potions/ice.png"
-dest_files=[ "res://.import/ice.png-fd9ff9215f9108e38c01588e0ab9eb86.stex" ]
+source_file="res://potions/ice_ice/Explosion.png"
+dest_files=[ "res://.import/Explosion.png-4430c94f7d8440abb3866585d00abb77.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
