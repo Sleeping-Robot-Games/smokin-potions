@@ -2,8 +2,6 @@ extends Node2D
 
 export (int) var speed = 100
 
-var last_wiz
-
 
 func _ready():
 	$Area2D.connect('area_shape_entered', self, '_on_area_shape_entered')
@@ -17,7 +15,8 @@ func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index)
 
 func _on_body_entered(body):
 	if body and weakref(body).get_ref() and 'Wizard' in body.name or 'Bot' in body.name:
-		body.take_dmg(1, self)
+		#body.take_dmg(1, self)
+		pass
 
 
 func _on_SelfDestructTimer_timeout():

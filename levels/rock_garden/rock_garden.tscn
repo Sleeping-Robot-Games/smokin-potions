@@ -897,26 +897,26 @@ position = Vector2( 67, 230 )
 [node name="Durable5" parent="YSort" index="22" instance=ExtResource( 3 )]
 position = Vector2( 554, 230 )
 
-[node name="NoLava" type="Node2D" parent="." index="3"]
+[node name="NoLavaOrIce" type="Node2D" parent="." index="3"]
 
-[node name="Area2D" type="Area2D" parent="NoLava" index="0"]
+[node name="Area2D" type="Area2D" parent="NoLavaOrIce" index="0"]
 collision_layer = 256
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NoLava/Area2D" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NoLavaOrIce/Area2D" index="0"]
 position = Vector2( -25, 231.5 )
 shape = SubResource( 6 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="NoLava/Area2D" index="1"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="NoLavaOrIce/Area2D" index="1"]
 position = Vector2( 327.124, 499.531 )
 scale = Vector2( 2.70922, 0.138381 )
 shape = SubResource( 7 )
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="NoLava/Area2D" index="2"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="NoLavaOrIce/Area2D" index="2"]
 position = Vector2( 667, 234 )
 shape = SubResource( 8 )
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="NoLava/Area2D" index="3"]
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="NoLavaOrIce/Area2D" index="3"]
 position = Vector2( 327, -18 )
 scale = Vector2( 2.70922, 0.138381 )
 shape = SubResource( 9 )
