@@ -31,8 +31,6 @@ func _ready():
 	for player in g.players_in_current_game:
 		add_player_to_game(player)
 		
-	$HUD/AnimationPlayer.play("show_winner")
-	$HUD/AnimationPlayer.play("star_bounce")
 
 func add_player_to_game(player):
 	# Adds player to game
@@ -112,8 +110,13 @@ func format_time():
 
 func _on_NextRound_timeout():
 	if win_state[last_winner.number] == 3:
-		$HUD/WinnerScreen/AnimationPlayer.play("show_winner")
-		$HUD/WinnerScreen/AnimationPlayer.play("star_bounce")
+		for potion in get_tree().get_nodes_in_group('potions'):
+			potion.queue_free()
+		for ui in get_tree().get_nodes_in_group('player_ui'):
+			ui.visible = false
+		$HUD/AnimationPlayer.play("show_winner")
+		$HUD/WinnerScreen/Star/AnimationPlayer.play("star_bounce")
+		$HUD/WinnerScreen/Label.text = 'Player '+last_winner.number+' wins!'
 	else:
 		next_round()
 

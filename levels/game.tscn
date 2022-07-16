@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/font-theme.tres" type="Theme" id=1]
 [ext_resource path="res://sfx/battle_bgm.ogg" type="AudioStream" id=2]
@@ -6,8 +6,7 @@
 [ext_resource path="res://pickups/star.png" type="Texture" id=4]
 [ext_resource path="res://levels/game.gd" type="Script" id=5]
 [ext_resource path="res://assets/fonts/BOMBERMA.TTF" type="DynamicFontData" id=6]
-[ext_resource path="res://potions/ice_arcane/laser_beam/laser_beam.tscn" type="PackedScene" id=7]
-[ext_resource path="res://potions/fire/fireball/fireball.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/star_bounce.tres" type="Animation" id=7]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 10, 239.156 )
@@ -50,22 +49,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, -480 ), Vector2( 0, 0 ) ]
-}
-
-[sub_resource type="Animation" id=10]
-resource_name = "star_bounce"
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Star:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 453, 335 ), Vector2( 453, 350 ), Vector2( 453, 335 ) ]
 }
 
 [node name="Game" type="Node"]
@@ -137,12 +120,6 @@ one_shot = true
 stream = ExtResource( 2 )
 volume_db = -20.0
 
-[node name="LaserBeam" parent="." instance=ExtResource( 7 )]
-position = Vector2( 140, 97 )
-
-[node name="Fireball" parent="." instance=ExtResource( 8 )]
-position = Vector2( 71, 153 )
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 11 )
 
@@ -158,7 +135,6 @@ theme = SubResource( 7 )
 bbcode_enabled = true
 
 [node name="WinnerScreen" type="Control" parent="HUD"]
-visible = false
 margin_top = -480.0
 margin_bottom = -480.0
 
@@ -185,10 +161,13 @@ text = "Player 1 wins!"
 
 [node name="Star" type="TextureRect" parent="HUD/WinnerScreen"]
 margin_left = 453.0
-margin_top = 346.189
+margin_top = 341.891
 margin_right = 517.0
-margin_bottom = 410.189
+margin_bottom = 405.891
 texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/WinnerScreen/Star"]
+anims/star_bounce = ExtResource( 7 )
 
 [node name="Button" type="Button" parent="HUD/WinnerScreen"]
 margin_left = 236.0
@@ -202,7 +181,6 @@ flat = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HUD"]
 root_node = NodePath("../WinnerScreen")
 anims/show_winner = SubResource( 8 )
-anims/star_bounce = SubResource( 10 )
 
 [connection signal="timeout" from="MatchTimer" to="." method="_on_MatchTimer_timeout"]
 [connection signal="timeout" from="NextRound" to="." method="_on_NextRound_timeout"]
