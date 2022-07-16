@@ -45,6 +45,8 @@ var players_in_current_game = []
 
 var level_selected = 'rock_garden'
 
+var new_game = true
+
 
 func get_potion_scene(elements):
 	if elements.size() == 0:
@@ -116,6 +118,7 @@ func load_player(parent_node: Node2D, player_number: String):
 				part.material.set_shader_param("palette_swap", load("res://players/wizard/creator/palette/"+part.name+"/"+part.name+"_"+data.pallete_sprite_state[part.name]+".png"))
 				part.material.set_shader_param("greyscale_palette", load("res://players/wizard/creator/palette/"+part.name+"/"+part.name+"_000.png"))
 			make_shaders_unique(part)
+	return data
 			
 func load_normal_assets(parent_node: Node2D, player_number: String):
 	var f = File.new()

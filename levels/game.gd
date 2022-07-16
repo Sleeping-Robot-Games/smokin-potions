@@ -4,6 +4,7 @@ onready var wizard = preload('res://players/wizard/wizard.tscn')
 onready var bot = preload("res://players/bots/bot.tscn")
 onready var ui = preload('res://levels/player_ui.tscn')
 onready var breakable = preload('res://levels/breakable.tscn')
+onready var wizard_sprites = preload('res://levels/wizard_sprites.tscn')
 
 onready var match_time = get_node("HUD/MatchTime")
 var seconds = 120
@@ -18,7 +19,7 @@ func _ready():
 	g.connect("elements_changed", self, "handle_elements_changed")
 	g.connect("player_death", self, "handle_player_death")
 	g.connect("player_revive", self, "handle_player_revive")
-	print(g.players_in_current_game)
+	
 	## USED FOR DEBUGGING ##
 	if g.players_in_current_game.size() == 0:
 		g.players_in_current_game = [
@@ -30,6 +31,18 @@ func _ready():
 		
 	for player in g.players_in_current_game:
 		add_player_to_game(player)
+		
+		
+	$HUD/AnimationPlayer.play("show_winner")
+	$HUD/WinnerScreen/Star/AnimationPlayer.play("star_bounce")
+	$HUD/WinnerScreen/Label.text = 'Player '+'1'+' wins!'
+	var wiz_sprites = wizard_sprites.instance()
+	wiz_sprites.use_export_vars = true
+	wiz_sprites.p_number = '1'
+	wiz_sprites.frame = 68
+	wiz_sprites.scale = Vector2(3, 3)
+	wiz_sprites.position = $HUD/WinnerScreen/Position2D.position
+	$HUD/WinnerScreen.add_child(wiz_sprites)
 		
 
 func add_player_to_game(player):
@@ -120,6 +133,12 @@ func _on_NextRound_timeout():
 		$HUD/AnimationPlayer.play("show_winner")
 		$HUD/WinnerScreen/Star/AnimationPlayer.play("star_bounce")
 		$HUD/WinnerScreen/Label.text = 'Player '+last_winner.number+' wins!'
+		var wiz_sprites = wizard_sprites.instance()
+		wiz_sprites.use_export_vars = true
+		wiz_sprites.p_number = last_winner.number
+		wiz_sprites.frame = 68
+		wiz_sprites.position = $HUD/WinnerScreen/Position2D.position
+		$HUD/WinnerScreen.add_child(wiz_sprites)
 	else:
 		next_round()
 
@@ -127,3 +146,4 @@ func _on_NextRound_timeout():
 func _on_Button_button_up():
 	g.players_in_current_game = []
 	get_tree().change_scene("res://menus/start/start.tscn")
+	g.new_game = false

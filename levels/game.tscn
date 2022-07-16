@@ -1,8 +1,7 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/font-theme.tres" type="Theme" id=1]
 [ext_resource path="res://sfx/battle_bgm.ogg" type="AudioStream" id=2]
-[ext_resource path="res://levels/wizard_sprites.tscn" type="PackedScene" id=3]
 [ext_resource path="res://pickups/star.png" type="Texture" id=4]
 [ext_resource path="res://levels/game.gd" type="Script" id=5]
 [ext_resource path="res://assets/fonts/BOMBERMA.TTF" type="DynamicFontData" id=6]
@@ -119,7 +118,6 @@ one_shot = true
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 volume_db = -15.0
-autoplay = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 11 )
@@ -143,13 +141,6 @@ margin_bottom = -480.0
 margin_right = 640.0
 margin_bottom = 480.0
 color = Color( 0, 0, 0, 1 )
-
-[node name="WizardSprites" parent="HUD/WinnerScreen" instance=ExtResource( 3 )]
-position = Vector2( 531, 399 )
-scale = Vector2( 2, 2 )
-use_export_vars = true
-frame = 68
-p_number = "1"
 
 [node name="Label" type="Label" parent="HUD/WinnerScreen"]
 margin_left = 144.0
@@ -178,6 +169,9 @@ margin_bottom = 442.0
 theme = ExtResource( 1 )
 text = "Play Again?"
 flat = true
+
+[node name="Position2D" type="Position2D" parent="HUD/WinnerScreen"]
+position = Vector2( 535, 379 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HUD"]
 root_node = NodePath("../WinnerScreen")

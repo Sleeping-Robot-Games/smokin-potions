@@ -118,14 +118,16 @@ func set_random_texture(sprite_name: String) -> void:
 func create_random_character() -> void:
 	var sprite_folders = g.folders_in_dir(sprite_folder_path)
 	var palette_folders = g.folders_in_dir(palette_folder_path)
-	print(sprite_folders)
-	print(palette_folders)
 	for folder in sprite_folders:
 		set_random_texture(folder)
 	for folder in palette_folders:
 		set_random_color(folder)
-		
 
+func create_loaded_character() -> void:
+	var loaded_data = g.load_player($Wizard, number)
+	sprite_state = loaded_data.sprite_state
+	pallete_sprite_state = loaded_data.pallete_sprite_state
+	
 func _on_Random_button_up():
 	create_random_character()
 
@@ -138,8 +140,6 @@ func get_next_avail_color(direction):
 			return color.substr(6, 3)
 
 func _on_Color_Selection_button_up(direction: int, palette_sprite: String):
-	print(sprite_state)
-	print(pallete_sprite_state)
 	if palette_sprite == 'Color':
 		var folder_path = palette_folder_path + palette_sprite
 		var files = g.files_in_dir(folder_path)

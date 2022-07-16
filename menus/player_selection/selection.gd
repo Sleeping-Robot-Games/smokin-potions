@@ -7,7 +7,10 @@ var players = []
 func _ready():
 	var boxes = $Boxes.get_children()
 	for box in boxes:
-		box.create_random_character()
+		if g.new_game:
+			box.create_random_character()
+		else:
+			box.create_loaded_character()
 		box.get_node('Wizard').disabled = true
 		if box.player:
 			players.append(box)
@@ -43,6 +46,6 @@ func store_player_state(player):
 		'pallete_sprite_state': player.pallete_sprite_state
 	}
 	var f = File.new()
+	print("user://player_state_P"+ str(player.number) +".save")
 	f.open("user://player_state_P"+ str(player.number) +".save", File.WRITE)
-	f.store_string(JSON.print(player_customized_state, "  ", true))
 	f.close()
