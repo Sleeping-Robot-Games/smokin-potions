@@ -3308,6 +3308,13 @@ collision_mask = 16
 [node name="FloatTextManager" parent="." instance=ExtResource( 13 )]
 position = Vector2( 0, 0 )
 
+[node name="IceRay" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 15 )
+collision_mask = 512
+collide_with_areas = true
+collide_with_bodies = false
+
 [connection signal="area_shape_entered" from="PickupArea" to="." method="_on_PickupArea_area_shape_entered"]
 [connection signal="area_entered" from="BombPickupArea" to="." method="_on_BombPickupArea_area_entered"]
 [connection signal="area_exited" from="BombPickupArea" to="." method="_on_BombPickupArea_area_exited"]

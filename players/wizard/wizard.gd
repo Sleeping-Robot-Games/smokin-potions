@@ -7,14 +7,24 @@ func ready():
 
 func get_input():
 	velocity = Vector2()
-	if Input.is_action_pressed("right"):
-		velocity.x += 1
-	if Input.is_action_pressed("left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("down"):
-		velocity.y += 1
-	if Input.is_action_pressed("up"):
-		velocity.y -= 1
+	if $IceRay.is_colliding():
+		if cardinal_facing == "Right":
+			velocity.x += 1
+		elif cardinal_facing == "Left":
+			velocity.x -= 1
+		elif cardinal_facing == "Front":
+			velocity.y += 1
+		elif cardinal_facing == "Back":
+			velocity.y -= 1
+	else:
+		if Input.is_action_pressed("right"):
+			velocity.x += 1
+		if Input.is_action_pressed("left"):
+			velocity.x -= 1
+		if Input.is_action_pressed("down"):
+			velocity.y += 1
+		if Input.is_action_pressed("up"):
+			velocity.y -= 1
 	
 	if movement_enabled:
 		velocity = velocity.normalized() * speed
