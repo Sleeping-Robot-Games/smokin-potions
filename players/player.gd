@@ -206,7 +206,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 			kicking_potion.kick(kicking_impulse, self)
 		kicking_potion = null
 		kicking_impulse = Vector2.ZERO
-		g.play_random_sfx_2D(self, 'kicking_potion')
+		g.play_sfx_2D(self, 'kicking_potion')
 	if "Throw" in anim_name or 'Hurt' in anim_name:
 		anim_player.play("Idle"+y_facing+x_facing)
 
