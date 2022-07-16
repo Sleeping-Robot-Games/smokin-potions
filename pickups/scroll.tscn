@@ -158,3 +158,4 @@ anims/despawn = SubResource( 3 )
 anims/float = SubResource( 4 )
 
 [connection signal="timeout" from="DespawnTimer" to="." method="_on_DespawnTimer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

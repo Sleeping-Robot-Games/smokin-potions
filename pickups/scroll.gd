@@ -29,4 +29,4 @@ func _on_DespawnTimer_timeout():
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "despawn":
-		queue_free()
+		cleanup()

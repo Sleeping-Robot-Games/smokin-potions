@@ -20,6 +20,8 @@ func _ready():
 	activate()
 
 func trigger_effect():
+	$ExplosionArea/Explode.visible = true
+	$ExplosionArea/Explode.play()
 	var fireball_instance = fireball.instance()
 	fireball_instance.global_position = global_position
 	fireball_instance.last_wiz = last_wiz

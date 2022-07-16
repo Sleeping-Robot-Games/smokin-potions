@@ -177,8 +177,8 @@ func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_s
 			humungo()
 		elif scroll.magic == 'tinyboi':
 			tinyboi()
-		$ScrollTimer.start()
 		scroll.cleanup()
+		$ScrollTimer.start()
 		
 func humungo():
 	speed = 50
