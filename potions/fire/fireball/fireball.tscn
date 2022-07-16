@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://potions/fire/fireball/Fire-ball.png" type="Texture" id=1]
 [ext_resource path="res://potions/fire/fireball/fireball.gd" type="Script" id=2]
@@ -47,6 +47,37 @@ animations = [ {
 radius = 5.0
 height = 2.0
 
+[sub_resource type="Gradient" id=11]
+offsets = PoolRealArray( 0, 0.527473, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.921569, 0.47451, 0.0392157, 0.686275, 0.972549, 0.0156863, 0.0156863, 0.427451 )
+
+[sub_resource type="GradientTexture" id=12]
+gradient = SubResource( 11 )
+
+[sub_resource type="Curve" id=13]
+_data = [ Vector2( 0, 0.822727 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.404545 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=14]
+curve = SubResource( 13 )
+
+[sub_resource type="ParticlesMaterial" id=15]
+emission_shape = 1
+emission_sphere_radius = 20.0
+flag_disable_z = true
+direction = Vector3( -1, 0, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 40.0
+angular_velocity = 350.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 25.0
+angle = 45.0
+scale = 20.0
+scale_curve = SubResource( 14 )
+color_ramp = SubResource( 12 )
+
 [node name="Fireball" type="Area2D"]
 scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 2 )
@@ -55,7 +86,7 @@ script = ExtResource( 2 )
 position = Vector2( -5, -8 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 10 )
-frame = 7
+frame = 6
 speed_scale = 5.0
 playing = true
 
@@ -63,6 +94,13 @@ playing = true
 shape = SubResource( 1 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="Particles2D" type="Particles2D" parent="."]
+scale = Vector2( 0.25, 0.25 )
+amount = 120
+lifetime = 2.0
+speed_scale = 2.0
+process_material = SubResource( 15 )
 
 [connection signal="area_shape_entered" from="." to="." method="_on_Fireball_area_shape_entered"]
 [connection signal="body_entered" from="." to="." method="_on_Fireball_body_entered"]
