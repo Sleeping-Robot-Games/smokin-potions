@@ -128,38 +128,37 @@ __meta__ = {
 position = Vector2( 140, 373 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="Yellow" type="AnimatedSprite" parent="."]
 position = Vector2( 200, 373 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
-frame = 2
 playing = true
 
 [node name="Green" type="AnimatedSprite" parent="."]
 position = Vector2( 270, 373 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 3 )
+frame = 1
 playing = true
 
 [node name="Blue" type="AnimatedSprite" parent="."]
 position = Vector2( 333, 373 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 4 )
-frame = 2
 playing = true
 
 [node name="Purple" type="AnimatedSprite" parent="."]
 position = Vector2( 393, 373 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 5 )
-frame = 2
 playing = true
 
 [node name="Pink" type="AnimatedSprite" parent="."]
 position = Vector2( 459, 373 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 6 )
+frame = 1
 playing = true
