@@ -50,9 +50,9 @@ animations = [ {
 } ]
 
 [sub_resource type="Gradient" id=77]
-colors = PoolColorArray( 1, 1, 1, 0.0784314, 1, 1, 1, 0 )
+colors = PoolColorArray( 1, 1, 1, 0.0431373, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=76]
+[sub_resource type="GradientTexture" id=79]
 gradient = SubResource( 77 )
 
 [sub_resource type="ParticlesMaterial" id=78]
@@ -66,7 +66,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.02
 color = Color( 1.6, 1.6, 1.6, 0.67 )
-color_ramp = SubResource( 76 )
+color_ramp = SubResource( 79 )
 
 [sub_resource type="Animation" id=12]
 length = 3.5
@@ -145,7 +145,6 @@ flat = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Title/Button"]
 position = Vector2( -16, 30 )
 frames = SubResource( 5 )
-frame = 1
 playing = true
 
 [node name="Sprite" type="Sprite" parent="Title"]
@@ -155,9 +154,8 @@ texture = ExtResource( 6 )
 hframes = 4
 vframes = 4
 
-[node name="GhostParticles" type="Particles2D" parent="Title/Sprite"]
-position = Vector2( 1.39999, 22.4 )
-scale = Vector2( 1, 1 )
+[node name="SmokeParticles" type="Particles2D" parent="Title/Sprite"]
+position = Vector2( 0.799999, 22.6 )
 amount = 100
 lifetime = 4.0
 process_material = SubResource( 78 )

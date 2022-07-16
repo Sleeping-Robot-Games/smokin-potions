@@ -25,7 +25,6 @@ func trigger_effect():
 	fireball_instance.last_wiz = last_wiz
 	get_parent().add_child(fireball_instance)
 	fireball_instance.rotation_degrees = fx_dict[orginal_quadrant]
-	queue_free()
 
 func set_explode_timer():
 	var starting_quadrant = get_quadrant(original_potion) 
@@ -36,3 +35,7 @@ func set_explode_timer():
 		$ExplodeTimer.wait_time = (len(clockwise) - starting_quadrant_index) + (quadrant_index + 1)
 	else:
 		$ExplodeTimer.wait_time = (quadrant_index - starting_quadrant_index) + 1
+
+
+func _on_Explode_animation_finished():
+	queue_free()

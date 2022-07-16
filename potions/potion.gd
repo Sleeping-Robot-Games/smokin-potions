@@ -158,6 +158,8 @@ func _physics_process(delta):
 
 
 func _on_AnimatedSprite_animation_finished():
+	$SmokeParticles.emitting = false
+	$SmokeParticles.visible = false
 	$AnimatedSprite.visible = false
 	# prevents the potion from moving while the explode animation plays
 	mode = MODE_STATIC 

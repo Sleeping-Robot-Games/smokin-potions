@@ -11,10 +11,10 @@ func _on_ExplodeTimer_timeout():
 func trigger_effect():		
 	$ExplosionArea/Explode.visible = true
 	$ExplosionArea/Explode.play()
-
-func _on_Explode_animation_finished():
 	var smoke_instance = smoke.instance()
 	smoke_instance.global_position = global_position
 	get_node("/root/Game").add_child(smoke_instance)
+
+func _on_Explode_animation_finished():
 	queue_free()
 
