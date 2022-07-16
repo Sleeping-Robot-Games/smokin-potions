@@ -68,7 +68,7 @@ scale = Vector2( 0.625, 0.625 )
 
 [node name="Portal" parent="." index="3"]
 scale = Vector2( 0.75, 0.75 )
-frame = 5
+frame = 7
 
 [node name="PotionPickupArea" parent="." index="5"]
 scale = Vector2( 1.25, 1.25 )

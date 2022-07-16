@@ -3258,6 +3258,10 @@ one_shot = true
 wait_time = 3.0
 one_shot = true
 
+[node name="ScrollTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
 [node name="PotionRays" type="Node2D" parent="."]
 visible = false
 
@@ -3312,3 +3316,4 @@ position = Vector2( 0, 0 )
 [connection signal="timeout" from="PotionCooldown" to="." method="_on_PotionCooldown_timeout"]
 [connection signal="timeout" from="StunnedTimer" to="." method="_on_StunnedTimer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
+[connection signal="timeout" from="ScrollTimer" to="." method="_on_ScrollTimer_timeout"]

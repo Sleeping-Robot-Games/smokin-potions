@@ -36,6 +36,7 @@ var nearby_potions = []
 var holding_potion: RigidBody2D
 var ghost = false
 var dead = false
+var potion_drop_distance = 10
 
 const rune_scene = preload('res://pickups/runes/rune.tscn')
 
@@ -50,7 +51,7 @@ func place_potion():
 	if not potion_ready or ghost:
 		return
 	var p = g.get_potion_scene(elements).instance()
-	p.global_position = Vector2(global_position.x, global_position.y + 10)
+	p.global_position = Vector2(global_position.x, global_position.y + potion_drop_distance)
 	p.parent_player = self
 	get_parent().add_child(p)
 	p.but_make_it_symmetrical(elements)
@@ -167,7 +168,35 @@ func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_s
 		elements.push_front(rune.element)
 		g.emit_signal('elements_changed', elements, number)
 		rune.cleanup()
+	elif 'Scroll' in area.get_parent().name and not ghost:
+		$ScrollTimer.stop()
+		reset_scroll_magic()
+		var scroll = area.get_parent()
+		$FloatTextManager.float_text(scroll.label_text, Color(1,1,1,1))
+		if scroll.magic == 'humungo':
+			humungo()
+		elif scroll.magic == 'tinyboi':
+			tinyboi()
+		$ScrollTimer.start()
+		scroll.cleanup()
+		
+func humungo():
+	speed = 50
+	scale = Vector2(3,3)
+	potion_drop_distance = 40
+	
 
+func tinyboi():
+	speed = 300
+	scale = Vector2(.75,.75)
+
+func reset_scroll_magic():
+	speed = 150
+	scale = Vector2(1.5, 1.5)
+	potion_drop_distance = 10
+
+func _on_ScrollTimer_timeout():
+	reset_scroll_magic()
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if "Kick" in anim_name:
