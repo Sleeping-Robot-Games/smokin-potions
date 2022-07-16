@@ -14,6 +14,7 @@ onready var potion_earth = preload("res://potions/earth/earth.tscn")
 onready var potion_earth_earth = preload("res://potions/earth_earth/earth_earth.tscn")
 onready var potion_earth_arcane = preload("res://potions/earth_arcane/earth_arcane.tscn")
 onready var potion_arcane = preload("res://potions/arcane/arcane.tscn")
+onready var potion_arcane_arcane = preload("res://potions/arcane_arcane/arcane_arcane.tscn")
 
 
 
@@ -27,6 +28,7 @@ onready var potion_dict = {
 	'earth_earth': potion_earth_earth,
 	'earth_arcane': potion_earth_arcane,
 	'arcane': potion_arcane,
+	'arcane_arcane': potion_arcane_arcane,
 }
 
 var players_in_current_game = []

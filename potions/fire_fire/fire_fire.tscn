@@ -8,7 +8,7 @@ script = ExtResource( 1 )
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2( 0, 10.5 )
-scale = Vector2( 1.5, 1.5 )
+scale = Vector2( 1.25, 1.25 )
 
 [node name="AnimatedSprite" parent="." index="1"]
 self_modulate = Color( 1, 0.376471, 0, 1 )
@@ -16,7 +16,7 @@ scale = Vector2( 0.625, 0.625 )
 
 [node name="Portal" parent="." index="3"]
 scale = Vector2( 0.75, 0.75 )
-frame = 5
+frame = 7
 
 [node name="PotionPickupArea" parent="." index="5"]
 scale = Vector2( 1.25, 1.25 )
