@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/potion_landing.ogg-61dee1edc264da1a89d323268203e642.oggstr"
+
+[deps]
+
+source_file="res://sfx/potion_landing.ogg"
+dest_files=[ "res://.import/potion_landing.ogg-61dee1edc264da1a89d323268203e642.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

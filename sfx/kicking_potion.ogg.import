@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/kicking_potion.ogg-2ff998cbcdfba456e234b5f3e47c3086.oggstr"
+
+[deps]
+
+source_file="res://sfx/kicking_potion.ogg"
+dest_files=[ "res://.import/kicking_potion.ogg-2ff998cbcdfba456e234b5f3e47c3086.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,6 +1,5 @@
 extends 'res://potions/potion.gd'
 
-var rng = RandomNumberGenerator.new()
 const lightning = preload('res://potions/fire_arcane/lightning/lightning.tscn')
 
 var nearby_players = []

@@ -32,12 +32,12 @@ func _process(delta: float) -> void:
 	
 
 func _ready() -> void:
+	if not use_portal:
+		g.play_sfx(self, 'laser_beam')
 	set_physics_process(false)
 	fill.points[1] = Vector2.ZERO
 	self.is_casting = true
 	$StopTimer.start()
-	if not use_portal:
-		$AudioStreamPlayer.play()
 
 func _physics_process(delta: float) -> void:
 	cast_to = (cast_to + Vector2.RIGHT * cast_speed * delta).clamped(max_length)

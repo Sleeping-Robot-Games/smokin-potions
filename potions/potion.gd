@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+var rng = RandomNumberGenerator.new()
+
 var use_portal = false
 var original_potion
 var last_wiz: KinematicBody2D
@@ -12,7 +14,6 @@ var potion_daddy
 
 func _ready():
 	connect('body_entered', self, '_on_body_entered')
-	
 	
 	if use_portal:
 		$Portal.visible = true
@@ -76,6 +77,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		holder = null
 		potion_daddy.queue_free()
 		potion_daddy = null
+		g.play_sfx_2D(self, 'potion_landing')
 
 
 func explode():
@@ -177,4 +179,5 @@ func get_quadrant(potion = self):
 	var quadrant = "Upper" if potion.global_position.y <= get_viewport_rect().size.y / 2 else "Lower"
 	quadrant += "Left" if potion.global_position.x <= get_viewport_rect().size.x / 2 else "Right"
 	return quadrant
+
 

@@ -13,6 +13,8 @@ func break():
 	$Sprite.set_texture(load("res://levels/"+g.level_selected+"/breakable/broken/" + sprite + ".png"))
 	$AnimationPlayer.play("fade_out")
 	$RespawnTimer.start()
+	var type = 'box' if g.level_selected == 'wizard_tower' else 'rock'
+	g.play_random_sfx_2D(self, type+'_breaking')
 	
 func spawn():
 	var avail_sprites = g.files_in_dir('res://levels/'+g.level_selected+'/breakable/unbroken/')

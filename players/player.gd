@@ -27,7 +27,7 @@ var new_facing: String = facing
 var new_cardinal_facing: String = cardinal_facing
 var movement_enabled = true
 var potion_ready = true
-var elements = ['fire', 'fire']
+var elements = []
 var kicking_impulse = Vector2.ZERO
 var kicking_potion = null
 var is_invulnerable = false
@@ -57,7 +57,7 @@ func place_potion():
 	p.but_make_it_symmetrical(elements)
 	
 	# Clear elements after potion use
-	#elements = []
+	elements = []
 	g.emit_signal('elements_changed', elements, number)
 	
 	if potion_cooldown_toogle:
@@ -82,7 +82,7 @@ func take_dmg(dmg, potion):
 	g.emit_signal('health_changed', health, true, number)
 	
 	if health > 0:
-		play_sfx('hurt')
+		g.play_random_sfx_2D(self, 'hurt')
 		anim_player.play('Hurt'+y_facing+x_facing)
 		modulate = Color(1, .25, .25, 1)
 		$HurtTimer.start()
@@ -90,7 +90,7 @@ func take_dmg(dmg, potion):
 		$FloatTextManager.float_text("-"+str(dmg)+" HP", Color(1,0,0,1))
 		
 	if health <= 0:
-		play_sfx('dying')
+		g.play_random_sfx_2D(self, 'dying')
 		g.emit_signal("player_death", self)
 		anim_player.play('Death'+y_facing+x_facing)
 		dead = true
@@ -114,7 +114,7 @@ func revive(hp = 1):
 func get_stunned():
 	if dead:
 		return
-
+	g.play_sfx_2D(self, 'character_stunned')
 	disabled = true
 	$StunnedTimer.start()
 	anim_player.play('Daze'+y_facing+x_facing)
@@ -206,6 +206,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 			kicking_potion.kick(kicking_impulse, self)
 		kicking_potion = null
 		kicking_impulse = Vector2.ZERO
+		g.play_random_sfx_2D(self, 'kicking_potion')
 	if "Throw" in anim_name or 'Hurt' in anim_name:
 		anim_player.play("Idle"+y_facing+x_facing)
 
@@ -221,13 +222,4 @@ func _on_BombPickupArea_area_exited(area):
 		var potion = area.get_parent()
 		nearby_potions.erase(potion)
 		
-		
-func play_sfx(name):
-	var sfx_player = AudioStreamPlayer2D.new()
-	rng.randomize()
-	var track_num = rng.randi_range(1, 5)
-	print(track_num)
-	sfx_player.stream = load('res://sfx/'+name+'_'+str(track_num)+'.ogg')
-	sfx_player.connect("finished", sfx_player, "queue_free")
-	add_child(sfx_player)
-	sfx_player.play()
+

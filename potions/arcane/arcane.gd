@@ -1,6 +1,5 @@
 extends 'res://potions/potion.gd'
 
-var rng = RandomNumberGenerator.new()
 const magic_missile = preload('res://potions/arcane/magic_missile/magic_missile.tscn')
 
 func _ready():
