@@ -77,6 +77,7 @@ interact={
 2d_physics/layer_6="breakable"
 2d_physics/layer_7="durable"
 2d_physics/layer_8="boundaries"
+2d_physics/layer_9="no lava"
 
 [physics]
 

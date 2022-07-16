@@ -22,12 +22,6 @@ func chain_lightning(next_target, type):
 		next_target.take_dmg(1, self)
 
 
-func _on_MagicMissile_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	if area and 'Breakable' in area.get_parent().name:
-		area.get_parent().break()
-		queue_free()
-
-
 func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 	if not chained and area and weakref(area).get_ref() and 'Breakable' in area.get_parent().name:
 		chain_lightning(area.get_parent(), 'breakable')
