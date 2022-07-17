@@ -38,9 +38,11 @@ func _on_Explode_animation_finished():
 		var lightning_instance = lightning.instance()
 		lightning_instance.global_position = global_position
 		lightning_instance.last_wiz = last_wiz
+		lightning_instance.use_portal = use_portal
 		get_parent().add_child(lightning_instance)
 		rng.randomize()
 		lightning_instance.rotation_degrees = rng.randi_range(0, 360)
+		rng.randomize()
 #	if nearby_players.size() > 0:
 #		var i = rng.randi_range(0, nearby_players.size() - 1)
 #		lightning_instance.look_at(nearby_players[i].global_position)

@@ -1,12 +1,19 @@
 extends Node2D
 
+var rng = RandomNumberGenerator.new()
+
 var last_wiz
 var chained = false
+var use_portal = false
 
 func _ready():
 	$electricity.emitting = true
 	$Area2D.connect('area_shape_entered', self, '_on_area_shape_entered')
 	$Area2D.connect('body_entered', self, '_on_body_entered')
+	if not use_portal:
+		rng.randomize()
+		var sfx_num = rng.randi_range(1, 3)
+		g.play_sfx(self, 'electricity_' + str(sfx_num))
 
 
 #func chain_lightning(next_target, type):
