@@ -195,6 +195,9 @@ func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_s
 			humungo()
 		elif scroll.magic == 'tinyboi':
 			tinyboi()
+		rng.randomize()
+		var scroll_sfx_num = rng.randi_range(1, 4)
+		g.play_sfx(self, 'scroll_grab_' + str(scroll_sfx_num))
 		scroll.cleanup()
 		$ScrollTimer.start()
 		
