@@ -3351,8 +3351,9 @@ one_shot = true
 
 [node name="FrozenSprite" type="Sprite" parent="FrozenNode"]
 visible = false
-position = Vector2( 0, 4 )
-scale = Vector2( 0.3, 0.3 )
+modulate = Color( 1.25, 1.25, 1.25, 1 )
+position = Vector2( 0, -3 )
+scale = Vector2( 1.25, 1.25 )
 texture = ExtResource( 19 )
 
 [connection signal="area_shape_entered" from="PickupArea" to="." method="_on_PickupArea_area_shape_entered"]
