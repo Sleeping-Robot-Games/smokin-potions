@@ -100,11 +100,12 @@ func next_round():
 	$StartingTimer.start()
 	$HUD/StartingTime.visible = true
 	$HUD/StartingTime.text = "Starting in 3..."
-	seconds = 120
+	seconds = 90
 	for player in current_players:
 		var starting_pos = get_node("Starting" + str(player.number)).global_position
 		player.global_position = starting_pos
 		player.revive(2)
+		player.elements = []
 		handle_elements_changed([], player.number)
 	for potion in get_tree().get_nodes_in_group('potions'):
 		potion.queue_free()

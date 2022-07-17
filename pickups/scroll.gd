@@ -10,7 +10,7 @@ func _ready():
 	$AnimationPlayer.play('float')
 	
 	rng.randomize()
-	var type =  rng.randi_range(0, 2)
+	var type = rng.randi_range(0, 3)
 	if type == 0:
 		magic = 'humungo'
 		label_text = 'Humungo!'
@@ -20,6 +20,9 @@ func _ready():
 	elif type == 2:
 		magic = 'potionparty'
 		label_text = "Potion Party!"
+	elif type == 3:
+		magic = 'heal'
+		label_text = "Healing!"
 
 
 func cleanup():

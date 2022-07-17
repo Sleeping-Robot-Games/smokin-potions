@@ -129,6 +129,10 @@ func revive(hp = 1):
 	dead = false
 	modulate = Color(1, 1, 1, 1)
 
+func heal(hp):
+	health += hp
+	g.emit_signal('health_changed', health, false, number)
+
 func get_stunned():
 	if dead:
 		return
@@ -197,6 +201,8 @@ func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_s
 			tinyboi()
 		elif scroll.magic == 'potionparty':
 			start_the_party()
+		elif scroll.magic == 'heal' and health == 1:
+			heal(1)
 		rng.randomize()
 		var scroll_sfx_num = rng.randi_range(1, 4)
 		g.play_sfx(self, 'scroll_grab_' + str(scroll_sfx_num))
