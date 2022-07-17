@@ -14,8 +14,8 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if Input.is_action_just_released("ui_accept"):
+func _input(event):
+	if event.is_action_released("ui_accept") and visible:
 		_on_Button_button_up()
 
 
