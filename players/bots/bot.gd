@@ -62,26 +62,36 @@ func _physics_process(delta):
 	# DIRECTION
 	velocity = Vector2.ZERO
 	if action_queue.size() > 0 and action_queue[0]["type"] == "MOVE":
-		if action_queue[0]["dir"] == "Left":
-			velocity.x -= 1
-		elif action_queue[0]["dir"] == "UpperLeft":
-			velocity.x -= 1
-			velocity.y -= 1
-		elif action_queue[0]["dir"] == "Up":
-			velocity.y -= 1
-		elif action_queue[0]["dir"] == "UpperRight":
-			velocity.x += 1
-			velocity.y -= 1
-		elif action_queue[0]["dir"] == "Right":
-			velocity.x += 1
-		elif action_queue[0]["dir"] == "LowerRight":
-			velocity.x += 1
-			velocity.y += 1
-		elif action_queue[0]["dir"] == "Down":
-			velocity.y += 1
-		elif action_queue[0]["dir"] == "LowerLeft":
-			velocity.x -= 1
-			velocity.y += 1
+		if $IceRay.is_colliding():
+			if cardinal_facing == "Right":
+				velocity.x += 1
+			elif cardinal_facing == "Left":
+				velocity.x -= 1
+			elif cardinal_facing == "Front":
+				velocity.y += 1
+			elif cardinal_facing == "Back":
+				velocity.y -= 1
+		else:
+			if action_queue[0]["dir"] == "Left":
+				velocity.x -= 1
+			elif action_queue[0]["dir"] == "UpperLeft":
+				velocity.x -= 1
+				velocity.y -= 1
+			elif action_queue[0]["dir"] == "Up":
+				velocity.y -= 1
+			elif action_queue[0]["dir"] == "UpperRight":
+				velocity.x += 1
+				velocity.y -= 1
+			elif action_queue[0]["dir"] == "Right":
+				velocity.x += 1
+			elif action_queue[0]["dir"] == "LowerRight":
+				velocity.x += 1
+				velocity.y += 1
+			elif action_queue[0]["dir"] == "Down":
+				velocity.y += 1
+			elif action_queue[0]["dir"] == "LowerLeft":
+				velocity.x -= 1
+				velocity.y += 1
 	
 	x_changed = velocity.x != 0
 	x_facing = x_facing
