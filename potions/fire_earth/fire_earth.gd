@@ -16,6 +16,7 @@ func trigger_effect():
 	
 	var lava_instance = lava.instance()
 	lava_instance.global_position = global_position
+	lava_instance.use_portal = use_portal
 	lava_instance.scale = Vector2(2, 2)
 	get_parent().add_child(lava_instance)
 	

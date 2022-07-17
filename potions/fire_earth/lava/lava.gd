@@ -5,9 +5,12 @@ export (int) var speed = 100
 var last_wiz
 var nearby_players = []
 var timers = []
+var use_portal = false
 
 
 func _ready():
+	if not use_portal:
+		g.play_sfx(self, 'lava_happening')
 #	$Area2D.connect('area_shape_entered', self, '_on_area_shape_entered')
 	$Area2D.connect('body_entered', self, '_on_body_entered')
 	$Area2D.connect('body_exited', self, '_on_body_exited')
