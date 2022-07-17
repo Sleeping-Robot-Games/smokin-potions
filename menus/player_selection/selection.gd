@@ -11,9 +11,13 @@ func _ready():
 			box.create_random_character()
 		else:
 			box.create_loaded_character()
-		box.get_node('Wizard').disabled = true
+		box.get_node('Wizard').super_disabled = true
 		if box.player:
 			players.append(box)
+			
+func _input(event):
+	if not visible:
+		return
 
 func add_color(color):
 	used_colors.append(color)

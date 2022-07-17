@@ -84,6 +84,8 @@ margin_left = 14.0
 margin_top = 193.0
 margin_right = 58.0
 margin_bottom = 231.0
+focus_mode = 0
+enabled_focus_mode = 0
 icon = ExtResource( 1 )
 flat = true
 
@@ -100,6 +102,8 @@ margin_left = -24.0
 margin_top = -8.0
 margin_right = -2.0
 margin_bottom = 28.0
+focus_mode = 0
+enabled_focus_mode = 0
 icon = ExtResource( 5 )
 flat = true
 
@@ -108,6 +112,8 @@ margin_left = 82.0
 margin_top = -9.0
 margin_right = 104.0
 margin_bottom = 27.0
+focus_mode = 0
+enabled_focus_mode = 0
 icon = ExtResource( 6 )
 flat = true
 
@@ -125,6 +131,8 @@ margin_left = -11.0
 margin_top = -9.0
 margin_right = 11.0
 margin_bottom = 27.0
+focus_mode = 0
+enabled_focus_mode = 0
 icon = ExtResource( 5 )
 flat = true
 
@@ -133,6 +141,8 @@ margin_left = 67.0
 margin_top = -10.0
 margin_right = 89.0
 margin_bottom = 26.0
+focus_mode = 0
+enabled_focus_mode = 0
 icon = ExtResource( 6 )
 flat = true
 
@@ -150,6 +160,8 @@ margin_left = -14.0
 margin_top = -10.0
 margin_right = 8.0
 margin_bottom = 26.0
+focus_mode = 0
+enabled_focus_mode = 0
 icon = ExtResource( 5 )
 flat = true
 
@@ -158,6 +170,8 @@ margin_left = 69.0
 margin_top = -10.0
 margin_right = 91.0
 margin_bottom = 26.0
+focus_mode = 0
+enabled_focus_mode = 0
 icon = ExtResource( 6 )
 flat = true
 
@@ -175,6 +189,8 @@ margin_left = -13.0
 margin_top = -9.0
 margin_right = 9.0
 margin_bottom = 27.0
+focus_mode = 0
+enabled_focus_mode = 0
 icon = ExtResource( 5 )
 flat = true
 
@@ -183,6 +199,8 @@ margin_left = 69.0
 margin_top = -10.0
 margin_right = 91.0
 margin_bottom = 26.0
+focus_mode = 0
+enabled_focus_mode = 0
 icon = ExtResource( 6 )
 flat = true
 
@@ -201,6 +219,8 @@ margin_left = -23.0
 margin_top = 4.0
 margin_right = -1.0
 margin_bottom = 40.0
+focus_mode = 0
+enabled_focus_mode = 0
 icon = ExtResource( 5 )
 flat = true
 
@@ -209,6 +229,8 @@ margin_left = 78.0
 margin_top = 6.0
 margin_right = 100.0
 margin_bottom = 42.0
+focus_mode = 0
+enabled_focus_mode = 0
 icon = ExtResource( 6 )
 flat = true
 
@@ -226,7 +248,9 @@ margin_left = 189.0
 margin_top = 199.0
 margin_right = 284.0
 margin_bottom = 205.0
+focus_mode = 0
 theme = ExtResource( 4 )
+enabled_focus_mode = 0
 text = "Ready?"
 
 [node name="Box2" type="Control" parent="Boxes"]

@@ -154,10 +154,10 @@ func reparent(node, new_parent):
 	new_parent.add_child(node)
 
 
-func play_random_sfx(parent, name):
+func play_random_sfx(parent, name, custom_range = 5):
 	var sfx_player = AudioStreamPlayer.new()
 	rng.randomize()
-	var track_num = rng.randi_range(1, 5)
+	var track_num = rng.randi_range(1, custom_range)
 	sfx_player.stream = load('res://sfx/'+name+'_'+str(track_num)+'.ogg')
 	sfx_player.connect("finished", sfx_player, "queue_free")
 	parent.add_child(sfx_player)

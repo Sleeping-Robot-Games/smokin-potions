@@ -11,5 +11,5 @@ dest_files=[ "res://.import/smoke_poof_1.ogg-1dc02fdbde0234adaba2801b3cd7a5b5.og
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

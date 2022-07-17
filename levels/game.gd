@@ -44,7 +44,7 @@ func _ready():
 		$HUD/Tutorial.visible = true
 		
 func _input(event):
-	if reading_controls and event is InputEventKey and event is InputEventJoypadButton:
+	if reading_controls and (event is InputEventKey or event is InputEventJoypadButton):
 		for ui in get_tree().get_nodes_in_group('player_ui'):
 			ui.visible = true
 		$HUD/Tutorial.visible = false
