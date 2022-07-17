@@ -134,6 +134,9 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 4 )
 text = "Start Game"
 flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Title/Button"]
 position = Vector2( -16, 30 )
