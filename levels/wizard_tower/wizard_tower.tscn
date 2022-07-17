@@ -178,37 +178,67 @@ position = Vector2( 318, 200 )
 num = "005"
 
 [node name="Breakable" parent="YSort" index="5" instance=ExtResource( 4 )]
-position = Vector2( 520, 225 )
+position = Vector2( 536, 225 )
 
-[node name="Breakable6" parent="YSort" index="6" instance=ExtResource( 4 )]
-position = Vector2( 213, 224 )
+[node name="Breakable20" parent="YSort" index="6" instance=ExtResource( 4 )]
+position = Vector2( 592, 225 )
 
-[node name="Breakable7" parent="YSort" index="7" instance=ExtResource( 4 )]
-position = Vector2( 166, 224 )
+[node name="Breakable10" parent="YSort" index="7" instance=ExtResource( 4 )]
+position = Vector2( 323, 263 )
 
-[node name="Breakable8" parent="YSort" index="8" instance=ExtResource( 4 )]
-position = Vector2( 119, 224 )
+[node name="Breakable11" parent="YSort" index="8" instance=ExtResource( 4 )]
+position = Vector2( 323, 300 )
 
-[node name="Breakable2" parent="YSort" index="9" instance=ExtResource( 4 )]
-position = Vector2( 472, 225 )
+[node name="Breakable12" parent="YSort" index="9" instance=ExtResource( 4 )]
+position = Vector2( 323, 339 )
 
-[node name="Breakable3" parent="YSort" index="10" instance=ExtResource( 4 )]
+[node name="Breakable13" parent="YSort" index="10" instance=ExtResource( 4 )]
+position = Vector2( 323, 378 )
+
+[node name="Breakable19" parent="YSort" index="11" instance=ExtResource( 4 )]
+position = Vector2( 323, 422 )
+
+[node name="Breakable14" parent="YSort" index="12" instance=ExtResource( 4 )]
+position = Vector2( 323, 33 )
+
+[node name="Breakable15" parent="YSort" index="13" instance=ExtResource( 4 )]
+position = Vector2( 323, 138 )
+
+[node name="Breakable16" parent="YSort" index="14" instance=ExtResource( 4 )]
+position = Vector2( 323, 106 )
+
+[node name="Breakable6" parent="YSort" index="15" instance=ExtResource( 4 )]
+position = Vector2( 216, 225 )
+
+[node name="Breakable7" parent="YSort" index="16" instance=ExtResource( 4 )]
+position = Vector2( 162, 225 )
+
+[node name="Breakable8" parent="YSort" index="17" instance=ExtResource( 4 )]
+position = Vector2( 108, 225 )
+
+[node name="Breakable17" parent="YSort" index="18" instance=ExtResource( 4 )]
+position = Vector2( 53, 225 )
+
+[node name="Breakable18" parent="YSort" index="19" instance=ExtResource( 4 )]
+position = Vector2( 477, 130 )
+
+[node name="Breakable2" parent="YSort" index="20" instance=ExtResource( 4 )]
+position = Vector2( 480, 225 )
+
+[node name="Breakable3" parent="YSort" index="21" instance=ExtResource( 4 )]
 position = Vector2( 425, 225 )
 
-[node name="Breakable4" parent="YSort" index="11" instance=ExtResource( 4 )]
-position = Vector2( 378, 225 )
+[node name="Breakable4" parent="YSort" index="22" instance=ExtResource( 4 )]
+position = Vector2( 370, 225 )
 
-[node name="Breakable5" parent="YSort" index="12" instance=ExtResource( 4 )]
-position = Vector2( 260, 224 )
+[node name="Breakable5" parent="YSort" index="23" instance=ExtResource( 4 )]
+position = Vector2( 270, 225 )
 
-[node name="Right" parent="Boundaries" index="1"]
-visible = false
+[node name="Breakable9" parent="YSort" index="24" instance=ExtResource( 4 )]
+position = Vector2( 323, 70 )
 
 [node name="Top" parent="Boundaries" index="2"]
 position = Vector2( 360, 2 )
-
-[node name="Bottom" parent="Boundaries" index="3"]
-visible = false
 
 [node name="NoLavaOrIce" type="Node2D" parent="." index="3"]
 
