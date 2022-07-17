@@ -67,4 +67,6 @@ __meta__ = {
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="button_up" from="WizardTowerButton" to="." method="_on_Map_Selected_button_up" binds= [ "wizard_tower" ]]
+[connection signal="mouse_entered" from="WizardTowerButton" to="." method="_on_WizardTowerButton_mouse_entered"]
 [connection signal="button_up" from="RockGardenButton" to="." method="_on_Map_Selected_button_up" binds= [ "rock_garden" ]]
+[connection signal="mouse_entered" from="RockGardenButton" to="." method="_on_RockGardenButton_mouse_entered"]

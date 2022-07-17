@@ -26,8 +26,3 @@ func _on_Button_button_up():
 	music_player.stream = load('res://sfx/seth_song_3_v2.ogg')
 	music_player.play()
 	g.play_sfx(self, 'menu_confirmation', 10)
-
-
-func _on_Timer_timeout():
-	get_parent().get_node("Splashscreen").visible = false
-	visible = true

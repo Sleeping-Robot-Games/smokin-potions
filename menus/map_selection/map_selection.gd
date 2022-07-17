@@ -14,3 +14,11 @@ func _on_Map_Selected_button_up(map_name):
 
 func _on_finished():
 	get_tree().change_scene("res://levels/"+g.level_selected+"/"+g.level_selected+".tscn")
+
+
+func _on_WizardTowerButton_mouse_entered():
+	g.play_sfx(self, 'menu_selection')
+
+
+func _on_RockGardenButton_mouse_entered():
+	g.play_sfx(self, 'menu_selection')

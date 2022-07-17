@@ -142,7 +142,7 @@ flat = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Title/Button"]
 position = Vector2( -16, 30 )
 frames = SubResource( 5 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="Sprite" type="Sprite" parent="Title"]
@@ -164,11 +164,6 @@ method_call_mode = 1
 anims/RESET = SubResource( 12 )
 anims/jiggle = SubResource( 13 )
 
-[node name="Timer" type="Timer" parent="Title"]
-wait_time = 3.0
-one_shot = true
-autostart = true
-
 [node name="Select" parent="." instance=ExtResource( 2 )]
 visible = false
 
@@ -184,5 +179,9 @@ texture = ExtResource( 5 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="button_up" from="Title/Button" to="Title" method="_on_Button_button_up"]
-[connection signal="timeout" from="Title/Timer" to="Title" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
