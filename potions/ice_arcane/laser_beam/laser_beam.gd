@@ -107,24 +107,24 @@ func disappear() -> void:
 
 
 func _on_Area2D_body_entered(body):
-	if 'Wizard' in body.name or 'Bot' in body.name:
+	if g.is_player(body):
 		nearby_players.append(body)
 		body.take_dmg(1, self)
 		
 
 
 func _on_Area2D_body_exited(body):
-	if 'Wizard' in body.name or 'Bot' in body.name:
+	if g.is_player(body):
 		nearby_players.erase(body)
 
 
 func _on_Area2D_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	if area and 'Breakable' in area.get_parent().name:
+	if g.is_breakable(area):
 		nearby_breakables.append(area.get_parent())
 
 
 func _on_Area2D_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
-	if area and 'Breakable' in area.get_parent().name:
+	if g.is_breakable(area):
 		nearby_breakables.erase(area.get_parent())
 
 

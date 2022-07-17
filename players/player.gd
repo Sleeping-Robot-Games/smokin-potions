@@ -157,7 +157,7 @@ func _on_DeathTimer_timeout():
 
 
 func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	if 'Rune' in area.get_parent().name and not ghost:
+	if area and weakref(area).get_ref() and 'Rune' in area.get_parent().name and not ghost:
 		var rune = area.get_parent()
 		# if already have 2 runes, drop the 2nd to make room
 		if elements.size() == 2:
@@ -230,13 +230,13 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 
 func _on_BombPickupArea_area_entered(area):
-	if area.name == 'PotionPickupArea' and nearby_potions.find(area.get_parent()) == -1 and !area.get_parent().potion_daddy:
+	if area and weakref(area).get_ref() and area.name == 'PotionPickupArea' and nearby_potions.find(area.get_parent()) == -1 and !area.get_parent().potion_daddy:
 		var potion = area.get_parent()
 		nearby_potions.append(potion)
 
 
 func _on_BombPickupArea_area_exited(area):
-	if area.name == 'PotionPickupArea' and nearby_potions.find(area.get_parent()) != -1:
+	if area and weakref(area).get_ref() and area.name == 'PotionPickupArea' and nearby_potions.find(area.get_parent()) != -1:
 		var potion = area.get_parent()
 		nearby_potions.erase(potion)
 

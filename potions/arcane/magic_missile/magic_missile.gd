@@ -24,11 +24,11 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 
 func _on_MagicMissile_body_entered(body):
-	if 'Wizard' in body.name or 'Bot' in body.name:
+	if g.is_player(body):
 		body.take_dmg(1)
 
 
 func _on_MagicMissile_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	if area and 'Breakable' in area.get_parent().name:
+	if g.is_breakable(area):
 		area.get_parent().break()
 		cleanup()

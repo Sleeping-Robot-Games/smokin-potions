@@ -33,9 +33,9 @@ func _on_Explode_animation_finished():
 	queue_free()
 
 func _on_ExplosionArea_body_entered(body):
-	if body and weakref(body).get_ref() and 'Wizard' in body.name or 'Bot' in body.name:
+	if g.is_player(body):
 		nearby_players.append(body)
 		
 func _on_ExplosionArea_body_exited(body):
-	if body and weakref(body).get_ref() and 'Wizard' in body.name or 'Bot' in body.name:
+	if g.is_player(body):
 		nearby_players.erase(body)

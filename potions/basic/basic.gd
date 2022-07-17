@@ -38,17 +38,17 @@ func _on_Explode_animation_finished():
 	queue_free()
 
 func _on_ExplosionArea_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	if area and 'Breakable' in area.get_parent().name:
+	if g.is_breakable(area):
 		nearby_breakables.append(area.get_parent())
 
 func _on_ExplosionArea_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
-	if area and 'Breakable' in area.get_parent().name:
+	if g.is_breakable(area):
 		nearby_breakables.erase(area.get_parent())
 
 func _on_ExplosionArea_body_entered(body):
-	if 'Wizard' in body.name or 'Bot' in body.name:
+	if g.is_player(body):
 		nearby_players.append(body)
 		
 func _on_ExplosionArea_body_exited(body):
-	if 'Wizard' in body.name or 'Bot' in body.name:
+	if g.is_player(body):
 		nearby_players.erase(body)

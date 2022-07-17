@@ -28,7 +28,7 @@ func _ready():
 
 func _on_body_exited(body):
 	# when player leaves potion area, re-enable collision
-	if body == parent_player and holder == null:
+	if body and weakref(body).get_ref() and body == parent_player and holder == null:
 		remove_collision_exception_with(parent_player)
 		for p_ray in parent_player.get_node("PotionRays").get_children():
 			p_ray.remove_exception(self)
@@ -136,11 +136,11 @@ func get_thrown():
 	
 
 func _on_body_entered(body):
-	if "Potion" in body.name and is_moving and kick_impulse != Vector2.ZERO:
+	if body and weakref(body).get_ref() and "Potion" in body.name and is_moving and kick_impulse != Vector2.ZERO:
 		body.kick(kick_impulse, body.last_wiz)
 		kick_impulse = Vector2.ZERO
 		sleeping = true
-	if ("Wizard" in body.name or "Bot" in body.name) and is_moving and kick_impulse != Vector2.ZERO:
+	if g.is_player(body) and is_moving and kick_impulse != Vector2.ZERO:
 		body.get_stunned()
 		kick_impulse = Vector2.ZERO
 		sleeping = true

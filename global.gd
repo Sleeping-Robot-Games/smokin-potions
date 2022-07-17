@@ -50,6 +50,18 @@ var level_selected = 'rock_garden'
 var new_game = true
 
 
+func is_player(body):
+	return body and weakref(body).get_ref() and ('Wizard' in body.name or 'Bot' in body.name)
+
+
+func is_breakable(area):
+	return area and weakref(area).get_ref() and 'Breakable' in area.get_parent().name
+
+
+func is_potion(area):
+	return area and weakref(area).get_ref() and 'Potion' in area.get_parent().name
+
+
 func get_potion_scene(elements):
 	if elements.size() == 0:
 		return potion_basic

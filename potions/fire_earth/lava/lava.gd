@@ -22,7 +22,7 @@ func _ready():
 
 
 func _on_body_entered(body):
-	if body and weakref(body).get_ref() and 'Wizard' in body.name or 'Bot' in body.name:
+	if g.is_player(body):
 		nearby_players.append(body)
 		body.take_dmg(1, self)
 		var timer = Timer.new()
@@ -40,7 +40,7 @@ func _on_timer_timeout(body):
 
 
 func _on_body_exited(body):
-	if body and weakref(body).get_ref() and 'Wizard' in body.name or 'Bot' in body.name:
+	if g.is_player(body):
 		nearby_players.erase(body)
 		for t in timers:
 			if t["player"] == body:

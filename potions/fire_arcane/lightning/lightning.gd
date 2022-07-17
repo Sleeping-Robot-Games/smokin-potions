@@ -25,14 +25,14 @@ func _ready():
 func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 #	if not chained and area and weakref(area).get_ref() and 'Breakable' in area.get_parent().name:
 #		chain_lightning(area.get_parent(), 'breakable')
-	if area and weakref(area).get_ref() and 'Breakable' in area.get_parent().name:
+	if g.is_breakable(area):
 		area.get_parent().break()
 
 
 func _on_body_entered(body):
 #	if not chained and body and weakref(body).get_ref() and 'Wizard' in body.name or 'Bot' in body.name:
 #		chain_lightning(body, 'player')
-	if body and weakref(body).get_ref() and 'Wizard' in body.name or 'Bot' in body.name:
+	if g.is_player(body):
 		body.take_dmg(1, self)
 
 func _on_SelfDestructTimer_timeout():
