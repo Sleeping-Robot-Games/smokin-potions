@@ -5,6 +5,7 @@ var ready_players = []
 var players = []
 
 func _ready():
+	$Boxes/Box1/Random.grab_focus()
 	var boxes = $Boxes.get_children()
 	for box in boxes:
 		if g.new_game:
