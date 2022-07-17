@@ -5,9 +5,9 @@ export (int) var speed = 100
 var last_wiz
 var use_portal = false
 
-#func _ready():
-#	if not use_portal:
-#		g.play_sfx(self, 'magic_missile')
+func _ready():
+	if not use_portal:
+		g.play_random_sfx(self, 'magic_missiles', 3)
 
 func _physics_process(delta):
 	if not get_node("VisibilityNotifier2D").is_on_screen():

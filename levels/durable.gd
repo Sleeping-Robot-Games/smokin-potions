@@ -40,6 +40,8 @@ func fire_the_lasers():
 	for i in range(3):
 		var magic_missile_instance = magic_missile.instance()
 		magic_missile_instance.global_position = $Top.global_position
+		if not num == '001':
+			magic_missile_instance.use_portal = true
 		var mat = magic_missile_instance.get_node("Sprite/Particles2D").process_material.duplicate()
 		magic_missile_instance.get_node("Sprite/Particles2D").process_material = mat
 		magic_missile_instance.get_node("Sprite/Particles2D").process_material.color = Color(mm_color_map[num])
