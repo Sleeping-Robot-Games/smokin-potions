@@ -121,12 +121,12 @@ script = ExtResource( 3 )
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2( 0, 9 )
-scale = Vector2( 1.25, 1.25 )
 
 [node name="AnimatedSprite" parent="." index="1"]
-modulate = Color( 1.5, 1.5, 1.5, 1 )
-scale = Vector2( 0.625, 0.625 )
 frames = SubResource( 45 )
+
+[node name="Portal" parent="." index="3"]
+frame = 5
 
 [node name="ExplosionArea" type="Area2D" parent="." index="6"]
 
@@ -136,7 +136,7 @@ shape = SubResource( 30 )
 
 [node name="Explode" type="AnimatedSprite" parent="ExplosionArea" index="1"]
 visible = false
-self_modulate = Color( 0.611765, 1, 0.964706, 1 )
+self_modulate = Color( 0.733333, 0.223529, 0.223529, 1 )
 position = Vector2( 0, 7 )
 frames = SubResource( 31 )
 speed_scale = 3.0

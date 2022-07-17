@@ -31,20 +31,24 @@ func trigger_effect():
 
 
 func _on_Explode_animation_finished():
-	var lightning_instance = lightning.instance()
-	lightning_instance.global_position = global_position
-	lightning_instance.last_wiz = last_wiz
-	get_parent().add_child(lightning_instance)
+	
 	
 	rng.randomize()
-	if nearby_players.size() > 0:
-		var i = rng.randi_range(0, nearby_players.size() - 1)
-		lightning_instance.look_at(nearby_players[i].global_position)
-	elif nearby_breakables.size() > 0:
-		var i = rng.randi_range(0, nearby_breakables.size() - 1)
-		lightning_instance.look_at(nearby_breakables[i].global_position)
-	else:
+	for i in rng.randi_range(2, 5):
+		var lightning_instance = lightning.instance()
+		lightning_instance.global_position = global_position
+		lightning_instance.last_wiz = last_wiz
+		get_parent().add_child(lightning_instance)
+		rng.randomize()
 		lightning_instance.rotation_degrees = rng.randi_range(0, 360)
+#	if nearby_players.size() > 0:
+#		var i = rng.randi_range(0, nearby_players.size() - 1)
+#		lightning_instance.look_at(nearby_players[i].global_position)
+#	elif nearby_breakables.size() > 0:
+#		var i = rng.randi_range(0, nearby_breakables.size() - 1)
+#		lightning_instance.look_at(nearby_breakables[i].global_position)
+#	else:
+#		lightning_instance.rotation_degrees = rng.randi_range(0, 360)
 	queue_free()
 
 

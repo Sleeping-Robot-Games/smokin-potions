@@ -30,7 +30,7 @@ gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale_random = 0.4
-color = Color( 0.419608, 0.854902, 0.898039, 1 )
+color = Color( 0.733333, 0.223529, 0.223529, 1 )
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 100.0
