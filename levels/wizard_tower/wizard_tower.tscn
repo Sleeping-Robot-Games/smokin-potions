@@ -219,22 +219,19 @@ position = Vector2( 108, 225 )
 [node name="Breakable17" parent="YSort" index="18" instance=ExtResource( 4 )]
 position = Vector2( 53, 225 )
 
-[node name="Breakable18" parent="YSort" index="19" instance=ExtResource( 4 )]
-position = Vector2( 477, 130 )
-
-[node name="Breakable2" parent="YSort" index="20" instance=ExtResource( 4 )]
+[node name="Breakable2" parent="YSort" index="19" instance=ExtResource( 4 )]
 position = Vector2( 480, 225 )
 
-[node name="Breakable3" parent="YSort" index="21" instance=ExtResource( 4 )]
+[node name="Breakable3" parent="YSort" index="20" instance=ExtResource( 4 )]
 position = Vector2( 425, 225 )
 
-[node name="Breakable4" parent="YSort" index="22" instance=ExtResource( 4 )]
+[node name="Breakable4" parent="YSort" index="21" instance=ExtResource( 4 )]
 position = Vector2( 370, 225 )
 
-[node name="Breakable5" parent="YSort" index="23" instance=ExtResource( 4 )]
+[node name="Breakable5" parent="YSort" index="22" instance=ExtResource( 4 )]
 position = Vector2( 270, 225 )
 
-[node name="Breakable9" parent="YSort" index="24" instance=ExtResource( 4 )]
+[node name="Breakable9" parent="YSort" index="23" instance=ExtResource( 4 )]
 position = Vector2( 323, 70 )
 
 [node name="Top" parent="Boundaries" index="2"]
