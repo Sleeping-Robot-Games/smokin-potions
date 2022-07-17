@@ -36,9 +36,7 @@ func _ready():
 		add_player_to_game(player)
 	
 	if not g.new_game:
-		$StartingTimer.start()
-		$HUD/StartingTime.visible = true
-		$HUD/StartingTime.text = "Starting in 3..."
+		start_game()
 	else:
 		for ui in get_tree().get_nodes_in_group('player_ui'):
 			ui.visible = false
@@ -49,11 +47,20 @@ func _input(event):
 		for ui in get_tree().get_nodes_in_group('player_ui'):
 			ui.visible = true
 		$HUD/Tutorial.visible = false
-		$StartingTimer.start()
-		$HUD/StartingTime.visible = true
-		$HUD/StartingTime.text = "Starting in 3..."
+		start_game()
 		reading_controls = false
+
+func start_game():
+	$StartingTimer.start()
+	$HUD/StartingTime.visible = true
+	$HUD/StartingTime.text = "Starting in 3..."
+	$Music.stream = load('res://sfx/battle_intro.ogg')
+	$Music.connect("finished", self, "_play_battle_music")
+	$Music.play()
 	
+func _play_battle_music():
+	$Music.stream = load('res://sfx/battle_bgm.ogg')
+	$Music.play()
 
 func add_player_to_game(player):
 	# Adds player to game
@@ -179,3 +186,6 @@ func _on_StartingTimer_timeout():
 
 func _on_PressStartTimer_timeout():
 	$HUD/Tutorial/presskeytostart.visible = true
+
+
+

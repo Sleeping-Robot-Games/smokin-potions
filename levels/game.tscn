@@ -1,7 +1,6 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://assets/font-theme.tres" type="Theme" id=1]
-[ext_resource path="res://sfx/battle_bgm.ogg" type="AudioStream" id=2]
 [ext_resource path="res://assets/keys/S-Key.png" type="Texture" id=3]
 [ext_resource path="res://pickups/star.png" type="Texture" id=4]
 [ext_resource path="res://levels/game.gd" type="Script" id=5]
@@ -233,7 +232,6 @@ one_shot = true
 autostart = true
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 2 )
 volume_db = -15.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -337,68 +335,68 @@ collect power-ups - walk over them
 Revive - Kill another player as a ghost
 "
 
-[node name="W" type="AnimatedSprite" parent="HUD/Tutorial"]
-position = Vector2( 175, 83 )
+[node name="W" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
+position = Vector2( 106, 55 )
 frames = SubResource( 17 )
 frame = 1
 playing = true
 
-[node name="A" type="AnimatedSprite" parent="HUD/Tutorial"]
-position = Vector2( 219, 84 )
+[node name="A" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
+position = Vector2( 150, 56 )
 frames = SubResource( 20 )
 frame = 1
 playing = true
 
-[node name="S" type="AnimatedSprite" parent="HUD/Tutorial"]
-position = Vector2( 264, 83 )
+[node name="S" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
+position = Vector2( 195, 55 )
 frames = SubResource( 23 )
 frame = 1
 playing = true
 
-[node name="D" type="AnimatedSprite" parent="HUD/Tutorial"]
-position = Vector2( 308, 83 )
+[node name="D" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
+position = Vector2( 239, 55 )
 frames = SubResource( 14 )
 playing = true
 
-[node name="space" type="AnimatedSprite" parent="HUD/Tutorial"]
-position = Vector2( 306, 132 )
+[node name="space" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
+position = Vector2( 234, 103 )
 frames = SubResource( 26 )
 frame = 1
 playing = true
 
-[node name="e" type="AnimatedSprite" parent="HUD/Tutorial"]
-position = Vector2( 331, 231 )
+[node name="e" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
+position = Vector2( 262, 204 )
 frames = SubResource( 29 )
 frame = 1
 playing = true
 
-[node name="e2" type="AnimatedSprite" parent="HUD/Tutorial"]
-position = Vector2( 414, 231 )
+[node name="e2" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
+position = Vector2( 344, 205 )
 frames = SubResource( 29 )
 playing = true
 
-[node name="Scroll" type="Sprite" parent="HUD/Tutorial"]
-position = Vector2( 560, 307 )
+[node name="Scroll" type="Sprite" parent="HUD/Tutorial/Label"]
+position = Vector2( 491, 282 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 12 )
 
-[node name="Arcane" type="Sprite" parent="HUD/Tutorial"]
-position = Vector2( 364, 307 )
+[node name="Arcane" type="Sprite" parent="HUD/Tutorial/Label"]
+position = Vector2( 296, 282 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 14 )
 
-[node name="Arcane2" type="Sprite" parent="HUD/Tutorial"]
-position = Vector2( 514, 306 )
+[node name="Arcane2" type="Sprite" parent="HUD/Tutorial/Label"]
+position = Vector2( 445, 282 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 17 )
 
-[node name="Arcane3" type="Sprite" parent="HUD/Tutorial"]
-position = Vector2( 464, 306 )
+[node name="Arcane3" type="Sprite" parent="HUD/Tutorial/Label"]
+position = Vector2( 395, 282 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 11 )
 
-[node name="Arcane4" type="Sprite" parent="HUD/Tutorial"]
-position = Vector2( 414, 307 )
+[node name="Arcane4" type="Sprite" parent="HUD/Tutorial/Label"]
+position = Vector2( 345, 282 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 13 )
 
