@@ -20,4 +20,3 @@ export (int) var speed = 100
 
 func _on_SelfDestructTimer_timeout():
 	queue_free()
-	#pass

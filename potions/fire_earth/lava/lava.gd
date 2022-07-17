@@ -22,4 +22,3 @@ func _on_body_entered(body):
 
 func _on_SelfDestructTimer_timeout():
 	queue_free()
-	#pass
