@@ -192,28 +192,43 @@ func scheme():
 	# only add more actions to the queue after we run out
 	if action_queue.size() > 0:
 		return
-	var fresh_bombs = [] # safer to interact
-	var scary_bombs = [] # about to blow
+	
+	# random movement is always OK
+	var choices = ['move_random_spot']
+	
+	# ghosts can't drop potions
+	var match_timer = get_node("/root/Game").seconds
+	if not ghost and match_timer <= 87:
+		choices.append('drop_and_kick')
+		choices.append('drop_and_throw')
+		choices.append('drop_and_walk')
+	
+	# check nearby potions
+	var fresh_pots = [] # safer to interact
+	var scary_pots = [] # about to blow
 	for d_ray in $DangerRays.get_children():
 		d_ray.force_raycast_update()
 		if d_ray.is_colliding():
 			var collider = d_ray.get_collider()
 			# TODO factor in distance & speed
 			if collider.get_node_or_null('ExplodeTimer') and collider.get_node_or_null('ExplodeTimer').wait_time > 1:
-				fresh_bombs.append({"collider": collider, "dir": d_ray.name})
+				fresh_pots.append({"collider": collider, "dir": d_ray.name})
 			else:
-				scary_bombs.append({"collider": collider, "dir": d_ray.name})
-	var cap = 7 if fresh_bombs.size() > 0 or scary_bombs.size() > 0 else 4
-	var match_timer = get_node("/root/Game").seconds
-	if match_timer >= 87:
-		cap = 1
+				scary_pots.append({"collider": collider, "dir": d_ray.name})
+	if scary_pots.size() > 0:
+		choices.append('run_from_scary_potion')
+	if fresh_pots.size() > 0:
+		choices.append('run_towards_fresh_potion')
+
+	# make a decision
 	rng.randomize()
-	var decision = rng.randi_range(1, cap)
+	var decision = choices[rng.randi_range(0, choices.size() - 1)]
+	
 	# MOVE TO A RANDOM SPOT
-	if decision == 1:
+	if decision == 'move_random_spot':
 		queue_action_random_move()
 	# DROP AND KICK POTION (RANDOM DIRECTION)
-	elif decision == 2:
+	elif decision == 'drop_and_kick':
 		var valid_coords = []
 		var valid_dir = []
 		for s_ray in $SidestepRays.get_children():
@@ -240,7 +255,7 @@ func scheme():
 				"start_time" : null,
 			})
 	# DROP AND THROW POTION (VERY ROUGHLY TOWARDS RANDOM PLAYER)
-	elif decision == 3:
+	elif decision == 'drop_and_throw':
 		action_queue.append({
 			"type": "FUNCTION",
 			"fn": funcref(self, "place_potion"),
@@ -285,24 +300,21 @@ func scheme():
 			"name": "throw_potion()",
 		})
 	# DROP A BOMB AND WALK AWAY
-	elif decision == 4:
+	elif decision == 'drop_and_walk':
 		place_potion()
 		queue_action_random_move()
-	elif decision == 5:
-		if scary_bombs.size() > 0:
-			var scary_dir = []
-			for scary_bomb in scary_bombs:
-				scary_dir.append(scary_bomb["dir"])
-			queue_action_random_move(scary_dir)
-		elif fresh_bombs.size() > 0:
-			var fresh_dir = []
-			for fresh_bomb in fresh_bombs:
-				fresh_dir.append(fresh_bomb["dir"])
-			queue_action_random_move(fresh_dir)
-	elif decision == 6:
-		pass
-	elif decision == 7:
-		pass
+	# AVOID POTIONS ABOUT TO POP
+	elif decision == 'run_from_scary_potion':
+		var scary_dir = []
+		for scary_pot in scary_pots:
+			scary_dir.append(scary_pot["dir"])
+		queue_action_random_move(scary_dir)
+	# TRY TO KICK AWAY NEARBY FRESH POTION
+	elif decision == 'run_towards_fresh_potion':
+		var fresh_dir = []
+		for fresh_pot in fresh_pots:
+			fresh_dir.append(fresh_pot["dir"])
+		queue_action_random_move(fresh_dir)
 
 
 func queue_action_random_move(avoid_extra_dirs = []):
