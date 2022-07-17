@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/black_hole.ogg-a0e5bc7aaa63a21f5fa90b0209fd50d4.oggstr"
+
+[deps]
+
+source_file="res://sfx/black_hole.ogg"
+dest_files=[ "res://.import/black_hole.ogg-a0e5bc7aaa63a21f5fa90b0209fd50d4.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
