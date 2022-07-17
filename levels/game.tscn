@@ -340,38 +340,41 @@ Revive - Kill another player as a ghost
 [node name="W" type="AnimatedSprite" parent="HUD/Tutorial"]
 position = Vector2( 175, 83 )
 frames = SubResource( 17 )
+frame = 1
 playing = true
 
 [node name="A" type="AnimatedSprite" parent="HUD/Tutorial"]
 position = Vector2( 219, 84 )
 frames = SubResource( 20 )
+frame = 1
 playing = true
 
 [node name="S" type="AnimatedSprite" parent="HUD/Tutorial"]
 position = Vector2( 264, 83 )
 frames = SubResource( 23 )
+frame = 1
 playing = true
 
 [node name="D" type="AnimatedSprite" parent="HUD/Tutorial"]
 position = Vector2( 308, 83 )
 frames = SubResource( 14 )
-frame = 1
 playing = true
 
 [node name="space" type="AnimatedSprite" parent="HUD/Tutorial"]
 position = Vector2( 306, 132 )
 frames = SubResource( 26 )
+frame = 1
 playing = true
 
 [node name="e" type="AnimatedSprite" parent="HUD/Tutorial"]
 position = Vector2( 331, 231 )
 frames = SubResource( 29 )
+frame = 1
 playing = true
 
 [node name="e2" type="AnimatedSprite" parent="HUD/Tutorial"]
 position = Vector2( 414, 231 )
 frames = SubResource( 29 )
-frame = 1
 playing = true
 
 [node name="Scroll" type="Sprite" parent="HUD/Tutorial"]
