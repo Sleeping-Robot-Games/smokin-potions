@@ -9,3 +9,18 @@ script = ExtResource( 1 )
 position = Vector2( 209, 412 )
 cast_to = Vector2( 0, 10 )
 collision_mask = 224
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+position = Vector2( 209, 412 )
+cast_to = Vector2( 10, 0 )
+collision_mask = 224
+
+[node name="RayCast2D3" type="RayCast2D" parent="."]
+position = Vector2( 209, 412 )
+cast_to = Vector2( -10, 0 )
+collision_mask = 224
+
+[node name="RayCast2D4" type="RayCast2D" parent="."]
+position = Vector2( 209, 412 )
+cast_to = Vector2( 0, -10 )
+collision_mask = 224

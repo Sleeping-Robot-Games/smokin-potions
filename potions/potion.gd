@@ -14,6 +14,7 @@ var potion_daddy
 var bombs_away = false
 var flight_target: Vector2
 var landed = false
+var shooter
 
 func _ready():
 	connect('body_entered', self, '_on_body_entered')
@@ -38,6 +39,8 @@ func _on_body_exited(body):
 		for p_ray in parent_player.get_node("PotionRays").get_children():
 			p_ray.remove_exception(self)
 
+func clean_shooter():
+	shooter.queue_free()
 
 func but_make_it_symmetrical(elements):
 	# Generate potion instances
@@ -162,6 +165,7 @@ func _physics_process(delta):
 			mode = MODE_CHARACTER
 			$CollisionShape2D.disabled = false
 			bombs_away = false
+			clean_shooter()
 			activate()
 	if holder and not 'Throw' in $AnimationPlayer.current_animation:
 		global_position = Vector2(holder.global_position.x, holder.global_position.y - 10)

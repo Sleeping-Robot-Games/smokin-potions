@@ -223,15 +223,16 @@ func potion_party():
 	var random_pos = Vector2(rndX, rndY)
 	new_potion_shooter.global_position = random_pos
 	$YSort.add_child(new_potion_shooter)
-	var good_to_go = !new_potion_shooter.get_node("RayCast2D").is_colliding()
-	new_potion_shooter.queue_free()
+	var good_to_go = new_potion_shooter.safe_zone()
 	if good_to_go:
 		var new_random_potion = random_potion.instance()
-		new_random_potion.global_position = Vector2(random_pos.x, -20)
+		new_random_potion.global_position = Vector2(random_pos.x, random_pos.y -300)
 		new_random_potion.flight_target = random_pos
 		new_random_potion.bombs_away = true
+		new_random_potion.shooter = new_potion_shooter
 		new_random_potion.get_node('CollisionShape2D').disabled = true
 		$YSort.add_child(new_random_potion)
+		new_random_potion.get_node('AnimationPlayer').play('drop_fade')
 	else:
 		new_potion_shooter.queue_free()
 
