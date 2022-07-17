@@ -10,7 +10,7 @@ particles_anim_h_frames = 8
 particles_anim_v_frames = 7
 particles_anim_loop = false
 
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticlesMaterial" id=4]
 emission_shape = 1
 emission_sphere_radius = 1.0
 flag_disable_z = true
@@ -41,7 +41,7 @@ material = SubResource( 1 )
 amount = 10
 lifetime = 0.25
 local_coords = false
-process_material = SubResource( 2 )
+process_material = SubResource( 4 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

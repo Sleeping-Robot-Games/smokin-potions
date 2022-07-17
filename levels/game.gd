@@ -5,9 +5,10 @@ onready var bot = preload("res://players/bots/bot.tscn")
 onready var ui = preload('res://levels/player_ui.tscn')
 onready var breakable = preload('res://levels/breakable.tscn')
 onready var wizard_sprites = preload('res://levels/wizard_sprites.tscn')
+onready var fireball = preload('res://potions/fire/fireball/fireball.tscn')
 
 onready var match_time = get_node("HUD/MatchTime")
-var seconds = 120
+var seconds = 5
 var starting_seconds = 3
 var current_players = []
 var dead_players = []
@@ -145,6 +146,7 @@ func _on_MatchTimer_timeout():
 		seconds -= 1
 		if seconds <= 0:
 			match_time.bbcode_text = '[center][color=red]OVERTIME[/color][/center]'
+			$SuddenDeathEffectTimer.start()
 		else:
 			match_time.bbcode_text = '[center]' + format_time() + '[/center]'
 	else:
@@ -196,6 +198,24 @@ func _on_StartingTimer_timeout():
 
 func _on_PressStartTimer_timeout():
 	$HUD/Tutorial/presskeytostart.visible = true
+	
 
-
-
+func _on_SuddenDeathEffectTimer_timeout():
+	var fx_dict = {
+	'left': 0, # shoot right
+	'top': 90, # shoot down
+	'right': 180, # shoot left
+	'bottom': 270 # shoot up
+	}
+	for d in get_tree().get_nodes_in_group('durables'):
+		if g.level_selected == 'wizard_tower':
+			if d.num != '005':
+				d.fire_the_lasers()
+		else:
+			var fireball_instance = fireball.instance()
+#			fireball_instance.global_position = global_position
+#			fireball_instance.last_wiz = last_wiz
+#			fireball_instance.use_portal = use_portal
+#			get_parent().add_child(fireball_instance)
+#			fireball_instance.rotation_degrees = fx_dict[orginal_quadrant]
+			

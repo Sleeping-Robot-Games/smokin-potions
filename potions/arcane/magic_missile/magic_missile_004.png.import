@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/magic_missile_fire.png-e28e420b3310802921aac596c0dce5f1.stex"
+path="res://.import/magic_missile_004.png-5add859790d1acc633ecdc43ccb5c2c5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://potions/arcane/magic_missile/magic_missile_fire.png"
-dest_files=[ "res://.import/magic_missile_fire.png-e28e420b3310802921aac596c0dce5f1.stex" ]
+source_file="res://potions/arcane/magic_missile/magic_missile_004.png"
+dest_files=[ "res://.import/magic_missile_004.png-5add859790d1acc633ecdc43ccb5c2c5.stex" ]
 
 [params]
 

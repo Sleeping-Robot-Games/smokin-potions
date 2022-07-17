@@ -71,7 +71,7 @@ func _on_PotionCooldown_timeout():
 	potion_ready = true
 
 
-func take_dmg(dmg, potion):
+func take_dmg(dmg, potion = null):
 	if ghost or dead or super_disabled:
 		return
 	
@@ -97,8 +97,7 @@ func take_dmg(dmg, potion):
 		dead = true
 		dead_disabled = true
 		$DeathTimer.start()
-		if potion.last_wiz and potion.last_wiz.ghost and potion.last_wiz != self:
-			print('revived')
+		if potion and potion.last_wiz and potion.last_wiz.ghost and potion.last_wiz != self:
 			potion.last_wiz.revive()
 			g.emit_signal("player_revive", potion.last_wiz)
 		g.emit_signal("player_death", self)

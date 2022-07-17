@@ -218,6 +218,8 @@ position = Vector2( 55, 402 )
 [node name="Starting4" type="Position2D" parent="."]
 position = Vector2( 586, 404 )
 
+[node name="SuddenDeathEffectTimer" type="Timer" parent="."]
+
 [node name="MatchTimer" type="Timer" parent="."]
 
 [node name="NextRound" type="Timer" parent="."]
@@ -409,6 +411,7 @@ custom_colors/font_color = Color( 1, 0.890196, 0.290196, 1 )
 custom_fonts/font = SubResource( 30 )
 text = "Press any key to start..."
 
+[connection signal="timeout" from="SuddenDeathEffectTimer" to="." method="_on_SuddenDeathEffectTimer_timeout"]
 [connection signal="timeout" from="MatchTimer" to="." method="_on_MatchTimer_timeout"]
 [connection signal="timeout" from="NextRound" to="." method="_on_NextRound_timeout"]
 [connection signal="timeout" from="StartingTimer" to="." method="_on_StartingTimer_timeout"]
