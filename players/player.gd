@@ -189,6 +189,7 @@ func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_s
 		$FloatTextManager.float_text(rune.element, element_color_map[rune.element])
 		elements.push_front(rune.element)
 		g.emit_signal('elements_changed', elements, number)
+		g.play_sfx(self, 'rune_grab', 5)
 		rune.cleanup()
 	elif 'Scroll' in area.get_parent().name and not ghost:
 		$ScrollTimer.stop()
@@ -204,8 +205,7 @@ func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_s
 		elif scroll.magic == 'heal' and health == 1:
 			heal(1)
 		rng.randomize()
-		var scroll_sfx_num = rng.randi_range(1, 4)
-		g.play_sfx(self, 'scroll_grab_' + str(scroll_sfx_num))
+		g.play_random_sfx(self, 'scroll_grab', 4, 15)
 		scroll.cleanup()
 		$ScrollTimer.start()
 	

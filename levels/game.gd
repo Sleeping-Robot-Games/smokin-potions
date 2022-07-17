@@ -106,6 +106,7 @@ func next_round():
 		player.global_position = starting_pos
 		player.revive(2)
 		player.elements = []
+		g.load_normal_assets(player, player.number)
 		handle_elements_changed([], player.number)
 	for potion in get_tree().get_nodes_in_group('potions'):
 		potion.queue_free()
@@ -179,6 +180,8 @@ func _on_NextRound_timeout():
 		wiz_sprites.scale = Vector2(3, 3)
 		wiz_sprites.position = $HUD/WinnerScreen/Position2D.position
 		$HUD/WinnerScreen.add_child(wiz_sprites)
+		$Music.stream = load('res://sfx/credits.mp3')
+		$Music.play()
 	else:
 		next_round()
 

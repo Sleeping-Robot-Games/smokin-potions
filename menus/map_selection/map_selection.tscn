@@ -32,6 +32,9 @@ margin_bottom = 324.0
 texture_normal = ExtResource( 7 )
 texture_pressed = ExtResource( 9 )
 texture_hover = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="WizardTowerButton"]
 margin_left = 46.0

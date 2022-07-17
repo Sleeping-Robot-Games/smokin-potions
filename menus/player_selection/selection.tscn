@@ -286,6 +286,7 @@ margin_right = 284.0
 margin_bottom = 205.0
 focus_mode = 0
 theme = ExtResource( 4 )
+custom_colors/font_color = Color( 0.545098, 0.733333, 0.352941, 1 )
 enabled_focus_mode = 0
 text = "Ready?"
 
