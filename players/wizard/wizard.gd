@@ -133,7 +133,7 @@ func sprite_animation():
 		animation = new_animation
 		anim_player.play(animation + facing)
 	
-	if new_cardinal_facing != cardinal_facing:
+	if new_cardinal_facing != cardinal_facing and not $IceRay.is_colliding():
 		cardinal_facing = new_cardinal_facing
 
 
