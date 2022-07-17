@@ -1,6 +1,7 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=69 format=2]
 
 [ext_resource path="res://assets/font-theme.tres" type="Theme" id=1]
+[ext_resource path="res://players/animated deco/Bryce3.png" type="Texture" id=2]
 [ext_resource path="res://assets/keys/S-Key.png" type="Texture" id=3]
 [ext_resource path="res://pickups/star.png" type="Texture" id=4]
 [ext_resource path="res://levels/game.gd" type="Script" id=5]
@@ -16,6 +17,23 @@
 [ext_resource path="res://assets/keys/Space-Key.png" type="Texture" id=15]
 [ext_resource path="res://assets/keys/E-Key.png" type="Texture" id=16]
 [ext_resource path="res://pickups/runes/earth.png" type="Texture" id=17]
+[ext_resource path="res://players/animated deco/Rossshort1.png" type="Texture" id=18]
+[ext_resource path="res://players/animated deco/pinkwiz3.png" type="Texture" id=19]
+[ext_resource path="res://players/animated deco/Rossshort3.png" type="Texture" id=20]
+[ext_resource path="res://players/animated deco/Bryce2.png" type="Texture" id=21]
+[ext_resource path="res://players/animated deco/Rossshort2.png" type="Texture" id=22]
+[ext_resource path="res://players/animated deco/seth1.png" type="Texture" id=23]
+[ext_resource path="res://players/animated deco/Bryce1.png" type="Texture" id=24]
+[ext_resource path="res://players/animated deco/seth2.png" type="Texture" id=25]
+[ext_resource path="res://players/animated deco/pinkwiz2.png" type="Texture" id=26]
+[ext_resource path="res://players/animated deco/bryan2.png" type="Texture" id=27]
+[ext_resource path="res://players/animated deco/pinkwiz1.png" type="Texture" id=28]
+[ext_resource path="res://players/animated deco/jenna1.png" type="Texture" id=29]
+[ext_resource path="res://players/animated deco/jenna2.png" type="Texture" id=30]
+[ext_resource path="res://players/animated deco/bryan1.png" type="Texture" id=31]
+[ext_resource path="res://players/animated deco/bryan3.png" type="Texture" id=32]
+[ext_resource path="res://players/animated deco/jenna3.png" type="Texture" id=33]
+[ext_resource path="res://players/animated deco/seth3.png" type="Texture" id=34]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 10, 239.156 )
@@ -44,6 +62,54 @@ default_font = SubResource( 6 )
 [sub_resource type="DynamicFont" id=9]
 size = 37
 font_data = ExtResource( 6 )
+
+[sub_resource type="SpriteFrames" id=31]
+animations = [ {
+"frames": [ ExtResource( 24 ), ExtResource( 21 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=32]
+animations = [ {
+"frames": [ ExtResource( 29 ), ExtResource( 30 ), ExtResource( 33 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=33]
+animations = [ {
+"frames": [ ExtResource( 18 ), ExtResource( 22 ), ExtResource( 20 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=34]
+animations = [ {
+"frames": [ ExtResource( 31 ), ExtResource( 27 ), ExtResource( 32 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=35]
+animations = [ {
+"frames": [ ExtResource( 23 ), ExtResource( 25 ), ExtResource( 34 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=36]
+animations = [ {
+"frames": [ ExtResource( 28 ), ExtResource( 26 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [sub_resource type="Animation" id=8]
 resource_name = "show_winner"
@@ -322,6 +388,9 @@ margin_left = -434.2
 margin_top = 170.0
 margin_right = -394.2
 margin_bottom = 210.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="peeps" type="Label" parent="HUD/WinnerScreen/Credits"]
 margin_left = -90.0
@@ -334,6 +403,9 @@ Developer - Bryan Reed - Bronsky
 Developer - Ross Root - SleepingRobot)
 Music/SFX - Bryce Wilcox - esphron
 Music - Seth Garcia - SethTheTrash"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="HUD/WinnerScreen/Credits"]
 margin_left = 8.0
@@ -342,6 +414,45 @@ margin_right = 274.0
 margin_bottom = -32.0
 theme = ExtResource( 1 )
 text = "Thanks for playing!"
+
+[node name="Red" type="AnimatedSprite" parent="HUD/WinnerScreen/Credits"]
+position = Vector2( -29.8, -92 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 31 )
+frame = 1
+playing = true
+
+[node name="Yellow" type="AnimatedSprite" parent="HUD/WinnerScreen/Credits"]
+position = Vector2( 30.2, -92 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 32 )
+frame = 1
+playing = true
+
+[node name="Green" type="AnimatedSprite" parent="HUD/WinnerScreen/Credits"]
+position = Vector2( 100.2, -92 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 33 )
+playing = true
+
+[node name="Blue" type="AnimatedSprite" parent="HUD/WinnerScreen/Credits"]
+position = Vector2( 163.2, -92 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 34 )
+playing = true
+
+[node name="Purple" type="AnimatedSprite" parent="HUD/WinnerScreen/Credits"]
+position = Vector2( 223.2, -92 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 35 )
+frame = 2
+playing = true
+
+[node name="Pink" type="AnimatedSprite" parent="HUD/WinnerScreen/Credits"]
+position = Vector2( 289.2, -92 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 36 )
+playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HUD"]
 root_node = NodePath("../WinnerScreen")
@@ -391,38 +502,41 @@ Revive - Kill another player as a ghost
 [node name="W" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
 position = Vector2( 106, 55 )
 frames = SubResource( 17 )
+frame = 1
 playing = true
 
 [node name="A" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
 position = Vector2( 150, 56 )
 frames = SubResource( 20 )
+frame = 1
 playing = true
 
 [node name="S" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
 position = Vector2( 195, 55 )
 frames = SubResource( 23 )
+frame = 1
 playing = true
 
 [node name="D" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
 position = Vector2( 239, 55 )
 frames = SubResource( 14 )
-frame = 1
 playing = true
 
 [node name="space" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
 position = Vector2( 234, 103 )
 frames = SubResource( 26 )
+frame = 1
 playing = true
 
 [node name="e" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
 position = Vector2( 262, 204 )
 frames = SubResource( 29 )
+frame = 1
 playing = true
 
 [node name="e2" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
 position = Vector2( 344, 205 )
 frames = SubResource( 29 )
-frame = 1
 playing = true
 
 [node name="Scroll" type="Sprite" parent="HUD/Tutorial/Label"]
