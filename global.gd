@@ -173,8 +173,9 @@ func reparent(node, new_parent):
 	new_parent.add_child(node)
 
 
-func play_random_sfx(parent, name, custom_range = 5):
+func play_random_sfx(parent, name, custom_range = 5, db_override = 0):
 	var sfx_player = AudioStreamPlayer.new()
+	sfx_player.volume_db = db_override
 	rng.randomize()
 	var track_num = rng.randi_range(1, custom_range)
 	sfx_player.stream = load('res://sfx/'+name+'_'+str(track_num)+'.ogg')
