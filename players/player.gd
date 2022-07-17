@@ -27,7 +27,7 @@ var new_facing: String = facing
 var new_cardinal_facing: String = cardinal_facing
 var movement_enabled = true
 var potion_ready = true
-var elements = ['arcane', 'earth']
+var elements = ['ice', 'earth']
 var kicking_impulse = Vector2.ZERO
 var kicking_potion = null
 var is_invulnerable = false
@@ -107,12 +107,14 @@ func take_dmg(dmg, potion):
 func freeze():
 	frozen = true
 	$FrozenFx.visible = true
+	$FrozenNode/FrozenSprite.visible = true
 	$FrozenTimer.start()
 
 
 func _on_FrozenTimer_timeout():
 	frozen = false
 	$FrozenFx.visible = false
+	$FrozenNode/FrozenSprite.visible = false
 
 
 func revive(hp = 1):
