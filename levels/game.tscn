@@ -251,6 +251,15 @@ animations = [ {
 size = 28
 font_data = ExtResource( 6 )
 
+[sub_resource type="RectangleShape2D" id=31]
+extents = Vector2( 10.2239, 10.3879 )
+
+[sub_resource type="RectangleShape2D" id=32]
+
+[sub_resource type="RectangleShape2D" id=33]
+
+[sub_resource type="RectangleShape2D" id=34]
+
 [node name="Game" type="Node"]
 script = ExtResource( 5 )
 
@@ -353,9 +362,9 @@ margin_bottom = 480.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="Label" type="Label" parent="HUD/WinnerScreen"]
-margin_left = 176.8
+margin_left = 165.0
 margin_top = 203.0
-margin_right = 508.8
+margin_right = 497.0
 margin_bottom = 241.0
 theme = ExtResource( 1 )
 custom_fonts/font = SubResource( 9 )
@@ -377,6 +386,7 @@ margin_top = 414.0
 margin_right = 405.0
 margin_bottom = 442.0
 theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0.545098, 0.733333, 0.352941, 1 )
 text = "Play Again?"
 flat = true
 
@@ -419,41 +429,40 @@ text = "Thanks for playing!"
 position = Vector2( -29.8, -92 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 31 )
-frame = 2
 playing = true
 
 [node name="Yellow" type="AnimatedSprite" parent="HUD/WinnerScreen/Credits"]
 position = Vector2( 30.2, -92 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 32 )
-frame = 2
 playing = true
 
 [node name="Green" type="AnimatedSprite" parent="HUD/WinnerScreen/Credits"]
 position = Vector2( 100.2, -92 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 33 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="Blue" type="AnimatedSprite" parent="HUD/WinnerScreen/Credits"]
 position = Vector2( 163.2, -92 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 34 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="Purple" type="AnimatedSprite" parent="HUD/WinnerScreen/Credits"]
 position = Vector2( 223.2, -92 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 35 )
+frame = 1
 playing = true
 
 [node name="Pink" type="AnimatedSprite" parent="HUD/WinnerScreen/Credits"]
 position = Vector2( 289.2, -92 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 36 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HUD"]
@@ -504,41 +513,38 @@ Revive - Kill another player as a ghost
 [node name="W" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
 position = Vector2( 106, 55 )
 frames = SubResource( 17 )
-frame = 1
 playing = true
 
 [node name="A" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
 position = Vector2( 150, 56 )
 frames = SubResource( 20 )
-frame = 1
 playing = true
 
 [node name="S" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
 position = Vector2( 195, 55 )
 frames = SubResource( 23 )
-frame = 1
 playing = true
 
 [node name="D" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
 position = Vector2( 239, 55 )
 frames = SubResource( 14 )
+frame = 1
 playing = true
 
 [node name="space" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
 position = Vector2( 234, 103 )
 frames = SubResource( 26 )
-frame = 1
 playing = true
 
 [node name="e" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
 position = Vector2( 262, 204 )
 frames = SubResource( 29 )
-frame = 1
 playing = true
 
 [node name="e2" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
 position = Vector2( 344, 205 )
 frames = SubResource( 29 )
+frame = 1
 playing = true
 
 [node name="Scroll" type="Sprite" parent="HUD/Tutorial/Label"]
@@ -576,6 +582,44 @@ theme = ExtResource( 1 )
 custom_colors/font_color = Color( 1, 0.890196, 0.290196, 1 )
 custom_fonts/font = SubResource( 30 )
 text = "Press any key to start..."
+
+[node name="NoBotsAllowed" type="Node2D" parent="."]
+
+[node name="UpperLeft" type="Area2D" parent="NoBotsAllowed"]
+collision_layer = 1024
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NoBotsAllowed/UpperLeft"]
+position = Vector2( 34, 24 )
+scale = Vector2( 2, 2 )
+shape = SubResource( 31 )
+
+[node name="UpperRight" type="Area2D" parent="NoBotsAllowed"]
+collision_layer = 1024
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NoBotsAllowed/UpperRight"]
+position = Vector2( 606, 24 )
+scale = Vector2( 2, 2 )
+shape = SubResource( 32 )
+
+[node name="LowerRight" type="Area2D" parent="NoBotsAllowed"]
+collision_layer = 1024
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NoBotsAllowed/LowerRight"]
+position = Vector2( 33, 446 )
+scale = Vector2( 2, 2 )
+shape = SubResource( 33 )
+
+[node name="LowerLeft" type="Area2D" parent="NoBotsAllowed"]
+collision_layer = 1024
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NoBotsAllowed/LowerLeft"]
+position = Vector2( 606, 446 )
+scale = Vector2( 2, 2 )
+shape = SubResource( 34 )
 
 [connection signal="timeout" from="SuddenDeathEffectTimer" to="." method="_on_SuddenDeathEffectTimer_timeout"]
 [connection signal="timeout" from="MatchTimer" to="." method="_on_MatchTimer_timeout"]
