@@ -430,24 +430,3 @@ visible = false
 
 [node name="Label" parent="HUD/Tutorial" index="1"]
 visible = false
-
-[node name="W" parent="HUD/Tutorial/Label" index="0"]
-frame = 1
-
-[node name="A" parent="HUD/Tutorial/Label" index="1"]
-frame = 1
-
-[node name="S" parent="HUD/Tutorial/Label" index="2"]
-frame = 1
-
-[node name="D" parent="HUD/Tutorial/Label" index="3"]
-frame = 0
-
-[node name="space" parent="HUD/Tutorial/Label" index="4"]
-frame = 1
-
-[node name="e" parent="HUD/Tutorial/Label" index="5"]
-frame = 1
-
-[node name="e2" parent="HUD/Tutorial/Label" index="6"]
-frame = 0
