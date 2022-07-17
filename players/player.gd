@@ -27,7 +27,7 @@ var new_facing: String = facing
 var new_cardinal_facing: String = cardinal_facing
 var movement_enabled = true
 var potion_ready = true
-var elements = []
+var elements = ['ice', 'earth']
 var kicking_impulse = Vector2.ZERO
 var kicking_potion = null
 var is_invulnerable = false
@@ -108,6 +108,8 @@ func freeze():
 	frozen = true
 	$FrozenFx.visible = true
 	$FrozenNode/FrozenSprite.visible = true
+	g.play_sfx(self, 'ground_freeze')
+	anim_player.stop(false)
 	$FrozenTimer.start()
 
 
@@ -115,6 +117,7 @@ func _on_FrozenTimer_timeout():
 	frozen = false
 	$FrozenFx.visible = false
 	$FrozenNode/FrozenSprite.visible = false
+	anim_player.play()
 
 
 func revive(hp = 1):
