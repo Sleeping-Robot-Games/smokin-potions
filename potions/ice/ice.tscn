@@ -126,7 +126,7 @@ position = Vector2( 0, 9 )
 frames = SubResource( 45 )
 
 [node name="Portal" parent="." index="3"]
-frame = 0
+frame = 2
 
 [node name="ExplosionArea" type="Area2D" parent="." index="6"]
 
@@ -136,6 +136,7 @@ shape = SubResource( 30 )
 
 [node name="Explode" type="AnimatedSprite" parent="ExplosionArea" index="1"]
 visible = false
+modulate = Color( 1.5, 1.5, 1.5, 1 )
 self_modulate = Color( 0.294118, 0.129412, 0.0901961, 1 )
 position = Vector2( 0, 7 )
 frames = SubResource( 31 )
