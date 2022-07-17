@@ -179,6 +179,8 @@ func _on_NextRound_timeout():
 		wiz_sprites.scale = Vector2(3, 3)
 		wiz_sprites.position = $HUD/WinnerScreen/Position2D.position
 		$HUD/WinnerScreen.add_child(wiz_sprites)
+		$Music.stream = load('res://sfx/credits.mp3')
+		$Music.play()
 	else:
 		next_round()
 

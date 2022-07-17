@@ -1,6 +1,9 @@
-[gd_resource type="Theme" load_steps=3 format=2]
+[gd_resource type="Theme" load_steps=4 format=2]
 
 [ext_resource path="res://assets/fonts/BOMBERMA.TTF" type="DynamicFontData" id=1]
+
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0.960784, 0.796078, 1, 1 )
 
 [sub_resource type="DynamicFont" id=13]
 size = 21
@@ -8,3 +11,4 @@ font_data = ExtResource( 1 )
 
 [resource]
 default_font = SubResource( 13 )
+/styles/button = SubResource( 14 )
