@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/battle_intro_1.mp3-12e43b85473af6697e35cc8d27cffcdb.mp3str"
+
+[deps]
+
+source_file="res://sfx/battle_intro_1.mp3"
+dest_files=[ "res://.import/battle_intro_1.mp3-12e43b85473af6697e35cc8d27cffcdb.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

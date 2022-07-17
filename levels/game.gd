@@ -27,9 +27,9 @@ func _ready():
 	if g.players_in_current_game.size() == 0:
 		g.players_in_current_game = [
 			{'number': '1', 'bot': false},
-			#{'number': '2', 'bot': true},
-			#{'number': '3', 'bot': true},
-			#{'number': '4', 'bot': true},
+			{'number': '2', 'bot': true},
+			{'number': '3', 'bot': true},
+			{'number': '4', 'bot': true},
 		]
 		
 	for player in g.players_in_current_game:
@@ -56,7 +56,7 @@ func start_game():
 	$HUD/StartingTime.text = "Starting in 3..."
 	if g.level_selected == "rock_garden":
 		$Music.volume_db = -15
-		$Music.stream = load('res://sfx/battle_intro.mp3')
+		$Music.stream = load('res://sfx/battle_intro_1.mp3')
 		$Music.connect("finished", self, "_play_battle_music")
 	else:
 		$Music.volume_db = 0
