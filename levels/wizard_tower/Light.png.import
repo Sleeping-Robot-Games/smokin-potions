@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Winner.png-f2c8b87aefddc87a9330d97aa62fdb0e.stex"
+path="res://.import/Light.png-6456b81a672a102e984890ba18af0d71.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://players/wizard/creator/sprites/Hat/Winner.png"
-dest_files=[ "res://.import/Winner.png-f2c8b87aefddc87a9330d97aa62fdb0e.stex" ]
+source_file="res://levels/wizard_tower/Light.png"
+dest_files=[ "res://.import/Light.png-6456b81a672a102e984890ba18af0d71.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

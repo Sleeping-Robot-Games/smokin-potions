@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Winner.png-2a19ff82292cccb0735df33cd18f3f2f.stex"
+path="res://.import/Hat_021.png-780fccc51e0e01c49fe38decf5a64665.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://players/wizard/Hatthrow/Winner.png"
-dest_files=[ "res://.import/Winner.png-2a19ff82292cccb0735df33cd18f3f2f.stex" ]
+source_file="res://players/wizard/creator/sprites/Hat/Hat_021.png"
+dest_files=[ "res://.import/Hat_021.png-780fccc51e0e01c49fe38decf5a64665.stex" ]
 
 [params]
 
