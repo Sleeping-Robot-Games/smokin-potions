@@ -2,6 +2,11 @@ extends Node2D
 
 export (int) var speed = 100
 
+var use_portal = false
+
+func _ready():
+	if not use_portal:
+		g.play_sfx(self, 'ground_freeze')
 
 #func _ready():
 #	$Area2D.connect('area_shape_entered', self, '_on_area_shape_entered')

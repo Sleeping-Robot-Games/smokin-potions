@@ -17,6 +17,7 @@ func trigger_effect():
 	var ice_patch_instance = ice_patch.instance()
 	ice_patch_instance.global_position = global_position
 	ice_patch_instance.scale = Vector2(3, 3)
+	ice_patch_instance.use_portal = use_portal
 	get_parent().add_child(ice_patch_instance)
 	
 #	for x in range(size * -1, size):
