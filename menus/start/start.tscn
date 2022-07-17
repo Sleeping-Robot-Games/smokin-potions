@@ -143,7 +143,7 @@ flat = true
 modulate = Color( 0.545098, 0.733333, 0.352941, 1 )
 position = Vector2( -16, 30 )
 frames = SubResource( 5 )
-frame = 5
+frame = 4
 playing = true
 
 [node name="Sprite" type="Sprite" parent="Title"]

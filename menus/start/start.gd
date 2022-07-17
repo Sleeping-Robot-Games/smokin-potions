@@ -22,6 +22,7 @@ func _input(event):
 func _on_Button_button_up():
 	visible = false
 	get_parent().get_node("Select").visible = true
+	get_parent().get_node("Select/Boxes/Box1/Random").grab_focus()
 	var music_player = get_parent().get_node("AudioStreamPlayer")
 	music_player.stream = load('res://sfx/seth_song_3_v2.ogg')
 	music_player.play()
