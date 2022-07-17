@@ -41,7 +41,7 @@ func remove_action():
 
 
 func _physics_process(delta):
-	if disabled or super_disabled or dead_disabled or "Kick" in anim_player.current_animation:
+	if disabled or super_disabled or dead_disabled or frozen or "Kick" in anim_player.current_animation:
 		return
 	
 	# if current action hasn't been started, do so now

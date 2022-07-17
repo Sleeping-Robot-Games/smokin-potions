@@ -33,6 +33,7 @@ var kicking_potion = null
 var is_invulnerable = false
 var nearby_potions = []
 var holding_potion: RigidBody2D
+var frozen = false
 var ghost = false
 var dead = false
 var potion_drop_distance = 10
@@ -104,11 +105,13 @@ func take_dmg(dmg, potion):
 
 
 func freeze():
+	frozen = true
 	$FrozenFx.visible = true
 	$FrozenTimer.start()
 
 
 func _on_FrozenTimer_timeout():
+	frozen = false
 	$FrozenFx.visible = false
 
 
