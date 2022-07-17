@@ -204,6 +204,9 @@ func scheme():
 			else:
 				scary_bombs.append({"collider": collider, "dir": d_ray.name})
 	var cap = 7 if fresh_bombs.size() > 0 or scary_bombs.size() > 0 else 4
+	var match_timer = get_node("/root/Game").seconds
+	if match_timer >= 87:
+		cap = 1
 	rng.randomize()
 	var decision = rng.randi_range(1, cap)
 	# MOVE TO A RANDOM SPOT
