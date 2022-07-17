@@ -164,8 +164,9 @@ func play_random_sfx(parent, name):
 	sfx_player.play()
 
 
-func play_sfx(parent, name):
+func play_sfx(parent, name, db_override = 0):
 	var sfx_player = AudioStreamPlayer.new()
+	sfx_player.volume_db = db_override
 	rng.randomize()
 	var track_num = rng.randi_range(1, 5)
 	sfx_player.stream = load('res://sfx/'+name+'.ogg')

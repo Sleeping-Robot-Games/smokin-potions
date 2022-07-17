@@ -27,7 +27,7 @@ var new_facing: String = facing
 var new_cardinal_facing: String = cardinal_facing
 var movement_enabled = true
 var potion_ready = true
-var elements = ['earth', 'arcane']
+var elements = []
 var kicking_impulse = Vector2.ZERO
 var kicking_potion = null
 var is_invulnerable = false
@@ -59,7 +59,7 @@ func place_potion():
 	p.but_make_it_symmetrical(elements)
 	
 	# Clear elements after potion use
-	#elements = []
+	elements = []
 	g.emit_signal('elements_changed', elements, number)
 	
 	if potion_cooldown_toogle:

@@ -11,6 +11,7 @@ func _ready():
 	if not use_portal:
 		g.play_sfx(self, 'black_hole')
 
+
 func _physics_process(delta):
 	for c in nearby_players:
 		var velocity = c.global_position.direction_to(global_position)
