@@ -1,14 +1,16 @@
 extends Node
 
+var rng = RandomNumberGenerator.new()
+
 onready var wizard = preload('res://players/wizard/wizard.tscn')
 onready var bot = preload("res://players/bots/bot.tscn")
 onready var ui = preload('res://levels/player_ui.tscn')
 onready var breakable = preload('res://levels/breakable.tscn')
 onready var wizard_sprites = preload('res://levels/wizard_sprites.tscn')
-onready var fireball = preload('res://potions/fire/fireball/fireball.tscn')
+onready var potion_shooter = preload('res://levels/potion_shooter.tscn')
 
 onready var match_time = get_node("HUD/MatchTime")
-var seconds = 5
+var seconds = 90
 var starting_seconds = 3
 var current_players = []
 var dead_players = []
@@ -29,9 +31,9 @@ func _ready():
 	if g.players_in_current_game.size() == 0:
 		g.players_in_current_game = [
 			{'number': '1', 'bot': false},
-			{'number': '2', 'bot': true},
-			{'number': '3', 'bot': true},
-			{'number': '4', 'bot': true},
+#			{'number': '2', 'bot': true},
+#			{'number': '3', 'bot': true},
+#			{'number': '4', 'bot': true},
 		]
 		
 	for player in g.players_in_current_game:
@@ -43,6 +45,7 @@ func _ready():
 		for ui in get_tree().get_nodes_in_group('player_ui'):
 			ui.visible = false
 		$HUD/Tutorial.visible = true
+
 		
 func _input(event):
 	if reading_controls and (event is InputEventKey or event is InputEventJoypadButton):
@@ -201,21 +204,29 @@ func _on_PressStartTimer_timeout():
 	
 
 func _on_SuddenDeathEffectTimer_timeout():
-	var fx_dict = {
-	'left': 0, # shoot right
-	'top': 90, # shoot down
-	'right': 180, # shoot left
-	'bottom': 270 # shoot up
-	}
-	for d in get_tree().get_nodes_in_group('durables'):
-		if g.level_selected == 'wizard_tower':
+	if g.level_selected == 'wizard_tower':	
+		for d in get_tree().get_nodes_in_group('durables'):
 			if d.num != '005':
 				d.fire_the_lasers()
+	else:
+		var random_potion = g.get_random_potion_scene()
+		var new_potion_shooter = potion_shooter.instance()
+		## get random coord
+		var screenSize = get_viewport().get_visible_rect().size
+		var rndX = rng.randi_range(0, screenSize.x)
+		var rndY = rng.randi_range(0, screenSize.y)
+		var random_pos = Vector2(rndX, rndY)
+		new_potion_shooter.global_position = random_pos
+		$YSort.add_child(new_potion_shooter)
+		var good_to_go = !new_potion_shooter.get_node("RayCast2D").is_colliding()
+		new_potion_shooter.queue_free()
+		if good_to_go:
+			var new_random_potion = random_potion.instance()
+			new_random_potion.global_position = Vector2(random_pos.x, -20)
+			new_random_potion.flight_target = random_pos
+			new_random_potion.bombs_away = true
+			new_random_potion.get_node('CollisionShape2D').disabled = true
+			$YSort.add_child(new_random_potion)
 		else:
-			var fireball_instance = fireball.instance()
-#			fireball_instance.global_position = global_position
-#			fireball_instance.last_wiz = last_wiz
-#			fireball_instance.use_portal = use_portal
-#			get_parent().add_child(fireball_instance)
-#			fireball_instance.rotation_degrees = fx_dict[orginal_quadrant]
+			new_potion_shooter.queue_free()
 			

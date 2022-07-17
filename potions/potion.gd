@@ -11,24 +11,29 @@ var is_moving = false
 var holder: KinematicBody2D
 var parent_player = null
 var potion_daddy
+var bombs_away = false
+var flight_target: Vector2
+var landed = false
 
 func _ready():
 	connect('body_entered', self, '_on_body_entered')
-	
+	#activate()
+		
 	if use_portal:
 		$Portal.visible = true
 		$AnimationPlayer.play('fade')
 	else:
-		# when player first places potion, disable collision
-		$SpawningPlayerArea.connect('body_exited', self, '_on_body_exited')
-		add_collision_exception_with(parent_player)
-		for p_ray in parent_player.get_node("PotionRays").get_children():
-			p_ray.add_exception(self)
+		if parent_player:
+			# when player first places potion, disable collision
+			$SpawningPlayerArea.connect('body_exited', self, '_on_body_exited')
+			add_collision_exception_with(parent_player)
+			for p_ray in parent_player.get_node("PotionRays").get_children():
+				p_ray.add_exception(self)
 
 
 func _on_body_exited(body):
 	# when player leaves potion area, re-enable collision
-	if body and weakref(body).get_ref() and body == parent_player and holder == null:
+	if parent_player and body and weakref(body).get_ref() and body == parent_player and holder == null:
 		remove_collision_exception_with(parent_player)
 		for p_ray in parent_player.get_node("PotionRays").get_children():
 			p_ray.remove_exception(self)
@@ -60,7 +65,8 @@ func but_symmetrical(_original_potion):
 
 
 func activate():
-	$ExplodeTimer.start()
+	if not bombs_away:
+		$ExplodeTimer.start()
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):
@@ -147,6 +153,16 @@ func _on_body_entered(body):
 
 
 func _physics_process(delta):
+	if bombs_away and not landed:
+		global_position += transform.y * 150 * delta
+		if global_position.y > get_viewport().get_visible_rect().size.y:
+			queue_free() # Went off screen
+		if global_position.distance_to(flight_target) < 3:
+			landed = true
+			mode = MODE_CHARACTER
+			$CollisionShape2D.disabled = false
+			bombs_away = false
+			activate()
 	if holder and not 'Throw' in $AnimationPlayer.current_animation:
 		global_position = Vector2(holder.global_position.x, holder.global_position.y - 10)
 		if holder.y_facing == 'Back':

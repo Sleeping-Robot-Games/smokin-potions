@@ -19,6 +19,8 @@ func _physics_process(delta):
 		c.move_and_slide(velocity)
 	
 	for c in nearby_potions:
+		if c.bombs_away:
+			return
 		var velocity = c.global_position.direction_to(global_position)
 		velocity = velocity.normalized() * force
 #		velocity = Vector2(velocity.x * -1, velocity.y * -1)

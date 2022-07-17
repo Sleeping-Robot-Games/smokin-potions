@@ -73,6 +73,13 @@ func get_potion_scene(elements):
 		return potion_dict[elements[1] + "_" + elements[0]]
 	else:
 		return potion_basic
+		
+func get_random_potion_scene():
+	var all_potions = potion_dict.keys()
+	rng.randomize()
+	var random_potion_index = all_potions[rng.randi_range(0, all_potions.size()-1)]
+	var random_potion = potion_dict[random_potion_index]
+	return random_potion
 
 func folders_in_dir(path: String) -> Array:
 	var folders = []
