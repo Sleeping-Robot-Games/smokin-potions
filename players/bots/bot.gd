@@ -223,7 +223,6 @@ func scheme():
 	# make a decision
 	rng.randomize()
 	var decision = choices[rng.randi_range(0, choices.size() - 1)]
-	
 	# MOVE TO A RANDOM SPOT
 	if decision == 'move_random_spot':
 		queue_action_random_move()
@@ -312,9 +311,20 @@ func scheme():
 	# TRY TO KICK AWAY NEARBY FRESH POTION
 	elif decision == 'run_towards_fresh_potion':
 		var fresh_dir = []
+		var fresh_coords = []
 		for fresh_pot in fresh_pots:
 			fresh_dir.append(fresh_pot["dir"])
-		queue_action_random_move(fresh_dir)
+			fresh_coords.append(fresh_pot["collider"].global_position)
+		if fresh_dir.size() > 0:
+			rng.randomize()
+			var f = rng.randi_range(0, fresh_dir.size() - 1)
+			action_queue.append({
+				"type": "MOVE",
+				"dir": fresh_dir[f],
+				"coord": fresh_coords[f],
+				"timeout_ms": 2000,
+				"start_time" : null,
+			})
 
 
 func queue_action_random_move(avoid_extra_dirs = []):
