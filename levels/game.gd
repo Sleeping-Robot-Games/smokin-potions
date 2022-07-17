@@ -54,7 +54,7 @@ func start_game():
 	$StartingTimer.start()
 	$HUD/StartingTime.visible = true
 	$HUD/StartingTime.text = "Starting in 3..."
-	$Music.stream = load('res://sfx/battle_intro.ogg')
+	$Music.stream = load('res://sfx/battle_intro.mp3')
 	$Music.connect("finished", self, "_play_battle_music")
 	$Music.play()
 	
