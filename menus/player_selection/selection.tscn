@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://menus/player_selection/RandomIcon.png" type="Texture" id=1]
 [ext_resource path="res://players/wizard/wizard.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/font-theme.tres" type="Theme" id=4]
 [ext_resource path="res://menus/player_selection/LeftArrow10.png" type="Texture" id=5]
 [ext_resource path="res://menus/player_selection/RightArrow10.png" type="Texture" id=6]
+[ext_resource path="res://sfx/seth_song_3_v2.ogg" type="AudioStream" id=7]
 [ext_resource path="res://menus/player_selection/selection.gd" type="Script" id=8]
 [ext_resource path="res://menus/bg_002.png" type="Texture" id=9]
 
@@ -798,6 +799,9 @@ focus_mode = 0
 theme = ExtResource( 4 )
 enabled_focus_mode = 0
 text = "Ready?"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
 
 [connection signal="button_up" from="Boxes/Box1/Random" to="Boxes/Box1" method="_on_Random_button_up"]
 [connection signal="toggled" from="Boxes/Box1/CheckBox" to="Boxes/Box1" method="_on_CheckBox_toggled"]

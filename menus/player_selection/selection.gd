@@ -4,7 +4,7 @@ var used_colors = []
 var ready_players = []
 var players = []
 
-func _ready():
+func _ready():	
 	var boxes = $Boxes.get_children()
 	for box in boxes:
 		if g.new_game:

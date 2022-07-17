@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/seth_song_3_v2.ogg-71e93b90a8a7c0846b8ed65ca17b2d78.oggstr"
+
+[deps]
+
+source_file="res://sfx/seth_song_3_v2.ogg"
+dest_files=[ "res://.import/seth_song_3_v2.ogg-71e93b90a8a7c0846b8ed65ca17b2d78.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
