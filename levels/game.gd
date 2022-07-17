@@ -106,6 +106,7 @@ func next_round():
 		player.global_position = starting_pos
 		player.revive(2)
 		player.elements = []
+		g.load_normal_assets(player, player.number)
 		handle_elements_changed([], player.number)
 	for potion in get_tree().get_nodes_in_group('potions'):
 		potion.queue_free()
