@@ -14,9 +14,10 @@ var dead_players = []
 var win_state = {}
 var last_winner
 var breakable_positions = []
-var reading_controls = true
+var reading_controls
 
 func _ready():
+	reading_controls = g.new_game
 	
 	g.connect("elements_changed", self, "handle_elements_changed")
 	g.connect("player_death", self, "handle_player_death")
@@ -51,6 +52,7 @@ func _input(event):
 		reading_controls = false
 
 func start_game():
+	starting_seconds = 3
 	$StartingTimer.start()
 	$HUD/StartingTime.visible = true
 	$HUD/StartingTime.text = "Starting in 3..."
@@ -91,12 +93,10 @@ func next_round():
 	$HUD/StartingTime.visible = true
 	$HUD/StartingTime.text = "Starting in 3..."
 	seconds = 120
-	$MatchTimer.start()
 	for player in current_players:
 		var starting_pos = get_node("Starting" + str(player.number)).global_position
 		player.global_position = starting_pos
 		player.revive(2)
-		player.super_disabled = false
 		handle_elements_changed([], player.number)
 	for potion in get_tree().get_nodes_in_group('potions'):
 		potion.queue_free()
@@ -158,6 +158,7 @@ func _on_NextRound_timeout():
 		for ui in get_tree().get_nodes_in_group('player_ui'):
 			ui.visible = false
 		$HUD/AnimationPlayer.play("show_winner")
+		$HUD/WinnerScreen.visible = true
 		$HUD/WinnerScreen/Star/AnimationPlayer.play("star_bounce")
 		$HUD/WinnerScreen/Label.text = 'Player '+last_winner.number+' wins!'
 		var wiz_sprites = wizard_sprites.instance()

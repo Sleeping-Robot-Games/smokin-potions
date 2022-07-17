@@ -305,6 +305,7 @@ theme = ExtResource( 1 )
 text = "Starting in 1..."
 
 [node name="Tutorial" type="Control" parent="HUD"]
+visible = false
 margin_right = 642.0
 margin_bottom = 493.0
 
