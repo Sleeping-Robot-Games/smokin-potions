@@ -19,6 +19,7 @@ func break():
 		var type = 'box' if g.level_selected == 'wizard_tower' else 'rock'
 		g.play_random_sfx(self, type+'_breaking')
 		broken = true
+		$CollisionShape2D.disabled = true
 	
 func spawn():
 	var avail_sprites = g.files_in_dir('res://levels/'+g.level_selected+'/breakable/unbroken/')
@@ -50,7 +51,6 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 				get_parent().add_child(rune_instance)
 				
 		visible = false
-		$CollisionShape2D.disabled = true
 
 
 func _on_RespawnTimer_timeout():
