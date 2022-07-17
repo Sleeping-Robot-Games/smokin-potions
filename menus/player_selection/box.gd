@@ -130,6 +130,7 @@ func create_loaded_character() -> void:
 	
 func _on_Random_button_up():
 	create_random_character()
+	g.play_sfx(self, 'menu_selection')
 
 func get_next_avail_color(direction):
 	var all_colors = g.files_in_dir(palette_folder_path + "Color/")
@@ -140,6 +141,7 @@ func get_next_avail_color(direction):
 			return color.substr(6, 3)
 
 func _on_Color_Selection_button_up(direction: int, palette_sprite: String):
+	g.play_sfx(self, 'menu_selection')
 	if palette_sprite == 'Color':
 		var folder_path = palette_folder_path + palette_sprite
 		var files = g.files_in_dir(folder_path)
@@ -164,6 +166,7 @@ func _on_Color_Selection_button_up(direction: int, palette_sprite: String):
 			pallete_sprite_state[palette_sprite] = color_num
 
 func _on_Sprite_Selection_button_up(direction: int, sprite: String):
+	g.play_sfx(self, 'menu_selection')
 	var folder_path = sprite_folder_path + sprite
 	var files = g.files_in_dir(folder_path)
 	var file = sprite_state[sprite].split("/")[-1]
@@ -178,6 +181,7 @@ func _on_Sprite_Selection_button_up(direction: int, sprite: String):
 
 
 func _on_CheckBox_toggled(ready):
+	g.play_sfx(self, 'menu_confirmation', 10)
 	if ready:
 		selection.player_ready(self)
 	else:

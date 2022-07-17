@@ -943,7 +943,7 @@ extents = Vector2( 148.337, 307.345 )
 offsets = PoolRealArray( 0.021978, 0.120879, 0.263736, 0.576923, 0.824176 )
 colors = PoolColorArray( 0.409091, 0.409091, 0.409091, 0.590909, 1, 1, 1, 0, 0.411765, 0.901961, 0.780392, 1, 0.384314, 0.8, 0.541176, 1, 1, 1, 1, 1 )
 
-[sub_resource type="GradientTexture" id=4]
+[sub_resource type="GradientTexture" id=11]
 gradient = SubResource( 3 )
 
 [sub_resource type="ParticlesMaterial" id=5]
@@ -956,7 +956,7 @@ gravity = Vector3( 0, 0, 0 )
 initial_velocity = 10.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-color_ramp = SubResource( 4 )
+color_ramp = SubResource( 11 )
 
 [node name="Game" instance=ExtResource( 5 )]
 
