@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://menus/start/ArrowRight.png" type="Texture" id=1]
 [ext_resource path="res://menus/player_selection/selection.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://potions/basic/basic.png" type="Texture" id=6]
 [ext_resource path="res://assets/fonts/BOMBERMA.TTF" type="DynamicFontData" id=7]
 [ext_resource path="res://players/fog.png" type="Texture" id=8]
+[ext_resource path="res://sfx/seth_song_3_v2.ogg" type="AudioStream" id=9]
 
 [sub_resource type="DynamicFont" id=2]
 size = 59
@@ -174,5 +175,9 @@ visible = false
 [node name="Sprite" type="Sprite" parent="Splashscreen"]
 position = Vector2( 321, 241 )
 texture = ExtResource( 5 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+autoplay = true
 
 [connection signal="button_up" from="Title/Button" to="Title" method="_on_Button_button_up"]

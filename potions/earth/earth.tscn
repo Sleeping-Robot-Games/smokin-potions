@@ -122,6 +122,9 @@ script = ExtResource( 3 )
 [node name="AnimatedSprite" parent="." index="1"]
 frames = SubResource( 45 )
 
+[node name="Portal" parent="." index="3"]
+frame = 0
+
 [node name="ExplosionArea" type="Area2D" parent="." index="6"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionArea" index="0"]

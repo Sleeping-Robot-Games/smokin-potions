@@ -22,4 +22,4 @@ func _process(delta):
 func _on_Button_button_up():
 	visible = false
 	get_parent().get_node("Select").visible = true
-	get_parent().get_node("Select/Music").play()
+	#get_parent().get_node("Select/Music").play()
