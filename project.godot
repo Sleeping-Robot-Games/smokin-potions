@@ -135,6 +135,7 @@ interact={
 2d_physics/layer_8="boundaries"
 2d_physics/layer_9="no lava or ice"
 2d_physics/layer_10="ice patch"
+2d_physics/layer_11="no bots allowed"
 
 [physics]
 

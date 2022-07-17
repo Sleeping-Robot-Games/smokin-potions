@@ -31,7 +31,7 @@ func _ready():
 	if g.players_in_current_game.size() == 0:
 		g.players_in_current_game = [
 			{'number': '1', 'bot': false},
-#			{'number': '2', 'bot': true},
+			{'number': '2', 'bot': true},
 #			{'number': '3', 'bot': true},
 #			{'number': '4', 'bot': true},
 		]

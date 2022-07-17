@@ -60,49 +60,49 @@ position = Vector2( 0, 7 )
 [node name="Left" type="RayCast2D" parent="MoveRays" index="0"]
 enabled = true
 cast_to = Vector2( -80, 0 )
-collision_mask = 120
+collision_mask = 1144
 collide_with_areas = true
 
 [node name="UpperLeft" type="RayCast2D" parent="MoveRays" index="1"]
 enabled = true
 cast_to = Vector2( -60, -60 )
-collision_mask = 120
+collision_mask = 1144
 collide_with_areas = true
 
 [node name="Up" type="RayCast2D" parent="MoveRays" index="2"]
 enabled = true
 cast_to = Vector2( 0, -80 )
-collision_mask = 120
+collision_mask = 1144
 collide_with_areas = true
 
 [node name="UpperRight" type="RayCast2D" parent="MoveRays" index="3"]
 enabled = true
 cast_to = Vector2( 60, -60 )
-collision_mask = 120
+collision_mask = 1144
 collide_with_areas = true
 
 [node name="Right" type="RayCast2D" parent="MoveRays" index="4"]
 enabled = true
 cast_to = Vector2( 80, 0 )
-collision_mask = 120
+collision_mask = 1144
 collide_with_areas = true
 
 [node name="LowerRight" type="RayCast2D" parent="MoveRays" index="5"]
 enabled = true
 cast_to = Vector2( 60, 60 )
-collision_mask = 120
+collision_mask = 1144
 collide_with_areas = true
 
 [node name="Down" type="RayCast2D" parent="MoveRays" index="6"]
 enabled = true
 cast_to = Vector2( 0, 80 )
-collision_mask = 120
+collision_mask = 1144
 collide_with_areas = true
 
 [node name="LowerLeft" type="RayCast2D" parent="MoveRays" index="7"]
 enabled = true
 cast_to = Vector2( -60, 60 )
-collision_mask = 120
+collision_mask = 1144
 collide_with_areas = true
 
 [node name="SidestepRays" type="Node2D" parent="." index="16"]
