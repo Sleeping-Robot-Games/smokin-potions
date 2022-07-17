@@ -5,7 +5,11 @@ export (int) var force = 2
 
 var nearby_players = []
 var nearby_potions = []
+var use_portal = false
 
+func _ready():
+	if not use_portal:
+		g.play_sfx(self, 'black_hole')
 
 func _physics_process(delta):
 	for c in nearby_players:

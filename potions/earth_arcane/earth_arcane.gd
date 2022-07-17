@@ -13,6 +13,7 @@ func trigger_effect():
 	$ExplosionArea/Explode.play()
 	var black_hole_instance = black_hole.instance()
 	black_hole_instance.global_position = global_position
+	black_hole_instance.use_portal = use_portal
 	black_hole_instance
 	get_parent().add_child(black_hole_instance)
 

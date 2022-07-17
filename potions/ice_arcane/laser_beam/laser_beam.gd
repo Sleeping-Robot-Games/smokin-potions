@@ -28,8 +28,7 @@ onready var center = Vector2(position.x, position.y - radius)
 func _process(delta: float) -> void:
 	d += delta
 	position = Vector2(sin(d * speed) * radius,cos(d * speed) * radius) + center
-	
-	
+
 
 func _ready() -> void:
 	if not use_portal:
@@ -38,6 +37,7 @@ func _ready() -> void:
 	fill.points[1] = Vector2.ZERO
 	self.is_casting = true
 	$StopTimer.start()
+
 
 func _physics_process(delta: float) -> void:
 	cast_to = (cast_to + Vector2.RIGHT * cast_speed * delta).clamped(max_length)
