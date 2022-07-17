@@ -11,5 +11,5 @@ dest_files=[ "res://.import/potion_throw.ogg-cb13da972dad8410756638f6577f7fdd.og
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

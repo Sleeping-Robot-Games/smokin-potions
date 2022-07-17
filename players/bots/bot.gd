@@ -364,3 +364,4 @@ func throw_potion():
 		holding_potion = null
 		g.load_normal_assets(self, number)
 		anim_player.play("Throw"+y_facing+x_facing)
+		g.play_sfx(self, 'potion_throw')
