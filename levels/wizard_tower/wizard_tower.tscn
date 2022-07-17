@@ -241,6 +241,7 @@ position = Vector2( 323, 70 )
 position = Vector2( 360, 2 )
 
 [node name="NoLavaOrIce" type="Node2D" parent="." index="3"]
+visible = false
 
 [node name="Area2D" type="Area2D" parent="NoLavaOrIce" index="0"]
 collision_layer = 256
@@ -264,23 +265,23 @@ position = Vector2( 327, -18 )
 scale = Vector2( 2.70922, 0.138381 )
 shape = SubResource( 6 )
 
-[node name="W" parent="HUD/Tutorial" index="2"]
-frame = 0
+[node name="HorzLine" parent="." index="4"]
+visible = false
 
-[node name="A" parent="HUD/Tutorial" index="3"]
-frame = 0
+[node name="VertLine" parent="." index="5"]
+visible = false
 
-[node name="S" parent="HUD/Tutorial" index="4"]
-frame = 0
+[node name="MatchTime" parent="HUD" index="0"]
+visible = false
 
-[node name="D" parent="HUD/Tutorial" index="5"]
-frame = 1
+[node name="WinnerScreen" parent="HUD" index="1"]
+visible = false
 
-[node name="space" parent="HUD/Tutorial" index="6"]
-frame = 0
+[node name="Tutorial" parent="HUD" index="4"]
+visible = false
 
-[node name="e" parent="HUD/Tutorial" index="7"]
-frame = 0
+[node name="ColorRect" parent="HUD/Tutorial" index="0"]
+visible = false
 
-[node name="e2" parent="HUD/Tutorial" index="8"]
-frame = 1
+[node name="Label" parent="HUD/Tutorial" index="1"]
+visible = false

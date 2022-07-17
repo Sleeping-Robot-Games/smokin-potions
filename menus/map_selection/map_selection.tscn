@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://menus/map_selection/map_selection.gd" type="Script" id=1]
 [ext_resource path="res://menus/map_selection/rockgardenlevelnormal.PNG" type="Texture" id=2]
@@ -6,43 +6,63 @@
 [ext_resource path="res://menus/map_selection/rockgardenlevelpressed.PNG" type="Texture" id=4]
 [ext_resource path="res://menus/map_selection/rockgardenlevelhover.PNG" type="Texture" id=5]
 [ext_resource path="res://assets/fonts/BOMBERMA.TTF" type="DynamicFontData" id=6]
+[ext_resource path="res://menus/map_selection/wizardtowerlevelnormal.PNG" type="Texture" id=7]
+[ext_resource path="res://menus/map_selection/wizardtowerlevelhover.PNG" type="Texture" id=8]
+[ext_resource path="res://menus/map_selection/wizardtowerlevelpressed.PNG" type="Texture" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 6 )
 
 [node name="MapSection" type="Node2D"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 324.0, 348.0 ],
+"_edit_vertical_guides_": [ 50.0, 589.0 ]
+}
 
 [node name="Bg001" type="Sprite" parent="."]
 position = Vector2( 320, 240 )
 texture = ExtResource( 3 )
 
-[node name="WizardTowerButton" type="Button" parent="."]
-margin_left = 365.0
-margin_top = 182.0
-margin_right = 554.0
-margin_bottom = 288.0
-text = "WIZARD TOWER"
+[node name="WizardTowerButton" type="TextureButton" parent="."]
+margin_left = 344.0
+margin_top = 141.0
+margin_right = 587.0
+margin_bottom = 324.0
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 9 )
+texture_hover = ExtResource( 8 )
+
+[node name="Label" type="Label" parent="WizardTowerButton"]
+margin_left = 27.0
+margin_top = 192.0
+margin_right = 169.0
+margin_bottom = 209.0
+custom_fonts/font = SubResource( 1 )
+text = "Wizard tower"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RockGardenButton" type="TextureButton" parent="."]
-margin_left = 76.0
-margin_top = 140.0
-margin_right = 319.0
-margin_bottom = 323.0
+margin_left = 51.0
+margin_top = 141.0
+margin_right = 294.0
+margin_bottom = 324.0
 texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 4 )
 texture_hover = ExtResource( 5 )
 
-[node name="Label" type="Label" parent="RockGardenButton"]
-margin_left = 58.0
-margin_top = 193.0
-margin_right = 187.0
-margin_bottom = 210.0
+[node name="Label2" type="Label" parent="."]
+margin_left = 110.0
+margin_top = 333.0
+margin_right = 239.0
+margin_bottom = 350.0
 custom_fonts/font = SubResource( 1 )
 text = "Rock Garden"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="button_up" from="WizardTowerButton" to="." method="_on_Map_Selected_button_up" binds= [ "wizard_tower" ]]
 [connection signal="button_up" from="RockGardenButton" to="." method="_on_Map_Selected_button_up" binds= [ "rock_garden" ]]
