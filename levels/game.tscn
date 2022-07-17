@@ -419,39 +419,40 @@ text = "Thanks for playing!"
 position = Vector2( -29.8, -92 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 31 )
-frame = 1
 playing = true
 
 [node name="Yellow" type="AnimatedSprite" parent="HUD/WinnerScreen/Credits"]
 position = Vector2( 30.2, -92 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 32 )
-frame = 1
 playing = true
 
 [node name="Green" type="AnimatedSprite" parent="HUD/WinnerScreen/Credits"]
 position = Vector2( 100.2, -92 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 33 )
+frame = 2
 playing = true
 
 [node name="Blue" type="AnimatedSprite" parent="HUD/WinnerScreen/Credits"]
 position = Vector2( 163.2, -92 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 34 )
+frame = 2
 playing = true
 
 [node name="Purple" type="AnimatedSprite" parent="HUD/WinnerScreen/Credits"]
 position = Vector2( 223.2, -92 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 35 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="Pink" type="AnimatedSprite" parent="HUD/WinnerScreen/Credits"]
 position = Vector2( 289.2, -92 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 36 )
+frame = 2
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HUD"]
@@ -502,41 +503,38 @@ Revive - Kill another player as a ghost
 [node name="W" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
 position = Vector2( 106, 55 )
 frames = SubResource( 17 )
-frame = 1
 playing = true
 
 [node name="A" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
 position = Vector2( 150, 56 )
 frames = SubResource( 20 )
-frame = 1
 playing = true
 
 [node name="S" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
 position = Vector2( 195, 55 )
 frames = SubResource( 23 )
-frame = 1
 playing = true
 
 [node name="D" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
 position = Vector2( 239, 55 )
 frames = SubResource( 14 )
+frame = 1
 playing = true
 
 [node name="space" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
 position = Vector2( 234, 103 )
 frames = SubResource( 26 )
-frame = 1
 playing = true
 
 [node name="e" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
 position = Vector2( 262, 204 )
 frames = SubResource( 29 )
-frame = 1
 playing = true
 
 [node name="e2" type="AnimatedSprite" parent="HUD/Tutorial/Label"]
 position = Vector2( 344, 205 )
 frames = SubResource( 29 )
+frame = 1
 playing = true
 
 [node name="Scroll" type="Sprite" parent="HUD/Tutorial/Label"]

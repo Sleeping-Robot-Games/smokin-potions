@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/credits.mp3-dd94fa4144d41a9dcbf140f1050a66ba.mp3str"
+
+[deps]
+
+source_file="res://sfx/credits.mp3"
+dest_files=[ "res://.import/credits.mp3-dd94fa4144d41a9dcbf140f1050a66ba.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

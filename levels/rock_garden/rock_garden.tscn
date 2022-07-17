@@ -1081,3 +1081,42 @@ randomness = 0.5
 visibility_rect = Rect2( 0, 0, 640, 480 )
 process_material = SubResource( 5 )
 texture = ExtResource( 8 )
+
+[node name="Red" parent="HUD/WinnerScreen/Credits" index="2"]
+frame = 2
+
+[node name="Yellow" parent="HUD/WinnerScreen/Credits" index="3"]
+frame = 2
+
+[node name="Green" parent="HUD/WinnerScreen/Credits" index="4"]
+frame = 1
+
+[node name="Blue" parent="HUD/WinnerScreen/Credits" index="5"]
+frame = 1
+
+[node name="Purple" parent="HUD/WinnerScreen/Credits" index="6"]
+frame = 0
+
+[node name="Pink" parent="HUD/WinnerScreen/Credits" index="7"]
+frame = 1
+
+[node name="W" parent="HUD/Tutorial/Label" index="0"]
+frame = 1
+
+[node name="A" parent="HUD/Tutorial/Label" index="1"]
+frame = 1
+
+[node name="S" parent="HUD/Tutorial/Label" index="2"]
+frame = 1
+
+[node name="D" parent="HUD/Tutorial/Label" index="3"]
+frame = 0
+
+[node name="space" parent="HUD/Tutorial/Label" index="4"]
+frame = 1
+
+[node name="e" parent="HUD/Tutorial/Label" index="5"]
+frame = 1
+
+[node name="e2" parent="HUD/Tutorial/Label" index="6"]
+frame = 0
