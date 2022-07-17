@@ -54,8 +54,13 @@ func start_game():
 	$StartingTimer.start()
 	$HUD/StartingTime.visible = true
 	$HUD/StartingTime.text = "Starting in 3..."
-	$Music.stream = load('res://sfx/battle_intro.mp3')
-	$Music.connect("finished", self, "_play_battle_music")
+	if g.level_selected == "rock_garden":
+		$Music.volume_db = -15
+		$Music.stream = load('res://sfx/battle_intro.mp3')
+		$Music.connect("finished", self, "_play_battle_music")
+	else:
+		$Music.volume_db = 0
+		$Music.stream = load('res://sfx/battle_bgm2.mp3')
 	$Music.play()
 	
 func _play_battle_music():
