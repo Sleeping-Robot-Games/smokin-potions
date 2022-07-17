@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/rune_grab.ogg-5f1b325d163a18b64302c2eb015fecfe.oggstr"
+
+[deps]
+
+source_file="res://sfx/rune_grab.ogg"
+dest_files=[ "res://.import/rune_grab.ogg-5f1b325d163a18b64302c2eb015fecfe.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
