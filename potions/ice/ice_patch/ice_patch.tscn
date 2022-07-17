@@ -62,6 +62,7 @@ color_ramp = SubResource( 7 )
 
 [node name="Icy" type="Node2D"]
 scale = Vector2( 0.4, 0.4 )
+z_index = -4
 script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
