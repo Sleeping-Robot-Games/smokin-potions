@@ -134,7 +134,7 @@ shape = SubResource( 30 )
 [node name="Explode" type="AnimatedSprite" parent="ExplosionArea" index="1"]
 visible = false
 modulate = Color( 1.50196, 1.50196, 1.50196, 1 )
-self_modulate = Color( 0.52549, 0.0509804, 0.956863, 1 )
+self_modulate = Color( 0.764706, 0.137255, 0.47451, 1 )
 position = Vector2( 0, 7 )
 frames = SubResource( 31 )
 speed_scale = 3.0

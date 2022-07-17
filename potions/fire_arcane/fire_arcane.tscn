@@ -126,7 +126,7 @@ position = Vector2( 0, 9 )
 frames = SubResource( 45 )
 
 [node name="Portal" parent="." index="3"]
-frame = 0
+frame = 1
 
 [node name="ExplosionArea" type="Area2D" parent="." index="6"]
 

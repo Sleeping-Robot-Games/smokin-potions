@@ -130,7 +130,7 @@ frames = SubResource( 45 )
 
 [node name="Portal" parent="." index="3"]
 scale = Vector2( 0.75, 0.75 )
-frame = 5
+frame = 7
 
 [node name="PotionPickupArea" parent="." index="5"]
 scale = Vector2( 1.25, 1.25 )
@@ -145,7 +145,7 @@ shape = SubResource( 30 )
 [node name="Explode" type="AnimatedSprite" parent="ExplosionArea" index="1"]
 visible = false
 modulate = Color( 1.5, 1.5, 1.5, 1 )
-self_modulate = Color( 0.52549, 0.0509804, 0.956863, 1 )
+self_modulate = Color( 0.764706, 0.137255, 0.47451, 1 )
 position = Vector2( 0, 7 )
 frames = SubResource( 31 )
 speed_scale = 3.0
