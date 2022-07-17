@@ -96,7 +96,6 @@ func next_round():
 		var starting_pos = get_node("Starting" + str(player.number)).global_position
 		player.global_position = starting_pos
 		player.revive(2)
-		player.super_disabled = false
 		handle_elements_changed([], player.number)
 	for potion in get_tree().get_nodes_in_group('potions'):
 		potion.queue_free()
