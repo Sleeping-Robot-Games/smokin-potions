@@ -195,11 +195,14 @@ func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_s
 			humungo()
 		elif scroll.magic == 'tinyboi':
 			tinyboi()
+		elif scroll.magic == 'potionparty':
+			start_the_party()
 		rng.randomize()
 		var scroll_sfx_num = rng.randi_range(1, 4)
 		g.play_sfx(self, 'scroll_grab_' + str(scroll_sfx_num))
 		scroll.cleanup()
 		$ScrollTimer.start()
+	
 		
 func humungo():
 	speed = 50
@@ -211,6 +214,9 @@ func humungo():
 func tinyboi():
 	speed = 300
 	scale = Vector2(.75, .75)
+	
+func start_the_party():
+	get_node('/root/Game/PotionParty').start()
 
 func reset_scroll_magic():
 	speed = 150
@@ -220,6 +226,7 @@ func reset_scroll_magic():
 
 func _on_ScrollTimer_timeout():
 	reset_scroll_magic()
+	get_node('/root/Game/PotionParty').stop()
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if "Kick" in anim_name:

@@ -233,6 +233,8 @@ wait_time = 3.0
 one_shot = true
 autostart = true
 
+[node name="PotionParty" type="Timer" parent="."]
+
 [node name="Music" type="AudioStreamPlayer" parent="."]
 volume_db = -15.0
 
@@ -416,4 +418,5 @@ text = "Press any key to start..."
 [connection signal="timeout" from="NextRound" to="." method="_on_NextRound_timeout"]
 [connection signal="timeout" from="StartingTimer" to="." method="_on_StartingTimer_timeout"]
 [connection signal="timeout" from="PressStartTimer" to="." method="_on_PressStartTimer_timeout"]
+[connection signal="timeout" from="PotionParty" to="." method="_on_PotionParty_timeout"]
 [connection signal="button_up" from="HUD/WinnerScreen/Button" to="." method="_on_Button_button_up"]

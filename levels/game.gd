@@ -209,24 +209,31 @@ func _on_SuddenDeathEffectTimer_timeout():
 			if d.num != '005':
 				d.fire_the_lasers()
 	else:
-		var random_potion = g.get_random_potion_scene()
-		var new_potion_shooter = potion_shooter.instance()
-		## get random coord
-		var screenSize = get_viewport().get_visible_rect().size
-		var rndX = rng.randi_range(0, screenSize.x)
-		var rndY = rng.randi_range(0, screenSize.y)
-		var random_pos = Vector2(rndX, rndY)
-		new_potion_shooter.global_position = random_pos
-		$YSort.add_child(new_potion_shooter)
-		var good_to_go = !new_potion_shooter.get_node("RayCast2D").is_colliding()
+		potion_party()
+
+
+func potion_party():
+	var random_potion = g.get_random_potion_scene()
+	var new_potion_shooter = potion_shooter.instance()
+	## get random coord
+	var screenSize = get_viewport().get_visible_rect().size
+	var rndX = rng.randi_range(0, screenSize.x)
+	var rndY = rng.randi_range(0, screenSize.y)
+	var random_pos = Vector2(rndX, rndY)
+	new_potion_shooter.global_position = random_pos
+	$YSort.add_child(new_potion_shooter)
+	var good_to_go = !new_potion_shooter.get_node("RayCast2D").is_colliding()
+	new_potion_shooter.queue_free()
+	if good_to_go:
+		var new_random_potion = random_potion.instance()
+		new_random_potion.global_position = Vector2(random_pos.x, -20)
+		new_random_potion.flight_target = random_pos
+		new_random_potion.bombs_away = true
+		new_random_potion.get_node('CollisionShape2D').disabled = true
+		$YSort.add_child(new_random_potion)
+	else:
 		new_potion_shooter.queue_free()
-		if good_to_go:
-			var new_random_potion = random_potion.instance()
-			new_random_potion.global_position = Vector2(random_pos.x, -20)
-			new_random_potion.flight_target = random_pos
-			new_random_potion.bombs_away = true
-			new_random_potion.get_node('CollisionShape2D').disabled = true
-			$YSort.add_child(new_random_potion)
-		else:
-			new_potion_shooter.queue_free()
-			
+
+
+func _on_PotionParty_timeout():
+	potion_party()
