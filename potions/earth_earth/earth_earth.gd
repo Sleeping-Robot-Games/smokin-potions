@@ -17,6 +17,7 @@ func trigger_effect():
 	spikes_instance.global_position = global_position
 	spikes_instance
 	spikes_instance.last_wiz = last_wiz
+	spikes_instance.use_portal = use_portal
 	spikes_instance.scale = Vector2(0.75, 0.75)
 	get_parent().add_child(spikes_instance)
 

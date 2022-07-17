@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ground_spikes.ogg-b452dfa0dd17bc5861efbe325fbf763d.oggstr"
+
+[deps]
+
+source_file="res://sfx/ground_spikes.ogg"
+dest_files=[ "res://.import/ground_spikes.ogg-b452dfa0dd17bc5861efbe325fbf763d.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
