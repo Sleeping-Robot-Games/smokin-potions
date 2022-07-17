@@ -10,14 +10,14 @@ func _on_ExplodeTimer_timeout():
 	explode()
 
 
-func trigger_effect():		
+func trigger_effect():
 	$ExplosionArea/Explode.visible = true
 	$ExplosionArea/Explode.play()
 	for i in range(3):
 		var magic_missile_instance = magic_missile.instance()
 		magic_missile_instance.global_position = global_position
-		magic_missile_instance
 		magic_missile_instance.last_wiz = last_wiz
+		magic_missile_instance.use_portal = use_portal
 		get_parent().add_child(magic_missile_instance)
 		rng.randomize()
 		magic_missile_instance.rotation_degrees = rng.randi_range(0, 360)
