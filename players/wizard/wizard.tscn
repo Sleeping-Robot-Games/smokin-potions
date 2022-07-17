@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=2]
+[gd_scene load_steps=81 format=2]
 
 [ext_resource path="res://players/wizard/creator/sprites/Hat/Hat_001.png" type="Texture" id=1]
 [ext_resource path="res://players/wizard/Body/Skin.png" type="Texture" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://players/wizard/creator/palette/Outline/Outline_000.png" type="Texture" id=15]
 [ext_resource path="res://players/wizard/creator/palette/Outline/Outline_001.png" type="Texture" id=16]
 [ext_resource path="res://players/fog.png" type="Texture" id=17]
+[ext_resource path="res://players/wizard/frozen_sparkle.png" type="Texture" id=18]
 
 [sub_resource type="ShaderMaterial" id=26]
 shader = ExtResource( 6 )
@@ -3123,6 +3124,25 @@ tracks/4/keys = {
 "values": [ 68 ]
 }
 
+[sub_resource type="Gradient" id=79]
+offsets = PoolRealArray( 6.94467e-29, 0.758242, 0.906593 )
+colors = PoolColorArray( 0.0196078, 0.811765, 0.976471, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=80]
+gradient = SubResource( 79 )
+
+[sub_resource type="ParticlesMaterial" id=81]
+emission_shape = 1
+emission_sphere_radius = 10.0
+flag_disable_z = true
+gravity = Vector3( 0, -30, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 45.0
+angle_random = 1.0
+scale = 0.5
+color_ramp = SubResource( 80 )
+
 [node name="Wizard" type="KinematicBody2D"]
 scale = Vector2( 1.5, 1.5 )
 z_index = 1
@@ -3315,6 +3335,18 @@ collision_mask = 512
 collide_with_areas = true
 collide_with_bodies = false
 
+[node name="FrozenFx" type="Particles2D" parent="."]
+visible = false
+modulate = Color( 1.5, 1.5, 1.5, 1 )
+position = Vector2( 0, 7 )
+amount = 24
+process_material = SubResource( 81 )
+texture = ExtResource( 18 )
+
+[node name="FrozenTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="area_shape_entered" from="PickupArea" to="." method="_on_PickupArea_area_shape_entered"]
 [connection signal="area_entered" from="BombPickupArea" to="." method="_on_BombPickupArea_area_entered"]
 [connection signal="area_exited" from="BombPickupArea" to="." method="_on_BombPickupArea_area_exited"]
@@ -3324,3 +3356,4 @@ collide_with_bodies = false
 [connection signal="timeout" from="StunnedTimer" to="." method="_on_StunnedTimer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
 [connection signal="timeout" from="ScrollTimer" to="." method="_on_ScrollTimer_timeout"]
+[connection signal="timeout" from="FrozenTimer" to="." method="_on_FrozenTimer_timeout"]
