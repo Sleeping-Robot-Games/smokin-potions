@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/player_freeze.ogg-b9d32516c5649434c5d80b93aee9560f.oggstr"
+
+[deps]
+
+source_file="res://sfx/player_freeze.ogg"
+dest_files=[ "res://.import/player_freeze.ogg-b9d32516c5649434c5d80b93aee9560f.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

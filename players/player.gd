@@ -108,7 +108,7 @@ func freeze():
 	frozen = true
 	$FrozenFx.visible = true
 	$FrozenNode/FrozenSprite.visible = true
-	g.play_sfx(self, 'ground_freeze')
+	g.play_sfx(self, 'player_freeze')
 	anim_player.stop(false)
 	$FrozenTimer.start()
 
