@@ -10,7 +10,7 @@ onready var wizard_sprites = preload('res://levels/wizard_sprites.tscn')
 onready var potion_shooter = preload('res://levels/potion_shooter.tscn')
 
 onready var match_time = get_node("HUD/MatchTime")
-var seconds = 90
+var seconds = 1
 var starting_seconds = 3
 var current_players = []
 var dead_players = []
@@ -151,6 +151,7 @@ func _on_MatchTimer_timeout():
 		if seconds <= 0:
 			match_time.bbcode_text = '[center][color=red]OVERTIME[/color][/center]'
 			$SuddenDeathEffectTimer.start()
+			g.play_sfx(self, 'overtime_bell')
 		else:
 			match_time.bbcode_text = '[center]' + format_time() + '[/center]'
 	else:
@@ -222,9 +223,12 @@ func potion_party():
 	var rndY = rng.randi_range(0, screenSize.y)
 	var random_pos = Vector2(rndX, rndY)
 	new_potion_shooter.global_position = random_pos
+	new_potion_shooter.visible = false
 	$YSort.add_child(new_potion_shooter)
 	var good_to_go = new_potion_shooter.safe_zone()
 	if good_to_go:
+		new_potion_shooter.visible = true
+		new_potion_shooter.get_node("AnimationPlayer").play('fade')
 		var new_random_potion = random_potion.instance()
 		new_random_potion.global_position = Vector2(random_pos.x, random_pos.y -300)
 		new_random_potion.flight_target = random_pos

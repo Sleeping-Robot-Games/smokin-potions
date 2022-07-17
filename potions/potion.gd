@@ -18,7 +18,8 @@ var shooter
 
 func _ready():
 	connect('body_entered', self, '_on_body_entered')
-	#activate()
+	if not bombs_away:
+		modulate = Color(1, 1, 1, 1)
 		
 	if use_portal:
 		$Portal.visible = true
@@ -167,6 +168,7 @@ func _physics_process(delta):
 			bombs_away = false
 			clean_shooter()
 			activate()
+			g.play_sfx(self, 'potion_landing')
 	if holder and not 'Throw' in $AnimationPlayer.current_animation:
 		global_position = Vector2(holder.global_position.x, holder.global_position.y - 10)
 		if holder.y_facing == 'Back':

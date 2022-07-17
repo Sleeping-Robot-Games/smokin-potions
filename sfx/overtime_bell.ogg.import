@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/overtime_bell.ogg-cfaa48ca4d794f274494e46e79b12493.oggstr"
+
+[deps]
+
+source_file="res://sfx/overtime_bell.ogg"
+dest_files=[ "res://.import/overtime_bell.ogg-cfaa48ca4d794f274494e46e79b12493.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

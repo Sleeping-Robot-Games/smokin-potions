@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/potionshadow2.png-46b50d2a3de4ff9ccf14e27bef07f18b.stex"
+path="res://.import/potionshadow.png-b13c1954fbb0ff9d74b03706cd2e7bf7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://potions/potionshadow2.png"
-dest_files=[ "res://.import/potionshadow2.png-46b50d2a3de4ff9ccf14e27bef07f18b.stex" ]
+source_file="res://levels/potionshadow.png"
+dest_files=[ "res://.import/potionshadow.png-b13c1954fbb0ff9d74b03706cd2e7bf7.stex" ]
 
 [params]
 

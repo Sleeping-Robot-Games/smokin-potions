@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/potion_mixing_bubblies.ogg-7083d53c8b0aaa80495986d3281ac418.oggstr"
+
+[deps]
+
+source_file="res://sfx/potion_mixing_bubblies.ogg"
+dest_files=[ "res://.import/potion_mixing_bubblies.ogg-7083d53c8b0aaa80495986d3281ac418.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

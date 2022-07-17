@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/magic_missiles_1.ogg-3a04a3becf7b1bb2588df82450d2c7b1.oggstr"
+
+[deps]
+
+source_file="res://sfx/magic_missiles_1.ogg"
+dest_files=[ "res://.import/magic_missiles_1.ogg-3a04a3becf7b1bb2588df82450d2c7b1.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -8,7 +8,7 @@
 [ext_resource path="res://potions/basic/basic.png" type="Texture" id=6]
 [ext_resource path="res://assets/fonts/BOMBERMA.TTF" type="DynamicFontData" id=7]
 [ext_resource path="res://players/fog.png" type="Texture" id=8]
-[ext_resource path="res://sfx/seth_song_3_v2.ogg" type="AudioStream" id=9]
+[ext_resource path="res://sfx/title_screen.mp3" type="AudioStream" id=9]
 
 [sub_resource type="DynamicFont" id=2]
 size = 59
@@ -105,6 +105,7 @@ tracks/0/keys = {
 [node name="Menu" type="Node"]
 
 [node name="Title" type="Node2D" parent="."]
+visible = false
 script = ExtResource( 4 )
 
 [node name="ColorRect" type="ColorRect" parent="Title"]
@@ -139,7 +140,7 @@ flat = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Title/Button"]
 position = Vector2( -16, 30 )
 frames = SubResource( 5 )
-frame = 1
+frame = 4
 playing = true
 
 [node name="Sprite" type="Sprite" parent="Title"]
@@ -161,6 +162,11 @@ method_call_mode = 1
 anims/RESET = SubResource( 12 )
 anims/jiggle = SubResource( 13 )
 
+[node name="Timer" type="Timer" parent="Title"]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
 [node name="Select" parent="." instance=ExtResource( 2 )]
 visible = false
 
@@ -168,7 +174,6 @@ visible = false
 visible = false
 
 [node name="Splashscreen" type="Node2D" parent="."]
-visible = false
 
 [node name="Sprite" type="Sprite" parent="Splashscreen"]
 position = Vector2( 321, 241 )
@@ -179,3 +184,4 @@ stream = ExtResource( 9 )
 autoplay = true
 
 [connection signal="button_up" from="Title/Button" to="Title" method="_on_Button_button_up"]
+[connection signal="timeout" from="Title/Timer" to="Title" method="_on_Timer_timeout"]

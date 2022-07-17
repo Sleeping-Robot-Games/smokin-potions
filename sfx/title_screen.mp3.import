@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/title_screen.mp3-5f7410b0d7727928ccc98b4f5a924fb7.mp3str"
+
+[deps]
+
+source_file="res://sfx/title_screen.mp3"
+dest_files=[ "res://.import/title_screen.mp3-5f7410b0d7727928ccc98b4f5a924fb7.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
