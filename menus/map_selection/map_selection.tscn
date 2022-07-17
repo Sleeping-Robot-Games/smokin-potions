@@ -17,7 +17,7 @@ font_data = ExtResource( 6 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_horizontal_guides_": [ 324.0, 348.0 ],
-"_edit_vertical_guides_": [ 50.0, 589.0 ]
+"_edit_vertical_guides_": [ 50.0, 589.0, 173.0, 467.0 ]
 }
 
 [node name="Bg001" type="Sprite" parent="."]
@@ -34,9 +34,9 @@ texture_pressed = ExtResource( 9 )
 texture_hover = ExtResource( 8 )
 
 [node name="Label" type="Label" parent="WizardTowerButton"]
-margin_left = 27.0
+margin_left = 46.0
 margin_top = 192.0
-margin_right = 169.0
+margin_right = 188.0
 margin_bottom = 209.0
 custom_fonts/font = SubResource( 1 )
 text = "Wizard tower"
@@ -54,9 +54,9 @@ texture_pressed = ExtResource( 4 )
 texture_hover = ExtResource( 5 )
 
 [node name="Label2" type="Label" parent="."]
-margin_left = 110.0
+margin_left = 108.0
 margin_top = 333.0
-margin_right = 239.0
+margin_right = 237.0
 margin_bottom = 350.0
 custom_fonts/font = SubResource( 1 )
 text = "Rock Garden"
