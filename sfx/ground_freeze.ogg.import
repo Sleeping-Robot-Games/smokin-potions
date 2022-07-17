@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ground_freeze.ogg-fcf40034f67b654afd21431dc13a5172.oggstr"
+
+[deps]
+
+source_file="res://sfx/ground_freeze.ogg"
+dest_files=[ "res://.import/ground_freeze.ogg-fcf40034f67b654afd21431dc13a5172.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
