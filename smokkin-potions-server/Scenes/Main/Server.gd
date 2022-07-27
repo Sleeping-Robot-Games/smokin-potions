@@ -5,7 +5,7 @@ var port = 1909
 var max_players = 4
 
 func _ready():
-	pass
+	StartServer()
 
 
 func StartServer():

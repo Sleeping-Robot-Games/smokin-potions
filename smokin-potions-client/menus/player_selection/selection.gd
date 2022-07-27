@@ -31,6 +31,8 @@ func player_ready(player):
 	if players.size() == ready_players.size():
 		# When all players are ready and saved, save bot states
 		for box in $Boxes.get_children():
+			if box.none:
+				continue
 			## TODO: Update this when removing bots from selection
 			g.players_in_current_game.append({
 				'number': box.number,

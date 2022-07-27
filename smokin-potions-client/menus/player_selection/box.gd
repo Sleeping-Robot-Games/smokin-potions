@@ -3,6 +3,7 @@ extends Control
 var rng = RandomNumberGenerator.new()
 
 export (bool) var player: bool = false
+export (bool) var none: bool = false
 
 onready var wizard_sprite = {
 	'Hat': $Wizard/Hat,
@@ -186,3 +187,51 @@ func _on_CheckBox_toggled(ready):
 		selection.player_ready(self)
 	else:
 		selection.player_not_ready(self)
+		
+func add_player():
+	$Color.visible = true
+	$Hat.visible = true
+	$Hair.visible = true
+	$Skin.visible = true
+	$HairColor.visible = true
+	$CheckBox.visible = true
+	$CheckBox.disabled = false
+	$Name.text = "P"+ number
+	$Name.rect_position = Vector2($Name.rect_position.x + 50, $Name.rect_position.y)
+	$Wizard.visible = true
+	$Random.visible = true
+	$Random.disabled = false
+	player = true
+	none = false
+	selection.players.append(self)
+
+func add_bot():
+	$Color.visible = false
+	$Hat.visible = false
+	$Hair.visible = false
+	$Skin.visible = false
+	$HairColor.visible = false
+	$CheckBox.visible = false
+	$CheckBox.disabled = true
+	$Name.text = "Bot"
+	$Wizard.visible = true
+	player = false
+	none = false
+	selection.players.erase(self)
+
+func remove_player():
+	$Random.visible = false
+	$Random.disabled = true
+	$Name.text = "Add Player"
+	$Name.rect_position = Vector2($Name.rect_position.x - 50, $Name.rect_position.y)
+	player = false
+	none = true
+	$Wizard.visible = false
+
+func _on_Name_button_up():
+	if player:
+		add_bot()
+	elif not player and not none:
+		remove_player()
+	elif none and not player:
+		add_player()

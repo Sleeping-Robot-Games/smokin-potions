@@ -19,7 +19,7 @@ func break():
 		var type = 'box' if g.level_selected == 'wizard_tower' else 'rock'
 		g.play_random_sfx(self, type+'_breaking')
 		broken = true
-		$CollisionShape2D.disabled = true
+		$CollisionShape2D.set_deferred('disabled', true)
 	
 func spawn():
 	var avail_sprites = g.files_in_dir('res://levels/'+g.level_selected+'/breakable/unbroken/')
@@ -28,7 +28,7 @@ func spawn():
 	sprite = str(sprite_num).pad_zeros(3)
 	$Sprite.set_texture(load("res://levels/"+g.level_selected+"/breakable/unbroken/" + sprite + ".png"))
 	visible = true
-	$CollisionShape2D.disabled = false
+	$CollisionShape2D.set_deferred('disabled', false)
 	broken = false
 
 

@@ -106,6 +106,12 @@ tracks/0/keys = {
 [node name="Menu" type="Node"]
 script = ExtResource( 10 )
 
+[node name="Splashscreen" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Splashscreen"]
+position = Vector2( 321, 241 )
+texture = ExtResource( 5 )
+
 [node name="Title" type="Node2D" parent="."]
 visible = false
 script = ExtResource( 4 )
@@ -143,7 +149,7 @@ flat = true
 modulate = Color( 0.545098, 0.733333, 0.352941, 1 )
 position = Vector2( -16, 30 )
 frames = SubResource( 5 )
-frame = 3
+frame = 4
 playing = true
 
 [node name="Sprite" type="Sprite" parent="Title"]
@@ -165,17 +171,14 @@ method_call_mode = 1
 anims/RESET = SubResource( 12 )
 anims/jiggle = SubResource( 13 )
 
+[node name="Lobby" type="Node2D" parent="."]
+visible = false
+
 [node name="Select" parent="." instance=ExtResource( 2 )]
 visible = false
 
 [node name="MapSection" parent="." instance=ExtResource( 3 )]
 visible = false
-
-[node name="Splashscreen" type="Node2D" parent="."]
-
-[node name="Sprite" type="Sprite" parent="Splashscreen"]
-position = Vector2( 321, 241 )
-texture = ExtResource( 5 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
