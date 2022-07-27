@@ -17,6 +17,7 @@ config/icon="res://icon.png"
 [autoload]
 
 g="*res://global.gd"
+Server="*res://Server.gd"
 
 [display]
 
