@@ -17,13 +17,13 @@ func get_input():
 		elif cardinal_facing == "Back":
 			velocity.y -= 1
 	else:
-		if Input.is_action_pressed("right"):
+		if Input.is_action_pressed("right_"+controller_num):
 			velocity.x += 1
-		if Input.is_action_pressed("left"):
+		if Input.is_action_pressed("left_"+controller_num):
 			velocity.x -= 1
-		if Input.is_action_pressed("down"):
+		if Input.is_action_pressed("down_"+controller_num):
 			velocity.y += 1
-		if Input.is_action_pressed("up"):
+		if Input.is_action_pressed("up_"+controller_num):
 			velocity.y -= 1
 	
 	if movement_enabled:
@@ -32,26 +32,26 @@ func get_input():
 	# store necessary information to determine which way to face player in sprite_animation()
 	# x axis
 	x_changed = false
-	if Input.is_action_pressed("right") and Input.is_action_pressed("left"):
+	if Input.is_action_pressed("right_"+controller_num) and Input.is_action_pressed("left_"+controller_num):
 		x_facing = x_facing
-	elif Input.is_action_pressed("right"):
+	elif Input.is_action_pressed("right_"+controller_num):
 		x_facing = "Right"
 		x_changed = true
-	elif Input.is_action_pressed("left"):
+	elif Input.is_action_pressed("left_"+controller_num):
 		x_facing = "Left"
 		x_changed = true
 	# y axis
 	y_changed = false
-	if Input.is_action_pressed("up") and Input.is_action_pressed("down"):
+	if Input.is_action_pressed("up_"+controller_num) and Input.is_action_pressed("down_"+controller_num):
 		y_facing = y_facing
-	elif Input.is_action_pressed("up"):
+	elif Input.is_action_pressed("up_"+controller_num):
 		y_facing = "Back"
 		y_changed = true
-	elif Input.is_action_pressed("down"):
+	elif Input.is_action_pressed("down_"+controller_num):
 		y_facing = "Front"
 		y_changed = true
 		
-	if Input.is_action_just_released("interact"):
+	if Input.is_action_just_released("interact_"+controller_num):
 		if !holding_potion and nearby_potions.size() > 0:
 			holding_potion = nearby_potions.pop_back()
 			holding_potion.get_held(self)
@@ -68,35 +68,35 @@ func get_input():
 		
 	for p_ray in $PotionRays.get_children():
 		p_ray.force_raycast_update()
-	if $PotionRays/Left.is_colliding() and Input.is_action_pressed("left"):
+	if $PotionRays/Left.is_colliding() and Input.is_action_pressed("left_"+controller_num):
 		var collider = $PotionRays/Left.get_collider()
 		kicking_impulse = Vector2(KICK_FORCE * -1, 0)
 		kicking_potion = collider
-	elif $PotionRays/UpperLeft.is_colliding() and (Input.is_action_pressed("up") or Input.is_action_pressed("left")):
+	elif $PotionRays/UpperLeft.is_colliding() and (Input.is_action_pressed("up_"+controller_num) or Input.is_action_pressed("left_"+controller_num)):
 		var collider = $PotionRays/UpperLeft.get_collider()
 		kicking_impulse = Vector2(DIAG_KICK_FORCE * -1, DIAG_KICK_FORCE * -1)
 		kicking_potion = collider
-	elif $PotionRays/Up.is_colliding() and Input.is_action_pressed("up"):
+	elif $PotionRays/Up.is_colliding() and Input.is_action_pressed("up_"+controller_num):
 		var collider = $PotionRays/Up.get_collider()
 		kicking_impulse = Vector2(0, KICK_FORCE * -1)
 		kicking_potion = collider
-	elif $PotionRays/UpperRight.is_colliding() and (Input.is_action_pressed("up") or Input.is_action_pressed("right")):
+	elif $PotionRays/UpperRight.is_colliding() and (Input.is_action_pressed("up_"+controller_num) or Input.is_action_pressed("right_"+controller_num)):
 		var collider = $PotionRays/UpperRight.get_collider()
 		kicking_impulse = Vector2(DIAG_KICK_FORCE, DIAG_KICK_FORCE * -1)
 		kicking_potion = collider
-	elif $PotionRays/Right.is_colliding() and Input.is_action_pressed("right"):
+	elif $PotionRays/Right.is_colliding() and Input.is_action_pressed("right_"+controller_num):
 		var collider = $PotionRays/Right.get_collider()
 		kicking_impulse = Vector2(KICK_FORCE, 0)
 		kicking_potion = collider
-	elif $PotionRays/LowerRight.is_colliding() and (Input.is_action_pressed("down") or Input.is_action_pressed("right")):
+	elif $PotionRays/LowerRight.is_colliding() and (Input.is_action_pressed("down_"+controller_num) or Input.is_action_pressed("right_"+controller_num)):
 		var collider = $PotionRays/LowerRight.get_collider()
 		kicking_impulse = Vector2(DIAG_KICK_FORCE, DIAG_KICK_FORCE)
 		kicking_potion = collider
-	elif $PotionRays/Down.is_colliding() and Input.is_action_pressed("down"):
+	elif $PotionRays/Down.is_colliding() and Input.is_action_pressed("down_"+controller_num):
 		var collider = $PotionRays/Down.get_collider()
 		kicking_impulse = Vector2(0, KICK_FORCE)
 		kicking_potion = collider
-	elif $PotionRays/LowerLeft.is_colliding() and (Input.is_action_pressed("down") or Input.is_action_pressed("left")):
+	elif $PotionRays/LowerLeft.is_colliding() and (Input.is_action_pressed("down_"+controller_num) or Input.is_action_pressed("left_"+controller_num)):
 		var collider = $PotionRays/LowerLeft.get_collider()
 		kicking_impulse = Vector2(DIAG_KICK_FORCE * -1, DIAG_KICK_FORCE)
 		kicking_potion = collider
@@ -105,7 +105,7 @@ func get_input():
 	
 	sprite_animation()
 	
-	if Input.is_action_just_released('place'):
+	if Input.is_action_just_released("place_"+controller_num):
 		place_potion()
 
 

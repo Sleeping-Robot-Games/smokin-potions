@@ -70,11 +70,13 @@ margin_bottom = 40.0
 margin_left = 320.0
 margin_right = 640.0
 player = false
+none = true
 
 [node name="Box3" parent="Boxes" instance=ExtResource( 1 )]
 margin_top = 240.0
 margin_bottom = 480.0
 player = false
+none = true
 
 [node name="Box4" parent="Boxes" instance=ExtResource( 1 )]
 margin_left = 320.0

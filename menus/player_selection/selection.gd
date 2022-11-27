@@ -21,7 +21,10 @@ func _input(event):
 	if not visible:
 		return
 	if event is InputEventJoypadButton and event.is_action_pressed('ui_press'):
-		var p_num = event.device + 1 if g.p1_using_controller else 2
+		var p_num = event.device + 1 if g.p1_using_controller else event.device + 2
+		print(g.p1_using_controller)
+		print(event.device)
+		print(p_num)
 		var cursor = get_node_or_null('/root/Menu/'+str(p_num)+'cursor')
 		var box = get_node('Boxes/Box'+str(p_num))
 		if not box.player and not cursor:
@@ -45,6 +48,7 @@ func player_join(p_num):
 	## Adds the player to the box
 	var new_player_box = $Boxes.get_node("Box"+str(p_num))
 	new_player_box.player = true
+	new_player_box.none = false
 	new_player_box.apply_box_ui()
 	players.append(new_player_box)
 	## Creates a cursor
@@ -54,6 +58,7 @@ func player_leave(p_num):
 	## Remove the player from the box
 	var new_player_box = $Boxes.get_node("Box"+str(p_num))
 	new_player_box.player = false
+	new_player_box.none = false
 	new_player_box.apply_box_ui()
 	players.erase(new_player_box)
 	## Removes the cursor
@@ -77,8 +82,14 @@ func player_ready(player):
 				})
 				if not box.player:
 					store_player_state(box)
-		visible = false
-		get_parent().get_node("MapSection").visible = true
+			# Reset ready checkbox if players go back to this screen
+			var ready_checkbox = box.get_node('CheckBox')
+			if ready_checkbox:
+				ready_checkbox.pressed = false
+		
+		# Reset ready player state
+		ready_players = []
+		get_parent().switch_screen('map', self)
 
 func player_not_ready(player):
 	ready_players.erase(player)

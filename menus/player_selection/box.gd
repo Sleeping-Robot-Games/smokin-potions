@@ -211,13 +211,11 @@ func _on_CheckBox_toggled(ready):
 		selection.player_not_ready(self)
 
 func go_back():
-	g.play_sfx(self, 'menu_selection')
-	get_node('/root/Menu/Select').visible = false
-	get_node('/root/Menu/Title').visible = true
 	var music_player = get_node("/root/Menu/AudioStreamPlayer")
 	music_player.stream = load('res://sfx/title_screen.mp3')
 	music_player.play()
 	g.play_sfx(self, 'menu_confirmation', 10)
+	get_node('/root/Menu').switch_screen('title', get_node('/root/Menu/Select'))
 
 func _on_Leave_button_up():
 	g.play_sfx(self, 'menu_selection')

@@ -29,7 +29,7 @@ extents = Vector2( 32.5, 11.5 )
 [sub_resource type="RectangleShape2D" id=8]
 
 [sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 56, 10 )
+extents = Vector2( 56.5, 11.5 )
 
 [sub_resource type="DynamicFont" id=5]
 font_data = ExtResource( 6 )
@@ -48,6 +48,7 @@ position = Vector2( 154, 99 )
 scale = Vector2( 4, 4 )
 
 [node name="Leave" type="Button" parent="."]
+visible = false
 margin_left = 241.0
 margin_top = 18.0
 margin_right = 308.0
@@ -350,7 +351,7 @@ text = "Ready?"
 [node name="Area2D" type="Area2D" parent="CheckBox"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheckBox/Area2D"]
-position = Vector2( 60, 13 )
+position = Vector2( 60.5, 14 )
 shape = SubResource( 11 )
 
 [node name="RemoveBot" type="Button" parent="."]
@@ -366,6 +367,13 @@ custom_styles/focus = ExtResource( 8 )
 custom_styles/normal = ExtResource( 8 )
 text = "Remove"
 
+[node name="Area2D" type="Area2D" parent="RemoveBot"]
+position = Vector2( -29, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RemoveBot/Area2D"]
+position = Vector2( 70, 11 )
+shape = SubResource( 11 )
+
 [node name="AddBot" type="Button" parent="."]
 visible = false
 margin_left = 200.0
@@ -378,6 +386,13 @@ custom_styles/pressed = ExtResource( 9 )
 custom_styles/focus = ExtResource( 9 )
 custom_styles/normal = ExtResource( 9 )
 text = "Add Bot"
+
+[node name="Area2D" type="Area2D" parent="AddBot"]
+position = Vector2( -11, 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AddBot/Area2D"]
+position = Vector2( 58.5, 9 )
+shape = SubResource( 11 )
 
 [connection signal="button_up" from="Leave" to="." method="_on_Leave_button_up"]
 [connection signal="button_up" from="Random" to="." method="_on_Random_button_up"]

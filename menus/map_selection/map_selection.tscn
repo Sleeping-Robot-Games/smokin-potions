@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://menus/map_selection/map_selection.gd" type="Script" id=1]
 [ext_resource path="res://menus/map_selection/rockgardenlevelnormal.PNG" type="Texture" id=2]
@@ -12,11 +12,17 @@
 [ext_resource path="res://menus/player_selection/join_button_style.tres" type="StyleBox" id=10]
 [ext_resource path="res://menus/player_selection/leave_button_style.tres" type="StyleBox" id=11]
 
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 120, 90.5 )
+
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 6 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 104.5, 15.5 )
 
 [node name="MapSection" type="Node2D"]
 script = ExtResource( 1 )
@@ -41,16 +47,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="WizardTowerButton"]
-margin_left = 46.0
-margin_top = 192.0
-margin_right = 188.0
-margin_bottom = 209.0
+[node name="Area2D" type="Area2D" parent="WizardTowerButton"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WizardTowerButton/Area2D"]
+position = Vector2( 120, 89.5 )
+shape = SubResource( 4 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 390.0
+margin_top = 333.0
+margin_right = 532.0
+margin_bottom = 350.0
 custom_fonts/font = SubResource( 1 )
 text = "Wizard tower"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RockGardenButton" type="TextureButton" parent="."]
 margin_left = 51.0
@@ -60,6 +69,13 @@ margin_bottom = 324.0
 texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 4 )
 texture_hover = ExtResource( 5 )
+
+[node name="Area2D" type="Area2D" parent="RockGardenButton"]
+position = Vector2( 293, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RockGardenButton/Area2D"]
+position = Vector2( -172, 91 )
+shape = SubResource( 4 )
 
 [node name="Label2" type="Label" parent="."]
 margin_left = 108.0
@@ -86,7 +102,15 @@ custom_styles/focus = ExtResource( 11 )
 custom_styles/normal = ExtResource( 11 )
 text = "Back to Selection"
 
+[node name="Area2D" type="Area2D" parent="Button"]
+position = Vector2( -12, -15 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Button/Area2D"]
+position = Vector2( 116.5, 28.5 )
+shape = SubResource( 3 )
+
 [connection signal="button_up" from="WizardTowerButton" to="." method="_on_Map_Selected_button_up" binds= [ "wizard_tower" ]]
 [connection signal="mouse_entered" from="WizardTowerButton" to="." method="_on_WizardTowerButton_mouse_entered"]
 [connection signal="button_up" from="RockGardenButton" to="." method="_on_Map_Selected_button_up" binds= [ "rock_garden" ]]
 [connection signal="mouse_entered" from="RockGardenButton" to="." method="_on_RockGardenButton_mouse_entered"]
+[connection signal="button_up" from="Button" to="." method="_on_Button_button_up"]

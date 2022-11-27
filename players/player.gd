@@ -39,11 +39,16 @@ var dead = false
 var potion_drop_distance = 10
 var rune_drop_distance = 30
 
+var controller_num
+
 const rune_scene = preload('res://pickups/runes/rune.tscn')
 
 func _ready():
+	controller_num = number if g.p1_using_controller else str(int(number) - 1)
+	print(name)
+	print(controller_num)
 	add_to_group("players")
-	ready();
+	ready()
 
 func ready():
 	pass
