@@ -162,7 +162,7 @@ visible = false
 modulate = Color( 0.545098, 0.733333, 0.352941, 1 )
 position = Vector2( -16, 30 )
 frames = SubResource( 5 )
-frame = 4
+frame = 1
 playing = true
 
 [node name="Area2D" type="Area2D" parent="Title/Button"]

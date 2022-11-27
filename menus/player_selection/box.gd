@@ -3,6 +3,7 @@ extends Control
 var rng = RandomNumberGenerator.new()
 
 export (bool) var player: bool = false
+export (bool) var none: bool = false
 
 onready var wizard_sprite = {
 	'Hat': $Wizard/Hat,
@@ -52,17 +53,35 @@ func apply_box_ui():
 	if player:
 		$Leave.show()
 	
-	# Remove UI from bots
-	$Color.visible = player
-	$Hat.visible = player
-	$Hair.visible = player
-	$Skin.visible = player
-	$HairColor.visible = player
-	$CheckBox.visible = player
-	$CheckBox.disabled = !player
-	$Name.text = "P"+ number if player else "Bot"
-		
-		
+	if not none:
+		# Remove UI from bots
+		$Color.visible = player
+		$Hat.visible = player
+		$Hair.visible = player
+		$Skin.visible = player
+		$HairColor.visible = player
+		$CheckBox.visible = player
+		$CheckBox.disabled = !player
+		$RemoveBot.visible = !player
+		$Name.text = "P"+ number if player else "Bot"
+		$AddBot.visible = false
+		$Wizard.visible = true
+		$Random.visible = true
+	else:
+		# Remove all UI if none
+		$AddBot.visible = true
+		$Color.visible = false
+		$Hat.visible = false
+		$Hair.visible = false
+		$Skin.visible = false
+		$HairColor.visible = false
+		$CheckBox.visible = false
+		$CheckBox.disabled = true
+		$RemoveBot.visible = false
+		$Name.text = ""
+		$Wizard.visible = false
+		$Random.visible = false
+
 func set_sprite_texture(sprite_name: String, texture_path: String) -> void:
 	wizard_sprite[sprite_name].set_texture(load(texture_path))
 	sprite_state[sprite_name] = texture_path
@@ -192,6 +211,7 @@ func _on_CheckBox_toggled(ready):
 		selection.player_not_ready(self)
 
 func go_back():
+	g.play_sfx(self, 'menu_selection')
 	get_node('/root/Menu/Select').visible = false
 	get_node('/root/Menu/Title').visible = true
 	var music_player = get_node("/root/Menu/AudioStreamPlayer")
@@ -200,9 +220,21 @@ func go_back():
 	g.play_sfx(self, 'menu_confirmation', 10)
 
 func _on_Leave_button_up():
+	g.play_sfx(self, 'menu_selection')
 	if number == '1':
 		go_back()
 		get_node('/root/Menu/Select').all_players_leave()
 	else:
 		$Leave.hide()
 		get_node('/root/Menu/Select').player_leave(int(number))
+
+
+func _on_RemoveBot_button_up():
+	none = true
+	apply_box_ui()
+
+
+func _on_AddBot_button_up():
+	none = false
+	player = false
+	apply_box_ui()

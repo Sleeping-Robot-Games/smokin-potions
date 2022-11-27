@@ -25,7 +25,6 @@ func _input(event):
 		var cursor = get_node_or_null('/root/Menu/'+str(p_num)+'cursor')
 		var box = get_node('Boxes/Box'+str(p_num))
 		if not box.player:
-			print(p_num)
 			player_join(p_num, cursor == null)
 
 func _on_joy_connection_changed(device_id, connected):
@@ -73,13 +72,13 @@ func player_ready(player):
 	if players.size() == ready_players.size():
 		# When all players are ready and saved, save bot states
 		for box in $Boxes.get_children():
-			## TODO: Update this when removing bots from selection
-			g.players_in_current_game.append({
-				'number': box.number,
-				'bot': !box.player
-			})
-			if not box.player:
-				store_player_state(box)
+			if not box.none:
+				g.players_in_current_game.append({
+					'number': box.number,
+					'bot': !box.player
+				})
+				if not box.player:
+					store_player_state(box)
 		visible = false
 		get_parent().get_node("MapSection").visible = true
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://menus/map_selection/map_selection.gd" type="Script" id=1]
 [ext_resource path="res://menus/map_selection/rockgardenlevelnormal.PNG" type="Texture" id=2]
@@ -9,8 +9,13 @@
 [ext_resource path="res://menus/map_selection/wizardtowerlevelnormal.PNG" type="Texture" id=7]
 [ext_resource path="res://menus/map_selection/wizardtowerlevelhover.PNG" type="Texture" id=8]
 [ext_resource path="res://menus/map_selection/wizardtowerlevelpressed.PNG" type="Texture" id=9]
+[ext_resource path="res://menus/player_selection/join_button_style.tres" type="StyleBox" id=10]
+[ext_resource path="res://menus/player_selection/leave_button_style.tres" type="StyleBox" id=11]
 
 [sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 6 )
 
 [node name="MapSection" type="Node2D"]
@@ -68,6 +73,18 @@ __meta__ = {
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Button" type="Button" parent="."]
+margin_left = 12.0
+margin_top = 15.0
+margin_right = 224.0
+margin_bottom = 44.0
+custom_fonts/font = SubResource( 2 )
+custom_styles/hover = ExtResource( 10 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/focus = ExtResource( 11 )
+custom_styles/normal = ExtResource( 11 )
+text = "Back to Selection"
 
 [connection signal="button_up" from="WizardTowerButton" to="." method="_on_Map_Selected_button_up" binds= [ "wizard_tower" ]]
 [connection signal="mouse_entered" from="WizardTowerButton" to="." method="_on_WizardTowerButton_mouse_entered"]

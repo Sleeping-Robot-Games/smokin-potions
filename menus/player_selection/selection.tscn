@@ -82,3 +82,4 @@ margin_top = 240.0
 margin_right = 640.0
 margin_bottom = 480.0
 player = false
+none = true
