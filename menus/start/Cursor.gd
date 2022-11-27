@@ -11,11 +11,11 @@ var p_num
 func _ready():
 	screensize = get_viewport().size
 	$Label.text = "P"+str(p_num)
-	if p_num == 2:
+	if int(p_num) == 2:
 		set_texture(load('res://potions/fire/fire.png'))
-	if p_num == 3:
+	if int(p_num) == 3:
 		set_texture(load('res://potions/ice/ice.png'))
-	if p_num == 4:
+	if int(p_num) == 4:
 		set_texture(load('res://potions/arcane/arcane.png'))
 
 
@@ -45,7 +45,6 @@ func _input(event):
 func _on_Area2D_area_entered(area):
 	if area.get_parent() is Button:
 		hovering_button = area.get_parent()
-		print(hovering_button.is_hovered())
 
 
 func _on_Area2D_area_exited(area):

@@ -20,17 +20,20 @@ func _ready():
 func _input(event):
 	if not visible:
 		return
-#	if event is InputEventJoypadButton:
-#		if not g.p1_using_controller:
-#			player_join(device_id + 1)
-#		else:
-#			player_join(event.device)
+	if event is InputEventJoypadButton and event.is_action_pressed('ui_press'):
+		var p_num = event.device + 1 if g.p1_using_controller else 2
+		var cursor = get_node_or_null('/root/Menu/'+str(p_num)+'cursor')
+		var box = get_node('Boxes/Box'+str(p_num))
+		if not box.player:
+			print(p_num)
+			player_join(p_num, cursor == null)
 
 func _on_joy_connection_changed(device_id, connected):
+	var p_num = device_id + 1 if g.p1_using_controller else 2
 	if connected:
-		player_join(device_id)
+		player_join(p_num, connected)
 	else:
-		player_leave(device_id)
+		player_leave(p_num, connected)
 
 
 func add_color(color):
@@ -39,25 +42,30 @@ func add_color(color):
 func remove_color(color):
 	used_colors.erase(color)
 	
-func player_join(device_id):
+func player_join(p_num, newly_connected = false):
 	## Adds the player to the box
-	var p_num = device_id + 1 if g.p1_using_controller else 2
 	var new_player_box = $Boxes.get_node("Box"+str(p_num))
 	new_player_box.player = true
 	new_player_box.apply_box_ui()
 	players.append(new_player_box)
-	## Creates a cursor
-	get_node('/root/Menu/').create_cursor(p_num)
+	if newly_connected:
+		## Creates a cursor
+		get_node('/root/Menu/').create_cursor(p_num)
 	
-func player_leave(device_id):
+func player_leave(p_num, connected = true):
 	## Remove the player from the box
-	var p_num = device_id + 1 if g.p1_using_controller else 2
 	var new_player_box = $Boxes.get_node("Box"+str(p_num))
 	new_player_box.player = false
 	new_player_box.apply_box_ui()
 	players.erase(new_player_box)
-	## Removes a cursor
-	get_node('/root/Menu/').remove_cursor(p_num)
+	if not connected:
+		## Removes the cursor
+		get_node('/root/Menu/').remove_cursor(p_num)
+
+func all_players_leave():
+	for box in $Boxes.get_children():
+		if box.number != '1' and box.player:
+			player_leave(int(box.number), false)
 
 func player_ready(player):
 	ready_players.append(player)

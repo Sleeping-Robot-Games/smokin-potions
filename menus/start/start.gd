@@ -9,10 +9,13 @@ func _ready():
 
 func _input(event):
 	if visible:
-		if event is InputEventJoypadButton:
+		if event is InputEventJoypadButton and event.is_action_pressed('ui_press'):
+			print(visible)
+			print('START MENU SHIT')
 			g.p1_using_controller = true
 			get_parent().create_cursor(1)
-		elif event is InputEventMouseButton:
+		elif event is InputEventMouseButton and event.is_action_pressed('ui_press'):
+			print('START MENU SHIT')
 			g.p1_using_controller = false
 			get_parent().remove_cursor(1)
 

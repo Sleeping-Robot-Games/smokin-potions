@@ -202,5 +202,7 @@ func go_back():
 func _on_Leave_button_up():
 	if number == '1':
 		go_back()
+		get_node('/root/Menu/Select').all_players_leave()
 	else:
-		pass
+		$Leave.hide()
+		get_node('/root/Menu/Select').player_leave(int(number))
