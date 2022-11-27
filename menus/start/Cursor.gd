@@ -38,15 +38,21 @@ func _process(delta):
 
 
 func _input(event):
-	if hovering_button and event.is_action_pressed("ui_accept"):
+	if hovering_button != null and event.is_action_pressed('ui_press'):
 		hovering_button.emit_signal("button_up")
 
 
 func _on_Area2D_area_entered(area):
-	if area.get_parent() is Button:
-		hovering_button = area.get_parent()
+	var button = area.get_parent()
+	if button is Button and button.visible:
+		if 'Box' in button.get_parent().name:
+			# Only the player owned box can be edited
+			if int(button.get_parent().number) == int(p_num):
+				hovering_button = button
+		else:
+			hovering_button = button
 
 
 func _on_Area2D_area_exited(area):
-	if area.get_parent() is Button:
+	if area.get_parent() is Button and area.get_parent().visible:
 		hovering_button = null

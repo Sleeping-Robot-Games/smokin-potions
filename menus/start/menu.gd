@@ -15,7 +15,7 @@ func _ready():
 	
 func _on_Timer_timeout():
 	$Splashscreen.visible = false
-	$Title.visible = true
+#	$Title.visible = true
 
 func create_cursor(p_num):
 	var cursor = get_node_or_null(str(p_num)+'cursor')

@@ -24,15 +24,16 @@ func _input(event):
 		var p_num = event.device + 1 if g.p1_using_controller else 2
 		var cursor = get_node_or_null('/root/Menu/'+str(p_num)+'cursor')
 		var box = get_node('Boxes/Box'+str(p_num))
-		if not box.player:
-			player_join(p_num, cursor == null)
+		if not box.player and not cursor:
+			print('player joining')
+			player_join(p_num)
 
 func _on_joy_connection_changed(device_id, connected):
 	var p_num = device_id + 1 if g.p1_using_controller else 2
 	if connected:
-		player_join(p_num, connected)
+		player_join(p_num)
 	else:
-		player_leave(p_num, connected)
+		player_leave(p_num)
 
 
 func add_color(color):
@@ -41,30 +42,29 @@ func add_color(color):
 func remove_color(color):
 	used_colors.erase(color)
 	
-func player_join(p_num, newly_connected = false):
+func player_join(p_num):
 	## Adds the player to the box
 	var new_player_box = $Boxes.get_node("Box"+str(p_num))
 	new_player_box.player = true
 	new_player_box.apply_box_ui()
 	players.append(new_player_box)
-	if newly_connected:
-		## Creates a cursor
-		get_node('/root/Menu/').create_cursor(p_num)
+	## Creates a cursor
+	get_node('/root/Menu/').create_cursor(p_num)
 	
-func player_leave(p_num, connected = true):
+func player_leave(p_num):
 	## Remove the player from the box
 	var new_player_box = $Boxes.get_node("Box"+str(p_num))
 	new_player_box.player = false
 	new_player_box.apply_box_ui()
 	players.erase(new_player_box)
-	if not connected:
-		## Removes the cursor
-		get_node('/root/Menu/').remove_cursor(p_num)
+	print('player left')
+	## Removes the cursor
+	get_node('/root/Menu/').remove_cursor(p_num)
 
 func all_players_leave():
 	for box in $Boxes.get_children():
 		if box.number != '1' and box.player:
-			player_leave(int(box.number), false)
+			player_leave(int(box.number))
 
 func player_ready(player):
 	ready_players.append(player)

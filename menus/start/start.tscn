@@ -129,6 +129,9 @@ corner_radius_bottom_left = 10
 [node name="Menu" type="Node"]
 script = ExtResource( 10 )
 
+[node name="Select" parent="." instance=ExtResource( 2 )]
+visible = false
+
 [node name="Title" type="Node2D" parent="."]
 script = ExtResource( 4 )
 
@@ -162,7 +165,6 @@ visible = false
 modulate = Color( 0.545098, 0.733333, 0.352941, 1 )
 position = Vector2( -16, 30 )
 frames = SubResource( 5 )
-frame = 1
 playing = true
 
 [node name="Area2D" type="Area2D" parent="Title/Button"]
@@ -203,13 +205,11 @@ custom_styles/focus = ExtResource( 12 )
 custom_styles/normal = ExtResource( 12 )
 text = "Settings"
 
-[node name="Select" parent="." instance=ExtResource( 2 )]
-visible = false
-
 [node name="MapSection" parent="." instance=ExtResource( 3 )]
 visible = false
 
 [node name="Splashscreen" type="Node2D" parent="."]
+visible = false
 
 [node name="Sprite" type="Sprite" parent="Splashscreen"]
 visible = false
