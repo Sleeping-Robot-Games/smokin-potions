@@ -1,0 +1,254 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://menus/player_selection/LeftArrow10.png" type="Texture" id=1]
+[ext_resource path="res://menus/player_selection/RightArrow10.png" type="Texture" id=2]
+[ext_resource path="res://menus/player_selection/RandomIcon.png" type="Texture" id=3]
+[ext_resource path="res://assets/font-theme.tres" type="Theme" id=4]
+[ext_resource path="res://menus/player_selection/box.gd" type="Script" id=5]
+[ext_resource path="res://assets/fonts/BOMBERMA.TTF" type="DynamicFontData" id=6]
+[ext_resource path="res://players/wizard/wizard.tscn" type="PackedScene" id=7]
+[ext_resource path="res://menus/player_selection/leave_button_style.tres" type="StyleBox" id=8]
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 6 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Box1" type="Control"]
+margin_right = 320.0
+margin_bottom = 240.0
+script = ExtResource( 5 )
+player = true
+
+[node name="Wizard" parent="." instance=ExtResource( 7 )]
+position = Vector2( 154, 99 )
+scale = Vector2( 4, 4 )
+
+[node name="Leave" type="Button" parent="."]
+visible = false
+margin_left = 241.0
+margin_top = 18.0
+margin_right = 308.0
+margin_bottom = 41.0
+custom_fonts/font = SubResource( 3 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = ExtResource( 8 )
+custom_styles/normal = ExtResource( 8 )
+text = "Leave"
+
+[node name="Random" type="Button" parent="."]
+margin_left = 14.0
+margin_top = 193.0
+margin_right = 58.0
+margin_bottom = 231.0
+focus_neighbour_top = NodePath("../Hair/Left")
+focus_neighbour_right = NodePath("../CheckBox")
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 3 )
+flat = true
+
+[node name="Color" type="Label" parent="."]
+margin_left = 118.0
+margin_top = 16.0
+margin_right = 194.0
+margin_bottom = 46.0
+theme = ExtResource( 4 )
+text = "Color"
+
+[node name="Left" type="Button" parent="Color"]
+margin_left = -24.0
+margin_top = -8.0
+margin_right = -2.0
+margin_bottom = 28.0
+focus_neighbour_left = NodePath("../../Hat/Right")
+focus_neighbour_right = NodePath("../Right")
+focus_neighbour_bottom = NodePath("../../Hat/Right")
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 1 )
+flat = true
+
+[node name="Right" type="Button" parent="Color"]
+margin_left = 82.0
+margin_top = -9.0
+margin_right = 104.0
+margin_bottom = 27.0
+focus_neighbour_left = NodePath("../Left")
+focus_neighbour_right = NodePath("../../Skin/Left")
+focus_neighbour_bottom = NodePath("../../Skin/Left")
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 2 )
+flat = true
+
+[node name="Hat" type="Label" parent="."]
+margin_left = 20.0
+margin_top = 77.0
+margin_right = 96.0
+margin_bottom = 107.0
+theme = ExtResource( 4 )
+text = "Hat"
+align = 1
+
+[node name="Left" type="Button" parent="Hat"]
+margin_left = -11.0
+margin_top = -9.0
+margin_right = 11.0
+margin_bottom = 27.0
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 1 )
+flat = true
+
+[node name="Right" type="Button" parent="Hat"]
+margin_left = 67.0
+margin_top = -10.0
+margin_right = 89.0
+margin_bottom = 26.0
+focus_neighbour_left = NodePath("../Left")
+focus_neighbour_top = NodePath("../../Color/Left")
+focus_neighbour_right = NodePath("../../Skin/Left")
+focus_neighbour_bottom = NodePath("../../Hair/Right")
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 2 )
+flat = true
+
+[node name="Hair" type="Label" parent="."]
+margin_left = 23.0
+margin_top = 132.0
+margin_right = 99.0
+margin_bottom = 162.0
+theme = ExtResource( 4 )
+text = "Hair"
+align = 1
+
+[node name="Left" type="Button" parent="Hair"]
+margin_left = -14.0
+margin_top = -10.0
+margin_right = 8.0
+margin_bottom = 26.0
+focus_neighbour_top = NodePath("../../Hat/Left")
+focus_neighbour_right = NodePath("../Right")
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 1 )
+flat = true
+
+[node name="Right" type="Button" parent="Hair"]
+margin_left = 69.0
+margin_top = -10.0
+margin_right = 91.0
+margin_bottom = 26.0
+focus_neighbour_left = NodePath("../Left")
+focus_neighbour_top = NodePath("../../Hat/Right")
+focus_neighbour_right = NodePath("../../HairColor/Left")
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 2 )
+flat = true
+
+[node name="Skin" type="Label" parent="."]
+margin_left = 219.0
+margin_top = 75.0
+margin_right = 295.0
+margin_bottom = 105.0
+theme = ExtResource( 4 )
+text = "SKin"
+align = 1
+
+[node name="Left" type="Button" parent="Skin"]
+margin_left = -13.0
+margin_top = -9.0
+margin_right = 9.0
+margin_bottom = 27.0
+focus_neighbour_left = NodePath("../../Hat/Right")
+focus_neighbour_top = NodePath("../../Color/Right")
+focus_neighbour_right = NodePath("../Right")
+focus_neighbour_bottom = NodePath("../../HairColor/Left")
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 1 )
+flat = true
+
+[node name="Right" type="Button" parent="Skin"]
+margin_left = 69.0
+margin_top = -10.0
+margin_right = 91.0
+margin_bottom = 26.0
+focus_neighbour_left = NodePath("../Left")
+focus_neighbour_top = NodePath("../../Color/Right")
+focus_neighbour_bottom = NodePath("../../HairColor/Right")
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 2 )
+flat = true
+
+[node name="HairColor" type="Label" parent="."]
+margin_left = 217.0
+margin_top = 114.0
+margin_right = 293.0
+margin_bottom = 177.0
+theme = ExtResource( 4 )
+text = "Hair
+Color"
+align = 1
+
+[node name="Left" type="Button" parent="HairColor"]
+margin_left = -23.0
+margin_top = 4.0
+margin_right = -1.0
+margin_bottom = 40.0
+focus_neighbour_left = NodePath("../../Hair/Right")
+focus_neighbour_top = NodePath("../../Skin/Left")
+focus_neighbour_right = NodePath("../Right")
+focus_neighbour_bottom = NodePath("../../CheckBox")
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 1 )
+flat = true
+
+[node name="Right" type="Button" parent="HairColor"]
+margin_left = 78.0
+margin_top = 6.0
+margin_right = 100.0
+margin_bottom = 42.0
+focus_neighbour_left = NodePath("../Left")
+focus_neighbour_top = NodePath("../../Skin/Right")
+focus_neighbour_bottom = NodePath("../../CheckBox")
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 2 )
+flat = true
+
+[node name="Name" type="Label" parent="."]
+margin_left = 121.0
+margin_top = 201.0
+margin_right = 188.0
+margin_bottom = 231.0
+theme = ExtResource( 4 )
+text = "Bot"
+align = 1
+
+[node name="CheckBox" type="CheckBox" parent="."]
+anchor_right = 0.075
+anchor_bottom = 0.1
+margin_left = 189.0
+margin_top = 199.0
+margin_right = 284.0
+margin_bottom = 205.0
+focus_mode = 0
+theme = ExtResource( 4 )
+custom_colors/font_color = Color( 0.545098, 0.733333, 0.352941, 1 )
+enabled_focus_mode = 0
+text = "Ready?"
+
+[connection signal="button_up" from="Leave" to="." method="_on_Leave_button_up"]
+[connection signal="button_up" from="Random" to="." method="_on_Random_button_up"]
+[connection signal="toggled" from="CheckBox" to="." method="_on_CheckBox_toggled"]

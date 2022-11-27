@@ -45,18 +45,22 @@ func _ready():
 	$Hair/Left.connect('button_up', self, '_on_Sprite_Selection_button_up', [-1, "Hair"])
 	$Hair/Right.connect('button_up', self, '_on_Sprite_Selection_button_up', [1, "Hair"])
 	
-	$Name.text = "P"+ number
+	apply_box_ui()
+	
+func apply_box_ui():
+		# Ready or join button
+	if player:
+		$Leave.show()
 	
 	# Remove UI from bots
-	if not player:
-		$Color.visible = false
-		$Hat.visible = false
-		$Hair.visible = false
-		$Skin.visible = false
-		$HairColor.visible = false
-		$CheckBox.visible = false
-		$CheckBox.disabled = true
-		$Name.text = "Bot"
+	$Color.visible = player
+	$Hat.visible = player
+	$Hair.visible = player
+	$Skin.visible = player
+	$HairColor.visible = player
+	$CheckBox.visible = player
+	$CheckBox.disabled = !player
+	$Name.text = "P"+ number if player else "Bot"
 		
 		
 func set_sprite_texture(sprite_name: String, texture_path: String) -> void:
@@ -186,3 +190,17 @@ func _on_CheckBox_toggled(ready):
 		selection.player_ready(self)
 	else:
 		selection.player_not_ready(self)
+
+func go_back():
+	get_node('/root/Menu/Select').visible = false
+	get_node('/root/Menu/Title').visible = true
+	var music_player = get_node("/root/Menu/AudioStreamPlayer")
+	music_player.stream = load('res://sfx/title_screen.mp3')
+	music_player.play()
+	g.play_sfx(self, 'menu_confirmation', 10)
+
+func _on_Leave_button_up():
+	if number == '1':
+		go_back()
+	else:
+		pass

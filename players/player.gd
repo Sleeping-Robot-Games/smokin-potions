@@ -56,7 +56,7 @@ func place_potion():
 	p.global_position = Vector2(global_position.x, global_position.y + potion_drop_distance)
 	p.parent_player = self
 	get_parent().add_child(p)
-	p.but_make_it_symmetrical(elements)
+	# p.but_make_it_symmetrical(elements)
 	
 	# Clear elements after potion use
 	elements = []

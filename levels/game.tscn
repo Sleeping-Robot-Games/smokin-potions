@@ -251,15 +251,6 @@ animations = [ {
 size = 28
 font_data = ExtResource( 6 )
 
-[sub_resource type="RectangleShape2D" id=31]
-extents = Vector2( 10.2239, 10.3879 )
-
-[sub_resource type="RectangleShape2D" id=32]
-
-[sub_resource type="RectangleShape2D" id=33]
-
-[sub_resource type="RectangleShape2D" id=34]
-
 [node name="Game" type="Node"]
 script = ExtResource( 5 )
 
@@ -293,6 +284,7 @@ rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="HorzLine" type="Line2D" parent="."]
+visible = false
 self_modulate = Color( 1, 1, 1, 0.486275 )
 position = Vector2( -1, 5 )
 scale = Vector2( 0.992272, 1 )
@@ -300,6 +292,7 @@ points = PoolVector2Array( 0, 235, 645, 236 )
 width = 1.0
 
 [node name="VertLine" type="Line2D" parent="."]
+visible = false
 self_modulate = Color( 1, 1, 1, 0.486275 )
 position = Vector2( -0.00772798, 0.0123458 )
 scale = Vector2( 0.992272, 1.00206 )
@@ -592,7 +585,6 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NoBotsAllowed/UpperLeft"]
 position = Vector2( 34, 24 )
 scale = Vector2( 2, 2 )
-shape = SubResource( 31 )
 
 [node name="UpperRight" type="Area2D" parent="NoBotsAllowed"]
 collision_layer = 1024
@@ -601,7 +593,6 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NoBotsAllowed/UpperRight"]
 position = Vector2( 606, 24 )
 scale = Vector2( 2, 2 )
-shape = SubResource( 32 )
 
 [node name="LowerRight" type="Area2D" parent="NoBotsAllowed"]
 collision_layer = 1024
@@ -610,7 +601,6 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NoBotsAllowed/LowerRight"]
 position = Vector2( 33, 446 )
 scale = Vector2( 2, 2 )
-shape = SubResource( 33 )
 
 [node name="LowerLeft" type="Area2D" parent="NoBotsAllowed"]
 collision_layer = 1024
@@ -619,7 +609,6 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NoBotsAllowed/LowerLeft"]
 position = Vector2( 606, 446 )
 scale = Vector2( 2, 2 )
-shape = SubResource( 34 )
 
 [connection signal="timeout" from="SuddenDeathEffectTimer" to="." method="_on_SuddenDeathEffectTimer_timeout"]
 [connection signal="timeout" from="MatchTimer" to="." method="_on_MatchTimer_timeout"]

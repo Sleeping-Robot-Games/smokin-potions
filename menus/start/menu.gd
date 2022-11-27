@@ -1,12 +1,7 @@
 extends Node
 
+var cursor_scene = preload("res://menus/start/Cursor.tscn")
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	if g.new_game:
 		$Splashscreen.visible = true
@@ -17,12 +12,21 @@ func _ready():
 	else:
 		$Splashscreen.visible = false
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
+	
 func _on_Timer_timeout():
 	$Splashscreen.visible = false
 	$Title.visible = true
+
+func create_cursor(p_num):
+	var cursor = get_node_or_null(str(p_num)+'cursor')
+	if not cursor:
+		var new_cursor = cursor_scene.instance()
+		new_cursor.p_num = p_num
+		new_cursor.position = Vector2(320, 240)
+		new_cursor.name = str(p_num)+'cursor'
+		add_child(new_cursor)
+
+func remove_cursor(p_num):
+	var cursor = get_node_or_null(str(p_num)+'cursor')
+	if cursor:
+		cursor.queue_free()

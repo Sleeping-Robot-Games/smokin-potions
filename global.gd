@@ -49,6 +49,8 @@ var level_selected = 'rock_garden'
 
 var new_game = true
 
+var p1_using_controller = false
+
 
 func is_player(body):
 	return body and weakref(body).get_ref() and ('Wizard' in body.name or 'Bot' in body.name)
