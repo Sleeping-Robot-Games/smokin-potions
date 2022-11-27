@@ -25,7 +25,6 @@ func _input(event):
 		var cursor = get_node_or_null('/root/Menu/'+str(p_num)+'cursor')
 		var box = get_node('Boxes/Box'+str(p_num))
 		if not box.player and not cursor:
-			print('player joining')
 			player_join(p_num)
 
 func _on_joy_connection_changed(device_id, connected):
@@ -57,7 +56,6 @@ func player_leave(p_num):
 	new_player_box.player = false
 	new_player_box.apply_box_ui()
 	players.erase(new_player_box)
-	print('player left')
 	## Removes the cursor
 	get_node('/root/Menu/').remove_cursor(p_num)
 

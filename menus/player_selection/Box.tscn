@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://menus/player_selection/LeftArrow10.png" type="Texture" id=1]
 [ext_resource path="res://menus/player_selection/RightArrow10.png" type="Texture" id=2]
@@ -21,6 +21,15 @@ corner_radius_bottom_left = 10
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 32.5, 11.5 )
+
+[sub_resource type="RectangleShape2D" id=9]
+
+[sub_resource type="RectangleShape2D" id=10]
+
+[sub_resource type="RectangleShape2D" id=8]
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 56, 10 )
 
 [sub_resource type="DynamicFont" id=5]
 font_data = ExtResource( 6 )
@@ -68,6 +77,13 @@ enabled_focus_mode = 0
 icon = ExtResource( 3 )
 flat = true
 
+[node name="Area2D" type="Area2D" parent="Random"]
+position = Vector2( -5, -125 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Random/Area2D"]
+position = Vector2( 27, 143 )
+shape = SubResource( 9 )
+
 [node name="Color" type="Label" parent="."]
 margin_left = 118.0
 margin_top = 16.0
@@ -89,6 +105,12 @@ enabled_focus_mode = 0
 icon = ExtResource( 2 )
 flat = true
 
+[node name="Area2D" type="Area2D" parent="Color/Right"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Color/Right/Area2D"]
+position = Vector2( 8, 17 )
+shape = SubResource( 10 )
+
 [node name="Left" type="Button" parent="Color"]
 margin_left = -24.0
 margin_top = -8.0
@@ -101,6 +123,12 @@ focus_mode = 0
 enabled_focus_mode = 0
 icon = ExtResource( 1 )
 flat = true
+
+[node name="Area2D" type="Area2D" parent="Color/Left"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Color/Left/Area2D"]
+position = Vector2( 13, 17 )
+shape = SubResource( 8 )
 
 [node name="Hat" type="Label" parent="."]
 margin_left = 20.0
@@ -121,6 +149,12 @@ enabled_focus_mode = 0
 icon = ExtResource( 1 )
 flat = true
 
+[node name="Area2D" type="Area2D" parent="Hat/Left"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hat/Left/Area2D"]
+position = Vector2( 14, 18 )
+shape = SubResource( 9 )
+
 [node name="Right" type="Button" parent="Hat"]
 margin_left = 67.0
 margin_top = -10.0
@@ -134,6 +168,13 @@ focus_mode = 0
 enabled_focus_mode = 0
 icon = ExtResource( 2 )
 flat = true
+
+[node name="Area2D" type="Area2D" parent="Hat/Right"]
+position = Vector2( -78, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hat/Right/Area2D"]
+position = Vector2( 85, 18 )
+shape = SubResource( 9 )
 
 [node name="Hair" type="Label" parent="."]
 margin_left = 23.0
@@ -156,6 +197,13 @@ enabled_focus_mode = 0
 icon = ExtResource( 1 )
 flat = true
 
+[node name="Area2D" type="Area2D" parent="Hair/Left"]
+position = Vector2( 0, -54 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hair/Left/Area2D"]
+position = Vector2( 13, 72 )
+shape = SubResource( 9 )
+
 [node name="Right" type="Button" parent="Hair"]
 margin_left = 69.0
 margin_top = -10.0
@@ -168,6 +216,13 @@ focus_mode = 0
 enabled_focus_mode = 0
 icon = ExtResource( 2 )
 flat = true
+
+[node name="Area2D" type="Area2D" parent="Hair/Right"]
+position = Vector2( -83, -54 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hair/Right/Area2D"]
+position = Vector2( 92, 73 )
+shape = SubResource( 9 )
 
 [node name="Skin" type="Label" parent="."]
 margin_left = 219.0
@@ -192,6 +247,13 @@ enabled_focus_mode = 0
 icon = ExtResource( 1 )
 flat = true
 
+[node name="Area2D" type="Area2D" parent="Skin/Left"]
+position = Vector2( -197, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Skin/Left/Area2D"]
+position = Vector2( 210, 16 )
+shape = SubResource( 9 )
+
 [node name="Right" type="Button" parent="Skin"]
 margin_left = 69.0
 margin_top = -10.0
@@ -204,6 +266,13 @@ focus_mode = 0
 enabled_focus_mode = 0
 icon = ExtResource( 2 )
 flat = true
+
+[node name="Area2D" type="Area2D" parent="Skin/Right"]
+position = Vector2( -279, 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Skin/Right/Area2D"]
+position = Vector2( 287, 15 )
+shape = SubResource( 9 )
 
 [node name="HairColor" type="Label" parent="."]
 margin_left = 217.0
@@ -229,6 +298,13 @@ enabled_focus_mode = 0
 icon = ExtResource( 1 )
 flat = true
 
+[node name="Area2D" type="Area2D" parent="HairColor/Left"]
+position = Vector2( -185, -50 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HairColor/Left/Area2D"]
+position = Vector2( 197, 68 )
+shape = SubResource( 9 )
+
 [node name="Right" type="Button" parent="HairColor"]
 margin_left = 78.0
 margin_top = 6.0
@@ -241,6 +317,13 @@ focus_mode = 0
 enabled_focus_mode = 0
 icon = ExtResource( 2 )
 flat = true
+
+[node name="Area2D2" type="Area2D" parent="HairColor/Right"]
+position = Vector2( -286, -52 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HairColor/Right/Area2D2"]
+position = Vector2( 296, 69 )
+shape = SubResource( 9 )
 
 [node name="Name" type="Label" parent="."]
 margin_left = 121.0
@@ -263,6 +346,12 @@ theme = ExtResource( 4 )
 custom_colors/font_color = Color( 0.545098, 0.733333, 0.352941, 1 )
 enabled_focus_mode = 0
 text = "Ready?"
+
+[node name="Area2D" type="Area2D" parent="CheckBox"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CheckBox/Area2D"]
+position = Vector2( 60, 13 )
+shape = SubResource( 11 )
 
 [node name="RemoveBot" type="Button" parent="."]
 visible = false
