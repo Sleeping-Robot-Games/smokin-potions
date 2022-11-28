@@ -20,11 +20,8 @@ func _ready():
 func _input(event):
 	if not visible:
 		return
-	if event is InputEventJoypadButton and event.is_action_pressed('ui_press'):
+	if event.is_action_pressed('any_pad_button'):
 		var p_num = event.device + 1 if g.p1_using_controller else event.device + 2
-		print(g.p1_using_controller)
-		print(event.device)
-		print(p_num)
 		var cursor = get_node_or_null('/root/Menu/'+str(p_num)+'cursor')
 		var box = get_node('Boxes/Box'+str(p_num))
 		if not box.player and not cursor:
@@ -36,7 +33,6 @@ func _on_joy_connection_changed(device_id, connected):
 		player_join(p_num)
 	else:
 		player_leave(p_num)
-
 
 func add_color(color):
 	used_colors.append(color)

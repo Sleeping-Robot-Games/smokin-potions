@@ -11,8 +11,7 @@ var controller_num
 
 func _ready():
 	controller_num = p_num if g.p1_using_controller else p_num - 1
-	print(controller_num)
-	print(name)
+	
 	screensize = get_viewport().size
 	$Label.text = "P"+str(p_num)
 	if int(p_num) == 2:
@@ -52,7 +51,6 @@ func _input(event):
 func _on_Area2D_area_entered(area):
 	var button = area.get_parent()
 	if (button is Button or button is TextureButton) and button.visible:
-		print(button.name)
 		if 'Box' in button.get_parent().name:
 			# Only the player owned box can be edited
 			if not button.get_parent().player or int(button.get_parent().number) == int(p_num):

@@ -45,8 +45,7 @@ const rune_scene = preload('res://pickups/runes/rune.tscn')
 
 func _ready():
 	controller_num = number if g.p1_using_controller else str(int(number) - 1)
-	print(name)
-	print(controller_num)
+	
 	add_to_group("players")
 	ready()
 
