@@ -53,7 +53,22 @@ func _ready():
 func apply_box_ui():
 		# Ready or join button
 	if player:
+		var input_sprite = null
+		var input_device = g.player_input_devices["p"+number]
+		if input_device == "keyboard":
+			input_sprite = "keyboard.png"
+		elif input_device and "joy_" in input_device:
+			input_sprite = "controller.png"
+		
+		if input_sprite:
+			$ControlType.visible = true
+			$ControlType.set_texture(load("res://menus/player_selection/"+input_sprite))
+		else:
+			$ControlType.visible = false
+			$ControlType.set_texture(null)
 		$Leave.show()
+	else:
+		$ControlType.visible = false
 	
 	if not none:
 		# Remove UI from bots
@@ -234,22 +249,11 @@ func _on_CheckBox_toggled(ready):
 		selection.player_not_ready(self)
 
 
-func go_back():
-	var music_player = get_node("/root/Menu/AudioStreamPlayer")
-	music_player.stream = load('res://sfx/title_screen.mp3')
-	music_player.play()
-	g.play_sfx(self, 'menu_confirmation', 10)
-	get_node('/root/Menu').switch_screen('title', get_node('/root/Menu/Select'))
-
-
 func _on_Leave_button_up():
 	g.play_sfx(self, 'menu_selection')
-	if number == '1':
-		go_back()
-		get_node('/root/Menu/Select').all_players_leave()
-	else:
-		$Leave.hide()
-		get_node('/root/Menu/Select').player_leave(int(number))
+	$Leave.hide()
+	g.player_input_devices["p"+str(number)] = null
+	get_node('/root/Menu/Select').player_leave(int(number))
 
 
 func _on_RemoveBot_button_up():

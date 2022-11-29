@@ -17,22 +17,34 @@ func _ready():
 		_on_Button_button_up()
 	$Sprite/AnimationPlayer.play("jiggle")
 
+
 func _on_joy_connection_changed(device_id, connected):
 	if connected:
-		if device_id == 0:
-			g.p1_using_controller = true
-			get_parent().create_cursor(1)
+		if not g.player_input_devices.values().has("joy_" + str(device_id)):
+			for i in g.player_input_devices:
+				if g.player_input_devices[i] == null:
+					g.player_input_devices[i] = "joy_" + str(device_id)
+					get_parent().create_cursor(int(i.substr(1,1)))
+					return
 	else:
-		g.p1_using_controller = false
-		get_parent().remove_cursor(1)
+		for i in g.player_input_devices:
+			if g.player_input_devices[i] == "joy_" + str(device_id):
+				g.player_input_devices[i] = null
+				get_parent().remove_cursor(int(i.substr(1,1)))
+				return
+
 
 func _input(event):
-	if event is InputEventJoypadButton and event.is_action_pressed('any_pad_button_1'):
-		g.p1_using_controller = true
-		get_parent().create_cursor(1)
-	elif event is InputEventMouseButton and event.is_action_pressed('ui_press_0'):
-		g.p1_using_controller = false
+	if event.is_action_pressed('ui_press_0'):
+		g.player_input_devices["p1"] = "keyboard"
 		get_parent().remove_cursor(1)
+	elif event.is_action_pressed('any_pad_button'):
+		var device_name = Input.get_joy_name(event.device)
+		if g.ghost_inputs.has(device_name):
+			return
+		g.player_input_devices["p1"] = "joy_" + str(event.device)
+		get_parent().create_cursor(1)
+
 
 func _on_Button_button_up():
 	var music_player = get_parent().get_node("AudioStreamPlayer")

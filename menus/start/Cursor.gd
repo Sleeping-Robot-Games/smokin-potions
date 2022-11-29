@@ -10,7 +10,10 @@ var p_num
 var controller_num
 
 func _ready():
-	controller_num = p_num if g.p1_using_controller else p_num - 1
+	var input_device = g.player_input_devices["p"+str(p_num)]
+	controller_num = "unassigned"
+	if input_device and "joy_" in input_device:
+		controller_num = input_device.substr(4)
 	
 	screensize = get_viewport().size
 	$Label.text = "P"+str(p_num)
@@ -24,13 +27,13 @@ func _ready():
 
 func _process(delta):
 	var velocity = Vector2()
-	if Input.is_action_pressed("right_"+str(controller_num)):
+	if Input.is_action_pressed("right_"+controller_num):
 		velocity.x += 1
-	if Input.is_action_pressed("left_"+str(controller_num)):
+	if Input.is_action_pressed("left_"+controller_num):
 		velocity.x -= 1
-	if Input.is_action_pressed("down_"+str(controller_num)):
+	if Input.is_action_pressed("down_"+controller_num):
 		velocity.y += 1
-	if Input.is_action_pressed("up_"+str(controller_num)):
+	if Input.is_action_pressed("up_"+controller_num):
 		velocity.y -= 1
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * cursor_speed
@@ -41,7 +44,7 @@ func _process(delta):
 
 
 func _input(event):
-	if hovering_button != null and event.is_action_pressed('ui_press_'+str(controller_num)):
+	if hovering_button != null and event.is_action_pressed('ui_press_'+controller_num):
 		if hovering_button is Button or hovering_button is TextureButton:
 			hovering_button.emit_signal("button_up")
 		if hovering_button is CheckBox:

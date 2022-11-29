@@ -43,12 +43,14 @@ var dead = false
 var potion_drop_distance = 10
 var rune_drop_distance = 30
 
-var controller_num
+var controller_num = "kb"
 
 const rune_scene = preload('res://pickups/runes/rune.tscn')
 
 func _ready():
-	controller_num = number if g.p1_using_controller else str(int(number) - 1)
+	var input_device = g.player_input_devices["p"+number]
+	if input_device and input_device.left(4) == "joy_":
+		controller_num = input_device.substr(4)
 	
 	add_to_group("players")
 	ready()

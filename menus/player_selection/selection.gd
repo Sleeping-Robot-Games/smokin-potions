@@ -25,20 +25,39 @@ func _ready():
 func _input(event):
 	if not visible:
 		return
-	if event.is_action_pressed('any_pad_button'):
-		var p_num = event.device + 1 if g.p1_using_controller else event.device + 2
-		var cursor = get_node_or_null('/root/Menu/'+str(p_num)+'cursor')
-		var box = get_node('Boxes/Box'+str(p_num))
-		if not box.player and not cursor:
-			player_join(p_num)
+	if event.is_action_pressed('ui_accept') and not g.player_input_devices.values().has("keyboard"):
+		for i in g.player_input_devices:
+				if g.player_input_devices[i] == null:
+					g.player_input_devices[i] = "keyboard"
+					player_join(int(i.substr(1,1)), false)
+					return
+	elif event.is_action_pressed('any_pad_button'):
+		var device_name = Input.get_joy_name(event.device)
+		if g.ghost_inputs.has(device_name):
+			return
+		if g.player_input_devices.values().has("joy_" + str(event.device)):
+			return
+		for i in g.player_input_devices:
+			if g.player_input_devices[i] == null:
+				g.player_input_devices[i] = "joy_" + str(event.device)
+				player_join(int(i.substr(1,1)))
+				return
 
 
 func _on_joy_connection_changed(device_id, connected):
-	var p_num = device_id + 1 if g.p1_using_controller else 2
 	if connected:
-		player_join(p_num)
+		if not g.player_input_devices.values().has("joy_" + str(device_id)):
+			for i in g.player_input_devices:
+				if g.player_input_devices[i] == null:
+					g.player_input_devices[i] = "joy_" + str(device_id)
+					player_join(int(i.substr(1,1)))
+					return
 	else:
-		player_leave(p_num)
+		for i in g.player_input_devices:
+			if g.player_input_devices[i] == "joy_" + str(device_id):
+				g.player_input_devices[i] = null
+				player_leave(int(i.substr(1,1)))
+				return
 
 
 func add_color(color):
@@ -49,7 +68,7 @@ func remove_color(color):
 	used_colors.erase(color)
 
 
-func player_join(p_num):
+func player_join(p_num, add_cursor = true):
 	## Adds the player to the box
 	var new_player_box = $Boxes.get_node("Box"+str(p_num))
 	new_player_box.player = true
@@ -59,7 +78,8 @@ func player_join(p_num):
 	if players.size() + bots.size() > 1:
 		enable_ready_all()
 	## Creates a cursor
-	get_node('/root/Menu/').create_cursor(p_num)
+	if add_cursor:
+		get_node('/root/Menu/').create_cursor(p_num)
 
 
 func player_leave(p_num):
@@ -71,6 +91,8 @@ func player_leave(p_num):
 	players.erase(old_player_box)
 	if players.size() + bots.size() == 1:
 		disable_ready_all()
+	elif players.size() == 0:
+		go_back()
 	## Removes the cursor
 	get_node('/root/Menu/').remove_cursor(p_num)
 
@@ -96,7 +118,16 @@ func bot_leave(p_num):
 		disable_ready_all()
 
 
-func all_players_leave():
+func go_back():
+	reset_players()
+	var music_player = get_node("/root/Menu/AudioStreamPlayer")
+	music_player.stream = load('res://sfx/title_screen.mp3')
+	music_player.play()
+	g.play_sfx(self, 'menu_confirmation', 10)
+	get_node('/root/Menu').switch_screen('title', get_node('/root/Menu/Select'))
+
+
+func reset_players():
 	var boxes = $Boxes.get_children()
 	for box in boxes:
 		if box.number != '1' and box.player:

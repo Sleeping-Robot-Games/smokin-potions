@@ -49,7 +49,15 @@ var level_selected = 'rock_garden'
 
 var new_game = true
 
-var p1_using_controller = false
+var player_input_devices = {
+	'p1': 'keyboard',
+	'p2': null,
+	'p3': null,
+	'p4': null,
+}
+
+# physical input duplicate entries
+var ghost_inputs = ["Steam Virtual Gamepad"]
 
 
 func is_player(body):
