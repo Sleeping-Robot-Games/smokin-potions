@@ -35,7 +35,7 @@ func _on_joy_connection_changed(device_id, connected):
 
 
 func _input(event):
-	if event.is_action_pressed('ui_press_0'):
+	if event.is_action_pressed('ui_press_kb'):
 		g.player_input_devices["p1"] = "keyboard"
 		get_parent().remove_cursor(1)
 	elif event.is_action_pressed('any_pad_button'):
