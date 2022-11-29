@@ -11,10 +11,14 @@ onready var anim_player: AnimationPlayer = $AnimationPlayer
 
 const KICK_FORCE = 400
 const DIAG_KICK_FORCE = 200
+const NORMAL_SPEED = 200
+const HUMUNGO_SPEED = 75
+const TEENY_SPEED = 350
+
 
 var number = "1"
 var health = 2
-var speed: int = 150
+var speed: int = NORMAL_SPEED
 var velocity: Vector2 = Vector2()
 var x_facing: String = "Right"
 var x_changed: bool = false
@@ -215,21 +219,21 @@ func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_s
 	
 		
 func humungo():
-	speed = 50
+	speed = HUMUNGO_SPEED
 	scale = Vector2(3,3)
 	potion_drop_distance = 40
 	rune_drop_distance = 60
 	
 
 func tinyboi():
-	speed = 300
+	speed = TEENY_SPEED
 	scale = Vector2(.75, .75)
 	
 func start_the_party():
 	get_node('/root/Game/PotionParty').start()
 
 func reset_scroll_magic():
-	speed = 150
+	speed = NORMAL_SPEED
 	scale = Vector2(1.5, 1.5)
 	potion_drop_distance = 10
 	rune_drop_distance = 30
