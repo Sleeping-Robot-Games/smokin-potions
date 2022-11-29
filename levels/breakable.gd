@@ -13,15 +13,17 @@ func _ready():
 
 func break():
 	if not broken:
+		broken = true
 		$Sprite.set_texture(load("res://levels/"+g.level_selected+"/breakable/broken/" + sprite + ".png"))
 		$AnimationPlayer.play("fade_out")
 		$RespawnTimer.start()
 		var type = 'box' if g.level_selected == 'wizard_tower' else 'rock'
 		g.play_random_sfx(self, type+'_breaking')
-		broken = true
 		$CollisionShape2D.disabled = true
-	
+
+
 func spawn():
+	broken = false
 	var avail_sprites = g.files_in_dir('res://levels/'+g.level_selected+'/breakable/unbroken/')
 	rng.randomize()
 	var sprite_num = rng.randi_range(1, avail_sprites.size())
@@ -29,7 +31,6 @@ func spawn():
 	$Sprite.set_texture(load("res://levels/"+g.level_selected+"/breakable/unbroken/" + sprite + ".png"))
 	visible = true
 	$CollisionShape2D.disabled = false
-	broken = false
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):
