@@ -4,6 +4,7 @@ var rng = RandomNumberGenerator.new()
 
 export (bool) var player: bool = false
 export (bool) var none: bool = false
+export (bool) var disable_ready: bool = false
 
 onready var wizard_sprite = {
 	'Hat': $Wizard/Hat,
@@ -47,7 +48,8 @@ func _ready():
 	$Hair/Right.connect('button_up', self, '_on_Sprite_Selection_button_up', [1, "Hair"])
 	
 	apply_box_ui()
-	
+
+
 func apply_box_ui():
 		# Ready or join button
 	if player:
@@ -61,7 +63,7 @@ func apply_box_ui():
 		$Skin.visible = player
 		$HairColor.visible = player
 		$CheckBox.visible = player
-		$CheckBox.disabled = !player
+		$CheckBox.disabled = !player or disable_ready
 		$RemoveBot.visible = !player
 		$Name.text = "P"+ number if player else "Bot"
 		$AddBot.visible = false
@@ -82,10 +84,12 @@ func apply_box_ui():
 		$Wizard.visible = false
 		$Random.visible = false
 
+
 func set_sprite_texture(sprite_name: String, texture_path: String) -> void:
 	wizard_sprite[sprite_name].set_texture(load(texture_path))
 	sprite_state[sprite_name] = texture_path
-	
+
+
 func set_sprite_color(folder, sprite: Sprite, number: String) -> void:
 	var palette_path = "res://players/wizard/creator/palette/{folder}/{folder}_{number}.png".format({
 		"folder": folder,
@@ -98,6 +102,7 @@ func set_sprite_color(folder, sprite: Sprite, number: String) -> void:
 	sprite.material.set_shader_param("greyscale_palette", load(gray_palette_path))
 	g.make_shaders_unique(sprite)
 
+
 func random_asset(folder: String, keyword: String = "") -> String:
 	var files: Array
 	files = g.files_in_dir(folder)
@@ -108,7 +113,8 @@ func random_asset(folder: String, keyword: String = "") -> String:
 	rng.randomize()
 	var random_index = rng.randi_range(0, files.size() - 1)
 	return folder+"/"+files[random_index]
-	
+
+
 func set_random_color(palette_type: String) -> void:
 	var random_color
 	if palette_type == 'Color':
@@ -131,13 +137,15 @@ func set_random_color(palette_type: String) -> void:
 		var color_num = random_color.substr(len(random_color)-7, 3)
 		set_sprite_color(palette_type, sprite, color_num)
 		pallete_sprite_state[palette_type] = color_num
-		
+
+
 func set_random_texture(sprite_name: String) -> void:
 	var random_sprite = random_asset(sprite_folder_path + sprite_name)
 	if random_sprite == "": # No assets in the folder yet continue to next folder
 		return
 	set_sprite_texture(sprite_name, random_sprite)
-	
+
+
 func create_random_character() -> void:
 	var sprite_folders = g.folders_in_dir(sprite_folder_path)
 	var palette_folders = g.folders_in_dir(palette_folder_path)
@@ -146,14 +154,17 @@ func create_random_character() -> void:
 	for folder in palette_folders:
 		set_random_color(folder)
 
+
 func create_loaded_character() -> void:
 	var loaded_data = g.load_player($Wizard, number)
 	sprite_state = loaded_data.sprite_state
 	pallete_sprite_state = loaded_data.pallete_sprite_state
-	
+
+
 func _on_Random_button_up():
 	create_random_character()
 	g.play_sfx(self, 'menu_selection')
+
 
 func get_next_avail_color(direction):
 	var all_colors = g.files_in_dir(palette_folder_path + "Color/")
@@ -162,6 +173,18 @@ func get_next_avail_color(direction):
 	for color in reordered_colors:
 		if not color in selection.used_colors:
 			return color.substr(6, 3)
+
+
+func disable_ready() -> void:
+	disable_ready = true
+	$CheckBox.set_pressed_no_signal(false)
+	apply_box_ui()
+
+
+func enable_ready() -> void:
+	disable_ready = false
+	apply_box_ui()
+
 
 func _on_Color_Selection_button_up(direction: int, palette_sprite: String):
 	g.play_sfx(self, 'menu_selection')
@@ -210,12 +233,14 @@ func _on_CheckBox_toggled(ready):
 	else:
 		selection.player_not_ready(self)
 
+
 func go_back():
 	var music_player = get_node("/root/Menu/AudioStreamPlayer")
 	music_player.stream = load('res://sfx/title_screen.mp3')
 	music_player.play()
 	g.play_sfx(self, 'menu_confirmation', 10)
 	get_node('/root/Menu').switch_screen('title', get_node('/root/Menu/Select'))
+
 
 func _on_Leave_button_up():
 	g.play_sfx(self, 'menu_selection')
@@ -228,11 +253,8 @@ func _on_Leave_button_up():
 
 
 func _on_RemoveBot_button_up():
-	none = true
-	apply_box_ui()
+	get_node('/root/Menu/Select').bot_leave(int(number))
 
 
 func _on_AddBot_button_up():
-	none = false
-	player = false
-	apply_box_ui()
+	get_node('/root/Menu/Select').bot_join(int(number))

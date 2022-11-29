@@ -3,10 +3,11 @@ extends Node2D
 var used_colors = []
 var ready_players = []
 var players = []
+var bots = []
 
 func _ready():
 	Input.connect("joy_connection_changed", self, "_on_joy_connection_changed")
-
+	
 	var boxes = $Boxes.get_children()
 	for box in boxes:
 		if g.new_game:
@@ -16,6 +17,10 @@ func _ready():
 		box.get_node('Wizard').super_disabled = true
 		if box.player:
 			players.append(box)
+	if players.size() == 1:
+		for box in boxes:
+			box.disable_ready()
+
 
 func _input(event):
 	if not visible:
@@ -27,6 +32,7 @@ func _input(event):
 		if not box.player and not cursor:
 			player_join(p_num)
 
+
 func _on_joy_connection_changed(device_id, connected):
 	var p_num = device_id + 1 if g.p1_using_controller else 2
 	if connected:
@@ -34,12 +40,15 @@ func _on_joy_connection_changed(device_id, connected):
 	else:
 		player_leave(p_num)
 
+
 func add_color(color):
 	used_colors.append(color)
-	
+
+
 func remove_color(color):
 	used_colors.erase(color)
-	
+
+
 func player_join(p_num):
 	## Adds the player to the box
 	var new_player_box = $Boxes.get_node("Box"+str(p_num))
@@ -47,23 +56,64 @@ func player_join(p_num):
 	new_player_box.none = false
 	new_player_box.apply_box_ui()
 	players.append(new_player_box)
+	if players.size() + bots.size() > 1:
+		enable_ready_all()
 	## Creates a cursor
 	get_node('/root/Menu/').create_cursor(p_num)
-	
+
+
 func player_leave(p_num):
 	## Remove the player from the box
-	var new_player_box = $Boxes.get_node("Box"+str(p_num))
-	new_player_box.player = false
-	new_player_box.none = false
-	new_player_box.apply_box_ui()
-	players.erase(new_player_box)
+	var old_player_box = $Boxes.get_node("Box"+str(p_num))
+	old_player_box.player = false
+	old_player_box.none = false
+	old_player_box.apply_box_ui()
+	players.erase(old_player_box)
+	if players.size() + bots.size() == 1:
+		disable_ready_all()
 	## Removes the cursor
 	get_node('/root/Menu/').remove_cursor(p_num)
 
+
+func bot_join(p_num):
+	## Adds the bot to the box
+	var new_bot_box = $Boxes.get_node("Box"+str(p_num))
+	new_bot_box.none = false
+	new_bot_box.player = false
+	new_bot_box.apply_box_ui()
+	bots.append(new_bot_box)
+	if players.size() + bots.size() > 1:
+		enable_ready_all()
+
+
+func bot_leave(p_num):
+	## Remove the bot from the box
+	var old_bot_box = $Boxes.get_node("Box"+str(p_num))
+	old_bot_box.none = true
+	old_bot_box.apply_box_ui()
+	bots.erase(old_bot_box)
+	if players.size() + bots.size() == 1:
+		disable_ready_all()
+
+
 func all_players_leave():
-	for box in $Boxes.get_children():
+	var boxes = $Boxes.get_children()
+	for box in boxes:
 		if box.number != '1' and box.player:
 			player_leave(int(box.number))
+
+
+func enable_ready_all():
+	var boxes = $Boxes.get_children()
+	for box in boxes:
+		box.enable_ready()
+
+
+func disable_ready_all():
+	var boxes = $Boxes.get_children()
+	for box in boxes:
+		box.disable_ready()
+
 
 func player_ready(player):
 	ready_players.append(player)
@@ -87,8 +137,10 @@ func player_ready(player):
 		ready_players = []
 		get_parent().switch_screen('map', self)
 
+
 func player_not_ready(player):
 	ready_players.erase(player)
+
 
 func store_player_state(player):
 	var player_customized_state = {
