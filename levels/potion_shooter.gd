@@ -1,12 +1,5 @@
 extends Node2D
 
-
-func _ready():
-	pass
-
-func _process(delta):
-	pass
-
 func safe_zone():
 	var safe_landing = true
 	for cast in get_children():

@@ -170,7 +170,7 @@ func _on_DeathTimer_timeout():
 	modulate = Color(1, 1, 1, .25)
 
 
-func _on_PickupArea_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+func _on_PickupArea_area_shape_entered(_area_rid, area, _area_shape_index, _local_shape_index):
 	if area and weakref(area).get_ref() and 'Rune' in area.get_parent().name and not ghost:
 		var rune = area.get_parent()
 		# if already have 2 runes, drop the 2nd to make room

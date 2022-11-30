@@ -12,7 +12,7 @@ func _ready():
 		g.play_sfx(self, 'black_hole')
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	for c in nearby_players:
 		var velocity = c.global_position.direction_to(global_position)
 		velocity = velocity.normalized() * speed
@@ -42,12 +42,12 @@ func _on_Area2D_body_exited(body):
 		nearby_players.erase(body)
 
 
-func _on_Area2D_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+func _on_Area2D_area_shape_entered(_area_rid, area, _area_shape_index, _local_shape_index):
 	if g.is_potion(area):
 		#area.get_parent().mode = area.get_parent().MODE_KINEMATIC
 		nearby_potions.append(area.get_parent())
 
 
-func _on_Area2D_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
+func _on_Area2D_area_shape_exited(_area_rid, area, _area_shape_index, _local_shape_index):
 	if g.is_potion(area):
 		nearby_potions.erase(area.get_parent())

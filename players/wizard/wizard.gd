@@ -1,5 +1,5 @@
 extends 'res://players/player.gd'
-
+# warning-ignore-all:return_value_discarded
 
 func ready():
 	pass
@@ -138,7 +138,7 @@ func sprite_animation():
 		cardinal_facing = new_cardinal_facing
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	move_and_slide(velocity)
 	if disabled or super_disabled or dead_disabled or frozen or "Kick" in anim_player.current_animation:
 		velocity = Vector2.ZERO

@@ -28,7 +28,7 @@ func _on_MagicMissile_body_entered(body):
 		body.take_dmg(1)
 
 
-func _on_MagicMissile_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+func _on_MagicMissile_area_shape_entered(_area_rid, area, _area_shape_index, _local_shape_index):
 	if g.is_breakable(area):
 		area.get_parent().break()
 		cleanup()

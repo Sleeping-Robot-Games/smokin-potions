@@ -1,4 +1,6 @@
 extends Node
+# warning-ignore-all:return_value_discarded
+# warning-ignore-all:unused_signal
 
 var rng = RandomNumberGenerator.new()
 
@@ -22,9 +24,6 @@ onready var potion_earth_earth = preload("res://potions/earth_earth/earth_earth.
 onready var potion_earth_arcane = preload("res://potions/earth_arcane/earth_arcane.tscn")
 onready var potion_arcane = preload("res://potions/arcane/arcane.tscn")
 onready var potion_arcane_arcane = preload("res://potions/arcane_arcane/arcane_arcane.tscn")
-
-
-
 onready var potion_dict = {
 	'basic': potion_basic,
 	'fire': potion_fire,
@@ -83,13 +82,15 @@ func get_potion_scene(elements):
 		return potion_dict[elements[1] + "_" + elements[0]]
 	else:
 		return potion_basic
-		
+
+
 func get_random_potion_scene():
 	var all_potions = potion_dict.keys()
 	rng.randomize()
 	var random_potion_index = all_potions[rng.randi_range(0, all_potions.size()-1)]
 	var random_potion = potion_dict[random_potion_index]
 	return random_potion
+
 
 func folders_in_dir(path: String) -> Array:
 	var folders = []
@@ -104,6 +105,7 @@ func folders_in_dir(path: String) -> Array:
 			folders.append(folder)
 	dir.list_dir_end()
 	return folders
+
 
 func files_in_dir(path: String, keyword: String = "") -> Array:
 	var files = []
@@ -125,10 +127,8 @@ func files_in_dir(path: String, keyword: String = "") -> Array:
 func make_shaders_unique(sprite: Sprite):
 	var mat = sprite.get_material().duplicate()
 	sprite.set_material(mat)
-	
-func remove_values_from_array(array, values_to_remove):
-	pass
-	
+
+
 func load_player(parent_node: Node2D, player_number: String):
 	var f = File.new()
 	f.open("user://player_state_P"+str(player_number)+".save", File.READ)
@@ -150,7 +150,8 @@ func load_player(parent_node: Node2D, player_number: String):
 				part.material.set_shader_param("greyscale_palette", load("res://players/wizard/creator/palette/"+part.name+"/"+part.name+"_000.png"))
 			make_shaders_unique(part)
 	return data
-			
+
+
 func load_normal_assets(parent_node: Node2D, player_number: String):
 	var f = File.new()
 	f.open("user://player_state_P"+str(player_number)+".save", File.READ)
@@ -163,7 +164,8 @@ func load_normal_assets(parent_node: Node2D, player_number: String):
 				part.texture = load(data.sprite_state[part.name])
 			else:
 				part.texture = load('res://players/wizard/Body/'+part.name+'.png')
-				
+
+
 func load_hold_assets(parent_node: Node2D, player_number: String):
 	var f = File.new()
 	f.open("user://player_state_P"+str(player_number)+".save", File.READ)
@@ -177,6 +179,7 @@ func load_hold_assets(parent_node: Node2D, player_number: String):
 				part.texture = load('res://players/wizard/'+part.name+'throw/'+part.name+'_'+sprite_number+'.png')
 			else:
 				part.texture = load('res://players/wizard/Bodythrow/'+part.name+'.png')
+
 
 func reparent(node, new_parent):
 	node.get_parent().remove_child(node)
@@ -198,7 +201,6 @@ func play_sfx(parent, name, db_override = 0):
 	var sfx_player = AudioStreamPlayer.new()
 	sfx_player.volume_db = db_override
 	rng.randomize()
-	var track_num = rng.randi_range(1, 5)
 	sfx_player.stream = load('res://sfx/'+name+'.ogg')
 	sfx_player.connect("finished", sfx_player, "queue_free")
 	parent.add_child(sfx_player)

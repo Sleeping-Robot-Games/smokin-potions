@@ -1,32 +1,33 @@
 extends Control
+# warning-ignore-all:return_value_discarded
 
 var overlapping_bodies = []
 var player_number
 var health
 var freeze_ui_change = false
 
-func play_star_animation(player_number, wins):
+func play_star_animation(player_num, wins):
 	make_ui_normal()
 	freeze_ui_change = true
-	if player_number == "1":
+	if player_num == "1":
 		var star_anim: Animation = $AnimationPlayer.get_animation('star'+wins) 
 		star_anim.track_set_key_value(1, 0, Vector2(320, 240)) # set beginning
 		star_anim.track_set_key_value(1, 1, Vector2(182, 111)) # set mid
 		star_anim.track_set_key_value(1, 2, Vector2(182, 111)) # set mid
 		$AnimationPlayer.play("star"+wins)
-	elif player_number == "2":
+	elif player_num == "2":
 		var star_anim: Animation = $AnimationPlayer.get_animation('star'+wins) 
 		star_anim.track_set_key_value(1, 0, Vector2(-224, 240)) # set beginning
 		star_anim.track_set_key_value(1, 1, Vector2(-352, 111)) # set mid
 		star_anim.track_set_key_value(1, 2, Vector2(-352, 111)) # set mid
 		$AnimationPlayer.play("star"+wins)
-	elif player_number == "3":
+	elif player_num == "3":
 		var star_anim: Animation = $AnimationPlayer.get_animation('star'+wins) 
 		star_anim.track_set_key_value(1, 0, Vector2(320, -180)) # set beginning
 		star_anim.track_set_key_value(1, 1, Vector2(191, -339)) # set mid
 		star_anim.track_set_key_value(1, 2, Vector2(191, -339)) # set mid
 		$AnimationPlayer.play("star"+wins)
-	elif player_number == "4":
+	elif player_num == "4":
 		var star_anim: Animation = $AnimationPlayer.get_animation('star'+wins) 
 		star_anim.track_set_key_value(1, 0, Vector2(-224, -180)) # set beginning
 		star_anim.track_set_key_value(1, 1, Vector2(-352, -352)) # set mid
@@ -96,6 +97,6 @@ func _on_UIArea_body_exited(body):
 		make_ui_normal()
 
 
-func _on_AnimationPlayer_animation_finished(anim_name):
+func _on_AnimationPlayer_animation_finished(_anim_name):
 	change_health_ui()
 	freeze_ui_change = false

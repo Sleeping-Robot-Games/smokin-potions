@@ -1,10 +1,11 @@
 extends Control
+# warning-ignore-all:return_value_discarded
 
 var rng = RandomNumberGenerator.new()
 
 export (bool) var player: bool = false
 export (bool) var none: bool = false
-export (bool) var disable_ready: bool = false
+export (bool) var ready_disabled: bool = false
 
 onready var wizard_sprite = {
 	'Hat': $Wizard/Hat,
@@ -78,7 +79,7 @@ func apply_box_ui():
 		$Skin.visible = player
 		$HairColor.visible = player
 		$CheckBox.visible = player
-		$CheckBox.disabled = !player or disable_ready
+		$CheckBox.disabled = !player or ready_disabled
 		$RemoveBot.visible = !player
 		$Name.text = "P"+ number if player else "Bot"
 		$AddBot.visible = false
@@ -105,10 +106,10 @@ func set_sprite_texture(sprite_name: String, texture_path: String) -> void:
 	sprite_state[sprite_name] = texture_path
 
 
-func set_sprite_color(folder, sprite: Sprite, number: String) -> void:
-	var palette_path = "res://players/wizard/creator/palette/{folder}/{folder}_{number}.png".format({
+func set_sprite_color(folder, sprite: Sprite, color_num: String) -> void:
+	var palette_path = "res://players/wizard/creator/palette/{folder}/{folder}_{color_num}.png".format({
 		"folder": folder,
-		"number": number
+		"color_num": color_num
 	})
 	var gray_palette_path = "res://players/wizard/creator/palette/{folder}/{folder}_000.png".format({
 		"folder": folder
@@ -191,13 +192,13 @@ func get_next_avail_color(direction):
 
 
 func disable_ready() -> void:
-	disable_ready = true
+	ready_disabled = true
 	$CheckBox.set_pressed_no_signal(false)
 	apply_box_ui()
 
 
 func enable_ready() -> void:
-	disable_ready = false
+	ready_disabled = false
 	apply_box_ui()
 
 
@@ -225,6 +226,7 @@ func _on_Color_Selection_button_up(direction: int, palette_sprite: String):
 			var color_num = str(new_color).pad_zeros(3)
 			set_sprite_color(palette_sprite, sprite, color_num)
 			pallete_sprite_state[palette_sprite] = color_num
+
 
 func _on_Sprite_Selection_button_up(direction: int, sprite: String):
 	g.play_sfx(self, 'menu_selection')

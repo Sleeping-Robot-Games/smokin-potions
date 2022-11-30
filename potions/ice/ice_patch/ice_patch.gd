@@ -1,4 +1,5 @@
 extends Node2D
+# warning-ignore-all:return_value_discarded
 
 export (int) var speed = 100
 

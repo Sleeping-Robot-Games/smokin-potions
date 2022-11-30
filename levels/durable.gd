@@ -37,7 +37,7 @@ func _ready():
 		$Top/Particles2D.modulate = Color(particle_color_map[num])
 
 func fire_the_lasers():
-	for i in range(3):
+	for _i in range(3):
 		var magic_missile_instance = magic_missile.instance()
 		magic_missile_instance.global_position = $Top.global_position
 		if not num == '001':

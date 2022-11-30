@@ -1,4 +1,5 @@
 extends RigidBody2D
+# warning-ignore-all:return_value_discarded
 
 var rng = RandomNumberGenerator.new()
 
@@ -46,7 +47,7 @@ func clean_shooter():
 func but_make_it_symmetrical(elements):
 	# Generate potion instances
 	var symmetrical_potions = []
-	for i in range(3):
+	for _i in range(3):
 		var symmetrical_potion = g.get_potion_scene(elements).instance()
 		# symmetrical_potion.add_to_group(str(get_instance_id()))
 		symmetrical_potion.but_symmetrical(self)

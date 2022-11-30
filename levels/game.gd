@@ -1,4 +1,5 @@
 extends Node
+# warning-ignore-all:return_value_discarded
 
 var rng = RandomNumberGenerator.new()
 
@@ -21,7 +22,6 @@ var reading_controls
 
 func _ready():
 	reading_controls = g.new_game
-	
 	g.connect("elements_changed", self, "handle_elements_changed")
 	g.connect("player_death", self, "handle_player_death")
 	g.connect("player_revive", self, "handle_player_revive")
@@ -42,15 +42,15 @@ func _ready():
 	if not g.new_game:
 		start_game()
 	else:
-		for ui in get_tree().get_nodes_in_group('player_ui'):
-			ui.visible = false
+		for p in get_tree().get_nodes_in_group('player_ui'):
+			p.visible = false
 		$HUD/Tutorial.visible = true
 
 		
 func _input(event):
 	if reading_controls and (event is InputEventKey or event is InputEventJoypadButton):
-		for ui in get_tree().get_nodes_in_group('player_ui'):
-			ui.visible = true
+		for p in get_tree().get_nodes_in_group('player_ui'):
+			p.visible = true
 		$HUD/Tutorial.visible = false
 		start_game()
 		reading_controls = false
@@ -167,8 +167,8 @@ func _on_NextRound_timeout():
 	if win_state[last_winner.number] == 3:
 		for potion in get_tree().get_nodes_in_group('potions'):
 			potion.queue_free()
-		for ui in get_tree().get_nodes_in_group('player_ui'):
-			ui.visible = false
+		for p in get_tree().get_nodes_in_group('player_ui'):
+			p.visible = false
 		$HUD/AnimationPlayer.play("show_winner")
 		$HUD/WinnerScreen.visible = true
 		$HUD/WinnerScreen/Star/AnimationPlayer.play("star_bounce")

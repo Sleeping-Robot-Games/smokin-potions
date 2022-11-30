@@ -1,4 +1,5 @@
 extends 'res://potions/potion.gd'
+# warning-ignore-all:return_value_discarded
 
 const lightning = preload('res://potions/fire_arcane/lightning/lightning.tscn')
 

@@ -26,7 +26,7 @@ func _ready():
 
 
 func _process(delta):
-	var velocity = Vector2()
+	velocity = Vector2()
 	if Input.is_action_pressed("right_"+controller_num):
 		velocity.x += 1
 	if Input.is_action_pressed("left_"+controller_num):

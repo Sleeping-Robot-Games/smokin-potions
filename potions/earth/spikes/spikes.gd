@@ -10,7 +10,7 @@ func _ready():
 		g.play_sfx(self, 'ground_spikes')
 	$Particles2D.emitting = true
 
-func _on_Spikes_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+func _on_Spikes_area_shape_entered(_area_rid, area, _area_shape_index, _local_shape_index):
 	if g.is_breakable(area):
 		area.get_parent().break()
 

@@ -13,7 +13,7 @@ func _on_ExplodeTimer_timeout():
 func trigger_effect():
 	$ExplosionArea/Explode.visible = true
 	$ExplosionArea/Explode.play()
-	for i in range(3):
+	for _i in range(3):
 		var magic_missile_instance = magic_missile.instance()
 		magic_missile_instance.global_position = global_position
 		magic_missile_instance.last_wiz = last_wiz

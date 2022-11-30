@@ -118,12 +118,12 @@ func _on_Area2D_body_exited(body):
 		nearby_players.erase(body)
 
 
-func _on_Area2D_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+func _on_Area2D_area_shape_entered(_area_rid, area, _area_shape_index, _local_shape_index):
 	if g.is_breakable(area):
 		nearby_breakables.append(area.get_parent())
 
 
-func _on_Area2D_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
+func _on_Area2D_area_shape_exited(_area_rid, area, _area_shape_index, _local_shape_index):
 	if g.is_breakable(area):
 		nearby_breakables.erase(area.get_parent())
 
@@ -137,5 +137,5 @@ func _on_RemoveTimer_timeout():
 	queue_free()
 
 
-func _on_BreakableTimer_timeout(args):
+func _on_BreakableTimer_timeout():
 	pass # Replace with function body.

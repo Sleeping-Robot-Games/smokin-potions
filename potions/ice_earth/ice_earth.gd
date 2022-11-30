@@ -1,5 +1,5 @@
 extends 'res://potions/potion.gd'
-
+# warning-ignore-all:return_value_discarded
 
 var nearby_players = []
 

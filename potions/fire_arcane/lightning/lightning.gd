@@ -1,4 +1,5 @@
 extends Node2D
+# warning-ignore-all:return_value_discarded
 
 var rng = RandomNumberGenerator.new()
 
@@ -29,7 +30,7 @@ func _ready():
 #		next_target.take_dmg(1, self)
 
 
-func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+func _on_area_shape_entered(_area_rid, area, _area_shape_index, _local_shape_index):
 #	if not chained and area and weakref(area).get_ref() and 'Breakable' in area.get_parent().name:
 #		chain_lightning(area.get_parent(), 'breakable')
 	if g.is_breakable(area):

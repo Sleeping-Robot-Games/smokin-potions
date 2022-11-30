@@ -1,4 +1,5 @@
 extends 'res://players/player.gd'
+# warning-ignore-all:return_value_discarded
 
 var action_queue = []
 onready var action_started = OS.get_ticks_msec()
@@ -40,7 +41,7 @@ func remove_action():
 		action_queue[0]["start_time"] = OS.get_ticks_msec()
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if disabled or super_disabled or dead_disabled or frozen or "Kick" in anim_player.current_animation:
 		return
 	

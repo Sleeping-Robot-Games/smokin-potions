@@ -1,5 +1,5 @@
 extends Node2D
-
+# warning-ignore-all:return_value_discarded
 
 func _ready():
 	Input.connect("joy_connection_changed", self, "_on_joy_connection_changed")

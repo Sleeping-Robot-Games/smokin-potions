@@ -1,4 +1,5 @@
 extends Node2D
+# warning-ignore-all:return_value_discarded
 
 var used_colors = []
 var ready_players = []
