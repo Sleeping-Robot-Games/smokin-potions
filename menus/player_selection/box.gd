@@ -186,6 +186,8 @@ func get_next_avail_color(direction):
 	var all_colors = g.files_in_dir(palette_folder_path + "Color/")
 	var current_color_index = all_colors.find("Color_" + pallete_sprite_state['Color'] + ".png")
 	var reordered_colors = all_colors.slice(current_color_index, all_colors.size()-1) + all_colors.slice(1, current_color_index)
+	if direction == -1:
+		reordered_colors.invert()
 	for color in reordered_colors:
 		if not color in selection.used_colors:
 			return color.substr(6, 3)
