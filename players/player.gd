@@ -55,10 +55,12 @@ func _ready():
 	add_to_group("players")
 	ready()
 
+
 func ready():
 	pass
 
-func place_potion():
+
+func place_potion(symmetrical = false):
 	if not potion_ready or ghost:
 		return
 
@@ -66,7 +68,8 @@ func place_potion():
 	p.global_position = Vector2(global_position.x, global_position.y + potion_drop_distance)
 	p.parent_player = self
 	get_parent().add_child(p)
-	# p.but_make_it_symmetrical(elements)
+	if symmetrical:
+		p.but_make_it_symmetrical(elements)
 	
 	# Clear elements after potion use
 	elements = []
@@ -139,9 +142,11 @@ func revive(hp = 1):
 	dead = false
 	modulate = Color(1, 1, 1, 1)
 
+
 func heal(hp):
 	health += hp
 	g.emit_signal('health_changed', health, false, number)
+
 
 func get_stunned():
 	if dead:
@@ -150,8 +155,8 @@ func get_stunned():
 	disabled = true
 	$StunnedTimer.start()
 	anim_player.play('Daze'+y_facing+x_facing)
-	
-	
+
+
 func _on_HurtTimer_timeout():
 	modulate = Color(1, 1, 1, 1)
 	disabled = false
@@ -214,25 +219,34 @@ func _on_PickupArea_area_shape_entered(_area_rid, area, _area_shape_index, _loca
 			start_the_party()
 		elif scroll.magic == 'heal' and health == 1:
 			heal(1)
+		elif scroll.magic == 'symmetry':
+			you_know_im_good_for_that_jam_theme_son()
 		rng.randomize()
 		g.play_random_sfx(self, 'scroll_grab', 4, 15)
 		scroll.cleanup()
 		$ScrollTimer.start()
-	
-		
+
+
 func humungo():
 	speed = HUMUNGO_SPEED
 	scale = Vector2(3,3)
 	potion_drop_distance = 40
 	rune_drop_distance = 60
-	
+
 
 func tinyboi():
 	speed = TEENY_SPEED
 	scale = Vector2(.75, .75)
-	
+
+
 func start_the_party():
 	get_node('/root/Game/PotionParty').start()
+
+
+func you_know_im_good_for_that_jam_theme_son():
+	# WILD JAM #47 DON'T YOU FORGET IT, BABY
+	place_potion(true)
+
 
 func reset_scroll_magic():
 	speed = NORMAL_SPEED
@@ -240,9 +254,11 @@ func reset_scroll_magic():
 	potion_drop_distance = 10
 	rune_drop_distance = 30
 
+
 func _on_ScrollTimer_timeout():
 	reset_scroll_magic()
 	get_node('/root/Game/PotionParty').stop()
+
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if "Kick" in anim_name:
@@ -265,4 +281,3 @@ func _on_BombPickupArea_area_exited(area):
 	if area and weakref(area).get_ref() and area.name == 'PotionPickupArea' and nearby_potions.find(area.get_parent()) != -1:
 		var potion = area.get_parent()
 		nearby_potions.erase(potion)
-
