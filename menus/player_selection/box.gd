@@ -52,7 +52,7 @@ func _ready():
 
 
 func apply_box_ui():
-		# Ready or join button
+	# Ready or join button
 	if player:
 		var input_sprite = null
 		var input_device = g.player_input_devices["p"+number]
@@ -254,11 +254,14 @@ func _on_CheckBox_toggled(ready):
 
 
 func _on_Leave_button_up():
+	$Leave.disabled = true
 	g.play_sfx(self, 'menu_selection')
-	$Leave.hide()
-	g.player_input_devices["p"+str(number)] = null
-	get_node('/root/Menu/Select').player_leave(int(number))
+	$Leave/Timer.start()
 
+func _on_LeaveTimer_timeout():
+	$Leave.hide()
+	get_node('/root/Menu/Select').player_leave(int(number))
+	$Leave.disabled = false
 
 func _on_RemoveBot_button_up():
 	get_node('/root/Menu/Select').bot_leave(int(number))
@@ -266,3 +269,8 @@ func _on_RemoveBot_button_up():
 
 func _on_AddBot_button_up():
 	get_node('/root/Menu/Select').bot_join(int(number))
+
+
+func _on_Timer_timeout():
+	pass # Replace with function body.
+

@@ -42,7 +42,7 @@ func _input(event):
 			if g.player_input_devices[i] == null:
 				g.player_input_devices[i] = "joy_" + str(event.device)
 				player_join(int(i.substr(1,1)))
-				return
+				break
 
 
 func _on_joy_connection_changed(device_id, connected):
@@ -87,13 +87,14 @@ func player_leave(p_num):
 	## Remove the player from the box
 	var old_player_box = $Boxes.get_node("Box"+str(p_num))
 	old_player_box.player = false
-	old_player_box.none = false
+	old_player_box.none = true
 	old_player_box.apply_box_ui()
 	players.erase(old_player_box)
 	if players.size() + bots.size() == 1:
 		disable_ready_all()
 	elif players.size() == 0:
 		go_back()
+	g.player_input_devices["p"+str(p_num)] = null
 	## Removes the cursor
 	get_node('/root/Menu/').remove_cursor(p_num)
 

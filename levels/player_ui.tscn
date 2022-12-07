@@ -212,10 +212,9 @@ rect_scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
 [node name="PUi" type="Sprite" parent="."]
-position = Vector2( 48.0001, 22 )
+position = Vector2( 68, 21 )
 scale = Vector2( 1.45454, 1.375 )
 texture = ExtResource( 8 )
-flip_h = true
 
 [node name="Star1" type="TextureRect" parent="."]
 margin_left = -352.0

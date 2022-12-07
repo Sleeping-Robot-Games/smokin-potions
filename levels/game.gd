@@ -11,8 +11,8 @@ onready var wizard_sprites = preload('res://levels/wizard_sprites.tscn')
 onready var potion_shooter = preload('res://levels/potion_shooter.tscn')
 
 onready var match_time = get_node("HUD/MatchTime")
-var seconds = 90
-var starting_seconds = 3
+var seconds = 2
+var starting_seconds = 1
 var current_players = []
 var dead_players = []
 var win_state = {}
