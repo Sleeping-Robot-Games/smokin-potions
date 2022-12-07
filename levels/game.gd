@@ -100,6 +100,7 @@ func next_round():
 	$StartingTimer.start()
 	$HUD/StartingTime.visible = true
 	$HUD/StartingTime.text = "Starting in 3..."
+	$SuddenDeathEffectTimer.stop()
 	seconds = 90
 	for player in current_players:
 		var starting_pos = get_node("Starting" + str(player.number)).global_position
