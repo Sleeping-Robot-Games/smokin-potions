@@ -11,8 +11,8 @@ onready var wizard_sprites = preload('res://levels/wizard_sprites.tscn')
 onready var potion_shooter = preload('res://levels/potion_shooter.tscn')
 
 onready var match_time = get_node("HUD/MatchTime")
-var seconds = 2
-var starting_seconds = 1
+var seconds = 90
+var starting_seconds = 3
 var current_players = []
 var dead_players = []
 var win_state = {}
@@ -182,6 +182,9 @@ func _on_NextRound_timeout():
 		$HUD/WinnerScreen.add_child(wiz_sprites)
 		$Music.stream = load('res://sfx/credits.mp3')
 		$Music.play()
+		for i in g.player_input_devices:
+			if g.player_input_devices[i] != null and 'joy' in g.player_input_devices[i]:
+				g.create_cursor(int(i.substr(1,1)), $HUD/WinnerScreen)
 	else:
 		next_round()
 

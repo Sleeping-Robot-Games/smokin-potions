@@ -13,11 +13,13 @@ func _ready():
 	for box in boxes:
 		if g.new_game:
 			box.create_random_character()
+			if box.player:
+				players.append(box)
 		else:
 			box.create_loaded_character()
+			if g.player_input_devices['p'+box.number] != null:
+				player_join(int(box.number), 'joy' in g.player_input_devices['p'+box.number])
 		box.get_node('Wizard').super_disabled = true
-		if box.player:
-			players.append(box)
 	if players.size() == 1:
 		for box in boxes:
 			box.disable_ready()
@@ -80,7 +82,7 @@ func player_join(p_num, add_cursor = true):
 		enable_ready_all()
 	## Creates a cursor
 	if add_cursor:
-		get_node('/root/Menu/').create_cursor(p_num)
+		g.create_cursor(p_num, get_node('/root/Menu/'))
 
 
 func player_leave(p_num):
@@ -96,7 +98,7 @@ func player_leave(p_num):
 		go_back()
 	g.player_input_devices["p"+str(p_num)] = null
 	## Removes the cursor
-	get_node('/root/Menu/').remove_cursor(p_num)
+	g.remove_cursor(p_num, get_node('/root/Menu/'))
 
 
 func bot_join(p_num):

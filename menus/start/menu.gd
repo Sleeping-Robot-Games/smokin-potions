@@ -1,14 +1,12 @@
 extends Node
 
-var cursor_scene = preload("res://menus/start/Cursor.tscn")
 var title_scene = preload("res://menus/start/Title.tscn")
 var selection_scene = preload("res://menus/player_selection/selection.tscn")
 var map_scene = preload("res://menus/map_selection/map_selection.tscn")
 
-signal cursor_changed(connected)
-
 func _ready():
 	if g.new_game:
+		add_child(title_scene.instance())
 		$Splashscreen.visible = true
 		var music_player = $AudioStreamPlayer
 		music_player.stream = load('res://sfx/title_screen.mp3')
@@ -16,6 +14,7 @@ func _ready():
 		$Timer.start()
 	else:
 		$Splashscreen.visible = false
+		add_child(selection_scene.instance())
 
 	
 func _on_Timer_timeout():
@@ -30,20 +29,3 @@ func switch_screen(screen_name, current):
 		add_child(map_scene.instance())
 	current.queue_free()
 
-func create_cursor(p_num):
-	var cursor = get_node_or_null(str(p_num)+'cursor')
-	if not cursor:
-		var new_cursor = cursor_scene.instance()
-		new_cursor.p_num = p_num
-		new_cursor.position = Vector2(320, 240)
-		new_cursor.name = str(p_num)+'cursor'
-		add_child(new_cursor)
-		
-		emit_signal("cursor_changed", true)
-
-func remove_cursor(p_num):
-	var cursor = get_node_or_null(str(p_num)+'cursor')
-	if cursor:
-		cursor.queue_free()
-		
-		emit_signal("cursor_changed", false)

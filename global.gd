@@ -8,7 +8,9 @@ signal elements_changed(elements, number)
 signal health_changed(health)
 signal player_death(player)
 signal player_revive(player)
+signal cursor_changed(connected)
 
+onready var cursor_scene = preload("res://menus/start/Cursor.tscn")
 onready var potion_basic = preload('res://potions/basic/basic.tscn')
 onready var potion_fire = preload("res://potions/fire/fire.tscn")
 onready var potion_fire_fire = preload("res://potions/fire_fire/fire_fire.tscn")
@@ -58,6 +60,23 @@ var player_input_devices = {
 # physical input duplicate entries
 var ghost_inputs = ["Steam Virtual Gamepad"]
 
+func create_cursor(p_num, parent_node):
+	var cursor = parent_node.get_node_or_null(str(p_num)+'cursor')
+	if not cursor:
+		var new_cursor = cursor_scene.instance()
+		new_cursor.p_num = p_num
+		new_cursor.position = Vector2(320, 240)
+		new_cursor.name = str(p_num)+'cursor'
+		parent_node.add_child(new_cursor)
+		
+		emit_signal("cursor_changed", true)
+
+func remove_cursor(p_num, parent_node):
+	var cursor = parent_node.get_node_or_null(str(p_num)+'cursor')
+	if cursor:
+		cursor.queue_free()
+		
+		emit_signal("cursor_changed", false)
 
 func is_player(body):
 	return body and weakref(body).get_ref() and ('Wizard' in body.name or 'Bot' in body.name)
