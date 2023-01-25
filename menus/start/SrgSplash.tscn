@@ -1,0 +1,168 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://menus/start/sleepingrobotlogo002.png" type="Texture" id=1]
+[ext_resource path="res://menus/start/sleepingrobotlogo006.png" type="Texture" id=2]
+[ext_resource path="res://menus/start/sleepingrobotlogo001.png" type="Texture" id=3]
+[ext_resource path="res://menus/start/sleepingrobotlogo003.png" type="Texture" id=4]
+[ext_resource path="res://menus/start/sleepingrobotlogo005.png" type="Texture" id=5]
+[ext_resource path="res://menus/start/sleepingrobotlogo007.png" type="Texture" id=6]
+[ext_resource path="res://assets/fonts/AstroSpace-0Wl3o.otf" type="DynamicFontData" id=7]
+[ext_resource path="res://menus/start/sleepingrobotlogo004.png" type="Texture" id=8]
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 1 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="DynamicFont" id=6]
+size = 32
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 32
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 32
+font_data = ExtResource( 7 )
+
+[sub_resource type="Animation" id=12]
+resource_name = "SRG"
+length = 4.8
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 2.4, 2.6, 2.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sleeping:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.4, 3.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sleeping:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1.4, 1.6, 2, 2.4, 3.2, 3.4, 3.6, 3.8, 4, 4.2, 4.4, 4.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 0.666667 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.666667 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.666667 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Robot:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.2, 3.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Robot:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1.2, 1.4, 1.8, 2, 2.2, 3, 3.2, 3.6, 3.8, 4, 4.2, 4.4, 4.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 0.666667 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.666667 ), Color( 1, 1, 1, 0.333333 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.666667 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Games:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Games:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 1, 1.2, 1.6, 1.8, 2, 2.8, 3, 3.6, 3.8, 4, 4.2, 4.4, 4.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 0.666667 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.666667 ), Color( 1, 1, 1, 0.333333 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.666667 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="SrgSplash" type="ColorRect"]
+margin_top = 1.0
+margin_right = 640.0
+margin_bottom = 480.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+modulate = Color( 0.772549, 0.768627, 0.792157, 1 )
+position = Vector2( 319, 320 )
+scale = Vector2( 1.70313, 1.70313 )
+frames = SubResource( 5 )
+speed_scale = 0.75
+
+[node name="Sleeping" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 173.0
+margin_top = 74.0
+margin_right = 398.0
+margin_bottom = 117.0
+custom_colors/font_color = Color( 0.741176, 1, 0.772549, 1 )
+custom_fonts/font = SubResource( 6 )
+text = "Sleeping"
+align = 2
+
+[node name="Robot" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 334.0
+margin_top = 119.0
+margin_right = 464.0
+margin_bottom = 156.0
+custom_colors/font_color = Color( 0.741176, 1, 0.772549, 1 )
+custom_fonts/font = SubResource( 7 )
+text = "Robot"
+align = 2
+
+[node name="Games" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 230.0
+margin_top = 168.0
+margin_right = 395.0
+margin_bottom = 201.0
+custom_colors/font_color = Color( 0.741176, 1, 0.772549, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "Games"
+align = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/SRG = SubResource( 12 )
