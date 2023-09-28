@@ -11,5 +11,3 @@ script = ExtResource( 10 )
 stream = ExtResource( 9 )
 
 [node name="SrgSplash" parent="." instance=ExtResource( 1 )]
-margin_right = 640.0
-margin_bottom = 480.0

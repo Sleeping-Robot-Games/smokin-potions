@@ -124,11 +124,14 @@ func get_held(player):
 func drop_potion():
 	var true_global = global_position
 	g.reparent(self, get_node('/root/Game/YSort'))
-	global_position = true_global
+	
+	call_deferred("set_global_position", true_global)
 	remove_collision_exception_with(holder)
-	global_position = Vector2(global_position.x, global_position.y + 20)
+	call_deferred("set_global_position", Vector2(global_position.x, global_position.y + 20))
+	
 	for p_ray in holder.get_node("PotionRays").get_children():
 		p_ray.remove_exception(self)
+
 	holder = null
 	potion_daddy.queue_free()
 	potion_daddy = null

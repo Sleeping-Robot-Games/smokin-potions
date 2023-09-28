@@ -19,7 +19,7 @@ func break():
 		$RespawnTimer.start()
 		var type = 'box' if g.level_selected == 'wizard_tower' else 'rock'
 		g.play_random_sfx(self, type+'_breaking')
-		$CollisionShape2D.disabled = true
+		$CollisionShape2D.call_deferred("set_disabled", true)
 
 
 func spawn():

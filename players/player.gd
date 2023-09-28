@@ -191,7 +191,7 @@ func _on_PickupArea_area_shape_entered(_area_rid, area, _area_shape_index, _loca
 			elif cardinal_facing == "Front":
 				rune_pos.y -= rune_drop_distance
 			rune_instance.global_position = rune_pos
-			get_parent().add_child(rune_instance)
+			get_parent().call_deferred('add_child', rune_instance)
 			rune_instance.set_type(elements[1])
 			elements.remove(1)
 			

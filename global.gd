@@ -202,7 +202,7 @@ func load_hold_assets(parent_node: Node2D, player_number: String):
 
 func reparent(node, new_parent):
 	node.get_parent().remove_child(node)
-	new_parent.add_child(node)
+	new_parent.call_deferred("add_child", node)
 
 
 func play_random_sfx(parent, name, custom_range = 5, db_override = 0):
