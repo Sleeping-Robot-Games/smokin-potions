@@ -34,5 +34,5 @@ func switch_screen(screen_name, current):
 func on_Animation_finished(anim_name):
 	title.visible = true
 	$SrgSplash.visible = false
-	print(anim_name)
-	print('animation done')
+	for cursor in get_tree().get_nodes_in_group('cursors'):
+		cursor.show()

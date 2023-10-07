@@ -31,7 +31,7 @@ height = 0.0
 [sub_resource type="DynamicFont" id=81]
 font_data = ExtResource( 4 )
 
-[node name="Cursor" type="Sprite"]
+[node name="Cursor" type="Sprite" groups=["cursors"]]
 z_index = 100
 texture = ExtResource( 1 )
 hframes = 4

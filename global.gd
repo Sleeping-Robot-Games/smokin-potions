@@ -51,7 +51,7 @@ var level_selected = 'rock_garden'
 var new_game = true
 
 var player_input_devices = {
-	'p1': 'keyboard',
+	'p1': null,
 	'p2': null,
 	'p3': null,
 	'p4': null,
@@ -67,6 +67,8 @@ func create_cursor(p_num, parent_node):
 		new_cursor.p_num = p_num
 		new_cursor.position = Vector2(320, 240)
 		new_cursor.name = str(p_num)+'cursor'
+		if parent_node.name == 'Menu':
+			new_cursor.visible = !parent_node.get_node('SrgSplash').visible
 		parent_node.add_child(new_cursor)
 		
 		emit_signal("cursor_changed", true)

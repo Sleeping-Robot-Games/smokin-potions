@@ -61,7 +61,7 @@ func but_make_it_symmetrical(elements):
 	# Assign potion positions and lay them
 	for i in range(symmetrical_potions.size()):
 		symmetrical_potions[i].global_position = potion_positions[i]
-		get_parent().add_child(symmetrical_potions[i])
+		get_parent().call_deferred('add_child', symmetrical_potions[i])
 
 
 func but_symmetrical(_original_potion):
