@@ -9,6 +9,7 @@ var title = null
 func _ready():
 	if g.new_game:
 		title = title_scene.instance()
+		title.get_node("VideoPlayer").connect("finished", self, "on_video_finished")
 		add_child(title)
 		title.visible = false
 		$SrgSplash.visible = true
@@ -36,3 +37,7 @@ func on_Animation_finished(anim_name):
 	$SrgSplash.visible = false
 	for cursor in get_tree().get_nodes_in_group('cursors'):
 		cursor.show()
+	title.get_node('VideoPlayer').play()
+
+func on_video_finished():
+	title.get_node('VideoPlayer').play()

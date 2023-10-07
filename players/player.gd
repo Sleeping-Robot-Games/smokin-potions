@@ -11,9 +11,9 @@ onready var anim_player: AnimationPlayer = $AnimationPlayer
 
 const KICK_FORCE = 400
 const DIAG_KICK_FORCE = 200
-const NORMAL_SPEED = 200
+const NORMAL_SPEED = 150
 const HUMUNGO_SPEED = 75
-const TEENY_SPEED = 350
+const TEENY_SPEED = 300
 
 
 var number = "1"
@@ -67,7 +67,7 @@ func place_potion(symmetrical = false):
 	var p = g.get_potion_scene(elements).instance()
 	p.global_position = Vector2(global_position.x, global_position.y + potion_drop_distance)
 	p.parent_player = self
-	get_parent().add_child(p)
+	get_parent().call_deferred('add_child', p)
 	if symmetrical:
 		p.but_make_it_symmetrical(elements)
 	
@@ -243,6 +243,7 @@ func start_the_party():
 	get_node('/root/Game/PotionParty').start()
 
 
+# TODO: Make it so the next potion the player places is symmetrical
 func you_know_im_good_for_that_jam_theme_son():
 	# WILD JAM #47 DON'T YOU FORGET IT, BABY
 	place_potion(true)
