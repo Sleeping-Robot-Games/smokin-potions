@@ -9,6 +9,10 @@ var bots = []
 func _ready():
 	Input.connect("joy_connection_changed", self, "_on_joy_connection_changed")
 	
+	var music_player = get_parent().get_node("AudioStreamPlayer")
+	music_player.stream = load('res://sfx/seth_song_3_v2.ogg')
+	music_player.play()
+	
 	var boxes = $Boxes.get_children()
 	for box in boxes:
 		if g.new_game:

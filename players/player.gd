@@ -40,6 +40,7 @@ var holding_potion: RigidBody2D
 var frozen = false
 var ghost = false
 var dead = false
+var symmetrical = false
 var potion_drop_distance = 10
 var rune_drop_distance = 30
 
@@ -60,7 +61,7 @@ func ready():
 	pass
 
 
-func place_potion(symmetrical = false):
+func place_potion():
 	if not potion_ready or ghost:
 		return
 
@@ -69,6 +70,7 @@ func place_potion(symmetrical = false):
 	p.parent_player = self
 	get_parent().call_deferred('add_child', p)
 	if symmetrical:
+		symmetrical = false
 		p.but_make_it_symmetrical(elements)
 	
 	# Clear elements after potion use
@@ -243,11 +245,15 @@ func start_the_party():
 	get_node('/root/Game/PotionParty').start()
 
 
-# TODO: Make it so the next potion the player places is symmetrical
 func you_know_im_good_for_that_jam_theme_son():
 	# WILD JAM #47 DON'T YOU FORGET IT, BABY
-	place_potion(true)
+	symmetrical = true
 
+func reset_animation():
+	if number == "1" or number == "3":
+		anim_player.play('IdleFrontRight')
+	if number == "2" or number == "4":
+		anim_player.play('IdleFrontLeft')
 
 func reset_scroll_magic():
 	speed = NORMAL_SPEED

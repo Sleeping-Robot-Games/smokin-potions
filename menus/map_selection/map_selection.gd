@@ -26,9 +26,6 @@ func _on_RockGardenButton_mouse_entered():
 
 
 func _on_Button_button_up():
-	var music_player = get_parent().get_node("AudioStreamPlayer")
-	music_player.stream = load('res://sfx/seth_song_3_v2.ogg')
-	music_player.play()
 	g.play_sfx(self, 'menu_confirmation', 10)
 	g.players_in_current_game = []
 	get_parent().switch_screen('select', self)

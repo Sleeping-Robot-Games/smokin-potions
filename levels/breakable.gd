@@ -41,7 +41,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 			rng.randomize()
 			# Runes, Scrolls, ???
 			var loot_type = rng.randi_range(1, 100)
-			if  loot_type <= 20:
+			if  loot_type <= 30:
 				var scroll_instance = scroll.instance()
 				scroll_instance.global_position = global_position
 				get_parent().add_child(scroll_instance)

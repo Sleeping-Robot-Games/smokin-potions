@@ -44,7 +44,15 @@ func _on_body_exited(body):
 func clean_shooter():
 	shooter.queue_free()
 
+func _on_tree_entered(elements):
+	but_make_it_symmetrical(elements)
+
+
 func but_make_it_symmetrical(elements):
+	if not is_inside_tree():
+		# If the potion isn't in the scene tree yet, defer the call until it is
+		connect("tree_entered", self, "_on_tree_entered", [elements], CONNECT_ONESHOT)
+		return
 	# Generate potion instances
 	var symmetrical_potions = []
 	for _i in range(3):
@@ -125,9 +133,8 @@ func drop_potion():
 	var true_global = global_position
 	g.reparent(self, get_node('/root/Game/YSort'))
 	
-	call_deferred("set_global_position", true_global)
-	remove_collision_exception_with(holder)
 	call_deferred("set_global_position", Vector2(global_position.x, global_position.y + 20))
+	remove_collision_exception_with(holder)
 	
 	for p_ray in holder.get_node("PotionRays").get_children():
 		p_ray.remove_exception(self)
