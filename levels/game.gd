@@ -40,6 +40,7 @@ func _ready():
 		add_player_to_game(player)
 	
 	if not g.new_game:
+		tutorial_visible(false)
 		start_game()
 	else:
 		for p in get_tree().get_nodes_in_group('player_ui'):
@@ -199,12 +200,6 @@ func _on_NextRound_timeout():
 		next_round()
 
 
-func _on_Button_button_up():
-	g.players_in_current_game = []
-	get_tree().change_scene("res://menus/start/start.tscn")
-	g.new_game = false
-
-
 func _on_StartingTimer_timeout():
 	starting_seconds -= 1
 	if starting_seconds == 0:
@@ -259,3 +254,9 @@ func potion_party():
 
 func _on_PotionParty_timeout():
 	potion_party()
+
+
+func _on_PlayAgain_pressed():
+	g.players_in_current_game = []
+	get_tree().change_scene("res://menus/start/start.tscn")
+	g.new_game = false
