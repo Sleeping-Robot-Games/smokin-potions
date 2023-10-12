@@ -3,6 +3,9 @@ extends 'res://players/player.gd'
 
 var action_queue = []
 onready var action_started = OS.get_ticks_msec()
+var personalities = ['normie', 'drop_and_walk', 'drop_and_throw', 'drop_and_kick']
+var personality = 'normie'
+var personality_factor = 3
 
 
 func ready():
@@ -14,7 +17,9 @@ func ready():
 		s_ray.add_exception(self)
 	for w_ray in $WallRays.get_children():
 		w_ray.add_exception(self)
-
+	# assign random personality to bot
+	rng.randomize()
+	personality = personalities[rng.randi_range(0, personalities.size() - 1)]
 
 func invert_dir(d):
 	if d == "Left":
@@ -62,12 +67,7 @@ func _physics_process(_delta):
 	if action_queue.size() > 0 and action_queue[0]["type"] == "FUNCTION":
 		var delay = OS.get_ticks_msec() - action_queue[0]["start_time"]
 		if delay >= action_queue[0]["delay"]:
-			# if action is place_potion and bot has runes, flip a coin to mix or not
-			if action_queue[0]["name"] == "place_potion()" and elements.size() > 0:
-				if coin_toss():
-					action_queue[0]["fn"].call_func(true)
-			else:
-				action_queue[0]["fn"].call_func()
+			action_queue[0]["fn"].call_func()
 			remove_action()
 	
 	# DIRECTION
@@ -213,6 +213,11 @@ func scheme():
 		choices.append('drop_and_kick')
 		choices.append('drop_and_throw')
 		choices.append('drop_and_walk')
+		# if bot doesn't have normie personality
+		## add duplicate choices matching personality to increase odds
+		if personality != 'normie':
+			for i in range(personality_factor):
+				choices.append(personality)
 	
 	# check nearby potions
 	var fresh_pots = [] # safer to interact
@@ -226,11 +231,27 @@ func scheme():
 				fresh_pots.append({"collider": collider, "dir": d_ray.name})
 			else:
 				scary_pots.append({"collider": collider, "dir": d_ray.name})
-	if scary_pots.size() > 0:
-		choices.append('run_from_scary_potion')
+	
+	# if near a fresh potion, 50/50 run towards or away from it
 	if fresh_pots.size() > 0:
-		choices.append('run_towards_fresh_potion')
-
+		if coin_toss():
+			action_queue.clear()
+			var pot_dir = []
+			for fresh_pot in fresh_pots:
+				pot_dir.append(fresh_pot["dir"])
+			queue_action_random_move(pot_dir)
+		else:
+			choices.append('run_towards_fresh_potion')
+	
+	# if near a scary potion, ALWAYS RUN!!
+	if scary_pots.size() > 0:
+		action_queue.clear()
+		var scary_dir = []
+		for scary_pot in scary_pots:
+			scary_dir.append(scary_pot["dir"])
+		queue_action_random_move(scary_dir)
+		return
+	
 	# make a decision
 	rng.randomize()
 	var decision = choices[rng.randi_range(0, choices.size() - 1)]
@@ -247,11 +268,7 @@ func scheme():
 				valid_coords.append(s_ray.to_global(s_ray.cast_to))
 				valid_dir.append(s_ray.name)
 		if valid_dir.size() > 0:
-			# if bot has runes, flip coin to decide if placed potion is mixed or not
-			if elements.size() > 0 and coin_toss():
-				place_potion(true)
-			else:
-				place_potion()
+			drop_potion()
 			rng.randomize()
 			var m = rng.randi_range(0, valid_dir.size() - 1)
 			action_queue.append({
@@ -272,11 +289,11 @@ func scheme():
 	elif decision == 'drop_and_throw':
 		action_queue.append({
 			"type": "FUNCTION",
-			"fn": funcref(self, "place_potion"),
+			"fn": funcref(self, "drop_potion"),
 			"delay": 0,
 			"timeout_ms": 1000,
 			"start_time" : null,
-			"name": "place_potion()",
+			"name": "drop_potion()",
 		})
 		action_queue.append({
 			"type": "FUNCTION",
@@ -315,14 +332,9 @@ func scheme():
 		})
 	# DROP A BOMB AND WALK AWAY
 	elif decision == 'drop_and_walk':
-		place_potion()
+		# if bot has runes, flip coin to decide if placed potion is mixed or not
+		drop_potion()
 		queue_action_random_move()
-	# AVOID POTIONS ABOUT TO POP
-	elif decision == 'run_from_scary_potion':
-		var scary_dir = []
-		for scary_pot in scary_pots:
-			scary_dir.append(scary_pot["dir"])
-		queue_action_random_move(scary_dir)
 	# TRY TO KICK AWAY NEARBY FRESH POTION
 	elif decision == 'run_towards_fresh_potion':
 		var fresh_dir = []
@@ -340,6 +352,14 @@ func scheme():
 				"timeout_ms": 2000,
 				"start_time" : null,
 			})
+
+
+# randomly decide between regular potion and elemental potion if holding runes
+func drop_potion():
+	if elements.size() > 0 and coin_toss():
+		place_potion(true)
+	else:
+		place_potion()
 
 
 func queue_action_random_move(avoid_extra_dirs = []):
