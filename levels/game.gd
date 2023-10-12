@@ -44,14 +44,14 @@ func _ready():
 	else:
 		for p in get_tree().get_nodes_in_group('player_ui'):
 			p.visible = false
-		$HUD/Tutorial.visible = true
+		tutorial_visible(true)
 
-		
+
 func _input(event):
 	if reading_controls and (event is InputEventKey or event is InputEventJoypadButton):
 		for p in get_tree().get_nodes_in_group('player_ui'):
 			p.visible = true
-		$HUD/Tutorial.visible = false
+		tutorial_visible(false)
 		start_game()
 		reading_controls = false
 
@@ -67,7 +67,15 @@ func start_game():
 		$Music.stream = load('res://sfx/battle_intro_2.mp3')
 	$Music.connect("finished", self, "_play_battle_music")
 	$Music.play()
-	
+
+# synchronize button animations when toggling tutorial visibility
+func tutorial_visible(show = true):
+	for key in $HUD/Tutorial/Label.get_children():
+		if key.get_class() == "AnimatedSprite":
+			key.frame = 0
+			key.playing = show
+	$HUD/Tutorial.visible = show
+
 func _play_battle_music():
 	if g.level_selected == "rock_garden":
 		$Music.volume_db = -15

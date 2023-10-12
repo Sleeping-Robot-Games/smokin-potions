@@ -107,6 +107,8 @@ func get_input():
 	
 	if Input.is_action_just_released("place_"+controller_num):
 		place_potion()
+	elif Input.is_action_just_released("mix_"+controller_num):
+		place_potion(true)
 
 
 func sprite_animation():

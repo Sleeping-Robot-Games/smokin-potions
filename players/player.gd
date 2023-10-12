@@ -61,11 +61,12 @@ func ready():
 	pass
 
 
-func place_potion():
+func place_potion(mixed = false):
 	if not potion_ready or ghost:
 		return
-
-	var p = g.get_potion_scene(elements).instance()
+	if mixed and elements.size() == 0:
+		return
+	var p = g.get_potion_scene(elements if mixed else []).instance()
 	p.global_position = Vector2(global_position.x, global_position.y + potion_drop_distance)
 	p.parent_player = self
 	get_parent().call_deferred('add_child', p)
@@ -73,8 +74,9 @@ func place_potion():
 		symmetrical = false
 		p.but_make_it_symmetrical(elements)
 	
-	# Clear elements after potion use
-	elements = []
+	# Clear elements after mixed potion use
+	if mixed:
+		elements = []
 	g.emit_signal('elements_changed', elements, number)
 	
 	if potion_cooldown_toogle:

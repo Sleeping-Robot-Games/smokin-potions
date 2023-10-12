@@ -40,6 +40,11 @@ func remove_action():
 	if action_queue.size() > 0:
 		action_queue[0]["start_time"] = OS.get_ticks_msec()
 
+## 50/50 chance of returning true or false
+func coin_toss():
+	rng.randomize()
+	var coin = rng.randi_range(0, 1)
+	return false if coin == 0 else true
 
 func _physics_process(_delta):
 	if disabled or super_disabled or dead_disabled or frozen or "Kick" in anim_player.current_animation:
@@ -57,7 +62,12 @@ func _physics_process(_delta):
 	if action_queue.size() > 0 and action_queue[0]["type"] == "FUNCTION":
 		var delay = OS.get_ticks_msec() - action_queue[0]["start_time"]
 		if delay >= action_queue[0]["delay"]:
-			action_queue[0]["fn"].call_func()
+			# if action is place_potion and bot has runes, flip a coin to mix or not
+			if action_queue[0]["name"] == "place_potion()" and elements.size() > 0:
+				if coin_toss():
+					action_queue[0]["fn"].call_func(true)
+			else:
+				action_queue[0]["fn"].call_func()
 			remove_action()
 	
 	# DIRECTION
@@ -237,7 +247,11 @@ func scheme():
 				valid_coords.append(s_ray.to_global(s_ray.cast_to))
 				valid_dir.append(s_ray.name)
 		if valid_dir.size() > 0:
-			place_potion()
+			# if bot has runes, flip coin to decide if placed potion is mixed or not
+			if elements.size() > 0 and coin_toss():
+				place_potion(true)
+			else:
+				place_potion()
 			rng.randomize()
 			var m = rng.randi_range(0, valid_dir.size() - 1)
 			action_queue.append({
