@@ -43,6 +43,9 @@ var dead = false
 var symmetrical = false
 var potion_drop_distance = 10
 var rune_drop_distance = 30
+var dropkick_potion = null
+var dropkick_velocity = Vector2(1, 0)
+var is_kicking = false
 
 var controller_num = "kb"
 
@@ -70,6 +73,7 @@ func place_potion(mixed = false):
 	p.global_position = Vector2(global_position.x, global_position.y + potion_drop_distance)
 	p.parent_player = self
 	get_parent().call_deferred('add_child', p)
+	dropkick_potion = p
 	if symmetrical:
 		symmetrical = false
 		p.but_make_it_symmetrical(elements)
@@ -82,7 +86,8 @@ func place_potion(mixed = false):
 	if potion_cooldown_toogle:
 		potion_ready = false
 		$PotionCooldown.start()
-
+	
+	print("dropkick_potion: " + dropkick_potion.name)
 
 func _on_PotionCooldown_timeout():
 	potion_ready = true
@@ -270,11 +275,14 @@ func _on_ScrollTimer_timeout():
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):
+	print('anim_finished: ' + anim_name)
 	if "Kick" in anim_name:
 		if kicking_potion and weakref(kicking_potion).get_ref():
 			kicking_potion.kick(kicking_impulse, self)
+		is_kicking = false
 		kicking_potion = null
 		kicking_impulse = Vector2.ZERO
+		anim_player.play("Idle"+y_facing+x_facing)
 		g.play_sfx(self, 'kicking_potion')
 	if "Throw" in anim_name or 'Hurt' in anim_name:
 		anim_player.play("Idle"+y_facing+x_facing)

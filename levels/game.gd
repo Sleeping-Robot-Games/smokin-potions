@@ -87,6 +87,31 @@ func _play_battle_music():
 	$Music.play()
 
 func add_player_to_game(player):
+	# init internal player dirs based on starting pos.
+	## mostly needed if player immediately dropkicks before moving...
+	var init_dir = {
+		"1": {
+			"x_facing": "Right",
+			"y_facing": "Down",
+			"dropkick_velocity": Vector2(0, 1)
+		},
+		"2": {
+			"x_facing": "Left",
+			"y_facing": "Down",
+			"dropkick_velocity": Vector2(0, 1)
+		},
+		"3": {
+			"x_facing": "Right",
+			"y_facing": "Up",
+			"dropkick_velocity": Vector2(0, -1)
+		},
+		"4": {
+			"x_facing": "Left",
+			"y_facing": "Up",
+			"dropkick_velocity": Vector2(0, -1)
+		},
+	}
+	
 	# Adds player to game
 	var new_player = wizard.instance() if not player.bot else bot.instance()
 	current_players.append(new_player)
@@ -95,6 +120,9 @@ func add_player_to_game(player):
 	g.load_player(new_player, player.number)
 	var starting_pos = get_node("Starting" + str(player.number)).global_position
 	new_player.global_position = starting_pos
+	new_player.x_facing = init_dir[new_player.number]["x_facing"]
+	new_player.y_facing = init_dir[new_player.number]["y_facing"]
+	new_player.dropkick_velocity = init_dir[new_player.number]["dropkick_velocity"]
 	new_player.super_disabled = true
 	$YSort.add_child(new_player)
 	
