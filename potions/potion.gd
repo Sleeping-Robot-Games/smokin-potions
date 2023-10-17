@@ -113,7 +113,6 @@ func trigger_effect():
 
 
 func kick(impulse, kicker):
-	print("potion.kick(" + str(impulse) +"," + str(kicker)+")")
 	kick_impulse = impulse 
 	apply_central_impulse(impulse)
 	last_wiz = kicker
@@ -209,7 +208,6 @@ func _on_AnimatedSprite_animation_finished():
 		holder = null
 	# if the player hadn't moved since dropping this potion, clear it as viable for dropkicking
 	if parent_player != null and parent_player.dropkick_potion == self:
-		print('resetting dropkick potion on explosion')
 		parent_player.dropkick_potion = null
 
 

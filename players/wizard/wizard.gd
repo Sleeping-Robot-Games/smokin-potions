@@ -50,18 +50,41 @@ func get_input():
 	elif Input.is_action_pressed("down_"+controller_num):
 		y_facing = "Front"
 		y_changed = true
-	
+
 	# whenever player moves, update dropkick_velocity to be the last known 
-	if x_changed:
+	if x_changed :
 		dropkick_velocity.x = -1 if x_facing == "Left" else 1
-		if not y_changed:
-			# TODO: account for x frame buffer when letting of 2 dirs at once (aka moving diag) will still register that as last moving diagonally
+		var prev_y_changed = false
+		for buffer in diag_kick_frames:
+			if buffer["up_released"] or buffer["down_released"]:
+				dropkick_velocity.y = -1 if buffer["up_released"] else 1
+				prev_y_changed = true
+				break
+		if not y_changed and not prev_y_changed:
 			dropkick_velocity.y = 0
 	if y_changed:
 		dropkick_velocity.y = -1 if y_facing == "Back" else 1
-		if not x_changed:
-			# TODO: here too
+		var prev_x_changed = false
+		for buffer in diag_kick_frames:
+			if buffer["left_released"] or buffer["right_released"]:
+				dropkick_velocity.y = -1 if buffer["left_released"] else 1
+				prev_x_changed = true
+				break
+		if not x_changed and not prev_x_changed:
 			dropkick_velocity.x = 0
+	
+	var left_released = Input.is_action_just_released("left_"+controller_num)
+	var right_released = Input.is_action_just_released("right_"+controller_num)
+	var up_released = Input.is_action_just_released("up_"+controller_num)
+	var down_released = Input.is_action_just_released("down_"+controller_num)
+	diag_kick_frames.push_front({
+		"left_released": left_released,
+		"right_released": right_released,
+		"up_released": up_released,
+		"down_released": down_released,
+	})
+	if diag_kick_frames.size() > diag_kick_buffer:
+		diag_kick_frames.resize(diag_kick_buffer)
 	
 	if Input.is_action_just_released("interact_"+controller_num):
 		if !holding_potion and nearby_potions.size() > 0:
@@ -76,14 +99,6 @@ func get_input():
 			g.load_normal_assets(self, number)
 			anim_player.play("Throw"+y_facing+x_facing)
 			g.play_sfx(self, 'potion_throw')
-		
-	var is_dropkicking = false
-	if Input.is_action_just_pressed("place_"+controller_num):
-		print('-------------')
-		print('place pressed...')
-		print('dropkick_potion != null: ' + str(dropkick_potion != null))
-		print('weakref(dropkick_potion).get_ref(): ' + str(weakref(dropkick_potion).get_ref()))
-		print('-------------')
 	
 	for p_ray in $PotionRays.get_children():
 		p_ray.force_raycast_update()
@@ -119,24 +134,23 @@ func get_input():
 		var collider = $PotionRays/LowerLeft.get_collider()
 		kicking_impulse = Vector2(DIAG_KICK_FORCE * -1, DIAG_KICK_FORCE)
 		kicking_potion = collider
-	elif dropkick_potion != null and weakref(dropkick_potion).get_ref() and Input.is_action_just_pressed("place_"+controller_num):
-		is_dropkicking = true
+	elif dropkick_potion != null and weakref(dropkick_potion).get_ref() and \
+	((Input.is_action_just_pressed("place_"+controller_num) and "Basic" in dropkick_potion.name) \
+	or (Input.is_action_just_pressed("mix_"+controller_num) and not "Basic" in dropkick_potion.name)):
 		kicking_potion = dropkick_potion
 		dropkick_potion = null
 		if dropkick_velocity.x != 0 and dropkick_velocity.y != 0:
 			kicking_impulse = Vector2(DIAG_KICK_FORCE * dropkick_velocity.x, DIAG_KICK_FORCE * dropkick_velocity.y)
 		else:
 			kicking_impulse = Vector2(KICK_FORCE * dropkick_velocity.x, KICK_FORCE * dropkick_velocity.y)
-		print('dropkicking: ' + kicking_potion.name)
-		print('kicking_impulse: ' + str(kicking_impulse))
-	elif not is_kicking:
+	elif not "Kick" in anim_player.current_animation:
 		kicking_impulse = Vector2.ZERO
 	
 	sprite_animation()
 	
-	if Input.is_action_just_released("place_"+controller_num) and not is_dropkicking:
+	if Input.is_action_just_released("place_"+controller_num) and dropkick_potion == null:
 		place_potion()
-	elif Input.is_action_just_released("mix_"+controller_num):
+	elif Input.is_action_just_released("mix_"+controller_num) and dropkick_potion == null:
 		place_potion(true)
 
 
@@ -149,13 +163,11 @@ func sprite_animation():
 	
 	var new_animation = animation
 	if kicking_impulse != Vector2.ZERO:
-		is_kicking = true
 		velocity = Vector2.ZERO
 		new_animation = "Kick"
-		print('kicking')
-	elif velocity == Vector2(0,0) and !is_kicking:
+	elif velocity == Vector2(0,0):
 		new_animation = "Idle"
-	elif velocity != Vector2(0,0) and !is_kicking:
+	elif velocity != Vector2(0,0):
 		new_animation = "Run"
 	
 	if not movement_enabled and new_animation == "Run":
@@ -165,10 +177,13 @@ func sprite_animation():
 		dropkick_potion = null
 	
 	if new_facing != facing or new_animation != animation:
-		facing = new_facing
+		var same_anim = animation == new_animation
+		var old_anim_time = anim_player.current_animation_position
 		animation = new_animation
-		print('playing: ' + animation + facing)
+		facing = new_facing
 		anim_player.play(animation + facing)
+		if same_anim and anim_player.current_animation_length >= old_anim_time:
+			anim_player.advance(old_anim_time)
 	
 	if new_cardinal_facing != cardinal_facing and not $IceRay.is_colliding():
 		cardinal_facing = new_cardinal_facing

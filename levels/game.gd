@@ -92,22 +92,22 @@ func add_player_to_game(player):
 	var init_dir = {
 		"1": {
 			"x_facing": "Right",
-			"y_facing": "Down",
+			"y_facing": "Front",
 			"dropkick_velocity": Vector2(0, 1)
 		},
 		"2": {
 			"x_facing": "Left",
-			"y_facing": "Down",
+			"y_facing": "Front",
 			"dropkick_velocity": Vector2(0, 1)
 		},
 		"3": {
 			"x_facing": "Right",
-			"y_facing": "Up",
+			"y_facing": "Back",
 			"dropkick_velocity": Vector2(0, -1)
 		},
 		"4": {
 			"x_facing": "Left",
-			"y_facing": "Up",
+			"y_facing": "Back",
 			"dropkick_velocity": Vector2(0, -1)
 		},
 	}
