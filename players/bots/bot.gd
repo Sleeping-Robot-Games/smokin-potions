@@ -289,6 +289,14 @@ func scheme():
 					"timeout_ms": 1000,
 					"start_time" : null,
 				})
+				action_queue.append({
+					"type": "FUNCTION",
+					"fn": funcref(self, "drop_potion"),
+					"delay": 0,
+					"timeout_ms": 1000,
+					"start_time" : null,
+					"name": "drop_potion()",
+				})
 	# DROP AND KICK POTION (RANDOM DIRECTION)
 	elif decision == 'drop_and_kick':
 		var valid_coords = []
