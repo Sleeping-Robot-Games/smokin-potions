@@ -214,9 +214,6 @@ func scheme():
 		choices.append('run_towards_player')
 		choices.append('run_towards_player')
 		choices.append('run_towards_player')
-		choices.append('run_towards_player')
-		choices.append('run_towards_player')
-		choices.append('run_towards_player')
 		choices.append('drop_and_kick')
 		choices.append('drop_and_throw')
 		choices.append('drop_and_walk')
@@ -227,7 +224,6 @@ func scheme():
 				choices.append(personality)
 	
 	print('personality: ' + personality)
-	print(choices)
 	# check nearby potions
 	var fresh_pots = [] # safer to interact
 	var scary_pots = [] # about to blow
@@ -252,6 +248,8 @@ func scheme():
 			queue_action_random_move(pot_dir)
 		else:
 			choices.append('run_towards_fresh_potion')
+	
+	print('choices: ', choices)
 	
 	# if near a scary potion, ALWAYS RUN!!
 	if scary_pots.size() > 0:

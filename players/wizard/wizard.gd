@@ -93,6 +93,8 @@ func get_input():
 			for p_ray in $PotionRays.get_children():
 				p_ray.add_exception(holding_potion)
 			g.load_hold_assets(self, number)
+			# if picking up a potion ensure dropkick potion ref is reset
+			dropkick_potion == null
 		elif holding_potion and weakref(holding_potion).get_ref():
 			holding_potion.get_thrown()
 			holding_potion = null
