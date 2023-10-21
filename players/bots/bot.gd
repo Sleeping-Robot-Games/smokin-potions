@@ -3,7 +3,7 @@ extends 'res://players/player.gd'
 
 var action_queue = []
 onready var action_started = OS.get_ticks_msec()
-var personalities = ['normie', 'drop_and_walk', 'drop_and_throw', 'drop_and_kick']
+var personalities = ['normie', 'drop_and_walk', 'drop_and_throw', 'drop_and_kick', 'run_towards_player']
 var personality = 'normie'
 var personality_factor = 3
 
@@ -53,6 +53,11 @@ func coin_toss():
 
 func _physics_process(_delta):
 	if disabled or super_disabled or dead_disabled or frozen or "Kick" in anim_player.current_animation:
+		return
+	
+	# if we're out of actions, scheme up a new one
+	if action_queue.size() == 0:
+		scheme()
 		return
 	
 	# if current action hasn't been started, do so now
@@ -116,7 +121,7 @@ func _physics_process(_delta):
 	if y_changed and velocity.y < 0:
 		y_facing = "Back"
 	elif y_changed and velocity.y > 0:
-		y_facing = "Front"	
+		y_facing = "Front"
 	
 	new_facing = y_facing + x_facing
 	new_cardinal_facing = cardinal_facing
@@ -192,14 +197,10 @@ func _physics_process(_delta):
 	move_and_slide(velocity)
 
 
-func _on_ThinkTimer_timeout():
+func scheme():
 	if disabled or super_disabled or dead_disabled:
 		return
-		
-	scheme()
-
-
-func scheme():
+	
 	# only add more actions to the queue after we run out
 	if action_queue.size() > 0:
 		return
@@ -210,6 +211,12 @@ func scheme():
 	# ghosts can't drop potions
 	var match_timer = get_node("/root/Game").seconds
 	if not ghost and match_timer <= 87:
+		choices.append('run_towards_player')
+		choices.append('run_towards_player')
+		choices.append('run_towards_player')
+		choices.append('run_towards_player')
+		choices.append('run_towards_player')
+		choices.append('run_towards_player')
 		choices.append('drop_and_kick')
 		choices.append('drop_and_throw')
 		choices.append('drop_and_walk')
@@ -219,6 +226,8 @@ func scheme():
 			for i in range(personality_factor):
 				choices.append(personality)
 	
+	print('personality: ' + personality)
+	print(choices)
 	# check nearby potions
 	var fresh_pots = [] # safer to interact
 	var scary_pots = [] # about to blow
@@ -234,6 +243,7 @@ func scheme():
 	
 	# if near a fresh potion, 50/50 run towards or away from it
 	if fresh_pots.size() > 0:
+		print('running from fresh pot')
 		if coin_toss():
 			action_queue.clear()
 			var pot_dir = []
@@ -245,6 +255,7 @@ func scheme():
 	
 	# if near a scary potion, ALWAYS RUN!!
 	if scary_pots.size() > 0:
+		print('running from scary pot')
 		action_queue.clear()
 		var scary_dir = []
 		for scary_pot in scary_pots:
@@ -255,9 +266,31 @@ func scheme():
 	# make a decision
 	rng.randomize()
 	var decision = choices[rng.randi_range(0, choices.size() - 1)]
+	print("DECISION: " + decision)
 	# MOVE TO A RANDOM SPOT
 	if decision == 'move_random_spot':
 		queue_action_random_move()
+	# MOVE TO A NEARBY PLAYER
+	elif decision == 'run_towards_player':
+		var targets = []
+		for p in get_tree().get_nodes_in_group("players"):
+			if not p.ghost:
+				targets.append(p)
+		rng.randomize()
+		if targets.size() > 0:
+			var t = rng.randi_range(0, targets.size() - 1)
+			var target = null
+			if t >= 0:
+				target = targets[t]
+			if target:
+				var dir = dir_to_target(target)
+				action_queue.append({
+					"type": "MOVE",
+					"dir": dir,
+					"coord": target.global_position,
+					"timeout_ms": 1000,
+					"start_time" : null,
+				})
 	# DROP AND KICK POTION (RANDOM DIRECTION)
 	elif decision == 'drop_and_kick':
 		var valid_coords = []
