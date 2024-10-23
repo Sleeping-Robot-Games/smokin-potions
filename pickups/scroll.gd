@@ -27,6 +27,8 @@ func _ready():
 		magic = 'symmetry'
 		label_text = "Symmetrical Potions!"
 
+	if magic == 'heal':
+		$Sprite.set_texture(load('res://pickups/heart.png'))
 
 func cleanup():
 	queue_free();
