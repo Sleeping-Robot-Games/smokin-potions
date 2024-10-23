@@ -151,7 +151,6 @@ visible = false
 modulate = Color( 0.545098, 0.733333, 0.352941, 1 )
 position = Vector2( -16, 30 )
 frames = SubResource( 5 )
-frame = 4
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -190,10 +189,9 @@ anims/RESET = SubResource( 12 )
 anims/jiggle = SubResource( 13 )
 
 [node name="ControllerLabel" type="Label" parent="."]
-margin_left = 102.0
-margin_top = 459.0
-margin_right = 538.0
-margin_bottom = 476.0
+margin_top = 460.0
+margin_right = 638.0
+margin_bottom = 477.0
 custom_fonts/font = SubResource( 84 )
 text = "Left click on mouse to use Mouse/Keyboard"
 align = 1

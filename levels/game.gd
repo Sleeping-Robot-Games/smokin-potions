@@ -26,7 +26,6 @@ func _ready():
 	g.connect("player_death", self, "handle_player_death")
 	g.connect("player_revive", self, "handle_player_revive")
 	
-	#g.players_in_current_game)
 	## USED FOR DEBUGGING ##
 #	if g.players_in_current_game.size() == 0:
 #		g.players_in_current_game = [
@@ -35,7 +34,7 @@ func _ready():
 #			{'number': '3', 'bot': true},
 #			{'number': '4', 'bot': true},
 #		]
-		
+
 	for player in g.players_in_current_game:
 		add_player_to_game(player)
 	

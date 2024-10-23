@@ -16,6 +16,7 @@ var bombs_away = false
 var flight_target: Vector2
 var landed = false
 var shooter
+var is_exploding = false
 
 func _ready():
 	connect('body_entered', self, '_on_body_entered')
@@ -190,8 +191,12 @@ func _physics_process(delta):
 		is_moving = cur_position != last_position
 		last_position = cur_position
 
+func explode_early():
+	$AnimatedSprite.frame = 11
+	$AnimatedSprite.play()
 
 func _on_AnimatedSprite_animation_finished():
+	is_exploding = true
 	$SmokeParticles.emitting = false
 	$SmokeParticles.visible = false
 	$AnimatedSprite.visible = false

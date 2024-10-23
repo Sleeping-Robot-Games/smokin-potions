@@ -4,6 +4,7 @@ extends 'res://potions/potion.gd'
 
 var nearby_players = []
 var nearby_breakables = []
+var nearby_potions = []
 
 func _ready():
 	$ExplosionArea.connect('area_shape_entered', self, '_on_ExplosionArea_area_shape_entered')
@@ -24,14 +25,20 @@ func explode():
 
 func _on_ExplodeTimer_timeout():
 	explode()
-
+	
 
 func trigger_effect():
 	for player in nearby_players:
 		player.take_dmg(1, self)
+		
 	# destroy all breakables
 	for breakable in nearby_breakables:
 		breakable.break()
+	
+	for potion in nearby_potions:
+		if not potion.is_exploding:
+			potion.explode_early()
+	
 		
 	$ExplosionArea/Explode.visible = true
 	$ExplosionArea/Explode.play()
@@ -56,8 +63,14 @@ func _on_ExplosionArea_area_shape_exited(_area_rid, area, _area_shape_index, _lo
 func _on_ExplosionArea_body_entered(body):
 	if g.is_player(body):
 		nearby_players.append(body)
+	
+	if g.is_potion_body(body) and not body == self:
+		nearby_potions.append(body)
 
 
 func _on_ExplosionArea_body_exited(body):
 	if g.is_player(body):
 		nearby_players.erase(body)
+	
+	if g.is_potion_body(body) and not body == self:
+		nearby_potions.erase(body)

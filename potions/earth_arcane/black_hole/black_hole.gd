@@ -43,11 +43,11 @@ func _on_Area2D_body_exited(body):
 
 
 func _on_Area2D_area_shape_entered(_area_rid, area, _area_shape_index, _local_shape_index):
-	if g.is_potion(area):
+	if g.is_potion_area(area):
 		#area.get_parent().mode = area.get_parent().MODE_KINEMATIC
 		nearby_potions.append(area.get_parent())
 
 
 func _on_Area2D_area_shape_exited(_area_rid, area, _area_shape_index, _local_shape_index):
-	if g.is_potion(area):
+	if g.is_potion_area(area):
 		nearby_potions.erase(area.get_parent())

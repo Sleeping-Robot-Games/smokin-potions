@@ -310,6 +310,9 @@ orbit_velocity_random = 0.0
 color_ramp = SubResource( 9 )
 
 [node name="Game" instance=ExtResource( 1 )]
+__meta__ = {
+"_edit_vertical_guides_": [  ]
+}
 
 [node name="TileMap" parent="." index="0"]
 z_index = -5
@@ -355,58 +358,56 @@ position = Vector2( 536, 225 )
 position = Vector2( 592, 225 )
 
 [node name="Breakable10" parent="YSort" index="7" instance=ExtResource( 4 )]
-position = Vector2( 323, 263 )
+position = Vector2( 320, 258 )
 
 [node name="Breakable11" parent="YSort" index="8" instance=ExtResource( 4 )]
-position = Vector2( 323, 300 )
+position = Vector2( 321, 313 )
 
 [node name="Breakable12" parent="YSort" index="9" instance=ExtResource( 4 )]
-position = Vector2( 323, 339 )
+position = Vector2( 321, 373 )
 
-[node name="Breakable13" parent="YSort" index="10" instance=ExtResource( 4 )]
-position = Vector2( 323, 378 )
+[node name="Breakable19" parent="YSort" index="10" instance=ExtResource( 4 )]
+position = Vector2( 322, 427 )
 
-[node name="Breakable19" parent="YSort" index="11" instance=ExtResource( 4 )]
-position = Vector2( 323, 422 )
+[node name="Breakable14" parent="YSort" index="11" instance=ExtResource( 4 )]
+position = Vector2( 318, 68 )
+scale = Vector2( 1.2, 1.2 )
 
-[node name="Breakable14" parent="YSort" index="12" instance=ExtResource( 4 )]
-position = Vector2( 323, 62 )
+[node name="Breakable18" parent="YSort" index="12" instance=ExtResource( 4 )]
+position = Vector2( 317, 18 )
+scale = Vector2( 1.2, 1.2 )
 
-[node name="Breakable18" parent="YSort" index="13" instance=ExtResource( 4 )]
-position = Vector2( 323, 39 )
+[node name="Breakable15" parent="YSort" index="13" instance=ExtResource( 4 )]
+position = Vector2( 319, 167 )
+scale = Vector2( 1.2, 1.2 )
 
-[node name="Breakable15" parent="YSort" index="14" instance=ExtResource( 4 )]
-position = Vector2( 323, 142 )
+[node name="Breakable16" parent="YSort" index="14" instance=ExtResource( 4 )]
+position = Vector2( 319, 117 )
+scale = Vector2( 1.2, 1.2 )
 
-[node name="Breakable16" parent="YSort" index="15" instance=ExtResource( 4 )]
-position = Vector2( 323, 111 )
-
-[node name="Breakable6" parent="YSort" index="16" instance=ExtResource( 4 )]
+[node name="Breakable6" parent="YSort" index="15" instance=ExtResource( 4 )]
 position = Vector2( 216, 225 )
 
-[node name="Breakable7" parent="YSort" index="17" instance=ExtResource( 4 )]
+[node name="Breakable7" parent="YSort" index="16" instance=ExtResource( 4 )]
 position = Vector2( 162, 225 )
 
-[node name="Breakable8" parent="YSort" index="18" instance=ExtResource( 4 )]
+[node name="Breakable8" parent="YSort" index="17" instance=ExtResource( 4 )]
 position = Vector2( 108, 225 )
 
-[node name="Breakable17" parent="YSort" index="19" instance=ExtResource( 4 )]
+[node name="Breakable17" parent="YSort" index="18" instance=ExtResource( 4 )]
 position = Vector2( 53, 225 )
 
-[node name="Breakable2" parent="YSort" index="20" instance=ExtResource( 4 )]
+[node name="Breakable2" parent="YSort" index="19" instance=ExtResource( 4 )]
 position = Vector2( 480, 225 )
 
-[node name="Breakable3" parent="YSort" index="21" instance=ExtResource( 4 )]
+[node name="Breakable3" parent="YSort" index="20" instance=ExtResource( 4 )]
 position = Vector2( 425, 225 )
 
-[node name="Breakable4" parent="YSort" index="22" instance=ExtResource( 4 )]
+[node name="Breakable4" parent="YSort" index="21" instance=ExtResource( 4 )]
 position = Vector2( 370, 225 )
 
-[node name="Breakable5" parent="YSort" index="23" instance=ExtResource( 4 )]
+[node name="Breakable5" parent="YSort" index="22" instance=ExtResource( 4 )]
 position = Vector2( 270, 225 )
-
-[node name="Breakable9" parent="YSort" index="24" instance=ExtResource( 4 )]
-position = Vector2( 323, 87 )
 
 [node name="Boundaries" parent="." index="4"]
 visible = false
@@ -449,21 +450,3 @@ randomness = 0.5
 visibility_rect = Rect2( 0, 0, 640, 480 )
 process_material = SubResource( 10 )
 texture = ExtResource( 8 )
-
-[node name="Red" parent="HUD/WinnerScreen/Credits" index="2"]
-frame = 2
-
-[node name="Yellow" parent="HUD/WinnerScreen/Credits" index="3"]
-frame = 2
-
-[node name="Green" parent="HUD/WinnerScreen/Credits" index="4"]
-frame = 1
-
-[node name="Blue" parent="HUD/WinnerScreen/Credits" index="5"]
-frame = 1
-
-[node name="Purple" parent="HUD/WinnerScreen/Credits" index="6"]
-frame = 0
-
-[node name="Pink" parent="HUD/WinnerScreen/Credits" index="7"]
-frame = 1
