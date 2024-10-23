@@ -223,7 +223,8 @@ func scheme():
 			for i in range(personality_factor):
 				choices.append(personality)
 	
-	print('personality: ' + personality)
+#	print('personality: ' + personality)
+
 	# check nearby potions
 	var fresh_pots = [] # safer to interact
 	var scary_pots = [] # about to blow
@@ -239,7 +240,7 @@ func scheme():
 	
 	# if near a fresh potion, 50/50 run towards or away from it
 	if fresh_pots.size() > 0:
-		print('running from fresh pot')
+#		print('running from fresh pot')
 		if coin_toss():
 			action_queue.clear()
 			var pot_dir = []
@@ -249,7 +250,7 @@ func scheme():
 		else:
 			choices.append('run_towards_fresh_potion')
 	
-	print('choices: ', choices)
+#	print('choices: ', choices)
 	
 	# if near a scary potion, ALWAYS RUN!!
 	if scary_pots.size() > 0:
@@ -264,7 +265,7 @@ func scheme():
 	# make a decision
 	rng.randomize()
 	var decision = choices[rng.randi_range(0, choices.size() - 1)]
-	print("DECISION: " + decision)
+#	print("DECISION: " + decision)
 	# MOVE TO A RANDOM SPOT
 	if decision == 'move_random_spot':
 		queue_action_random_move()

@@ -160,11 +160,10 @@ func _on_body_entered(body):
 	if body and weakref(body).get_ref() and "Potion" in body.name and is_moving and kick_impulse != Vector2.ZERO:
 		body.kick(kick_impulse, body.last_wiz)
 		kick_impulse = Vector2.ZERO
-		sleeping = true
 	if g.is_player(body) and is_moving and kick_impulse != Vector2.ZERO:
 		body.get_stunned()
 		kick_impulse = Vector2.ZERO
-		sleeping = true
+	sleeping = true
 
 
 func _physics_process(delta):
