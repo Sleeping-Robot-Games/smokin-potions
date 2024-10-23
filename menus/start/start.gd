@@ -8,11 +8,11 @@ func _ready():
 	var p1_cursor = get_node_or_null('/root/Menu/1cursor')
 	if Input.get_connected_joypads().size() > 0:
 		if p1_cursor:
-			$ControllerLabel.text = 'Left click on mouse to use Mouse/Keyboard'
+			$ControllerLabel.text = 'Left-click to switch to Mouse/Keyboard controls'
 		else:
-			$ControllerLabel.text = 'Press any button to use controller'
+			$ControllerLabel.text = 'Press any button to switch to controller'
 	else:
-		$ControllerLabel.text = 'Connect controller to play with one'
+		$ControllerLabel.text = 'Connect a controller to enable controller support'
 	if not g.new_game:
 		_on_Button_button_up()
 	$Sprite/AnimationPlayer.play("jiggle")
@@ -57,9 +57,9 @@ func _on_Button_button_up():
 
 func _on_Menu_cursor_changed(connected):
 	if connected:
-		$ControllerLabel.text = 'Left click on mouse to use Mouse/Keyboard'
+		$ControllerLabel.text = 'Left-click to switch to Mouse/Keyboard controls'
 	else:
 		if Input.get_connected_joypads().size() > 0:
-			$ControllerLabel.text = 'Press any button to use controller'
+			$ControllerLabel.text = 'Press any button to switch to controller'
 		else:
-			$ControllerLabel.text = 'Connect controller to play with one'
+			$ControllerLabel.text = 'Connect a controller to enable controller support'
