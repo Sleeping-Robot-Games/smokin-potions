@@ -18,20 +18,20 @@ func _ready():
 	$Sprite/AnimationPlayer.play("jiggle")
 
 
-func _on_joy_connection_changed(device_id, connected):
-	if connected:
-		if not g.player_input_devices.values().has("joy_" + str(device_id)):
-			for i in g.player_input_devices:
-				if g.player_input_devices[i] == null:
-					g.player_input_devices[i] = "joy_" + str(device_id)
-					g.create_cursor(int(i.substr(1,1)), get_parent())
-					return
-	else:
-		for i in g.player_input_devices:
-			if g.player_input_devices[i] == "joy_" + str(device_id):
-				g.player_input_devices[i] = null
-				g.remove_cursor(int(i.substr(1,1)), get_parent())
-				return
+#func _on_joy_connection_changed(device_id, connected):
+#	if connected:
+#		if not g.player_input_devices.values().has("joy_" + str(device_id)):
+#			for i in g.player_input_devices:
+#				if g.player_input_devices[i] == null:
+#					g.player_input_devices[i] = "joy_" + str(device_id)
+#					g.create_cursor(int(i.substr(1,1)), get_parent())
+#					return
+#	else:
+#		for i in g.player_input_devices:
+#			if g.player_input_devices[i] == "joy_" + str(device_id):
+#				g.player_input_devices[i] = null
+#				g.remove_cursor(int(i.substr(1,1)), get_parent())
+#				return
 
 
 func _input(event):
