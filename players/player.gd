@@ -47,6 +47,7 @@ var dropkick_potion = null
 var dropkick_velocity = Vector2(1, 0)
 var diag_kick_buffer = 5
 var diag_kick_frames = []
+var affinity = null
 
 var controller_num = "kb"
 
@@ -82,6 +83,8 @@ func place_potion(mixed = false):
 	# Clear elements after mixed potion use
 	if mixed:
 		elements = []
+		if affinity:
+			elements.push_front(affinity)
 	g.emit_signal('elements_changed', elements, number)
 	
 	if potion_cooldown_toogle:

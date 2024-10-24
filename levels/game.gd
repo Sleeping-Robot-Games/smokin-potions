@@ -67,6 +67,20 @@ func start_game():
 		$Music.stream = load('res://sfx/battle_intro_2.mp3')
 	$Music.connect("finished", self, "_play_battle_music")
 	$Music.play()
+	for p in current_players:
+		rng.randomize()
+		var elemental_affinity = rng.randi_range(1, 4)
+		if elemental_affinity == 1:
+			p.affinity = 'fire'
+		elif elemental_affinity == 2:
+			p.affinity = 'ice'
+		elif elemental_affinity == 3:
+			p.affinity = 'earth'
+		elif elemental_affinity == 4:
+			p.affinity = 'arcane'
+		p.elements = []
+		p.elements.push_front(p.affinity)
+		g.emit_signal('elements_changed', p.elements, p.number)
 
 # synchronize button animations when toggling tutorial visibility
 func tutorial_visible(show = true):
