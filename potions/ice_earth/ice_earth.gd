@@ -1,6 +1,8 @@
 extends 'res://potions/potion.gd'
 # warning-ignore-all:return_value_discarded
 
+const ice_cube = preload('res://potions/ice_earth/ice_cube/ice_cube.tscn')
+
 var nearby_players = []
 
 func _ready():
@@ -26,8 +28,10 @@ func trigger_effect():
 	
 	$ExplosionArea/Explode.visible = true
 	$ExplosionArea/Explode.play()
-#	if not use_portal:
-#		$AudioStreamPlayer.play()
+
+	var ice_cube_instance = ice_cube.instance()
+	ice_cube_instance.global_position = global_position
+	get_parent().add_child(ice_cube_instance)
 
 func _on_Explode_animation_finished():
 	queue_free()

@@ -66,7 +66,7 @@ animations = [ {
 } ]
 
 [sub_resource type="CircleShape2D" id=30]
-radius = 28.0
+radius = 47.0
 
 [sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 2 )
@@ -121,9 +121,6 @@ script = ExtResource( 3 )
 
 [node name="AnimatedSprite" parent="." index="1"]
 frames = SubResource( 45 )
-
-[node name="Portal" parent="." index="3"]
-frame = 0
 
 [node name="ExplosionArea" type="Area2D" parent="." index="6"]
 

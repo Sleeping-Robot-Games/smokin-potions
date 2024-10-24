@@ -13,7 +13,7 @@ const KICK_FORCE = 400
 const DIAG_KICK_FORCE = 200
 const NORMAL_SPEED = 150
 const HUMUNGO_SPEED = 75
-const TEENY_SPEED = 300
+const TEENY_SPEED = 250
 
 
 var number = "1"

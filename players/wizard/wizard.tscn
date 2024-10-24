@@ -3129,7 +3129,7 @@ tracks/4/keys = {
 offsets = PoolRealArray( 6.94467e-29, 0.758242, 0.906593 )
 colors = PoolColorArray( 0.0196078, 0.811765, 0.976471, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=80]
+[sub_resource type="GradientTexture" id=82]
 gradient = SubResource( 79 )
 
 [sub_resource type="ParticlesMaterial" id=81]
@@ -3142,7 +3142,7 @@ orbit_velocity_random = 0.0
 angle = 45.0
 angle_random = 1.0
 scale = 0.5
-color_ramp = SubResource( 80 )
+color_ramp = SubResource( 82 )
 
 [node name="Wizard" type="KinematicBody2D"]
 scale = Vector2( 1.5, 1.5 )

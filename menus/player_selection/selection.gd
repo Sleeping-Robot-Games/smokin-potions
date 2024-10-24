@@ -42,6 +42,8 @@ func _input(event):
 		var device_name = Input.get_joy_name(event.device)
 		if g.ghost_inputs.has(device_name):
 			return
+		else:
+			print(device_name)
 		if g.player_input_devices.values().has("joy_" + str(event.device)):
 			return
 		for i in g.player_input_devices:

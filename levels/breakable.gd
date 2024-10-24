@@ -16,6 +16,9 @@ func break():
 		broken = true
 		$Sprite.set_texture(load("res://levels/"+g.level_selected+"/breakable/broken/" + sprite + ".png"))
 		$AnimationPlayer.play("fade_out")
+		## Breakables randomly respawn between 10 - 20 seconds
+		rng.randomize()
+		$RespawnTimer.wait_time = rng.randi_range(10, 30)
 		$RespawnTimer.start()
 		var type = 'box' if g.level_selected == 'wizard_tower' else 'rock'
 		g.play_random_sfx(self, type+'_breaking')

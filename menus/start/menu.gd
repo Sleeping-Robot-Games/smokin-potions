@@ -4,9 +4,13 @@ var title_scene = preload("res://menus/start/Title.tscn")
 var selection_scene = preload("res://menus/player_selection/selection.tscn")
 var map_scene = preload("res://menus/map_selection/map_selection.tscn")
 
+var rock_garden_level = preload("res://levels/rock_garden/rock_garden.tscn")
+
 var title = null
 
 func _ready():
+	if OS.is_debug_build():
+		pass ## TODO: Jump right into level
 	if g.new_game:
 		title = title_scene.instance()
 		title.get_node("VideoPlayer").connect("finished", self, "on_video_finished")

@@ -502,6 +502,7 @@
 23/autotile/navpoly_map = [  ]
 23/autotile/priority_map = [  ]
 23/autotile/z_index_map = [  ]
+23/autotile/fallback_mode = 0
 23/occluder_offset = Vector2( 0, 0 )
 23/navigation_offset = Vector2( 0, 0 )
 23/shape_offset = Vector2( 0, 0 )
@@ -525,6 +526,7 @@
 24/autotile/navpoly_map = [  ]
 24/autotile/priority_map = [  ]
 24/autotile/z_index_map = [  ]
+24/autotile/fallback_mode = 0
 24/occluder_offset = Vector2( 0, 0 )
 24/navigation_offset = Vector2( 0, 0 )
 24/shape_offset = Vector2( 0, 0 )
@@ -1097,14 +1099,8 @@ frame = 1
 [node name="S" parent="HUD/Tutorial/Label" index="2"]
 frame = 1
 
-[node name="D" parent="HUD/Tutorial/Label" index="3"]
-frame = 0
-
 [node name="space" parent="HUD/Tutorial/Label" index="4"]
 frame = 1
 
-[node name="e" parent="HUD/Tutorial/Label" index="5"]
+[node name="e" parent="HUD/Tutorial/Label" index="6"]
 frame = 1
-
-[node name="e2" parent="HUD/Tutorial/Label" index="6"]
-frame = 0
