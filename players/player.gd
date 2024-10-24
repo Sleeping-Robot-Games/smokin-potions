@@ -77,7 +77,6 @@ func place_potion(mixed = false):
 	get_parent().call_deferred('add_child', p)
 	dropkick_potion = p
 	if symmetrical:
-		symmetrical = false
 		p.but_make_it_symmetrical(elements)
 	
 	# Clear elements after mixed potion use
@@ -257,7 +256,16 @@ func start_the_party():
 
 func you_know_im_good_for_that_jam_theme_son():
 	# WILD JAM #47 DON'T YOU FORGET IT, BABY
+	var new_timer = Timer.new()
+	new_timer.wait_time = 10
+	new_timer.autostart = true
+	new_timer.connect("timeout", self, "_on_symmetrical_timeout")
+	add_child(new_timer)
+	
 	symmetrical = true
+	
+func _on_symmetrical_timeout():
+	symmetrical = false
 
 func reset_animation():
 	if number == "1" or number == "3":
