@@ -23,15 +23,19 @@ func _on_ExplodeTimer_timeout():
 
 
 func trigger_effect():
+	var player_hit = false
+	
 	for player in nearby_players:
+		player_hit = true
 		player.freeze();
 	
 	$ExplosionArea/Explode.visible = true
 	$ExplosionArea/Explode.play()
 
-	var ice_cube_instance = ice_cube.instance()
-	ice_cube_instance.global_position = global_position
-	get_parent().add_child(ice_cube_instance)
+	if not player_hit:
+		var ice_cube_instance = ice_cube.instance()
+		ice_cube_instance.global_position = global_position
+		get_parent().add_child(ice_cube_instance)
 
 func _on_Explode_animation_finished():
 	queue_free()
