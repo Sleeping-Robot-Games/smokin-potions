@@ -25,15 +25,7 @@ func _ready():
 	g.connect("elements_changed", self, "handle_elements_changed")
 	g.connect("player_death", self, "handle_player_death")
 	g.connect("player_revive", self, "handle_player_revive")
-	
-	## USED FOR DEBUGGING ##
-#	if g.players_in_current_game.size() == 0:
-#		g.players_in_current_game = [
-#			{'number': '1', 'bot': false},
-#			{'number': '2', 'bot': true},
-#			{'number': '3', 'bot': true},
-#			{'number': '4', 'bot': true},
-#		]
+
 
 	for player in g.players_in_current_game:
 		add_player_to_game(player)
@@ -291,6 +283,11 @@ func potion_party():
 		new_random_potion.get_node('AnimationPlayer').play('drop_fade')
 	else:
 		new_potion_shooter.queue_free()
+		
+func random_rune_spawn():
+	## Borrow logic from potion party random location logic
+	## If the location would collide with a breakable then get new location
+	pass
 
 
 func _on_PotionParty_timeout():

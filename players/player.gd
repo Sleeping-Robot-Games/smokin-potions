@@ -227,6 +227,10 @@ func _on_PickupArea_area_shape_entered(_area_rid, area, _area_shape_index, _loca
 		g.play_sfx(self, 'rune_grab', 5)
 		rune.cleanup()
 	elif 'Scroll' in area.get_parent().name and not ghost:
+		# REFACTOR NOTES
+		## we should have a magic_applied array that tracks which scroll is applied and a signal that applies the magic
+		### this way we can determine if anything should overlap and to reset others if needed
+		## They should also create their own timer nodes so we can track different time durations if needed
 		$ScrollTimer.stop()
 		reset_scroll_magic()
 		var scroll = area.get_parent()
