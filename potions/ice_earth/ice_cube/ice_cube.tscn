@@ -34,8 +34,9 @@ process_material = SubResource( 3 )
 texture = ExtResource( 1 )
 
 [node name="FrozenTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 5.0
 one_shot = true
+autostart = true
 
 [node name="FrozenSprite" type="Sprite" parent="."]
 modulate = Color( 1.25, 1.25, 1.25, 1 )
