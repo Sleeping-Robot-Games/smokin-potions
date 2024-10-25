@@ -2,7 +2,6 @@ extends Node2D
 # warning-ignore-all:return_value_discarded
 
 func _ready():
-	Input.connect("joy_connection_changed", self, "_on_joy_connection_changed")
 	g.connect('cursor_changed', self, "_on_Menu_cursor_changed")
 	
 	var p1_cursor = get_node_or_null('/root/Menu/1cursor')
@@ -17,21 +16,6 @@ func _ready():
 		_on_Button_button_up()
 	$Sprite/AnimationPlayer.play("jiggle")
 
-
-#func _on_joy_connection_changed(device_id, connected):
-#	if connected:
-#		if not g.player_input_devices.values().has("joy_" + str(device_id)):
-#			for i in g.player_input_devices:
-#				if g.player_input_devices[i] == null:
-#					g.player_input_devices[i] = "joy_" + str(device_id)
-#					g.create_cursor(int(i.substr(1,1)), get_parent())
-#					return
-#	else:
-#		for i in g.player_input_devices:
-#			if g.player_input_devices[i] == "joy_" + str(device_id):
-#				g.player_input_devices[i] = null
-#				g.remove_cursor(int(i.substr(1,1)), get_parent())
-#				return
 
 
 func _input(event):

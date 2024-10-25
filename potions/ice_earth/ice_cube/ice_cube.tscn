@@ -23,7 +23,8 @@ angle_random = 1.0
 scale = 0.5
 color_ramp = SubResource( 2 )
 
-[node name="IceCube" type="Node2D"]
+[node name="IceCube" type="StaticBody2D"]
+collision_layer = 32
 script = ExtResource( 3 )
 
 [node name="FrozenFx" type="Particles2D" parent="."]
@@ -38,8 +39,12 @@ one_shot = true
 
 [node name="FrozenSprite" type="Sprite" parent="."]
 modulate = Color( 1.25, 1.25, 1.25, 1 )
-position = Vector2( 0, -3 )
-scale = Vector2( 1.25, 1.25 )
+position = Vector2( 2, -3 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 4, 2 )
+polygon = PoolVector2Array( -18, -18, 29, -18, 29, 12, 22, 16, -29, 17, -29, -8 )
 
 [connection signal="timeout" from="FrozenTimer" to="." method="_on_FrozenTimer_timeout"]

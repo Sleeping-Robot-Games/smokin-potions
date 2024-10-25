@@ -34,12 +34,12 @@ var potion_ready = true
 var elements = []
 var kicking_impulse = Vector2.ZERO
 var kicking_potion = null
-var is_invulnerable = false
 var nearby_potions = []
 var holding_potion: RigidBody2D
 var frozen = false
 var ghost = false
 var dead = false
+var invulnerable = false
 var symmetrical = false
 var potion_drop_distance = 10
 var rune_drop_distance = 30
@@ -99,6 +99,9 @@ func take_dmg(dmg, potion = null):
 	if ghost or dead or super_disabled:
 		return
 	
+	if invulnerable:
+		return
+	
 	if holding_potion and weakref(holding_potion).get_ref():
 		holding_potion.drop_potion()
 		holding_potion = null
@@ -112,6 +115,8 @@ func take_dmg(dmg, potion = null):
 		anim_player.play('Hurt'+y_facing+x_facing)
 		modulate = Color(1, .25, .25, 1)
 		$HurtTimer.start()
+		$InvulnerableTimer.start()
+		invulnerable = true
 		disabled = true
 		$FloatTextManager.float_text("-"+str(dmg)+" HP", Color(1,0,0,1))
 		
@@ -144,6 +149,7 @@ func _on_FrozenTimer_timeout():
 
 
 func revive(hp = 1):
+	## TODO: Make a revive sound
 	health = hp
 	g.emit_signal("player_revive", self)
 	g.emit_signal('health_changed', health, false, number)
@@ -171,6 +177,9 @@ func get_stunned():
 func _on_HurtTimer_timeout():
 	modulate = Color(1, 1, 1, 1)
 	disabled = false
+
+func _on_InvulnerableTimer_timeout():
+	invulnerable = false
 
 
 func _on_StunnedTimer_timeout():

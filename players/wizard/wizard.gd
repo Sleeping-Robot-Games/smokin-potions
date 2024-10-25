@@ -197,3 +197,4 @@ func _physics_process(_delta):
 		velocity = Vector2.ZERO
 		return
 	get_input()
+

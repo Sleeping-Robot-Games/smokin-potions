@@ -1,7 +1,7 @@
 extends Node2D
 
-export (int) var speed = 75
-export (int) var force = 3
+export (int) var speed = 110
+export (int) var force = 2
 
 var nearby_players = []
 var nearby_potions = []
