@@ -266,7 +266,7 @@ func start_the_party():
 func you_know_im_good_for_that_jam_theme_son():
 	# WILD JAM #47 DON'T YOU FORGET IT, BABY
 	var new_timer = Timer.new()
-	new_timer.wait_time = 10
+	new_timer.wait_time = 5
 	new_timer.autostart = true
 	new_timer.connect("timeout", self, "_on_symmetrical_timeout")
 	add_child(new_timer)
